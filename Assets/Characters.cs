@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 
+[Serializable]
 public enum Names { BLACK, BLUE, BROWN, GREEN, PURPLE, RED, YELLOW, BODY, INVALID }
 
 public struct Character
@@ -45,5 +48,33 @@ public class Characters
         NameDict.Add("BODY", Names.BODY);
 
         CharacterDict.Add(Names.INVALID, new Character("Missingno", "#FFFFFF"));
+    }
+
+    public Names StringToName(string name)
+    {
+        Names value = Names.INVALID;
+        try
+        {
+            NameDict.TryGetValue(name, out value);
+        }
+        catch
+        {
+            Debug.Log("Invalid dialogue name lookup: " + name);
+        }
+        return value;
+    }
+
+    public Character NameToCharacter(Names name)
+    {
+        Character value = new Character("Missingno", "#FFFFFF");
+        try
+        {
+            CharacterDict.TryGetValue(name, out value);
+        }
+        catch
+        {
+            Debug.Log("Enum not assigned to character: " + name.ToString());
+        }
+        return value;
     }
 }
