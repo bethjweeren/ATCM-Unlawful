@@ -7,13 +7,28 @@ using System.Text;
 
 public class DialogueSystem
 {
-    Characters characters;
+    static DialogueSystem instance;
+    private static Object singletonLock = new Object();
+    public Characters characters;
     public Quotes quotes;
 
     public DialogueSystem()
     {
         characters = new Characters();
         quotes = new Quotes();
+        LoadJSON("test.json");
+    }
+
+    public static DialogueSystem Instance()
+    {
+        lock (singletonLock)
+        {
+            if (instance == null)
+            {
+                instance = new DialogueSystem();
+            }
+        }
+        return instance;
     }
 
     public string formatColors(string line)
@@ -25,7 +40,7 @@ public class DialogueSystem
             final += line.Substring(0, startIndex);
             int endIndex = line.IndexOf(']');
             string name = line.Substring(startIndex + 1, endIndex - (startIndex + 1));
-            Character person = characters.NameToCharacter(characters.StringToName(name.ToUpper()));
+            Character person = characters.IDToCharacter(characters.NameToID(name.ToUpper()));
             name = "<color=" + person.color + ">" + person.name + "</color>";
             final += name;
             line = line.Substring(endIndex + 1, line.Length - (endIndex + 1));
@@ -45,7 +60,7 @@ public class DialogueSystem
             quotes = JsonUtility.FromJson<Quotes>(json);
             fileReader.Close();
             Debug.Log("read success");
-            foreach(DialogueLine quote in quotes.allQuotes)
+            foreach(Quotes.DialogueLine quote in quotes.allQuotes)
             {
                 quote.line = formatColors(quote.line);
             }

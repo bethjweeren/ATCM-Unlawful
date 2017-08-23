@@ -3,12 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Tester : MonoBehaviour {
-    public DialogueSystem dialogue;
+    public DialogueBox dialogue;
+    DialogueSystem dialogueSystem;
 
 	void Start () {
-        dialogue = new DialogueSystem();
+        dialogueSystem = DialogueSystem.Instance();
+        StartCoroutine("DoDisplay");
+    }
 
-        dialogue.LoadJSON("test.json");
-        dialogue.ExportJSON("output2.json");
+    IEnumerator DoDisplay()
+    {
+        yield return new WaitForSeconds(5);
+        foreach (Quotes.DialogueLine d in dialogueSystem.quotes.allQuotes)
+        {
+            dialogue.DisplayLine(d);
+            yield return new WaitForSeconds(5);
+        }
     }
 }
