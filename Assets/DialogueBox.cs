@@ -7,6 +7,7 @@ public class DialogueBox : MonoBehaviour {
     Quotes.DialogueLine currentLine;
     public Text nameText;
     public Text dialogueText;
+    string textToDisplay;
     DialogueSystem dialogueSystem;
 
 	void Start () {
@@ -27,7 +28,6 @@ public class DialogueBox : MonoBehaviour {
     {
         currentLine = newLine;
         Clear();
-        Debug.Log(currentLine.spokenBy);
         SetName(currentLine.spokenBy);
         SetText(currentLine.line);
     }
@@ -40,6 +40,42 @@ public class DialogueBox : MonoBehaviour {
 
     void SetText(string line)
     {
-        dialogueText.text = line;
+        textToDisplay = line;
+        StartCoroutine("SayLine");
+    }
+
+    IEnumerator SayLine()
+    {
+        while (textToDisplay.Length > 0)
+        {
+            if(textToDisplay[0] == '<')
+            {
+                string baseText = dialogueText.text;
+
+                string startFormat = textToDisplay.Substring(0, textToDisplay.IndexOf('>') +1);
+                textToDisplay = textToDisplay.Substring(startFormat.Length, textToDisplay.Length - startFormat.Length);
+
+                string nameToDisplay = textToDisplay.Substring(0, textToDisplay.IndexOf('<'));
+                textToDisplay = textToDisplay.Substring(nameToDisplay.Length, textToDisplay.Length - nameToDisplay.Length);
+
+                string endFormat = textToDisplay.Substring(0, textToDisplay.IndexOf('>') + 1);
+                textToDisplay = textToDisplay.Substring(endFormat.Length, textToDisplay.Length - endFormat.Length);
+
+                while(nameToDisplay.Length > 0)
+                {
+                    startFormat = startFormat + nameToDisplay[0];
+                    nameToDisplay = nameToDisplay.Substring(1, nameToDisplay.Length - 1);
+                    dialogueText.text = baseText + startFormat + endFormat;
+                    yield return new WaitForSeconds(0.05f);
+                }
+
+            }
+            else
+            {
+                dialogueText.text = dialogueText.text + textToDisplay[0];
+                textToDisplay = textToDisplay.Substring(1, textToDisplay.Length - 1);
+            }
+            yield return new WaitForSeconds(0.05f);
+        }
     }
 }
