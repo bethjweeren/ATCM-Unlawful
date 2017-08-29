@@ -44,8 +44,8 @@ public class Characters
         CharacterDict.Add(CharacterID.YELLOW, new Character("Dr. Yellow", "#FFFF32"));
         NameDict.Add("YELLOW", CharacterID.YELLOW);
 
-        CharacterDict.Add(CharacterID.BODY, new Character("Mr. Boddy", "#AD7F61"));
-        NameDict.Add("BODY", CharacterID.BODY);
+        CharacterDict.Add(CharacterID.VICTIM1, new Character("Mr. Boddy", "#AD7F61"));
+        NameDict.Add("VICTIM1", CharacterID.VICTIM1);
 
         CharacterDict.Add(CharacterID.INVALID, new Character("Missingno", "#FFFFFF"));
     }
