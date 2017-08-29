@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
 	};
 
 	public float speed = 1;
+	public GameObject journalManager;
+	public GameObject journalCanvas;
 	private State currentState;
 	private Rigidbody2D playerRB;
 	private Animator animator;
@@ -71,7 +73,10 @@ public class PlayerController : MonoBehaviour
 					else if (Input.GetKeyDown(KeyCode.J))
 					{
 						currentState = State.JOURNAL;
-						print("Looking at journal. Press ESC to close."); //Replace with journal code
+						print("Looking at journal. Press J or ESC to close."); //Replace with journal code
+						journalManager.SetActive(true);
+						journalCanvas.SetActive(true);
+
 					}
 					else if (Input.GetKeyDown(KeyCode.I))
 					{
@@ -93,9 +98,11 @@ public class PlayerController : MonoBehaviour
 				}
 				break;
 			case State.JOURNAL:
-				if (Input.GetKeyDown(KeyCode.Escape)) //Pressing "J" to close the journal might not work if typing
+				if (Input.GetKeyDown(KeyCode.J) || Input.GetKeyDown(KeyCode.Escape)) //Pressing "J" to close the journal might not work if typing
 				{
 					currentState = State.MAIN;
+					journalManager.SetActive(false);
+					journalCanvas.SetActive(false);
 					print("Closed journal."); //Replace with journal code
 				}
 				break;
