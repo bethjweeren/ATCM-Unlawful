@@ -141,13 +141,13 @@ public class PlayerController : MonoBehaviour
 					print("Closed inventory."); //Replace with inventory code
 				}
 				break;
-			case State.INTERACTING:
+			/*case State.INTERACTING:
 				if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Escape))
 				{
 					currentState = State.MAIN;
 					print("Ended interaction."); //Replace with interaction/NPC discussion code
 				}
-				break;
+				break;*/
 		}
 	}
 
