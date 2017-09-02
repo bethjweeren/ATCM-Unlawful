@@ -22,10 +22,13 @@ public class PlayerController : MonoBehaviour
 	private State currentState;
 	private Rigidbody2D playerRB;
 	private Animator animator;
+    public float interactRange = 2;
+    public LayerMask interactLayer;
 
 	// Use this for initialization
 	void Start()
 	{
+        DialogueSystem.Instance().player = this;
 		currentState = State.MAIN;
 		playerRB = this.GetComponent<Rigidbody2D>();
 		animator = this.GetComponent<Animator>();
@@ -85,8 +88,33 @@ public class PlayerController : MonoBehaviour
 					}
 					else if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Space))
 					{
-						currentState = State.INTERACTING;
-						print("Looking or talking. Press E or Space or ESC to end interaction."); //Replace with interaction code
+                        int facing = animator.GetInteger("Direction");
+                        Vector2 facingVector;
+                        switch (facing)
+                        {
+                            case 0:
+                                facingVector = Vector2.up;
+                                break;
+                            case 1:
+                                facingVector = Vector2.right;
+                                break;
+                            case 2:
+                                facingVector = Vector2.down;
+                                break;
+                            case 3:
+                                facingVector = Vector2.left;
+                                break;
+                            default:
+                                Debug.Log("Invalid facing dirction recieved from animator component");
+                                facingVector = Vector2.zero;
+                                break;
+                        }
+                        RaycastHit2D foundObject = Physics2D.Raycast(transform.position, facingVector, interactRange, interactLayer);
+                        if (foundObject)
+                        {
+                            foundObject.collider.GetComponent<IInteractable>().Interact();
+                            currentState = State.INTERACTING;
+                        }
 					}
 				}
 				break;
@@ -122,4 +150,12 @@ public class PlayerController : MonoBehaviour
 				break;
 		}
 	}
+
+    public void EndInteraction()
+    {
+        if(currentState == State.INTERACTING)
+        {
+            currentState = State.MAIN;
+        }
+    }
 }
