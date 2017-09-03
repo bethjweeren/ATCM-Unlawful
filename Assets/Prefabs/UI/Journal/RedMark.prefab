@@ -9,33 +9,33 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1019900947532048}
+  m_RootGameObject: {fileID: 1558324181086308}
   m_IsPrefabParent: 1
---- !u!1 &1019900947532048
+--- !u!1 &1558324181086308
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 224244239198583174}
-  - component: {fileID: 222114062650533406}
-  - component: {fileID: 114979436312684712}
-  - component: {fileID: 114338966092656476}
-  - component: {fileID: 61995966982308706}
+  - component: {fileID: 224593433054410564}
+  - component: {fileID: 222826382940015242}
+  - component: {fileID: 114190263911460660}
+  - component: {fileID: 114622023524792438}
+  - component: {fileID: 61383391752700780}
   m_Layer: 5
-  m_Name: BlueMark
-  m_TagString: Untagged
+  m_Name: RedMark
+  m_TagString: MapMark
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!61 &61995966982308706
+--- !u!61 &61383391752700780
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1019900947532048}
+  m_GameObject: {fileID: 1558324181086308}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -55,23 +55,12 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 46.26, y: 47.3}
   m_EdgeRadius: 0
---- !u!114 &114338966092656476
+--- !u!114 &114190263911460660
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1019900947532048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0191980c8a3e3e842a7c7efaf31cb4d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114979436312684712
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1019900947532048}
+  m_GameObject: {fileID: 1558324181086308}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
@@ -85,7 +74,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 7683e740da3c1474288a5bef0310c56d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cf6b72db0c0215a4eb7be661f0037c4b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -93,18 +82,29 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!222 &222114062650533406
+--- !u!114 &114622023524792438
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1558324181086308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0191980c8a3e3e842a7c7efaf31cb4d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!222 &222826382940015242
 CanvasRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1019900947532048}
---- !u!224 &224244239198583174
+  m_GameObject: {fileID: 1558324181086308}
+--- !u!224 &224593433054410564
 RectTransform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1019900947532048}
+  m_GameObject: {fileID: 1558324181086308}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.000004, y: 1.000004, z: 1.000004}
@@ -114,6 +114,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -275.00012, y: -828}
+  m_AnchoredPosition: {x: -604.9001, y: -828}
   m_SizeDelta: {x: 56.2, y: 56.2}
   m_Pivot: {x: 0.5, y: 0.5}

@@ -11,11 +11,12 @@ public class Mark_Manager : MonoBehaviour {
 	public bool isPlacingRed = false;
 	public bool isPlacingBlack = false;
 	public bool isPlacingGreen = false;
-	public Button createBlueButton;
-	public Button createYellowButton;
-	public Button createRedButton;
-	public Button createBlackButton;
-	public Button createGreenButton;
+	public Button createBlue_Btn;
+	public Button createYellow_Btn;
+	public Button createRed_Btn;
+	public Button createBlack_Btn;
+	public Button createGreen_Btn;
+	public Button clearAll_Btn;
 	public GameObject blueCursor;
 	public GameObject yellowCursor;
 	public GameObject redCursor;
@@ -26,29 +27,31 @@ public class Mark_Manager : MonoBehaviour {
 	public GameObject redMark;
 	public GameObject blackMark;
 	public GameObject greenMark;
+	public GameObject mapArea;
+	public Camera realCamera;
+	GameObject[] marks;
 
 	void Start()
 	{
-		Button createBlue_Btn = createBlueButton.GetComponent<Button> ();
 		createBlue_Btn.onClick.AddListener (StartPlacingBlue);
 
-		Button createYellow_Btn = createYellowButton.GetComponent<Button> ();
 		createYellow_Btn.onClick.AddListener (StartPlacingYellow);
 
-		Button createRed_Btn = createRedButton.GetComponent<Button> ();
 		createRed_Btn.onClick.AddListener (StartPlacingRed);
 
-		Button createBlack_Btn = createBlackButton.GetComponent<Button> ();
 		createBlack_Btn.onClick.AddListener (StartPlacingBlack);
 
-		Button createGreen_Btn = createGreenButton.GetComponent<Button> ();
 		createGreen_Btn.onClick.AddListener (StartPlacingGreen);
+
+		clearAll_Btn.onClick.AddListener (ClearAll);
 
 		StopPlacing ();
 	}
 
 	void Update()
 	{
+		ClickedOffMap ();
+
 		if (isPlacingBlue) 
 		{
 			PlaceBlue ();
@@ -96,12 +99,12 @@ public class Mark_Manager : MonoBehaviour {
 			isPlacing = false;
 			StopPlacing ();
 		}
+
 	}
 
 	public void StartPlacingBlue()
 	{
-		StopPlacing ();
-		isPlacing = true;
+		StartedPlacing ();
 		isPlacingBlue = true;
 		blueCursor.SetActive (true);
 		Debug.Log ("placingBlue");
@@ -109,8 +112,7 @@ public class Mark_Manager : MonoBehaviour {
 
 	public void StartPlacingYellow()
 	{
-		StopPlacing ();
-		isPlacing = true;
+		StartedPlacing ();
 		isPlacingYellow = true;
 		yellowCursor.SetActive (true);
 		Debug.Log ("placingYellow");
@@ -118,8 +120,7 @@ public class Mark_Manager : MonoBehaviour {
 
 	public void StartPlacingRed()
 	{
-		StopPlacing ();
-		isPlacing = true;
+		StartedPlacing ();
 		isPlacingRed = true;
 		redCursor.SetActive (true);
 		Debug.Log ("placingRed");
@@ -127,8 +128,7 @@ public class Mark_Manager : MonoBehaviour {
 
 	public void StartPlacingBlack()
 	{
-		StopPlacing ();
-		isPlacing = true;
+		StartedPlacing ();
 		isPlacingBlack = true;
 		blackCursor.SetActive (true);
 		Debug.Log ("placingBack");
@@ -136,8 +136,7 @@ public class Mark_Manager : MonoBehaviour {
 
 	public void StartPlacingGreen()
 	{
-		StopPlacing ();
-		isPlacing = true;
+		StartedPlacing ();
 		isPlacingGreen = true;
 		greenCursor.SetActive (true);
 		Debug.Log ("placingGreen");
@@ -188,6 +187,19 @@ public class Mark_Manager : MonoBehaviour {
 		}
 	}
 
+	void ClearAll(){
+		marks = GameObject.FindGameObjectsWithTag ("MapMark");
+		foreach (GameObject mark in marks) {
+			Destroy (mark);
+		}
+	}
+
+	void StartedPlacing ()
+	{
+		StopPlacing ();
+		isPlacing = true;
+	}
+
 	void StopPlacing ()
 	{
 		isPlacingBlue = false;
@@ -200,5 +212,17 @@ public class Mark_Manager : MonoBehaviour {
 		redCursor.SetActive (false);
 		blackCursor.SetActive (false);
 		greenCursor.SetActive (false);
+	}
+
+	void ClickedOffMap()
+	{
+		if (Input.GetMouseButton(0))
+		{
+			RectTransform rectTransform = mapArea.GetComponent<RectTransform>();
+			if (!RectTransformUtility.RectangleContainsScreenPoint (rectTransform, Input.mousePosition, realCamera)) {
+				isPlacing = false;
+				StopPlacing ();
+			}
+		}
 	}
 }

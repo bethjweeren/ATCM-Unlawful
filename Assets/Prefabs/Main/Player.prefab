@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 61569049491488074}
   - component: {fileID: 95490253983247634}
   - component: {fileID: 114657558118750304}
+  - component: {fileID: 114110378902978754}
   - component: {fileID: 50350904995902434}
   m_Layer: 0
   m_Name: Player
@@ -106,6 +107,19 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114110378902978754
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1398861343353772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4251db3c77a8f94c869c4c9ae0beb49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentMoney: 0
+  moneyText: {fileID: 0}
 --- !u!114 &114657558118750304
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -118,8 +132,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1.5
-  journalManager: {fileID: 0}
+  journal_manager: {fileID: 0}
   journalCanvas: {fileID: 0}
+  jounalButton: {fileID: 0}
 --- !u!212 &212898046512528968
 SpriteRenderer:
   m_ObjectHideFlags: 1

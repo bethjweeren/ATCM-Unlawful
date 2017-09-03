@@ -4557,21 +4557,6 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 224751871842122212, guid: 33b41a5613b7f184ead48ecb26526559,
-        type: 2}
-      propertyPath: m_LocalScale.x
-      value: 0.9999955
-      objectReference: {fileID: 0}
-    - target: {fileID: 224751871842122212, guid: 33b41a5613b7f184ead48ecb26526559,
-        type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1.0000046
-      objectReference: {fileID: 0}
-    - target: {fileID: 224751871842122212, guid: 33b41a5613b7f184ead48ecb26526559,
-        type: 2}
-      propertyPath: m_LocalScale.z
-      value: 1.0000046
-      objectReference: {fileID: 0}
     - target: {fileID: 1720820972273002, guid: 33b41a5613b7f184ead48ecb26526559, type: 2}
       propertyPath: m_Name
       value: Tile (34)

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 // Controls player movement and handles player sprite animations
 public class PlayerController : MonoBehaviour
@@ -17,21 +18,22 @@ public class PlayerController : MonoBehaviour
 	};
 
 	public float speed = 1;
-	public GameObject journalManager;
+	public Journal_Manager journal_manager;
 	public GameObject journalCanvas;
 	private State currentState;
 	private Rigidbody2D playerRB;
 	private Animator animator;
-    public float interactRange = 0.2f;
-    public LayerMask interactLayer;
+	public Button jounalButton;
 
 	// Use this for initialization
 	void Start()
 	{
-        DialogueSystem.Instance().player = this;
+		journalCanvas.SetActive (false);
 		currentState = State.MAIN;
 		playerRB = this.GetComponent<Rigidbody2D>();
 		animator = this.GetComponent<Animator>();
+		journal_manager = journalCanvas.GetComponent<Journal_Manager> ();
+		jounalButton.onClick.AddListener (ToggleJournal);
 	}
 
 	// Update is called every fixed framerate frame
@@ -72,12 +74,13 @@ public class PlayerController : MonoBehaviour
 					{
 						currentState = State.MAP;
 						print("Looking at map. Press M or ESC or Space to close."); //Replace with map code
+						journalCanvas.SetActive(true);
+						journal_manager.BringUpMap ();
 					}
 					else if (Input.GetKeyDown(KeyCode.J))
 					{
 						currentState = State.JOURNAL;
 						print("Looking at journal. Press J or ESC to close."); //Replace with journal code
-						journalManager.SetActive(true);
 						journalCanvas.SetActive(true);
 
 					}
@@ -88,33 +91,8 @@ public class PlayerController : MonoBehaviour
 					}
 					else if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Space))
 					{
-                        int facing = animator.GetInteger("Direction");
-                        Vector2 facingVector;
-                        switch (facing)
-                        {
-                            case 0:
-                                facingVector = Vector2.up;
-                                break;
-                            case 1:
-                                facingVector = Vector2.right;
-                                break;
-                            case 2:
-                                facingVector = Vector2.down;
-                                break;
-                            case 3:
-                                facingVector = Vector2.left;
-                                break;
-                            default:
-                                Debug.Log("Invalid facing dirction recieved from animator component");
-                                facingVector = Vector2.zero;
-                                break;
-                        }
-                        RaycastHit2D foundObject = Physics2D.Raycast(transform.position, facingVector, interactRange, interactLayer);
-                        if (foundObject)
-                        {
-                            foundObject.collider.GetComponent<IInteractable>().Interact();
-                            currentState = State.INTERACTING;
-                        }
+						currentState = State.INTERACTING;
+						print("Looking or talking. Press E or Space or ESC to end interaction."); //Replace with interaction code
 					}
 				}
 				break;
@@ -123,13 +101,13 @@ public class PlayerController : MonoBehaviour
 				{
 					currentState = State.MAIN;
 					print("Closed map"); //Replace with map code
+					journalCanvas.SetActive(false);
 				}
 				break;
 			case State.JOURNAL:
 				if (Input.GetKeyDown(KeyCode.J) || Input.GetKeyDown(KeyCode.Escape)) //Pressing "J" to close the journal might not work if typing
 				{
 					currentState = State.MAIN;
-					journalManager.SetActive(false);
 					journalCanvas.SetActive(false);
 					print("Closed journal."); //Replace with journal code
 				}
@@ -141,21 +119,25 @@ public class PlayerController : MonoBehaviour
 					print("Closed inventory."); //Replace with inventory code
 				}
 				break;
-			/*case State.INTERACTING:
+			case State.INTERACTING:
 				if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Escape))
 				{
 					currentState = State.MAIN;
 					print("Ended interaction."); //Replace with interaction/NPC discussion code
 				}
-				break;*/
+				break;
+		}
+	}
+		
+	void ToggleJournal()
+	{
+		if (currentState == State.MAIN) {
+			currentState = State.JOURNAL;
+			journalCanvas.SetActive (true);
+		} else {
+			currentState = State.MAIN;
+			journalCanvas.SetActive(false);
 		}
 	}
 
-    public void EndInteraction()
-    {
-        if(currentState == State.INTERACTING)
-        {
-            currentState = State.MAIN;
-        }
-    }
 }

@@ -36,5 +36,12 @@ public class Tile_Swapper : MonoBehaviour {
 			xMark.SetActive (false);
 		}
 	}
+
+	public void MakeBlank(){
+		isCheck = false;
+		isX = false;
+		checkMark.SetActive (false);
+		xMark.SetActive (false);
+	}
 		
 }

@@ -4,8 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - MapMark
   - checkMark
   - xMark
+  - MarkerBlock
   layers:
   - Default
   - TransparentFX
@@ -15,9 +17,9 @@ TagManager:
   - UI
   - 
   - 
-  - Player
-  - Interactable
-  - World
+  - 
+  - 
+  - 
   - 
   - 
   - 
