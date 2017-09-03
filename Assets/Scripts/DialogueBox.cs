@@ -7,9 +7,11 @@ public class DialogueBox : MonoBehaviour {
     Quotes.DialogueLine currentLine;
     public Text nameText;
     public Text dialogueText;
+    List<string> textPortions;
     string textToDisplay;
     bool doneDisplaying;
-    float typeDelayMultiplier = 1;
+    float typeDelay = 0.05f;
+    float delayMultiplier = 1;
 
 	void Start () {
         DialogueSystem.Instance().dialogueBox = this;
@@ -20,14 +22,14 @@ public class DialogueBox : MonoBehaviour {
 	void Update () {
         if (Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.Space))
         {
-            typeDelayMultiplier = 0.5f;
+            delayMultiplier = 0.25f;
         }
         else
         {
-            typeDelayMultiplier = 1f;
+            delayMultiplier = 1f;
         }
         if(doneDisplaying && (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Space))){
-            DialogueSystem.Instance().CloseDialogueBox();
+            SayNextPortion();
         }
 	}
 
@@ -39,10 +41,10 @@ public class DialogueBox : MonoBehaviour {
 
     public void DisplayLine(Quotes.DialogueLine newLine)
     {
-        currentLine = newLine;
         Clear();
-        SetName(currentLine.spokenBy);
-        SetText(currentLine.line);
+        currentLine = newLine;
+        PartitionText(currentLine.line);
+        SayNextPortion();
     }
 
     void SetName(CharacterID id)
@@ -51,11 +53,21 @@ public class DialogueBox : MonoBehaviour {
         nameText.text = "<color=" + speaker.color + ">" + speaker.name + "</color>";
     }
 
-    void SetText(string line)
+    void SayNextPortion()
     {
-        textToDisplay = line;
-        doneDisplaying = false;
-        StartCoroutine("SayLine");
+        if (textPortions.Count > 0)
+        {
+            Clear();
+            SetName(currentLine.spokenBy);
+            textToDisplay = textPortions[0];
+            textPortions.RemoveAt(0);
+            doneDisplaying = false;
+            StartCoroutine("SayLine");
+        }
+        else
+        {
+            DialogueSystem.Instance().CloseDialogueBox();
+        }
     }
 
     IEnumerator SayLine()
@@ -80,7 +92,7 @@ public class DialogueBox : MonoBehaviour {
                     startFormat = startFormat + nameToDisplay[0];
                     nameToDisplay = nameToDisplay.Substring(1, nameToDisplay.Length - 1);
                     dialogueText.text = baseText + startFormat + endFormat;
-                    yield return new WaitForSeconds(0.05f * typeDelayMultiplier);
+                    yield return new WaitForSeconds(typeDelay * delayMultiplier);
                 }
 
             }
@@ -89,8 +101,28 @@ public class DialogueBox : MonoBehaviour {
                 dialogueText.text = dialogueText.text + textToDisplay[0];
                 textToDisplay = textToDisplay.Substring(1, textToDisplay.Length - 1);
             }
-            yield return new WaitForSeconds(0.05f * typeDelayMultiplier);
+            yield return new WaitForSeconds(typeDelay * delayMultiplier);
         }
         doneDisplaying = true;
+    }
+
+    void PartitionText(string allText)
+    {
+        string remaining = allText;
+        textPortions = new List<string>();
+        while(allText.Length > 255)
+        {
+            string beginning = allText.Substring(0, 255);
+            string end = allText.Substring(255, allText.Length - 255);
+            int lastSpace = beginning.LastIndexOf(' ');
+            if (lastSpace != 254)
+            {
+                end = beginning.Substring(lastSpace + 1, beginning.Length - (lastSpace + 1)) + end;
+                beginning = beginning.Substring(0, lastSpace+1);
+            }
+            textPortions.Add(beginning);
+            allText = end;
+        }
+        textPortions.Add(allText);
     }
 }

@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
 	private State currentState;
 	private Rigidbody2D playerRB;
 	private Animator animator;
-    public float interactRange = 2;
+    public float interactRange = 0.2f;
     public LayerMask interactLayer;
 
 	// Use this for initialization
