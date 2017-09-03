@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
 				//TO-DO Only change animator and velocity when keys pressed or released, not held down
 
 				//If ANY key was just pressed, change animation and velocity
-				//So it doesn't change every framevvvvvvvvvvvvvvvvvvvvvvvvvv
+				//So it doesn't change every frame
 				if (Input.anyKeyDown)
 				{
 					if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
