@@ -2654,7 +2654,7 @@ Prefab:
     - target: {fileID: 114657558118750304, guid: 9b012aee3142ad44f881cf3dcdc783c2,
         type: 2}
       propertyPath: speed
-      value: 3.2
+      value: 3.3
       objectReference: {fileID: 0}
     - target: {fileID: 114657558118750304, guid: 9b012aee3142ad44f881cf3dcdc783c2,
         type: 2}
@@ -3840,7 +3840,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1097344824
 MonoBehaviour:
   m_ObjectHideFlags: 0
