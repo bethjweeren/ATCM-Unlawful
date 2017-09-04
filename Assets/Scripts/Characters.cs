@@ -26,22 +26,22 @@ public class Characters
         CharacterDict.Add(CharacterID.BLACK, new Character("Friar Black", "#191919"));
         NameDict.Add("BLACK", CharacterID.BLACK);
 
-        CharacterDict.Add(CharacterID.BLUE, new Character("Pvt. Blue", "#193BFF"));
+        CharacterDict.Add(CharacterID.BLUE, new Character("Blue", "#193BFF"));
         NameDict.Add("BLUE", CharacterID.BLUE);
 
         CharacterDict.Add(CharacterID.BROWN, new Character("The Beggar", "#664028"));
         NameDict.Add("BROWN", CharacterID.BROWN);
 
-        CharacterDict.Add(CharacterID.GREEN, new Character("Mr. Green", "#11B211"));
+        CharacterDict.Add(CharacterID.GREEN, new Character("Greensworth Greenston", "#11B211"));
         NameDict.Add("GREEN", CharacterID.GREEN);
 
-        CharacterDict.Add(CharacterID.PURPLE, new Character("Sir Purple", "#AF11A5"));
+        CharacterDict.Add(CharacterID.PURPLE, new Character("Purple", "#AF11A5"));
         NameDict.Add("PURPLE", CharacterID.PURPLE);
 
-        CharacterDict.Add(CharacterID.RED, new Character("Redmond Reddington", "#FF1919"));
+        CharacterDict.Add(CharacterID.RED, new Character("Red", "#FF1919"));
         NameDict.Add("RED", CharacterID.RED);
 
-        CharacterDict.Add(CharacterID.YELLOW, new Character("Dr. Yellow", "#FFFF32"));
+        CharacterDict.Add(CharacterID.YELLOW, new Character("Yellow", "#FFFF32"));
         NameDict.Add("YELLOW", CharacterID.YELLOW);
 
         CharacterDict.Add(CharacterID.VICTIM1, new Character("Mr. Boddy", "#AD7F61"));
