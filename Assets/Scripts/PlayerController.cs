@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
 	};
 
 	public float speed = 1;
+    public float sprintValue = 1;
 	public Journal_Manager journal_manager;
 	public GameObject journalCanvas;
 	public GameObject screenMenu;
@@ -61,25 +62,25 @@ public class PlayerController : MonoBehaviour
                 {
                     animator.SetInteger("Direction", 0); //Animate north sprite
                     animator.SetBool("Walking", true);
-                    playerRB.velocity = new Vector2(0, 1) * speed; //Move north
+                    playerRB.velocity = new Vector2(0, 1) * speed * sprintValue; //Move north
                 }
                 else if ((Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) || ((Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) && !(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))))
                 {
                     animator.SetInteger("Direction", 1); //Animate east sprite
                     animator.SetBool("Walking", true);
-                    playerRB.velocity = new Vector2(1, 0) * speed; //Move east
+                    playerRB.velocity = new Vector2(1, 0) * speed * sprintValue; //Move east
                 }
                 else if ((Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) || ((Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) && !(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))))
                 {
                     animator.SetInteger("Direction", 2); //Animate south sprite
                     animator.SetBool("Walking", true);
-                    playerRB.velocity = new Vector2(0, -1) * speed; //Move south
+                    playerRB.velocity = new Vector2(0, -1) * speed * sprintValue; //Move south
                 }
                 else if ((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) || ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) && !(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))))
                 {
                     animator.SetInteger("Direction", 3); //Animate west sprite
                     animator.SetBool("Walking", true);
-                    playerRB.velocity = new Vector2(-1, 0) * speed; //Move west
+                    playerRB.velocity = new Vector2(-1, 0) * speed * sprintValue; //Move west
                 }
                 else
                 {
@@ -113,6 +114,14 @@ public class PlayerController : MonoBehaviour
                         StopMoving();
                         screenMenu.SetActive(true);
                     }
+                }
+                if (Input.GetKeyDown(KeyCode.LeftShift))
+                {
+                    sprintValue = 2;
+                }
+                else if (Input.GetKeyUp(KeyCode.LeftShift))
+                {
+                    sprintValue = 1;
                 }
                 if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Space))
                 {
