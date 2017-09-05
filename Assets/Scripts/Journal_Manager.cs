@@ -142,9 +142,11 @@ public class Journal_Manager : MonoBehaviour {
 
 	void AddNotesPage()
 	{
-		if (currentNumberOfPages <= pages.Length) {
+		if (currentNumberOfPages <= pages.Length - 4) {
 			currentNumberOfPages += 2;
 		}
+
+		UpdateJournalButtons ();
 			
 	}
 

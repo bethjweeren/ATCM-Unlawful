@@ -18,6 +18,7 @@ public class PlayerMadeText : MonoBehaviour {
 			RectTransform rectTransform = textArea.GetComponent<RectTransform>();
 			if (RectTransformUtility.RectangleContainsScreenPoint (rectTransform, Input.mousePosition, realCamera)) {
 				GUI.contentColor = Color.black;
+				GUI.skin.settings.cursorColor = Color.black;
 				if (this.stringToEdit == "Personal Journal") {
 					this.stringToEdit = "";
 				}
