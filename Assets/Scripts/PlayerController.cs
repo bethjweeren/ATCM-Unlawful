@@ -11,7 +11,6 @@ public class PlayerController : MonoBehaviour
 	enum State
 	{
 		MAIN,
-		MAP,
 		JOURNAL,
 		INVENTORY,
 		INTERACTING,
@@ -28,8 +27,9 @@ public class PlayerController : MonoBehaviour
 	private Rigidbody2D playerRB;
 	private Animator animator;
 	public Button jounalButton;
-    public float interactRange = 0.5f;
+    public float interactRange = 1;
     public LayerMask interactLayer;
+    public Transform interactRayOrigin;
 
     // Use this for initialization
     void Start()
@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
 		currentState = State.MENU;
 		playerRB = this.GetComponent<Rigidbody2D>();
 		animator = this.GetComponent<Animator>();
-		animator.enabled = false; //Stop animating sprite
+		animator.SetBool("Walking", false); //Stop animating sprite
 		playerRB.velocity = new Vector2(0, 0); //Don't move
 		screenMenu.SetActive(true); //Start with menu enabled, because it's not fun to keep it enabled
 	}
@@ -49,71 +49,71 @@ public class PlayerController : MonoBehaviour
 	// Update is called every fixed framerate frame
 	void Update()
 	{
-		switch (currentState)
+        switch (currentState)
 		{
 			case State.MAIN:
-				animator.enabled = true; //Animate sprite
+                //TO-DO Use Axis instead of GetKey
+                //TO-DO Only change animator and velocity when keys pressed or released, not held down
 
-				//TO-DO Use Axis instead of GetKey
-				//TO-DO Only change animator and velocity when keys pressed or released, not held down
+                //If ANY key was just pressed, change animation and velocity
+                //So it doesn't change every frame
+                if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) || ((Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) && !(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))))
+                {
+                    animator.SetInteger("Direction", 0); //Animate north sprite
+                    animator.SetBool("Walking", true);
+                    playerRB.velocity = new Vector2(0, 1) * speed; //Move north
+                }
+                else if ((Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) || ((Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) && !(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))))
+                {
+                    animator.SetInteger("Direction", 1); //Animate east sprite
+                    animator.SetBool("Walking", true);
+                    playerRB.velocity = new Vector2(1, 0) * speed; //Move east
+                }
+                else if ((Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) || ((Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) && !(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))))
+                {
+                    animator.SetInteger("Direction", 2); //Animate south sprite
+                    animator.SetBool("Walking", true);
+                    playerRB.velocity = new Vector2(0, -1) * speed; //Move south
+                }
+                else if ((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) || ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) && !(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))))
+                {
+                    animator.SetInteger("Direction", 3); //Animate west sprite
+                    animator.SetBool("Walking", true);
+                    playerRB.velocity = new Vector2(-1, 0) * speed; //Move west
+                }
+                else
+                {
+                    if (Input.GetKeyDown(KeyCode.M))
+                    {
+                        currentState = State.JOURNAL;
+                        StopMoving();
+                        print("Looking at map. Press M or ESC or Space to close."); //Replace with map code
+                        journalCanvas.SetActive(true);
+                        journal_manager.BringUpMap();
+                    }
+                    else if (Input.GetKeyDown(KeyCode.J))
+                    {
+                        currentState = State.JOURNAL;
+                        StopMoving();
+                        print("Looking at journal. Press J or ESC to close."); //Replace with journal code
+                        journalCanvas.SetActive(true);
+                    }
+                    /*
+                    else if (Input.GetKeyDown(KeyCode.I))
+                    {
+                        currentState = State.INVENTORY;
+                        StopMoving();
+                        print("Looking through inventory. Press I or ESC to close."); //Replace with inventory code
+                    }
+                    */
 
-				//If ANY key was just pressed, change animation and velocity
-				//So it doesn't change every frame
-				if (Input.anyKeyDown)
-				{
-					if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
-					{
-						animator.SetInteger("Direction", 0); //Animate north sprite
-						playerRB.velocity = new Vector2(0, 1) * speed; //Move north
-					}
-					else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
-					{
-						animator.SetInteger("Direction", 1); //Animate east sprite
-						playerRB.velocity = new Vector2(1, 0) * speed; //Move east
-					}
-					else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
-					{
-						animator.SetInteger("Direction", 2); //Animate south sprite
-						playerRB.velocity = new Vector2(0, -1) * speed; //Move south
-					}
-					else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
-					{
-						animator.SetInteger("Direction", 3); //Animate west sprite
-						playerRB.velocity = new Vector2(-1, 0) * speed; //Move west
-					}
-					else
-					{
-						animator.enabled = false; //Stop animating sprite
-						playerRB.velocity = new Vector2(0, 0); //Don't move
-
-						if (Input.GetKeyDown(KeyCode.M))
-						{
-                            currentState = State.JOURNAL;
-                            print("Looking at map. Press M or ESC or Space to close."); //Replace with map code
-                            journalCanvas.SetActive(true);
-                            journal_manager.BringUpMap();
-                        }
-						else if (Input.GetKeyDown(KeyCode.J))
-						{
-                            currentState = State.JOURNAL;
-                            print("Looking at journal. Press J or ESC to close."); //Replace with journal code
-                            journalCanvas.SetActive(true);
-                        }
-						/*
-						else if (Input.GetKeyDown(KeyCode.I))
-						{
-							currentState = State.INVENTORY;
-							print("Looking through inventory. Press I or ESC to close."); //Replace with inventory code
-						}
-                        */
-						
-						else if (Input.GetKeyDown(KeyCode.Escape))
-						{
-							currentState = State.MENU;
-							screenMenu.SetActive(true);
-						}
-					}
-				}
+                    else if (Input.GetKeyDown(KeyCode.Escape))
+                    {
+                        currentState = State.MENU;
+                        StopMoving();
+                        screenMenu.SetActive(true);
+                    }
+                }
                 if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Space))
                 {
                     int facing = animator.GetInteger("Direction");
@@ -137,19 +137,19 @@ public class PlayerController : MonoBehaviour
                             facingVector = Vector2.zero;
                             break;
                     }
-                    RaycastHit2D foundObject = Physics2D.Raycast(transform.position, facingVector, interactRange, interactLayer);
+                    RaycastHit2D foundObject = Physics2D.Raycast(interactRayOrigin.position, facingVector, interactRange, interactLayer);
                     if (foundObject)
                     {
                         foundObject.collider.GetComponent<IInteractable>().Interact();
                         currentState = State.INTERACTING;
+                        StopMoving();
                     }
                 }
 
-                else if (!(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.RightArrow)))
+                else if (!AnyMovementKey())
 				{
-					animator.enabled = false; //Stop animating sprite
-					playerRB.velocity = new Vector2(0, 0); //Don't move
-				}
+                    StopMoving();
+                }
 				break;
 			case State.JOURNAL:
 				if (Input.GetKeyDown(KeyCode.J) || Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.M) || Input.GetKeyDown(KeyCode.Space)) //Pressing "J" to close the journal might not work if typing
@@ -190,6 +190,22 @@ public class PlayerController : MonoBehaviour
 				break;
 		}
 	}
+
+    void StopMoving()
+    {
+        animator.SetBool("Walking", false); //Stop animating sprite
+        playerRB.velocity = new Vector2(0, 0); //Don't move
+    }
+
+    bool AnyMovementKeyDown()
+    {
+        return (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.RightArrow));
+    }
+
+    bool AnyMovementKey()
+    {
+        return (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.RightArrow));
+    }
 
     public void EndInteraction()
     {
