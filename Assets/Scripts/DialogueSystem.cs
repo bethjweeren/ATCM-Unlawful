@@ -28,9 +28,10 @@ public class DialogueSystem
         return instance;
     }
 
-    public void OpenDialogueBox()
+    public void OpenDialogueBox(CharacterID id)
     {
         dialogueBox.transform.parent.gameObject.SetActive(true);
+        dialogueBox.SetPortrait(id);
     }
 
     public void CloseDialogueBox()

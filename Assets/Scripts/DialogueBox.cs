@@ -53,13 +53,17 @@ public class DialogueBox : MonoBehaviour {
     {
         Character speaker = DialogueSystem.Instance().characters.IDToCharacter(id);
         nameText.text = "<color=" + speaker.color + ">" + speaker.name + "</color>";
-        if(id != CharacterID.BLACK && id != CharacterID.BLUE && id != CharacterID.BROWN && id != CharacterID.GREEN && id != CharacterID.PURPLE && id != CharacterID.RED && id != CharacterID.YELLOW)
+    }
+
+    public void SetPortrait(CharacterID id)
+    {
+        if (id != CharacterID.BLACK && id != CharacterID.BLUE && id != CharacterID.BROWN && id != CharacterID.GREEN && id != CharacterID.PURPLE && id != CharacterID.RED && id != CharacterID.YELLOW)
         {
             NonPlayerThumb.gameObject.SetActive(false);
         }
         else
         {
-            NonPlayerThumb.sprite = speaker.thumb;
+            NonPlayerThumb.sprite = DialogueSystem.Instance().characters.IDToCharacter(id).thumb;
             NonPlayerThumb.gameObject.SetActive(true);
         }
     }
