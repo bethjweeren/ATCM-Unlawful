@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DemoNPC : MonoBehaviour, IInteractable {
 
+    public CharacterID id;
     public string dialogueFile;
     Quotes quotes;
 

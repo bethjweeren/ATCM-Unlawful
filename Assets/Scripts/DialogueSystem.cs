@@ -30,12 +30,12 @@ public class DialogueSystem
 
     public void OpenDialogueBox()
     {
-        dialogueBox.gameObject.SetActive(true);
+        dialogueBox.transform.parent.gameObject.SetActive(true);
     }
 
     public void CloseDialogueBox()
     {
-        dialogueBox.gameObject.SetActive(false);
+        dialogueBox.transform.parent.gameObject.SetActive(false);
         player.EndInteraction();
     }
 }
