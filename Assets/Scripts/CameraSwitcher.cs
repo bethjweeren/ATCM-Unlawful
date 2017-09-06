@@ -4,15 +4,19 @@ using UnityEngine;
 
 //Controls camera switching for one specific area
 //Put this script under any area camera
+//To-Do: Change the name of this class to AreaSwitcher or something
+//since it also changes player speed and disables the roof
 public class CameraSwitcher : MonoBehaviour
 {
 	//Camera to switch to and camera to switch from when enter area
 	public Camera areaCamera, mainCamera;
+	public GameObject roof; //Optional, should NOT be collideable
+	private PlayerController playerController;
 
 	// Use this for initialization
 	void Start ()
 	{
-		//Derp de derp
+		//derp de derp
 	}
 
 	//Called when player enters area
@@ -20,8 +24,12 @@ public class CameraSwitcher : MonoBehaviour
 	{
 		if (other.tag.Equals("Player"))
 		{
+			playerController = other.GetComponent<PlayerController>();
 			areaCamera.enabled = true;
 			mainCamera.enabled = false;
+			if (roof != null)
+				roof.SetActive(false); //Roof disappears and player can enter.
+			playerController.SetSpeed(playerController.speed-1); //Slow player down when they enter area
 		}
 	}
 
@@ -32,6 +40,9 @@ public class CameraSwitcher : MonoBehaviour
 		{
 			areaCamera.enabled = false;
 			mainCamera.enabled = true;
+			if (roof != null)
+				roof.SetActive(true); //Roof covers area again.
+			playerController.SetSpeed(playerController.speed+1); //Bring player back to normal speed when they leave
 		}
 	}
 }

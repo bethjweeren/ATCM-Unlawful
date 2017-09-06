@@ -224,6 +224,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+	public void SetSpeed(float newSpeed)
+	{
+		speed = newSpeed;
+	}
+
     void ToggleJournal()
 	{
 		if (currentState == State.MAIN) {
