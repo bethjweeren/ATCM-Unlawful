@@ -7,6 +7,8 @@ public class DialogueBox : MonoBehaviour {
     Quotes.DialogueLine currentLine;
     public Text nameText;
     public Text dialogueText;
+    public Image PlayerThumb;
+    public Image NonPlayerThumb;
     List<string> textPortions;
     string textToDisplay;
     bool doneDisplaying;
@@ -51,6 +53,19 @@ public class DialogueBox : MonoBehaviour {
     {
         Character speaker = DialogueSystem.Instance().characters.IDToCharacter(id);
         nameText.text = "<color=" + speaker.color + ">" + speaker.name + "</color>";
+    }
+
+    public void SetPortrait(CharacterID id)
+    {
+        if (id != CharacterID.BLACK && id != CharacterID.BLUE && id != CharacterID.BROWN && id != CharacterID.GREEN && id != CharacterID.PURPLE && id != CharacterID.RED && id != CharacterID.YELLOW)
+        {
+            NonPlayerThumb.gameObject.SetActive(false);
+        }
+        else
+        {
+            NonPlayerThumb.sprite = DialogueSystem.Instance().characters.IDToCharacter(id).thumb;
+            NonPlayerThumb.gameObject.SetActive(true);
+        }
     }
 
     void SayNextPortion()

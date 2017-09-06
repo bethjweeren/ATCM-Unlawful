@@ -28,14 +28,15 @@ public class DialogueSystem
         return instance;
     }
 
-    public void OpenDialogueBox()
+    public void OpenDialogueBox(CharacterID id)
     {
-        dialogueBox.gameObject.SetActive(true);
+        dialogueBox.transform.parent.gameObject.SetActive(true);
+        dialogueBox.SetPortrait(id);
     }
 
     public void CloseDialogueBox()
     {
-        dialogueBox.gameObject.SetActive(false);
+        dialogueBox.transform.parent.gameObject.SetActive(false);
         player.EndInteraction();
     }
 }

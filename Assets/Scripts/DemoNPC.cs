@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DemoNPC : MonoBehaviour, IInteractable {
 
+    public CharacterID id;
     public string dialogueFile;
     Quotes quotes;
 
@@ -24,7 +25,7 @@ public class DemoNPC : MonoBehaviour, IInteractable {
             if(quotes.allQuotes.Count != 0)
             {
                 Quotes.DialogueLine line = quotes.allQuotes[Random.Range(0, quotes.allQuotes.Count)];
-                DialogueSystem.Instance().OpenDialogueBox();
+                DialogueSystem.Instance().OpenDialogueBox(id);
                 DialogueSystem.Instance().dialogueBox.DisplayLine(line);
             }
             else
