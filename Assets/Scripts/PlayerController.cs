@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     public float sprintValue = 1;
 	public Journal_Manager journal_manager;
 	public GameObject journalCanvas;
+	public GameObject enableOnStart;
 	public GameObject screenMenu;
 	public GameObject screenControls;
 	public GameObject screenCredits;
@@ -45,6 +46,7 @@ public class PlayerController : MonoBehaviour
 		animator.SetBool("Walking", false); //Stop animating sprite
 		playerRB.velocity = new Vector2(0, 0); //Don't move
 		screenMenu.SetActive(true); //Start with menu enabled, because it's not fun to keep it enabled
+		enableOnStart.SetActive(true); //Enable all the intrusive UI things on start, because they get in the way in the scene
 	}
 
 	// Update is called every fixed framerate frame
