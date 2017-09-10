@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
 		JOURNAL,
 		INVENTORY,
 		INTERACTING,
+		PAUSED,
 		MENU
 	};
 
@@ -199,6 +200,9 @@ public class PlayerController : MonoBehaviour
 					currentState = State.MAIN;
 				}
 				break;
+
+			case State.PAUSED:
+			break;
 		}
 	}
 
@@ -240,6 +244,17 @@ public class PlayerController : MonoBehaviour
 			currentState = State.MAIN;
 			journalCanvas.SetActive(false);
 		}
+	}
+
+	public void StopInput()
+	{
+		animator.SetBool("Walking", false);
+		currentState = State.PAUSED;
+	}
+
+	public void ResumeInput()
+	{
+		currentState = State.MAIN;
 	}
 
 }
