@@ -11,6 +11,7 @@ public class CameraSwitcher : MonoBehaviour
 	//Camera to switch to and camera to switch from when enter area
 	public Camera areaCamera, mainCamera;
 	public GameObject roof; //Optional, should NOT be collideable
+	private float slowDown = 1.5f; //This variable is private because it's a pain to change for each one, and it helps keeps things consistent
 	private PlayerController playerController;
 
 	// Use this for initialization
@@ -29,7 +30,7 @@ public class CameraSwitcher : MonoBehaviour
 			mainCamera.enabled = false;
 			if (roof != null)
 				roof.SetActive(false); //Roof disappears and player can enter.
-			playerController.SetSpeed(playerController.speed-1); //Slow player down when they enter area
+			playerController.SetSpeed(playerController.speed - slowDown); //Slow player down when they enter area
 		}
 	}
 
@@ -42,7 +43,7 @@ public class CameraSwitcher : MonoBehaviour
 			mainCamera.enabled = true;
 			if (roof != null)
 				roof.SetActive(true); //Roof covers area again.
-			playerController.SetSpeed(playerController.speed+1); //Bring player back to normal speed when they leave
+			playerController.SetSpeed(playerController.speed + slowDown); //Bring player back to normal speed when they leave
 		}
 	}
 }
