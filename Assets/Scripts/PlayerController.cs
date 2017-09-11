@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
 	public Journal_Manager journal_manager;
 	public GameObject journalCanvas;
 	public GameObject enableOnStart;
+	public GameObject screenMenuStarting;
 	public GameObject screenMenu;
 	public GameObject screenControls;
 	public GameObject screenCredits;
@@ -33,6 +34,7 @@ public class PlayerController : MonoBehaviour
     public float interactRange = 1;
     public LayerMask interactLayer;
     public Transform interactRayOrigin;
+	public Time_Manager time_manager;
 
     // Use this for initialization
     void Start()
@@ -41,12 +43,12 @@ public class PlayerController : MonoBehaviour
         journalCanvas.SetActive (false);
 		journal_manager = journalCanvas.GetComponent<Journal_Manager> ();
 		jounalButton.onClick.AddListener (ToggleJournal);
-		currentState = State.MENU;
+		currentState = State.MAIN;
 		playerRB = this.GetComponent<Rigidbody2D>();
 		animator = this.GetComponent<Animator>();
 		animator.SetBool("Walking", false); //Stop animating sprite
 		playerRB.velocity = new Vector2(0, 0); //Don't move
-		screenMenu.SetActive(true); //Start with menu enabled, because it's not fun to keep it enabled
+		screenMenuStarting.SetActive(true); //Starting menu gets in the way, keep disabled in scene and this will enable it
 		enableOnStart.SetActive(true); //Enable all the intrusive UI things on start, because they get in the way in the scene
 	}
 
@@ -115,7 +117,8 @@ public class PlayerController : MonoBehaviour
                     {
                         currentState = State.MENU;
                         StopMoving();
-                        screenMenu.SetActive(true);
+						time_manager.ForcePausedState();
+						screenMenu.SetActive(true);
                     }
                 }
                 if (Input.GetKeyDown(KeyCode.LeftShift))
@@ -193,10 +196,7 @@ public class PlayerController : MonoBehaviour
 					screenMenu.SetActive(false);
 					screenControls.SetActive(false);
 					screenCredits.SetActive(false);
-					currentState = State.MAIN;
-				}
-				else if (!screenMenu.activeInHierarchy && !screenControls.activeInHierarchy && !screenCredits.activeInHierarchy)
-				{
+					time_manager.LeavePauseState();
 					currentState = State.MAIN;
 				}
 				break;
@@ -229,6 +229,12 @@ public class PlayerController : MonoBehaviour
             currentState = State.MAIN;
         }
     }
+
+	//Similar to EndInteraction, but need this for the Menu, specifically ButtonPlay.cs
+	public void SwitchToMainState()
+	{
+		currentState = State.MAIN;
+	}
 
 	public void SetSpeed(float newSpeed)
 	{

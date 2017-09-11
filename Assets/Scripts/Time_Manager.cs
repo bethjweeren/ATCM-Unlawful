@@ -230,4 +230,11 @@ public class Time_Manager : MonoBehaviour {
 		hour = 18;
 		minute = 0;
 	}
+
+	//Need this for in-game Menu (esc in PlayerController)
+	public void ForcePausedState()
+	{
+		pastTimeState = currentTimeState;
+		currentTimeState = State.Paused;
+	}
 }
