@@ -2,28 +2,25 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class ButtonPlay : MonoBehaviour
+public class ButtonResume : MonoBehaviour
 {
-	public Button buttonPlay;
+	public Button buttonResume;
 	public GameObject menu;
 	public GameObject player;
-	private Animator playerAnimator;
+	public Time_Manager time_manager;
 	private PlayerController playerController;
 
 	void Start()
 	{
-		Button btn = buttonPlay.GetComponent<Button>();
+		Button btn = buttonResume.GetComponent<Button>();
 		btn.onClick.AddListener(TaskOnClick);
 		playerController = player.GetComponent<PlayerController>();
-		playerController.enabled = false;
-		playerAnimator = player.GetComponent<Animator>();
-		playerAnimator.enabled = false;
 	}
 
 	void TaskOnClick()
 	{
+		playerController.SwitchToMainState();
+		time_manager.LeavePauseState();
 		menu.SetActive(false);
-		playerController.enabled = true;
-		playerAnimator.enabled = true;
 	}
 }

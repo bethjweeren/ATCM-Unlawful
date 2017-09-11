@@ -17,7 +17,8 @@ public class CameraSwitcher : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		//derp de derp
+		if (roof != null)
+			roof.SetActive(true); //So we don't need these enabled in the scene because they get in the way
 	}
 
 	//Called when player enters area
