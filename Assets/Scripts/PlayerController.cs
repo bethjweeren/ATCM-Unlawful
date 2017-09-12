@@ -121,6 +121,7 @@ public class PlayerController : MonoBehaviour
 						screenMenu.SetActive(true);
                     }
                 }
+				/*
                 if (Input.GetKeyDown(KeyCode.LeftShift))
                 {
                     sprintValue = 2;
@@ -129,6 +130,7 @@ public class PlayerController : MonoBehaviour
                 {
                     sprintValue = 1;
                 }
+				*/
                 if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Space))
                 {
                     int facing = animator.GetInteger("Direction");
