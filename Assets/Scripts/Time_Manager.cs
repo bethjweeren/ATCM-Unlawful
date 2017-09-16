@@ -23,6 +23,7 @@ public class Time_Manager : MonoBehaviour {
 	public Transform hourHand, minuteHand, restPlace;
 	public GameObject Player, skipRest, nightShade, afternoonShade;
 	private PlayerController playerController;
+	public bool isGoing = true;
 
 	void Start()
 	{
@@ -133,18 +134,19 @@ public class Time_Manager : MonoBehaviour {
 
 	void RestCode(){
 		//enter rest code
+
 		//move the player
 		Player.transform.position = restPlace.position;
 		//stop player
-		playerController.StopInput ();
-
+		if (isGoing) {
+			playerController.StopInput ();
+			isGoing = false;
+		}
 		UpdateTime (false, currentTimeSpeed);
 		SwitchToPausedState ();
 	}
 
 	void PausedCode(){
-
-		//enter paused code
 
 		UpdateTime (false, currentTimeSpeed);
 		if (Input.GetKeyDown(KeyCode.P)) {
@@ -188,6 +190,7 @@ public class Time_Manager : MonoBehaviour {
 		skipRest.SetActive (false);
 		UpdateTime (true, currentTimeSpeed);
 		playerController.ResumeInput ();
+		Debug.Log ("skiped");
 	}
 
 	public void LeavePauseState(){
