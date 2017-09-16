@@ -154,12 +154,37 @@ public class PlayerController : MonoBehaviour
                             facingVector = Vector2.zero;
                             break;
                     }
+                    Debug.DrawLine(interactRayOrigin.position, (Vector2)interactRayOrigin.position + interactRange * facingVector);
                     RaycastHit2D foundObject = Physics2D.Raycast(interactRayOrigin.position, facingVector, interactRange, interactLayer);
                     if (foundObject)
                     {
                         foundObject.collider.GetComponent<IInteractable>().Interact();
                         currentState = State.INTERACTING;
                         StopMoving();
+                    }
+                    else
+                    {
+                        GameObject[] interacts = GameObject.FindGameObjectsWithTag("Interactable");
+                        GameObject nearest = null;
+                        float distance = Mathf.Infinity;
+                        foreach (GameObject g in interacts)
+                        {
+                            if(Vector2.Distance(transform.position, g.transform.position) < distance)
+                            {
+                                nearest = g;
+                                distance = Vector2.Distance(transform.position, g.transform.position);
+                            }
+                        }
+                        if (nearest != null && distance < interactRange / 2)
+                        {
+                            if(Mathf.Abs(transform.position.y - nearest.transform.position.y) > Mathf.Abs(transform.position.x - nearest.transform.position.x))
+                            {
+
+                            }
+                            nearest.GetComponent<IInteractable>().Interact();
+                            currentState = State.INTERACTING;
+                            StopMoving();
+                        }
                     }
                 }
 

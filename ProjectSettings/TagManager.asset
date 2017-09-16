@@ -8,6 +8,7 @@ TagManager:
   - checkMark
   - xMark
   - MarkerBlock
+  - Interactable
   layers:
   - Default
   - TransparentFX

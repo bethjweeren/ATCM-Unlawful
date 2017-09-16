@@ -34,28 +34,28 @@ public class Characters
 
     public Characters()
     {
-        CharacterDict.Add(CharacterID.BLACK, new Character("Friar Black", "#191919", Resources.Load<Sprite>(thumbPath + "Black_thumb")));
+        CharacterDict.Add(CharacterID.BLACK, new Character("Friar Noir", "#191919", Resources.Load<Sprite>(thumbPath + "Black_thumb")));
         NameDict.Add("BLACK", CharacterID.BLACK);
 
-        CharacterDict.Add(CharacterID.BLUE, new Character("Blue", "#193BFF", Resources.Load<Sprite>(thumbPath + "Blue_thumb")));
+        CharacterDict.Add(CharacterID.BLUE, new Character("Bleu", "#193BFF", Resources.Load<Sprite>(thumbPath + "Blue_thumb")));
         NameDict.Add("BLUE", CharacterID.BLUE);
 
         CharacterDict.Add(CharacterID.BROWN, new Character("The Beggar", "#664028"));
         NameDict.Add("BROWN", CharacterID.BROWN);
 
-        CharacterDict.Add(CharacterID.GREEN, new Character("Greensworth Greenston", "#11B211", Resources.Load<Sprite>(thumbPath + "Green_thumb")));
+        CharacterDict.Add(CharacterID.GREEN, new Character("Count Vert Strahd", "#11B211", Resources.Load<Sprite>(thumbPath + "Green_thumb")));
         NameDict.Add("GREEN", CharacterID.GREEN);
 
-        CharacterDict.Add(CharacterID.PURPLE, new Character("Purple", "#AF11A5"));
+        CharacterDict.Add(CharacterID.PURPLE, new Character("Mayor Violet", "#AF11A5"));
         NameDict.Add("PURPLE", CharacterID.PURPLE);
 
-        CharacterDict.Add(CharacterID.RED, new Character("Red", "#FF1919", Resources.Load<Sprite>(thumbPath + "Red_thumb")));
+        CharacterDict.Add(CharacterID.RED, new Character("Rouge", "#FF1919", Resources.Load<Sprite>(thumbPath + "Red_thumb")));
         NameDict.Add("RED", CharacterID.RED);
 
-        CharacterDict.Add(CharacterID.YELLOW, new Character("Yellow", "#FFFF32", Resources.Load<Sprite>(thumbPath + "Yellow_thumb")));
+        CharacterDict.Add(CharacterID.YELLOW, new Character("Jaune", "#FFFF32", Resources.Load<Sprite>(thumbPath + "Yellow_thumb")));
         NameDict.Add("YELLOW", CharacterID.YELLOW);
 
-        CharacterDict.Add(CharacterID.VICTIM1, new Character("Dr. Boddy", "#AD7F61"));
+        CharacterDict.Add(CharacterID.VICTIM1, new Character("Dr. Mort", "#AD7F61"));
         NameDict.Add("VICTIM1", CharacterID.VICTIM1);
 
         CharacterDict.Add(CharacterID.INVALID, new Character("Missingno", "#FFFFFF"));
