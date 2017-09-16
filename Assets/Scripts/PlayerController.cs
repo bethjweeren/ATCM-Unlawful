@@ -29,12 +29,15 @@ public class PlayerController : MonoBehaviour
 	public GameObject screenCredits;
 	private State currentState;
 	private Rigidbody2D playerRB;
+    private Collider2D playerCollider;
 	private Animator animator;
 	public Button jounalButton;
     public float interactRange = 1;
     public LayerMask interactLayer;
     public Transform interactRayOrigin;
 	public Time_Manager time_manager;
+
+    public static float playerY;
 
     // Use this for initialization
     void Start()
@@ -46,6 +49,7 @@ public class PlayerController : MonoBehaviour
 		currentState = State.MAIN;
 		playerRB = this.GetComponent<Rigidbody2D>();
 		animator = this.GetComponent<Animator>();
+        playerCollider = this.GetComponent<Collider2D>();
 		animator.SetBool("Walking", false); //Stop animating sprite
 		playerRB.velocity = new Vector2(0, 0); //Don't move
 		screenMenuStarting.SetActive(true); //Starting menu gets in the way, keep disabled in scene and this will enable it
@@ -55,6 +59,8 @@ public class PlayerController : MonoBehaviour
 	// Update is called every fixed framerate frame
 	void Update()
 	{
+        playerY = transform.position.y + playerCollider.offset.y;
+
         switch (currentState)
 		{
 			case State.MAIN:
