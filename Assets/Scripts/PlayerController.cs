@@ -158,9 +158,9 @@ public class PlayerController : MonoBehaviour
                     RaycastHit2D foundObject = Physics2D.Raycast(interactRayOrigin.position, facingVector, interactRange, interactLayer);
                     if (foundObject)
                     {
-                        foundObject.collider.GetComponent<IInteractable>().Interact();
                         currentState = State.INTERACTING;
                         StopMoving();
+                        foundObject.collider.GetComponent<IInteractable>().Interact();
                     }
                     else
                     {
@@ -175,15 +175,37 @@ public class PlayerController : MonoBehaviour
                                 distance = Vector2.Distance(transform.position, g.transform.position);
                             }
                         }
-                        if (nearest != null && distance < interactRange / 2)
+                        if (nearest != null && distance < interactRange * 0.75f) //If the player misses the raycast but there is an interactable object nearby
                         {
                             if(Mathf.Abs(transform.position.y - nearest.transform.position.y) > Mathf.Abs(transform.position.x - nearest.transform.position.x))
                             {
-
+                                if(transform.position.y > nearest.transform.position.y)
+                                {
+                                    animator.SetInteger("Direction", 2); //Face south
+                                    Debug.Log("south");
+                                }
+                                else
+                                {
+                                    animator.SetInteger("Direction", 0); //Face north
+                                    Debug.Log("north");
+                                }
                             }
-                            nearest.GetComponent<IInteractable>().Interact();
+                            else
+                            {
+                                if (transform.position.x > nearest.transform.position.x)
+                                {
+                                    animator.SetInteger("Direction", 3); //Face west
+                                    Debug.Log("west");
+                                }
+                                else
+                                {
+                                    animator.SetInteger("Direction", 1); //Face east
+                                    Debug.Log("east");
+                                }
+                            }
                             currentState = State.INTERACTING;
                             StopMoving();
+                            nearest.GetComponent<IInteractable>().Interact();
                         }
                     }
                 }
