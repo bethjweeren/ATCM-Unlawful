@@ -169,9 +169,13 @@ public class PlayerController : MonoBehaviour
                     RaycastHit2D foundObject = Physics2D.Raycast(interactRayOrigin.position, facingVector, interactRange, interactLayer);
                     if (foundObject)
                     {
-                        foundObject.collider.GetComponent<IInteractable>().Interact();
-                        currentState = State.INTERACTING;
-                        StopMoving();
+					if (foundObject.transform.gameObject.CompareTag ("item")) {
+						foundObject.collider.GetComponent<IInteractable> ().Interact ();
+					} else {
+						foundObject.collider.GetComponent<IInteractable> ().Interact ();
+						currentState = State.INTERACTING;
+						StopMoving ();
+					}
                     }
                 }
 
@@ -200,15 +204,17 @@ public class PlayerController : MonoBehaviour
 					print("Closed inventory."); //Replace with inventory code
 				}
 				break;
-			/*
+
 			case State.INTERACTING:
+			/*
 				if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Escape))
 				{
 					currentState = State.MAIN;
 					print("Ended interaction."); //Replace with interaction/NPC discussion code
 				}
+				*/
 				break;
-			*/
+
 		case State.MENU:
 			if (time_manager.currentTimeState != Time_Manager.State.Rest) {
 				time_manager.ForcePausedState ();
