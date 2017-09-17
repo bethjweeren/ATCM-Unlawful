@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
 {
 	// Different screens a player can be in
 	// Was originally going to have "still" and "walking" but there was too much overlap
-	enum State
+	public enum State
 	{
 		MAIN,
 		JOURNAL,
@@ -21,13 +21,15 @@ public class PlayerController : MonoBehaviour
 	public float speed = 1;
     public float sprintValue = 1;
 	public Journal_Manager journal_manager;
+	public ItemsManager itemsManager;
+	public GameObject itemCanvas;
 	public GameObject journalCanvas;
 	public GameObject enableOnStart;
 	public GameObject screenMenuStarting;
 	public GameObject screenMenu;
 	public GameObject screenControls;
 	public GameObject screenCredits;
-	private State currentState;
+	public State currentState;
 	private Rigidbody2D playerRB;
 	private Animator animator;
 	public Button jounalButton;
@@ -41,6 +43,7 @@ public class PlayerController : MonoBehaviour
 	{
         DialogueSystem.Instance().player = this;
         journalCanvas.SetActive (false);
+		itemCanvas.SetActive (false);
 		journal_manager = journalCanvas.GetComponent<Journal_Manager> ();
 		jounalButton.onClick.AddListener (ToggleJournal);
 		currentState = State.MAIN;
@@ -110,14 +113,15 @@ public class PlayerController : MonoBehaviour
                         print("Looking at journal. Press J or ESC to close."); //Replace with journal code
                         journalCanvas.SetActive(true);
                     }
-                    /*
+                    
                     else if (Input.GetKeyDown(KeyCode.I))
                     {
                         currentState = State.INVENTORY;
                         StopMoving();
+						itemCanvas.SetActive (true);
                         print("Looking through inventory. Press I or ESC to close."); //Replace with inventory code
                     }
-                    */
+                    
 
                     else if (Input.GetKeyDown(KeyCode.Escape))
                     {
@@ -187,14 +191,16 @@ public class PlayerController : MonoBehaviour
 					print("Closed journal."); //Replace with journal code
 				}
 				break;
-			/*
+
 			case State.INVENTORY:
 				if (Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.Escape))
 				{
+					itemCanvas.SetActive (false);
 					currentState = State.MAIN;
 					print("Closed inventory."); //Replace with inventory code
 				}
 				break;
+			/*
 			case State.INTERACTING:
 				if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Escape))
 				{
@@ -287,4 +293,8 @@ public class PlayerController : MonoBehaviour
 		currentState = State.MAIN;
 	}
 
+	public void SayHello(){
+		Debug.Log ("hello");
+		currentState = State.MAIN;
+	}
 }

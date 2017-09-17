@@ -263,20 +263,6 @@ public class Time_Manager : MonoBehaviour {
 		currentTimeState = State.Paused;
 	}
 
-	/*
-	private IEnumerator PauseEffect()
-	{
-		yield return pauseEffectDuration;
-
-		SwitchToRed ();
-
-		yield return pauseEffectDuration;
-		Debug.Log ("isgoing");
-		SwitchToBlack ();
-
-	}
-	*/
-
 	void SwitchToRed(){
 		hourHand_red.SetActive (true);
 		minuteHand_red.SetActive (true);
