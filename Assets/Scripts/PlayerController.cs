@@ -91,6 +91,9 @@ public class PlayerController : MonoBehaviour
                 {
                     if (Input.GetKeyDown(KeyCode.M))
                     {
+					if (time_manager.currentTimeState != Time_Manager.State.Rest) {
+						time_manager.ForcePausedState ();
+					}
                         currentState = State.JOURNAL;
                         StopMoving();
                         print("Looking at map. Press M or ESC or Space to close."); //Replace with map code
@@ -99,6 +102,9 @@ public class PlayerController : MonoBehaviour
                     }
                     else if (Input.GetKeyDown(KeyCode.J))
                     {
+					if (time_manager.currentTimeState != Time_Manager.State.Rest) {
+						time_manager.ForcePausedState ();
+					}
                         currentState = State.JOURNAL;
                         StopMoving();
                         print("Looking at journal. Press J or ESC to close."); //Replace with journal code
@@ -115,9 +121,11 @@ public class PlayerController : MonoBehaviour
 
                     else if (Input.GetKeyDown(KeyCode.Escape))
                     {
+					if (time_manager.currentTimeState != Time_Manager.State.Rest) {
+						time_manager.ForcePausedState ();
+					}
                         currentState = State.MENU;
                         StopMoving();
-						time_manager.ForcePausedState();
 						screenMenu.SetActive(true);
                     }
                 }
@@ -168,9 +176,12 @@ public class PlayerController : MonoBehaviour
                     StopMoving();
                 }
 				break;
-			case State.JOURNAL:
+		case State.JOURNAL:
 				if (Input.GetKeyDown(KeyCode.J) || Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.M) || Input.GetKeyDown(KeyCode.Space)) //Pressing "J" to close the journal might not work if typing
 				{
+				if (time_manager.currentTimeState != Time_Manager.State.Rest) {
+					time_manager.LeavePauseState ();
+				}
 					currentState = State.MAIN;
 					journalCanvas.SetActive(false);
 					print("Closed journal."); //Replace with journal code
@@ -192,13 +203,18 @@ public class PlayerController : MonoBehaviour
 				}
 				break;
 			*/
-			case State.MENU:
+		case State.MENU:
+			if (time_manager.currentTimeState != Time_Manager.State.Rest) {
+				time_manager.ForcePausedState ();
+			}
 				if (Input.GetKeyDown(KeyCode.Escape))
 				{
+				if (time_manager.currentTimeState != Time_Manager.State.Rest) {
+					time_manager.LeavePauseState ();
+				}
 					screenMenu.SetActive(false);
 					screenControls.SetActive(false);
 					screenCredits.SetActive(false);
-					time_manager.LeavePauseState();
 					currentState = State.MAIN;
 				}
 				break;
@@ -246,9 +262,15 @@ public class PlayerController : MonoBehaviour
     void ToggleJournal()
 	{
 		if (currentState == State.MAIN) {
+			if (time_manager.currentTimeState != Time_Manager.State.Rest) {
+				time_manager.ForcePausedState ();
+			}
 			currentState = State.JOURNAL;
 			journalCanvas.SetActive (true);
 		} else {
+			if (time_manager.currentTimeState != Time_Manager.State.Rest) {
+				time_manager.LeavePauseState ();
+			}
 			currentState = State.MAIN;
 			journalCanvas.SetActive(false);
 		}
