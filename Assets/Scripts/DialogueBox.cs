@@ -4,16 +4,25 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class DialogueBox : MonoBehaviour {
-    Quotes.DialogueLine currentLine;
+    string currentLine;
     public Text nameText;
     public Text dialogueText;
-    public Image PlayerThumb;
-    public Image NonPlayerThumb;
+    public Image playerThumb;
+    public Image nonPlayerThumb;
+    public GameObject dialogueContent;
+    public GameObject choiceContent;
+    public Text[] dialogueOptions;
+    Choice selectedChoice;
+    public Color selectedColor = new Color(255, 255, 255, 100);
+    public Color deselectedColor = new Color(65, 75, 100, 100);
+    CharacterID speaker;
     List<string> textPortions;
     string textToDisplay;
     bool doneDisplaying;
     float typeDelay = 0.05f;
     float delayMultiplier = 1;
+    bool exitAfterSaying;
+    bool choiceMode = false;
 
 	void Start () {
         DialogueSystem.Instance().dialogueBox = this;
@@ -22,16 +31,130 @@ public class DialogueBox : MonoBehaviour {
 	}
 	
 	void Update () {
-        if (Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.Space))
+        if (choiceMode)
         {
-            delayMultiplier = 0.25f;
+            if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Space))
+            {
+                choiceMode = false;
+                DialogueSystem.Instance().ProcessChoice(selectedChoice);
+            }
+            else
+            {
+                switch (selectedChoice)
+                {
+                    case Choice.BLACK_WHERE:
+                        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+                        {
+                            dialogueOptions[(int)selectedChoice].transform.parent.GetComponent<Image>().color = deselectedColor;
+                            selectedChoice = Choice.RED;
+                            dialogueOptions[(int)selectedChoice].transform.parent.GetComponent<Image>().color = selectedColor;
+                        }
+                        else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+                        {
+                            dialogueOptions[(int)selectedChoice].transform.parent.GetComponent<Image>().color = deselectedColor;
+                            selectedChoice = Choice.BLUE_WHEN;
+                            dialogueOptions[(int)selectedChoice].transform.parent.GetComponent<Image>().color = selectedColor;
+                        }
+                        break;
+                    case Choice.BLUE_WHEN:
+                        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+                        {
+                            dialogueOptions[(int)selectedChoice].transform.parent.GetComponent<Image>().color = deselectedColor;
+                            selectedChoice = Choice.BLACK_WHERE;
+                            dialogueOptions[(int)selectedChoice].transform.parent.GetComponent<Image>().color = selectedColor;
+                        }
+                        else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+                        {
+                            dialogueOptions[(int)selectedChoice].transform.parent.GetComponent<Image>().color = deselectedColor;
+                            selectedChoice = Choice.YELLOW;
+                            dialogueOptions[(int)selectedChoice].transform.parent.GetComponent<Image>().color = selectedColor;
+                        }
+                        else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+                        {
+                            dialogueOptions[(int)selectedChoice].transform.parent.GetComponent<Image>().color = deselectedColor;
+                            selectedChoice = Choice.GREEN;
+                            dialogueOptions[(int)selectedChoice].transform.parent.GetComponent<Image>().color = selectedColor;
+                        }
+                        break;
+                    case Choice.GREEN:
+                        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+                        {
+                            dialogueOptions[(int)selectedChoice].transform.parent.GetComponent<Image>().color = deselectedColor;
+                            selectedChoice = Choice.BLUE_WHEN;
+                            dialogueOptions[(int)selectedChoice].transform.parent.GetComponent<Image>().color = selectedColor;
+                        }
+                        else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+                        {
+                            dialogueOptions[(int)selectedChoice].transform.parent.GetComponent<Image>().color = deselectedColor;
+                            selectedChoice = Choice.CANCEL;
+                            dialogueOptions[(int)selectedChoice].transform.parent.GetComponent<Image>().color = selectedColor;
+                        }
+                        break;
+                    case Choice.RED:
+                        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+                        {
+                            dialogueOptions[(int)selectedChoice].transform.parent.GetComponent<Image>().color = deselectedColor;
+                            selectedChoice = Choice.BLACK_WHERE;
+                            dialogueOptions[(int)selectedChoice].transform.parent.GetComponent<Image>().color = selectedColor;
+                        }
+                        else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+                        {
+                            dialogueOptions[(int)selectedChoice].transform.parent.GetComponent<Image>().color = deselectedColor;
+                            selectedChoice = Choice.YELLOW;
+                            dialogueOptions[(int)selectedChoice].transform.parent.GetComponent<Image>().color = selectedColor;
+                        }
+                        break;
+                    case Choice.YELLOW:
+                        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+                        {
+                            dialogueOptions[(int)selectedChoice].transform.parent.GetComponent<Image>().color = deselectedColor;
+                            selectedChoice = Choice.RED;
+                            dialogueOptions[(int)selectedChoice].transform.parent.GetComponent<Image>().color = selectedColor;
+                        }
+                        else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+                        {
+                            dialogueOptions[(int)selectedChoice].transform.parent.GetComponent<Image>().color = deselectedColor;
+                            selectedChoice = Choice.BLUE_WHEN;
+                            dialogueOptions[(int)selectedChoice].transform.parent.GetComponent<Image>().color = selectedColor;
+                        }
+                        else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+                        {
+                            dialogueOptions[(int)selectedChoice].transform.parent.GetComponent<Image>().color = deselectedColor;
+                            selectedChoice = Choice.CANCEL;
+                            dialogueOptions[(int)selectedChoice].transform.parent.GetComponent<Image>().color = selectedColor;
+                        }
+                        break;
+                    case Choice.CANCEL:
+                        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+                        {
+                            dialogueOptions[(int)selectedChoice].transform.parent.GetComponent<Image>().color = deselectedColor;
+                            selectedChoice = Choice.YELLOW;
+                            dialogueOptions[(int)selectedChoice].transform.parent.GetComponent<Image>().color = selectedColor;
+                        }
+                        else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+                        {
+                            dialogueOptions[(int)selectedChoice].transform.parent.GetComponent<Image>().color = deselectedColor;
+                            selectedChoice = Choice.GREEN;
+                            dialogueOptions[(int)selectedChoice].transform.parent.GetComponent<Image>().color = selectedColor;
+                        }
+                        break;
+                }
+            } 
         }
         else
         {
-            delayMultiplier = 1f;
-        }
-        if(doneDisplaying && (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Space))){
-            SayNextPortion();
+            if (Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.Space))
+            {
+                delayMultiplier = 0.25f;
+            }
+            else
+            {
+                delayMultiplier = 1f;
+            }
+            if (doneDisplaying && (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Space)))
+            {
+                SayNextPortion();
+            }
         }
 	}
 
@@ -41,12 +164,31 @@ public class DialogueBox : MonoBehaviour {
         dialogueText.text = "";
     }
 
-    public void DisplayLine(Quotes.DialogueLine newLine)
+    public void DisplayLine(CharacterID s, string newLine, bool exitLine)
     {
+        choiceContent.SetActive(false);
+        dialogueContent.SetActive(true);
         Clear();
-        currentLine = newLine;
-        PartitionText(currentLine.line);
+        speaker = s;
+        exitAfterSaying = exitLine;
+        string line = newLine;
+        textPortions = PartitionText(line);
         SayNextPortion();
+    }
+
+    public void DisplayChoices(string[] textOptions)
+    {
+        dialogueOptions[(int)selectedChoice].transform.parent.GetComponent<Image>().color = deselectedColor;
+        selectedChoice = Choice.CANCEL;
+        dialogueOptions[(int)selectedChoice].transform.parent.GetComponent<Image>().color = selectedColor;
+
+        for (int i = 0; i<6; i++)
+        {
+            dialogueOptions[i].text = textOptions[i];
+        }
+        dialogueContent.SetActive(false);
+        choiceContent.SetActive(true);
+        choiceMode = true;
     }
 
     void SetName(CharacterID id)
@@ -59,12 +201,12 @@ public class DialogueBox : MonoBehaviour {
     {
         if (id != CharacterID.BLACK && id != CharacterID.BLUE && id != CharacterID.BROWN && id != CharacterID.GREEN && id != CharacterID.PURPLE && id != CharacterID.RED && id != CharacterID.YELLOW)
         {
-            NonPlayerThumb.gameObject.SetActive(false);
+            nonPlayerThumb.gameObject.SetActive(false);
         }
         else
         {
-            NonPlayerThumb.sprite = DialogueSystem.Instance().characters.IDToCharacter(id).thumb;
-            NonPlayerThumb.gameObject.SetActive(true);
+            nonPlayerThumb.sprite = DialogueSystem.Instance().characters.IDToCharacter(id).thumb;
+            nonPlayerThumb.gameObject.SetActive(true);
         }
     }
 
@@ -73,7 +215,7 @@ public class DialogueBox : MonoBehaviour {
         if (textPortions.Count > 0)
         {
             Clear();
-            SetName(currentLine.spokenBy);
+            SetName(speaker);
             textToDisplay = textPortions[0];
             textPortions.RemoveAt(0);
             doneDisplaying = false;
@@ -81,7 +223,14 @@ public class DialogueBox : MonoBehaviour {
         }
         else
         {
-            DialogueSystem.Instance().CloseDialogueBox();
+            if (exitAfterSaying)
+            {
+                DialogueSystem.Instance().CloseDialogueBox();
+            }
+            else
+            {
+                DialogueSystem.Instance().NextLine();
+            }
         }
     }
 
@@ -121,10 +270,10 @@ public class DialogueBox : MonoBehaviour {
         doneDisplaying = true;
     }
 
-    void PartitionText(string allText)
+    List<string> PartitionText(string allText)
     {
         string remaining = allText;
-        textPortions = new List<string>();
+        List<string> portions = new List<string>();
         while(allText.Length > 255)
         {
             string beginning = allText.Substring(0, 255);
@@ -135,9 +284,10 @@ public class DialogueBox : MonoBehaviour {
                 end = beginning.Substring(lastSpace + 1, beginning.Length - (lastSpace + 1)) + end;
                 beginning = beginning.Substring(0, lastSpace+1);
             }
-            textPortions.Add(beginning);
+            portions.Add(beginning);
             allText = end;
         }
-        textPortions.Add(allText);
+        portions.Add(allText);
+        return portions;
     }
 }

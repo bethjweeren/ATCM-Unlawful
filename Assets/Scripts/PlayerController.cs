@@ -188,12 +188,10 @@ public class PlayerController : MonoBehaviour
                                 if(transform.position.y > nearest.transform.position.y)
                                 {
                                     animator.SetInteger("Direction", 2); //Face south
-                                    Debug.Log("south");
                                 }
                                 else
                                 {
                                     animator.SetInteger("Direction", 0); //Face north
-                                    Debug.Log("north");
                                 }
                             }
                             else
@@ -201,12 +199,10 @@ public class PlayerController : MonoBehaviour
                                 if (transform.position.x > nearest.transform.position.x)
                                 {
                                     animator.SetInteger("Direction", 3); //Face west
-                                    Debug.Log("west");
                                 }
                                 else
                                 {
                                     animator.SetInteger("Direction", 1); //Face east
-                                    Debug.Log("east");
                                 }
                             }
                             currentState = State.INTERACTING;
