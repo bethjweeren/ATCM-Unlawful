@@ -281,7 +281,7 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
-    void StopMoving()
+    public void StopMoving()
     {
         animator.SetBool("Walking", false); //Stop animating sprite
         playerRB.velocity = new Vector2(0, 0); //Don't move
