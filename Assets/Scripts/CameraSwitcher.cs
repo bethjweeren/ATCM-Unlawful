@@ -13,12 +13,16 @@ public class CameraSwitcher : MonoBehaviour
 	public GameObject roof; //Optional, should NOT be collideable
 	private float slowDown = 1.5f; //This variable is private because it's a pain to change for each one, and it helps keeps things consistent
 	private PlayerController playerController;
+	private SpriteRenderer spriteRenderer;
+	private float outdoorSize = .325f;
+	private float indoorSize = .325f;
 
 	// Use this for initialization
 	void Start ()
 	{
 		if (roof != null)
 			roof.SetActive(true); //So we don't need these enabled in the scene because they get in the way
+		spriteRenderer = playerController.GetComponent<SpriteRenderer>();
 	}
 
 	//Called when player enters area
@@ -27,12 +31,14 @@ public class CameraSwitcher : MonoBehaviour
 		if (other.tag.Equals("Player"))
 		{
 			playerController = other.GetComponent<PlayerController>();
+			spriteRenderer = other.GetComponent<SpriteRenderer>();
 			areaCamera.enabled = true;
 			mainCamera.enabled = false;
 			if (roof != null)
 				roof.SetActive(false); //Roof disappears and player can enter.
 			playerController.SetSpeed(playerController.speed - slowDown); //Slow player down when they enter area
 		}
+		//other.transform.localScale = new Vector3(indoorSize, indoorSize, 1);
 	}
 
 	//Called when player exits area
@@ -40,11 +46,15 @@ public class CameraSwitcher : MonoBehaviour
 	{
 		if (other.tag.Equals("Player"))
 		{
+			playerController = other.GetComponent<PlayerController>();
+			spriteRenderer = other.GetComponent<SpriteRenderer>();
 			areaCamera.enabled = false;
 			mainCamera.enabled = true;
 			if (roof != null)
 				roof.SetActive(true); //Roof covers area again.
 			playerController.SetSpeed(playerController.speed + slowDown); //Bring player back to normal speed when they leave
+			
 		}
+		//other.transform.localScale = new Vector3(outdoorSize, outdoorSize, 1);
 	}
 }
