@@ -93,7 +93,7 @@ public class Quotes {
             startIndex = line.IndexOf('[');
         }
         final += line;
-        return line;
+        return final;
     }
 }
 

@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Choice { BLACK_WHERE, BLUE_WHEN, GREEN, RED, YELLOW, CANCEL }
+public enum Choice { BLACK_ALIBI, BLUE_LASTSEEN, GREEN_SUSPECTS, RED_OPINION, YELLOW_CLUE, CANCEL }
+enum Prompt { DEFAULT, ACCUSATION, OPINION }
 
 public class DialogueSystem
 {
@@ -35,7 +36,30 @@ public class DialogueSystem
 
     public void ProcessChoice(Choice selection)
     {
-        
+        string line;
+        switch (selection)
+        {
+            case Choice.BLACK_ALIBI:
+
+                break;
+            case Choice.BLUE_LASTSEEN:
+
+                break;
+            case Choice.GREEN_SUSPECTS:
+
+                break;
+            case Choice.RED_OPINION:
+
+                break;
+            case Choice.YELLOW_CLUE:
+
+                break;
+            case Choice.CANCEL:
+            default:
+                line = quotes.closers[Random.Range(0, quotes.closers.Count)];
+                dialogueBox.DisplayLine(nonPlayerID, line, true);
+                break;
+        }
     }
 
     public void NextLine()
@@ -48,17 +72,22 @@ public class DialogueSystem
         }
         else
         {
-            string[] choiceText;
-            if(nonPlayerID == CharacterID.PURPLE)
-            {
-                choiceText = new string[6] { "<color=#191919>Noir</color>.", "<color=#193BFF>Bleu</color>.", "<color=#11B211>Vert</color>.", "<color=#FF1919>Rouge</color>.", "<color=#FFFF32>Jaune</color>.", "Nevermind."};
-            }
-            else
-            {
-                choiceText = new string[6] { "Where were you..?", "When did you last see the victim?", "Who could have done this?", "What's your opinion of...", "Can I ask you about..?", "Goodbye." };
-            }
-            dialogueBox.DisplayChoices(choiceText);
+            NextChoice();
         }
+    }
+
+    void NextChoice()
+    {
+        string[] choiceText;
+        if (nonPlayerID == CharacterID.PURPLE)
+        {
+            choiceText = new string[6] { "<color=#191919>Noir</color>.", "<color=#193BFF>Bleu</color>.", "<color=#11B211>Vert</color>.", "<color=#FF1919>Rouge</color>.", "<color=#FFFF32>Jaune</color>.", "Nevermind." };
+        }
+        else
+        {
+            choiceText = new string[6] { "Where were you..?", "When did you last see the victim?", "Who could have done this?", "What's your opinion of...", "Can I ask you about..?", "Goodbye." };
+        }
+        dialogueBox.DisplayChoices(choiceText);
     }
 
     public void OpenDialogueBox(CharacterID id, Quotes npcQuotes, bool firstMeeting)

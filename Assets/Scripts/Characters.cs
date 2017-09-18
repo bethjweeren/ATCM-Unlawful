@@ -43,7 +43,7 @@ public class Characters
         CharacterDict.Add(CharacterID.BROWN, new Character("The Beggar", "#664028"));
         NameDict.Add("BROWN", CharacterID.BROWN);
 
-        CharacterDict.Add(CharacterID.GREEN, new Character("Count Vert Strahd", "#11B211", Resources.Load<Sprite>(thumbPath + "Green_thumb")));
+        CharacterDict.Add(CharacterID.GREEN, new Character("Vert", "#11B211", Resources.Load<Sprite>(thumbPath + "Green_thumb")));
         NameDict.Add("GREEN", CharacterID.GREEN);
 
         CharacterDict.Add(CharacterID.PURPLE, new Character("Mayor Violet", "#AF11A5"));
