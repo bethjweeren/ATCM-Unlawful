@@ -13,16 +13,16 @@ public class CameraSwitcher : MonoBehaviour
 	public GameObject roof; //Optional, should NOT be collideable
 	private float slowDown = 1.5f; //This variable is private because it's a pain to change for each one, and it helps keeps things consistent
 	private PlayerController playerController;
-	private SpriteRenderer spriteRenderer;
-	private float outdoorSize = .325f;
-	private float indoorSize = .325f;
+	//private SpriteRenderer spriteRenderer;
+	//private float outdoorSize = .325f;
+	//private float indoorSize = .325f;
 
 	// Use this for initialization
 	void Start ()
 	{
 		if (roof != null)
 			roof.SetActive(true); //So we don't need these enabled in the scene because they get in the way
-		spriteRenderer = playerController.GetComponent<SpriteRenderer>();
+		//spriteRenderer = playerController.GetComponent<SpriteRenderer>();
 	}
 
 	//Called when player enters area
@@ -31,7 +31,7 @@ public class CameraSwitcher : MonoBehaviour
 		if (other.tag.Equals("Player"))
 		{
 			playerController = other.GetComponent<PlayerController>();
-			spriteRenderer = other.GetComponent<SpriteRenderer>();
+			//spriteRenderer = other.GetComponent<SpriteRenderer>();
 			areaCamera.enabled = true;
 			mainCamera.enabled = false;
 			if (roof != null)
@@ -47,7 +47,7 @@ public class CameraSwitcher : MonoBehaviour
 		if (other.tag.Equals("Player"))
 		{
 			playerController = other.GetComponent<PlayerController>();
-			spriteRenderer = other.GetComponent<SpriteRenderer>();
+			//spriteRenderer = other.GetComponent<SpriteRenderer>();
 			areaCamera.enabled = false;
 			mainCamera.enabled = true;
 			if (roof != null)
