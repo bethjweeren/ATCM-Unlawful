@@ -8,50 +8,42 @@ TagManager:
   - checkMark
   - xMark
   - MarkerBlock
+  - item
   - Interactable
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  -
   - Water
   - UI
-  - 
-  - 
+  -
+  -
   - Interactable
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Below Player
-    uniqueID: 1345120653
-    locked: 0
-  - name: Player
-    uniqueID: 262527369
-    locked: 0
-  - name: Above Player
-    uniqueID: 4280113621
     locked: 0

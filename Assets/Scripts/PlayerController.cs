@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
 {
 	// Different screens a player can be in
 	// Was originally going to have "still" and "walking" but there was too much overlap
-	enum State
+	public enum State
 	{
 		MAIN,
 		JOURNAL,
@@ -21,13 +21,15 @@ public class PlayerController : MonoBehaviour
 	public float speed = 1;
     public float sprintValue = 1;
 	public Journal_Manager journal_manager;
+	public ItemsManager itemsManager;
+	public GameObject itemCanvas;
 	public GameObject journalCanvas;
 	public GameObject enableOnStart;
 	public GameObject screenMenuStarting;
 	public GameObject screenMenu;
 	public GameObject screenControls;
 	public GameObject screenCredits;
-	private State currentState;
+	public State currentState;
 	private Rigidbody2D playerRB;
     private Collider2D playerCollider;
 	private Animator animator;
@@ -44,6 +46,7 @@ public class PlayerController : MonoBehaviour
 	{
         DialogueSystem.Instance().player = this;
         journalCanvas.SetActive (false);
+		itemCanvas.SetActive (false);
 		journal_manager = journalCanvas.GetComponent<Journal_Manager> ();
 		jounalButton.onClick.AddListener (ToggleJournal);
 		currentState = State.MAIN;
@@ -97,6 +100,9 @@ public class PlayerController : MonoBehaviour
                 {
                     if (Input.GetKeyDown(KeyCode.M))
                     {
+					if (time_manager.currentTimeState != Time_Manager.State.Rest) {
+						time_manager.ForcePausedState ();
+					}
                         currentState = State.JOURNAL;
                         StopMoving();
                         print("Looking at map. Press M or ESC or Space to close."); //Replace with map code
@@ -105,25 +111,31 @@ public class PlayerController : MonoBehaviour
                     }
                     else if (Input.GetKeyDown(KeyCode.J))
                     {
+					if (time_manager.currentTimeState != Time_Manager.State.Rest) {
+						time_manager.ForcePausedState ();
+					}
                         currentState = State.JOURNAL;
                         StopMoving();
                         print("Looking at journal. Press J or ESC to close."); //Replace with journal code
                         journalCanvas.SetActive(true);
                     }
-                    /*
+                    
                     else if (Input.GetKeyDown(KeyCode.I))
                     {
                         currentState = State.INVENTORY;
                         StopMoving();
+						itemCanvas.SetActive (true);
                         print("Looking through inventory. Press I or ESC to close."); //Replace with inventory code
                     }
-                    */
+                    
 
                     else if (Input.GetKeyDown(KeyCode.Escape))
                     {
+					if (time_manager.currentTimeState != Time_Manager.State.Rest) {
+						time_manager.ForcePausedState ();
+					}
                         currentState = State.MENU;
                         StopMoving();
-						time_manager.ForcePausedState();
 						screenMenu.SetActive(true);
                     }
                 }
@@ -217,37 +229,49 @@ public class PlayerController : MonoBehaviour
                     StopMoving();
                 }
 				break;
-			case State.JOURNAL:
+		case State.JOURNAL:
 				if (Input.GetKeyDown(KeyCode.J) || Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.M) || Input.GetKeyDown(KeyCode.Space)) //Pressing "J" to close the journal might not work if typing
 				{
+				if (time_manager.currentTimeState != Time_Manager.State.Rest) {
+					time_manager.LeavePauseState ();
+				}
 					currentState = State.MAIN;
 					journalCanvas.SetActive(false);
 					print("Closed journal."); //Replace with journal code
 				}
 				break;
-			/*
+
 			case State.INVENTORY:
 				if (Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.Escape))
 				{
+					itemCanvas.SetActive (false);
 					currentState = State.MAIN;
 					print("Closed inventory."); //Replace with inventory code
 				}
 				break;
+
 			case State.INTERACTING:
+			/*
 				if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Escape))
 				{
 					currentState = State.MAIN;
 					print("Ended interaction."); //Replace with interaction/NPC discussion code
 				}
+				*/
 				break;
-			*/
-			case State.MENU:
+
+		case State.MENU:
+			if (time_manager.currentTimeState != Time_Manager.State.Rest) {
+				time_manager.ForcePausedState ();
+			}
 				if (Input.GetKeyDown(KeyCode.Escape))
 				{
+				if (time_manager.currentTimeState != Time_Manager.State.Rest) {
+					time_manager.LeavePauseState ();
+				}
 					screenMenu.SetActive(false);
 					screenControls.SetActive(false);
 					screenCredits.SetActive(false);
-					time_manager.LeavePauseState();
 					currentState = State.MAIN;
 				}
 				break;
@@ -295,9 +319,15 @@ public class PlayerController : MonoBehaviour
     void ToggleJournal()
 	{
 		if (currentState == State.MAIN) {
+			if (time_manager.currentTimeState != Time_Manager.State.Rest) {
+				time_manager.ForcePausedState ();
+			}
 			currentState = State.JOURNAL;
 			journalCanvas.SetActive (true);
 		} else {
+			if (time_manager.currentTimeState != Time_Manager.State.Rest) {
+				time_manager.LeavePauseState ();
+			}
 			currentState = State.MAIN;
 			journalCanvas.SetActive(false);
 		}
@@ -314,4 +344,8 @@ public class PlayerController : MonoBehaviour
 		currentState = State.MAIN;
 	}
 
+	public void SayHello(){
+		Debug.Log ("hello");
+		currentState = State.MAIN;
+	}
 }

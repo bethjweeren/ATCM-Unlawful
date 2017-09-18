@@ -19,13 +19,21 @@ public class Time_Manager : MonoBehaviour {
 
 	public int hour, hourStart = 6, day, afternoonStart = 12, nightStart = 18, morningStart = 6, restStart = 0;
 	private float hrDegree = 30f, minDegree = 6f;
-	public float timer, timeCrunch, minute, currentTimeSpeed, normalTimeSpeed, fastTimeSpeed;
-	public Transform hourHand, minuteHand, restPlace;
+	public float timer, timeCrunch, minute, currentTimeSpeed, normalTimeSpeed, fastTimeSpeed, pauseEffectTimer;
+	public GameObject hourHand, minuteHand, hourHand_red, minuteHand_red, hourHand_black, minuteHand_black;
+	public Transform restPlace;
 	public GameObject Player, skipRest, nightShade, afternoonShade;
 	private PlayerController playerController;
+	public bool isGoing = true;
+	public GameObject gameoverPanel;
+	public GameOver gameOver;
+	public string outOfTimeReason;
+	//private WaitForSeconds pauseEffectDuration = new WaitForSeconds(.5f);
 
 	void Start()
 	{
+		gameoverPanel.SetActive (false);
+		pauseEffectTimer = 0;
 		currentTimeState = State.Morning;
 		hour = hourStart;
 		pastTimeState = currentTimeState;
@@ -45,6 +53,10 @@ public class Time_Manager : MonoBehaviour {
 		TimeKeepingStates ();
 		UpdateClock ();
 		//Debug.Log (hour + " : " + minute + " _ " + day);
+		if (day >= 4) {
+			gameoverPanel.SetActive (true);
+			gameOver.ReasonWhy (outOfTimeReason);
+		}
 	}
 
 	void TimeKeepingStates()
@@ -133,21 +145,35 @@ public class Time_Manager : MonoBehaviour {
 
 	void RestCode(){
 		//enter rest code
+
 		//move the player
 		Player.transform.position = restPlace.position;
 		//stop player
-		playerController.StopInput ();
-
+		if (isGoing) {
+			playerController.StopInput ();
+			isGoing = false;
+		}
 		UpdateTime (false, currentTimeSpeed);
 		SwitchToPausedState ();
 	}
 
 	void PausedCode(){
 
-		//enter paused code
+		pauseEffectTimer += Time.deltaTime;
+
+		if (Mathf.RoundToInt(pauseEffectTimer)% 2 == 0) {
+			SwitchToRed ();
+		} else {
+			SwitchToBlack ();
+		}
 
 		UpdateTime (false, currentTimeSpeed);
 		if (Input.GetKeyDown(KeyCode.P)) {
+			pauseEffectTimer = 0;
+			hourHand_red.SetActive (false);
+			minuteHand_red.SetActive (false);
+			hourHand_black.SetActive (true);
+			minuteHand_black.SetActive (true);
 			Debug.Log ("trying to resume");
 			currentTimeState = pastTimeState;
 			UpdateTime (true, currentTimeSpeed);
@@ -176,8 +202,8 @@ public class Time_Manager : MonoBehaviour {
 	}
 
 	void UpdateClock(){
-		hourHand.localRotation = Quaternion.Euler(0f, 0f, (-hour * hrDegree) + 90f);
-		minuteHand.localRotation = Quaternion.Euler(0f, 0f, (-minute * minDegree) + 90f);
+		hourHand.transform.localRotation = Quaternion.Euler(0f, 0f, (-hour * hrDegree) + 90f);
+		minuteHand.transform.localRotation = Quaternion.Euler(0f, 0f, (-minute * minDegree) + 90f);
 	}
 
 	void SkipRestPeriod(){
@@ -188,9 +214,16 @@ public class Time_Manager : MonoBehaviour {
 		skipRest.SetActive (false);
 		UpdateTime (true, currentTimeSpeed);
 		playerController.ResumeInput ();
+		Debug.Log ("skiped");
 	}
 
 	public void LeavePauseState(){
+		pauseEffectTimer = 0;
+		hourHand_red.SetActive (false);
+		minuteHand_red.SetActive (false);
+		hourHand_black.SetActive (true);
+		minuteHand_black.SetActive (true);
+		Debug.Log ("resuming");
 		currentTimeState = pastTimeState;
 		UpdateTime (true, currentTimeSpeed);
 	}
@@ -234,7 +267,21 @@ public class Time_Manager : MonoBehaviour {
 	//Need this for in-game Menu (esc in PlayerController)
 	public void ForcePausedState()
 	{
-		pastTimeState = currentTimeState;
+		//pastTimeState = currentTimeState;
 		currentTimeState = State.Paused;
+	}
+
+	void SwitchToRed(){
+		hourHand_red.SetActive (true);
+		minuteHand_red.SetActive (true);
+		hourHand_black.SetActive (false);
+		minuteHand_black.SetActive (false);
+	}
+
+	void SwitchToBlack(){
+		hourHand_red.SetActive (false);
+		minuteHand_red.SetActive (false);
+		hourHand_black.SetActive (true);
+		minuteHand_black.SetActive (true);
 	}
 }
