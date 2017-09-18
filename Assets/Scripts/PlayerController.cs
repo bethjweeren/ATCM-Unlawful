@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 // Controls player movement and handles player sprite animations
 public class PlayerController : MonoBehaviour
@@ -62,7 +63,13 @@ public class PlayerController : MonoBehaviour
 	// Update is called every fixed framerate frame
 	void Update()
 	{
-        playerY = transform.position.y + playerCollider.offset.y;
+		//If you press CTRL + SHIFT + R the game/scene reloads
+		if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && Input.GetKey(KeyCode.R))
+		{
+			SceneManager.LoadScene(SceneManager.GetActiveScene().name); //Reloads current scene
+		}
+
+		playerY = transform.position.y + playerCollider.offset.y;
 
         switch (currentState)
 		{
