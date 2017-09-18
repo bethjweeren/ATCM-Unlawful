@@ -25,14 +25,11 @@ public class Time_Manager : MonoBehaviour {
 	public GameObject Player, skipRest, nightShade, afternoonShade;
 	private PlayerController playerController;
 	public bool isGoing = true;
-	public GameObject gameoverPanel;
-	public GameOver gameOver;
-	public string outOfTimeReason;
-	//private WaitForSeconds pauseEffectDuration = new WaitForSeconds(.5f);
+    public string outOfTimeReason;
+    //private WaitForSeconds pauseEffectDuration = new WaitForSeconds(.5f);
 
-	void Start()
+    void Start()
 	{
-		gameoverPanel.SetActive (false);
 		pauseEffectTimer = 0;
 		currentTimeState = State.Morning;
 		hour = hourStart;
@@ -54,8 +51,7 @@ public class Time_Manager : MonoBehaviour {
 		UpdateClock ();
 		//Debug.Log (hour + " : " + minute + " _ " + day);
 		if (day >= 4) {
-			gameoverPanel.SetActive (true);
-			gameOver.ReasonWhy (outOfTimeReason);
+            DialogueSystem.Instance().endGame.LoseGame(outOfTimeReason);
 		}
 	}
 

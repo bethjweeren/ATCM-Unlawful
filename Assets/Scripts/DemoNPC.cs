@@ -7,10 +7,15 @@ public class DemoNPC : MonoBehaviour, IInteractable {
     public CharacterID id;
     public string dialogueFile;
     bool firstMeeting = true;
+    bool randomNPC;
     Quotes quotes;
 
 	// Use this for initialization
 	void Start () {
+        if(id == CharacterID.RANDO)
+        {
+            randomNPC = true;
+        }
         quotes = Quotes.LoadJSON(dialogueFile);
         if (quotes != null)
         {
@@ -30,7 +35,7 @@ public class DemoNPC : MonoBehaviour, IInteractable {
     {
         if(quotes != null)
         {
-            DialogueSystem.Instance().OpenDialogueBox(id, quotes, firstMeeting);
+            DialogueSystem.Instance().OpenDialogueBox(id, quotes, firstMeeting, randomNPC);
             firstMeeting = false;
         }
         else
