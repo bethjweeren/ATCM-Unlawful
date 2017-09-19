@@ -19,7 +19,7 @@ public class DialogueBox : MonoBehaviour {
     List<string> textPortions;
     string textToDisplay;
     bool doneDisplaying;
-    float typeDelay = 0.05f;
+    float typeDelay = 0.02f;
     float delayMultiplier = 1;
     bool exitAfterSaying;
     bool choiceMode = false;
