@@ -48,6 +48,7 @@ public class Journal_Manager : MonoBehaviour {
 	public Transform redNotes1, redNotes2, redNotes3, redNotes4, redNotes5, redNotes6, redNotes7, redNotes8;
 	public Transform greenNotes1, greenNotes2, greenNotes3, greenNotes4, greenNotes5, greenNotes6, greenNotes7, greenNotes8;
 	public Transform entryLocation;
+	public List<string> journalEntry = new List<string>();
 
 	void Start()
 	{
@@ -364,5 +365,6 @@ public class Journal_Manager : MonoBehaviour {
 		localEntry = Instantiate (autoEntryPrefab, entryLocation.position, entryLocation.rotation, characterPage.transform);
 		autoJournalEntry = localEntry.GetComponent<AutoJournalEntry> ();
 		autoJournalEntry.entryText.text = entryString;
+		journalEntry.Add (entryString);
 	}
 }
