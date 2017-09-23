@@ -28,19 +28,34 @@ public class Journal_Manager : MonoBehaviour {
 	public Button charactersTab;
 	public Button notesTab;
 	public Button addPages;
+	public GameObject autoEntryPrefab;
+	private GameObject localEntry;
+	private AutoJournalEntry autoJournalEntry;
+	private GameObject characterPage;
+	public GameObject blueEntryPage;
+	public GameObject blackEntryPage;
+	public GameObject yellowEntryPage;
+	public GameObject redEntryPage;
+	public GameObject greenEntryPage;
+	public int currentBlueNotes;
+	public int currentBlackNotes;
+	public int currentYellowNotes;
+	public int currentRedNotes;
+	public int currentGreenNotes;
+	public Transform blueNotes1, blueNotes2, blueNotes3, blueNotes4, blueNotes5, blueNotes6, blueNotes7, blueNotes8;
+	public Transform blackNotes1, blackNotes2, blackNotes3, blackNotes4, blackNotes5, blackNotes6, blackNotes7, blackNotes8;
+	public Transform yellowNotes1, yellowNotes2, yellowNotes3, yellowNotes4, yellowNotes5, yellowNotes6, yellowNotes7, yellowNotes8;
+	public Transform redNotes1, redNotes2, redNotes3, redNotes4, redNotes5, redNotes6, redNotes7, redNotes8;
+	public Transform greenNotes1, greenNotes2, greenNotes3, greenNotes4, greenNotes5, greenNotes6, greenNotes7, greenNotes8;
+	public Transform entryLocation;
 
 	void Start()
 	{
-		if (currentPage == null) 
-		{
-			currentPageNumber = 0;
-			ChangePage ();
-		}
 
 		currentPage.transform.position = page1Location.position;
 		nextPage.transform.position = page2Location.position;
 
-		currentNumberOfPages = 10;
+		currentNumberOfPages = 14;
 
 		Button next_Btn = nextButton.GetComponent<Button> ();
 		next_Btn.onClick.AddListener (GoNextPage);
@@ -75,7 +90,7 @@ public class Journal_Manager : MonoBehaviour {
 
 	}
 
-	void ChangePage()
+	public void ChangePage()
 	{
 		currentPage = pages [(currentPageNumber)];
 		nextPage = pages [(currentPageNumber+1)];
@@ -84,11 +99,11 @@ public class Journal_Manager : MonoBehaviour {
 
 		UpdateJournalButtons ();
 
-		if (currentPageNumber >= 0 && currentPageNumber <= 4) {
+		if (currentPageNumber >= 0 && currentPageNumber <= 8) {
 			charactersTab.transform.position = tabLeft1.position;
 			mapTab.transform.position = tabRight2.position;
 			notesTab.transform.position = tabRight1.position;
-		} else if (currentPageNumber == 6) {
+		} else if (currentPageNumber == 10) {
 			charactersTab.transform.position = tabLeft1.position;
 			mapTab.transform.position = tabLeft2.position;
 			notesTab.transform.position = tabRight1.position;
@@ -101,7 +116,7 @@ public class Journal_Manager : MonoBehaviour {
 
 	public void BringUpMap(){
 		PutAwayCurrentPages ();
-		currentPageNumber = 6;
+		currentPageNumber = 10;
 		ChangePage ();
 	}
 
@@ -113,7 +128,7 @@ public class Journal_Manager : MonoBehaviour {
 
 	public void BringUpNotes(){
 		PutAwayCurrentPages ();
-		currentPageNumber = 8;
+		currentPageNumber = 12;
 		ChangePage ();
 	}
 
@@ -162,5 +177,192 @@ public class Journal_Manager : MonoBehaviour {
 		} else {
 			backButton.SetActive (true);
 		}
+	}
+		
+	public void CreateAutoJournalEntry(string entryString, string character){
+		if (character == "Blue") {
+			characterPage = blueEntryPage;
+			if (currentBlueNotes == 0) {
+				entryLocation = blueNotes1;
+				currentBlueNotes++;
+			} else if (currentBlueNotes == 1) {
+				entryLocation = blueNotes2;
+				currentBlueNotes++;
+			} else if (currentBlueNotes == 2) {
+				entryLocation = blueNotes3;
+				currentBlueNotes++;
+			} else if (currentBlueNotes == 3) {
+				entryLocation = blueNotes4;
+				currentBlueNotes++;
+			} else if (currentBlueNotes == 4) {
+				entryLocation = blueNotes5;
+				currentBlueNotes++;
+			} else if (currentBlueNotes == 5) {
+				entryLocation = blueNotes6;
+				currentBlueNotes++;
+			} else if (currentBlueNotes == 6) {
+				entryLocation = blueNotes7;
+				currentBlueNotes++;
+			} else if (currentBlueNotes == 7) {
+				entryLocation = blueNotes8;
+				currentBlueNotes++;
+			} else {
+				entryLocation = blueNotes1;
+				currentBlueNotes++;
+			}
+		} else if (character == "Black") {
+			characterPage = blackEntryPage;
+			if (currentBlackNotes == 0) {
+				entryLocation = blackNotes1;
+				currentBlackNotes++;
+			} else if (currentBlackNotes == 1) {
+				entryLocation = blackNotes2;
+				currentBlackNotes++;
+			} else if (currentBlackNotes == 2) {
+				entryLocation = blackNotes3;
+				currentBlackNotes++;
+			} else if (currentBlackNotes == 3) {
+				entryLocation = blackNotes4;
+				currentBlackNotes++;
+			} else if (currentBlackNotes == 4) {
+				entryLocation = blackNotes5;
+				currentBlackNotes++;
+			} else if (currentBlackNotes == 5) {
+				entryLocation = blackNotes6;
+				currentBlackNotes++;
+			} else if (currentBlackNotes == 6) {
+				entryLocation = blackNotes7;
+				currentBlackNotes++;
+			} else if (currentBlackNotes == 7) {
+				entryLocation = blackNotes8;
+				currentBlackNotes++;
+			} else {
+				entryLocation = blackNotes1;
+				currentBlackNotes++;
+			}
+		} else if (character == "Yellow") {
+			characterPage = yellowEntryPage;
+			if (currentYellowNotes == 0) {
+				entryLocation = yellowNotes1;
+				currentYellowNotes++;
+			} else if (currentYellowNotes == 1) {
+				entryLocation = yellowNotes2;
+				currentYellowNotes++;
+			} else if (currentYellowNotes == 2) {
+				entryLocation = yellowNotes3;
+				currentYellowNotes++;
+			} else if (currentYellowNotes == 3) {
+				entryLocation = yellowNotes4;
+				currentYellowNotes++;
+			} else if (currentYellowNotes == 4) {
+				entryLocation = yellowNotes5;
+				currentYellowNotes++;
+			} else if (currentYellowNotes == 5) {
+				entryLocation = yellowNotes6;
+				currentYellowNotes++;
+			} else if (currentYellowNotes == 6) {
+				entryLocation = yellowNotes7;
+				currentYellowNotes++;
+			} else if (currentYellowNotes == 7) {
+				entryLocation = yellowNotes8;
+				currentYellowNotes++;
+			} else {
+				entryLocation = yellowNotes1;
+				currentYellowNotes++;
+			}
+		} else if (character == "Green") {
+			characterPage = greenEntryPage;
+			if (currentGreenNotes == 0) {
+				entryLocation = greenNotes1;
+				currentGreenNotes++;
+			} else if (currentGreenNotes == 1) {
+				entryLocation = greenNotes2;
+				currentGreenNotes++;
+			} else if (currentGreenNotes == 2) {
+				entryLocation = greenNotes3;
+				currentGreenNotes++;
+			} else if (currentGreenNotes == 3) {
+				entryLocation = greenNotes4;
+				currentGreenNotes++;
+			} else if (currentGreenNotes == 4) {
+				entryLocation = greenNotes5;
+				currentGreenNotes++;
+			} else if (currentGreenNotes == 5) {
+				entryLocation = greenNotes6;
+				currentGreenNotes++;
+			} else if (currentGreenNotes == 6) {
+				entryLocation = greenNotes7;
+				currentGreenNotes++;
+			} else if (currentGreenNotes == 7) {
+				entryLocation = greenNotes8;
+				currentGreenNotes++;
+			} else {
+				entryLocation = greenNotes1;
+				currentGreenNotes++;
+			}
+		} else if (character == "Red") {
+			characterPage = redEntryPage;
+			if (currentRedNotes == 0) {
+				entryLocation = redNotes1;
+				currentRedNotes++;
+			} else if (currentRedNotes == 1) {
+				entryLocation = redNotes2;
+				currentRedNotes++;
+			} else if (currentRedNotes == 2) {
+				entryLocation = redNotes3;
+				currentRedNotes++;
+			} else if (currentRedNotes == 3) {
+				entryLocation = redNotes4;
+				currentRedNotes++;
+			} else if (currentRedNotes == 4) {
+				entryLocation = redNotes5;
+				currentRedNotes++;
+			} else if (currentRedNotes == 5) {
+				entryLocation = redNotes6;
+				currentRedNotes++;
+			} else if (currentRedNotes == 6) {
+				entryLocation = redNotes7;
+				currentRedNotes++;
+			} else if (currentRedNotes == 7) {
+				entryLocation = redNotes8;
+				currentRedNotes++;
+			} else {
+				entryLocation = redNotes1;
+				currentRedNotes++;
+			}
+		} else {
+			characterPage = blueEntryPage;
+			if (currentBlueNotes == 0) {
+				entryLocation = blueNotes1;
+				currentBlueNotes++;
+			} else if (currentBlueNotes == 1) {
+				entryLocation = blueNotes2;
+				currentBlueNotes++;
+			} else if (currentBlueNotes == 2) {
+				entryLocation = blueNotes3;
+				currentBlueNotes++;
+			} else if (currentBlueNotes == 3) {
+				entryLocation = blueNotes4;
+				currentBlueNotes++;
+			} else if (currentBlueNotes == 4) {
+				entryLocation = blueNotes5;
+				currentBlueNotes++;
+			} else if (currentBlueNotes == 5) {
+				entryLocation = blueNotes6;
+				currentBlueNotes++;
+			} else if (currentBlueNotes == 6) {
+				entryLocation = blueNotes7;
+				currentBlueNotes++;
+			} else if (currentBlueNotes == 7) {
+				entryLocation = blueNotes8;
+				currentBlueNotes++;
+			} else {
+				entryLocation = blueNotes1;
+				currentBlueNotes++;
+			}
+		}
+		localEntry = Instantiate (autoEntryPrefab, entryLocation.position, entryLocation.rotation, characterPage.transform);
+		autoJournalEntry = localEntry.GetComponent<AutoJournalEntry> ();
+		autoJournalEntry.entryText.text = entryString;
 	}
 }

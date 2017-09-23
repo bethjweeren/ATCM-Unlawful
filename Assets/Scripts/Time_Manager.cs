@@ -26,6 +26,7 @@ public class Time_Manager : MonoBehaviour {
 	private PlayerController playerController;
 	public bool isGoing = true;
     public string outOfTimeReason;
+	public Journal_Manager journal_Manager;
     //private WaitForSeconds pauseEffectDuration = new WaitForSeconds(.5f);
 
     void Start()
@@ -52,6 +53,10 @@ public class Time_Manager : MonoBehaviour {
 		//Debug.Log (hour + " : " + minute + " _ " + day);
 		if (day >= 4) {
             DialogueSystem.Instance().endGame.LoseGame(outOfTimeReason);
+		}
+
+		if (Input.GetKeyDown (KeyCode.Alpha3)) {
+			journal_Manager.CreateAutoJournalEntry ("I eat cake", "Red");
 		}
 	}
 
