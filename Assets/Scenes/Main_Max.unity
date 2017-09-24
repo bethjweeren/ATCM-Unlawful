@@ -22837,7 +22837,6 @@ MonoBehaviour:
   greenNotes7: {fileID: 0}
   greenNotes8: {fileID: 0}
   entryLocation: {fileID: 0}
-  journalEntry: []
 --- !u!4 &1486727236
 Transform:
   m_ObjectHideFlags: 0
