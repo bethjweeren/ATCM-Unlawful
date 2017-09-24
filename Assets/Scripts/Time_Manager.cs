@@ -56,7 +56,7 @@ public class Time_Manager : MonoBehaviour {
 		}
 
 		if (Input.GetKeyDown (KeyCode.Alpha3)) {
-			journal_Manager.CreateAutoJournalEntry ("I eat cake", "Red");
+			journal_Manager.CreateAutoJournalEntry ("I eat cake", CharacterID.RED);
 		}
 	}
 

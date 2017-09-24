@@ -180,7 +180,183 @@ public class Journal_Manager : MonoBehaviour {
 		}
 	}
 		
-	public void CreateAutoJournalEntry(string entryString, string character){
+	public void CreateAutoJournalEntry(string entryString, CharacterID character){
+        switch (character)
+        {
+            case CharacterID.BLACK:
+                characterPage = blackEntryPage;
+                switch (currentBlackNotes)
+                {
+                    case 8:
+                        return;
+                    case 7:
+                        entryLocation = blackNotes8;
+                        break;
+                    case 6:
+                        entryLocation = blackNotes7;
+                        break;
+                    case 5:
+                        entryLocation = blackNotes6;
+                        break;
+                    case 4:
+                        entryLocation = blackNotes5;
+                        break;
+                    case 3:
+                        entryLocation = blackNotes4;
+                        break;
+                    case 2:
+                        entryLocation = blackNotes3;
+                        break;
+                    case 1:
+                        entryLocation = blackNotes2;
+                        break;
+                    case 0:
+                    default:
+                        entryLocation = blackNotes1;
+                        break;
+                }
+                currentBlackNotes++;
+                break;
+            case CharacterID.BLUE:
+                characterPage = blueEntryPage;
+                switch (currentBlueNotes)
+                {
+                    case 8:
+                        return;
+                    case 7:
+                        entryLocation = blueNotes8;
+                        break;
+                    case 6:
+                        entryLocation = blueNotes7;
+                        break;
+                    case 5:
+                        entryLocation = blueNotes6;
+                        break;
+                    case 4:
+                        entryLocation = blueNotes5;
+                        break;
+                    case 3:
+                        entryLocation = blueNotes4;
+                        break;
+                    case 2:
+                        entryLocation = blueNotes3;
+                        break;
+                    case 1:
+                        entryLocation = blueNotes2;
+                        break;
+                    case 0:
+                    default:
+                        entryLocation = blueNotes1;
+                        break;
+                }
+                currentBlueNotes++;
+                break;
+            case CharacterID.GREEN:
+                characterPage = greenEntryPage;
+                switch (currentGreenNotes)
+                {
+                    case 8:
+                        return;
+                    case 7:
+                        entryLocation = greenNotes8;
+                        break;
+                    case 6:
+                        entryLocation = greenNotes7;
+                        break;
+                    case 5:
+                        entryLocation = greenNotes6;
+                        break;
+                    case 4:
+                        entryLocation = greenNotes5;
+                        break;
+                    case 3:
+                        entryLocation = greenNotes4;
+                        break;
+                    case 2:
+                        entryLocation = greenNotes3;
+                        break;
+                    case 1:
+                        entryLocation = greenNotes2;
+                        break;
+                    case 0:
+                    default:
+                        entryLocation = greenNotes1;
+                        break;
+                }
+                currentGreenNotes++;
+                break;
+            case CharacterID.RED:
+                characterPage = redEntryPage;
+                switch (currentRedNotes)
+                {
+                    case 8:
+                        return;
+                    case 7:
+                        entryLocation = redNotes8;
+                        break;
+                    case 6:
+                        entryLocation = redNotes7;
+                        break;
+                    case 5:
+                        entryLocation = redNotes6;
+                        break;
+                    case 4:
+                        entryLocation = redNotes5;
+                        break;
+                    case 3:
+                        entryLocation = redNotes4;
+                        break;
+                    case 2:
+                        entryLocation = redNotes3;
+                        break;
+                    case 1:
+                        entryLocation = redNotes2;
+                        break;
+                    case 0:
+                    default:
+                        entryLocation = redNotes1;
+                        break;
+                }
+                currentRedNotes++;
+                break;
+            case CharacterID.YELLOW:
+                characterPage = yellowEntryPage;
+                switch (currentYellowNotes)
+                {
+                    case 8:
+                        return;
+                    case 7:
+                        entryLocation = yellowNotes8;
+                        break;
+                    case 6:
+                        entryLocation = yellowNotes7;
+                        break;
+                    case 5:
+                        entryLocation = yellowNotes6;
+                        break;
+                    case 4:
+                        entryLocation = yellowNotes5;
+                        break;
+                    case 3:
+                        entryLocation = yellowNotes4;
+                        break;
+                    case 2:
+                        entryLocation = yellowNotes3;
+                        break;
+                    case 1:
+                        entryLocation = yellowNotes2;
+                        break;
+                    case 0:
+                    default:
+                        entryLocation = yellowNotes1;
+                        break;
+                }
+                currentYellowNotes++;
+                break;
+            default:
+                return;
+        }
+        /*
 		if (character == "Blue") {
 			characterPage = blueEntryPage;
 			if (currentBlueNotes == 0) {
@@ -205,8 +381,7 @@ public class Journal_Manager : MonoBehaviour {
 				entryLocation = blueNotes7;
 				currentBlueNotes++;
 			} else if (currentBlueNotes == 7) {
-				entryLocation = blueNotes8;
-				currentBlueNotes++;
+				
 			} else {
 				entryLocation = blueNotes1;
 				currentBlueNotes++;
@@ -362,6 +537,7 @@ public class Journal_Manager : MonoBehaviour {
 				currentBlueNotes++;
 			}
 		}
+        */
 		localEntry = Instantiate (autoEntryPrefab, entryLocation.position, entryLocation.rotation, characterPage.transform);
 		autoJournalEntry = localEntry.GetComponent<AutoJournalEntry> ();
 		autoJournalEntry.entryText.text = entryString;
