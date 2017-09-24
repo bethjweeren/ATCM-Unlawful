@@ -5,6 +5,14 @@ using UnityEngine;
 public class Tutorial : MonoBehaviour {
     public GameObject letterUI;
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return))
+        {
+            Close();
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         other.GetComponent<PlayerController>().currentState = PlayerController.State.INTERACTING;
