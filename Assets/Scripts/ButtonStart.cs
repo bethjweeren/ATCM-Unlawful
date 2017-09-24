@@ -6,7 +6,6 @@ public class ButtonStart : MonoBehaviour
 {
 	public Button buttonStart;
 	public GameObject menu;
-	public GameObject player;
 	public Time_Manager time_manager;
 	private Animator playerAnimator;
 	private PlayerController playerController;
@@ -15,6 +14,7 @@ public class ButtonStart : MonoBehaviour
 	{
 		Button btn = buttonStart.GetComponent<Button>();
 		btn.onClick.AddListener(TaskOnClick);
+		GameObject player = GameObject.FindGameObjectWithTag("Player");
 		playerController = player.GetComponent<PlayerController>();
 		playerController.enabled = false;
 		playerAnimator = player.GetComponent<Animator>();

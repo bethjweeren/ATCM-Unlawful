@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
 	// Different screens a player can be in
-	// Was originally going to have "still" and "walking" but there was too much overlap
 	public enum State
 	{
 		MAIN,
@@ -31,9 +30,7 @@ public class PlayerController : MonoBehaviour
 	public GameObject screenControls;
 	public GameObject screenCredits;
 	public State currentState;
-	private Rigidbody2D playerRB;
-    private Collider2D playerCollider;
-	private Animator animator;
+
 	public Button jounalButton;
     public float interactRange = 1;
     public LayerMask interactLayer;
@@ -42,8 +39,13 @@ public class PlayerController : MonoBehaviour
 
     public static float playerY;
 
-    // Use this for initialization
-    void Start()
+	private Rigidbody2D playerRB;
+	private Collider2D playerCollider;
+	private Animator animator;
+	private NPC[] npcs; //The player freezes/unfreezes NPCs, not the other way around
+
+	// Use this for initialization
+	void Start()
 	{
         DialogueSystem.Instance().player = this;
         journalCanvas.SetActive (false);
@@ -58,6 +60,10 @@ public class PlayerController : MonoBehaviour
 		playerRB.velocity = new Vector2(0, 0); //Don't move
 		screenMenuStarting.SetActive(true); //Starting menu gets in the way, keep disabled in scene and this will enable it
 		enableOnStart.SetActive(true); //Enable all the intrusive UI things on start, because they get in the way in the scene
+		npcs = GameObject.FindObjectsOfType<NPC>();
+		foreach (NPC npcController in npcs)
+			print(npcController);
+		FreezeNPCs();
 	}
 
 	// Update is called every fixed framerate frame
@@ -115,7 +121,8 @@ public class PlayerController : MonoBehaviour
                         print("Looking at map. Press M or ESC or Space to close."); //Replace with map code
                         journalCanvas.SetActive(true);
                         journal_manager.BringUpMap();
-                    }
+						FreezeNPCs();
+					}
                     else if (Input.GetKeyDown(KeyCode.J))
                     {
 					if (time_manager.currentTimeState != Time_Manager.State.Rest) {
@@ -125,7 +132,8 @@ public class PlayerController : MonoBehaviour
                         StopMoving();
                         print("Looking at journal. Press J or ESC to close."); //Replace with journal code
                         journalCanvas.SetActive(true);
-                    }
+						FreezeNPCs();
+					}
                     
                     else if (Input.GetKeyDown(KeyCode.I))
                     {
@@ -133,18 +141,19 @@ public class PlayerController : MonoBehaviour
                         StopMoving();
 						itemCanvas.SetActive (true);
                         print("Looking through inventory. Press I or ESC to close."); //Replace with inventory code
-                    }
-                    
-
+						FreezeNPCs();
+					}
                     else if (Input.GetKeyDown(KeyCode.Escape))
                     {
-					if (time_manager.currentTimeState != Time_Manager.State.Rest) {
-						time_manager.ForcePausedState ();
-					}
+						if (time_manager.currentTimeState != Time_Manager.State.Rest)
+						{
+							time_manager.ForcePausedState ();
+						}
                         currentState = State.MENU;
                         StopMoving();
 						screenMenu.SetActive(true);
-                    }
+						FreezeNPCs();
+					}
                 }
 				/*
                 if (Input.GetKeyDown(KeyCode.LeftShift))
@@ -227,24 +236,26 @@ public class PlayerController : MonoBehaviour
                             currentState = State.INTERACTING;
                             StopMoving();
                             nearest.GetComponent<IInteractable>().Interact();
-                        }
+							FreezeNPCs();
+						}
                     }
                 }
-
                 else if (!AnyMovementKey())
 				{
                     StopMoving();
                 }
 				break;
+
 		case State.JOURNAL:
 				if (Input.GetKeyDown(KeyCode.J) || Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.M) || Input.GetKeyDown(KeyCode.Space)) //Pressing "J" to close the journal might not work if typing
 				{
-				if (time_manager.currentTimeState != Time_Manager.State.Rest) {
-					time_manager.LeavePauseState ();
-				}
+					if (time_manager.currentTimeState != Time_Manager.State.Rest)
+					{
+						time_manager.LeavePauseState ();
+					}
 					currentState = State.MAIN;
 					journalCanvas.SetActive(false);
-					print("Closed journal."); //Replace with journal code
+					UnfreezeNPCs();
 				}
 				break;
 
@@ -253,7 +264,7 @@ public class PlayerController : MonoBehaviour
 				{
 					itemCanvas.SetActive (false);
 					currentState = State.MAIN;
-					print("Closed inventory."); //Replace with inventory code
+					UnfreezeNPCs();
 				}
 				break;
 
@@ -309,13 +320,15 @@ public class PlayerController : MonoBehaviour
         if (currentState == State.INTERACTING)
         {
             currentState = State.MAIN;
-        }
+			UnfreezeNPCs();
+		}
     }
 
 	//Similar to EndInteraction, but need this for the Menu, specifically ButtonPlay.cs
 	public void SwitchToMainState()
 	{
 		currentState = State.MAIN;
+		UnfreezeNPCs();
 	}
 
 	public void SetSpeed(float newSpeed)
@@ -354,5 +367,39 @@ public class PlayerController : MonoBehaviour
 	public void SayHello(){
 		Debug.Log ("hello");
 		currentState = State.MAIN;
+	}
+
+	//I have the player change the NPCs' state as needed because it's WAY fewer checks
+	//than having every NPC check the player's state every update.
+	public void FreezeNPCs()
+	{
+		/*
+		foreach (NPC npcController in npcs)
+		{
+			npcController.StopMoving();
+		}
+		*/
+	}
+
+	//I have the player change the NPCs' state as needed because it's WAY fewer checks
+	//than having every NPC check the player's state every update.
+	public void UnfreezeNPCs()
+	{
+		/*
+		foreach (NPC npcController in npcs)
+		{
+			npcController.StartMoving();
+		}
+		*/
+	}
+
+	void OnEnable()
+	{
+		UnfreezeNPCs();
+	}
+
+	void OnDisable()
+	{
+		FreezeNPCs();
 	}
 }

@@ -1,9 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Priority_Queue;
 
+/*
+* Uses https://github.com/BlueRaja/High-Speed-Priority-Queue-for-C-Sharp
+* Because, unlike Java, C# does not have a built-in priority queue,
+* and I ain't got no time to start writing prioritiy queue classes.
+* Plus my priority queue class would probably be a copy/paste from a
+* textbook or something.
+* Rest assured, though, BlueRaja's Priority Queue is released under the
+* MIT License, so "it's free to use in all cases: free for personal
+* or commercial use, in free or paid software, open or closed source.
+* No strings attached!"
+* Not really sure I imported it properly though, cuz NuGet wouldn't work,
+* but copying some NuGet package files into the assets folder seemed to work.
+* -Sharon
+*/
 public class Pathfinder : MonoBehaviour
 {
+	SimplePriorityQueue<Vertex> priorityQueue; //U in pseudocode, Maintains the priorities of the vertices
+	float keyModifier; //km in pseudocode, accounts for cost changes
+	HashSet<Vertex> graph; //S in pseudocode, The finite set of vertices of the graph; I chose HashSet cuz the pseudocode just said "Set" and this was close enough I guess.
 
 	// Use this for initialization
 	void Start()
@@ -17,88 +35,75 @@ public class Pathfinder : MonoBehaviour
 
 	}
 
-	//Sources:
-	//https://gamedev.stackexchange.com/questions/58963/pathfinding-with-2d-non-grid-based-movement-over-uniform-terrain
-	//http://aigamedev.com/open/tutorials/theta-star-any-angle-paths/
-	//http://www.jair.org/media/2994/live-2994-5259-jair.pdf
-	//https://en.wikipedia.org/wiki/Theta*#Pseudocode
-	//Nodes:
-	//http://www.jgallant.com/nodal-pathfinding-in-unity-2d-with-a-in-non-grid-based-games/
-	//Especially the last link
-	//Theta* is supposedly better than A* so that what I'mma use -Sharon
-	//NPCs use Vector3s, so input the (X, Y) values as Vector2s
-	/*void theta*( start,  goal)
+
+	/*
+
+	//https://cstheory.stackexchange.com/questions/11855/how-do-the-state-of-the-art-pathfinding-algorithms-for-changing-graphs-d-d-l
+	//I looked at this C++ implementation to understand the pdf: https://code.google.com/archive/p/dstarlite/
+	//However I didn't copy any code over. My implementation is much more similar to the original pseudocode:
+	//http://idm-lab.org/bib/abstracts/papers/aaai02b.pdf
+	//X.Sun, W.Yeoh and S.Koenig. Moving Target D* Lite. In Proceedings of the International Joint Conference on Autonomous Agents and Multiagent Systems (AAMAS), 67-74, 2010. 
+	//
+	//D*-Lite (optimized version)
+	//Dynamic simple pathfinding (45 or 90 degree angles), faster and less complicated than D*
+	
+	Vector2 CalculateKey(Vertex vertex)
 	{
-		//This is the main loop:
-		currentShortestDistance(start) = 0;
-		
-		parent(start) = start;
+		//g = estimate of start distance g* of the vertex, RHS = one-step lookahead value
+		//According to Wikipedia, "A heuristic function, also called simply a heuristic, is a function that ranks alternatives in search algorithms
+		//at each branching step based on available information to decide which branch to follow. For example, it may approximate the exact solution."
+		return new Vector2((Mathf.Min(GetStartDistanceEstimate(vertex), GetRHS(vertex)) + heuristic(startVertex, vertex) + keyModifier), (Mathf.Min(GetStartDistanceEstimate(vertex), getRHS(vertex))));
+	}
 
-		// Initializing open and closed sets. The open set is initialized 
-		// with the start node and an initial cost
+	void Initialize()
+	{
+		priorityQueue = new SimplePriorityQueue<Vertex>();
+		keyModifier = 0;
+		//Set S finiteSetofVerticesOfTheGraph 
+		foreach (Vertex vertex in graph)
+		{
+			SetRHS(vertex, float.PositiveInfinity);
+			GetStartDistanceEstimate(vertex, float.PositiveInfinity);
+		}
+		setRHS(goalVertex, 0);
+		priorityQueue.Insert(goalVertex, new Vector2(heuristic(startVertex, goalVertex),0))
+	}
 
-		-
+	void UpdateVertex(vertex)
+	{
+		if(!anyVertex.Equals(startVertex))
+			setRHS(anyVertex, Mathf.Min())
+	}
 
+	void ComputeShortestPath()
+	{
+		while (priorityQueue.First.GetKey() < CalculateKey(startVertex) || getRHS(startVertex)
+		{
+			anyVertex = priorityQueue.
+		}
+	}
 
-		function theta*(start, goal)
-		// This main loop is the same as A*
-		gScore(start) := 0
-		parent(start) := start
-		// Initializing open and closed sets. The open set is initialized 
-		// with the start node and an initial cost
-		open := {}
-		open.insert(start, gScore(start) + heuristic(start))
-		// gScore(node) is the current shortest distance from the start node to node
-		// heuristic(node) is the estimated distance of node from the goal node
-		// there are many options for the heuristic such as Euclidean or Manhattan 
-		closed := {}
-		while open is not empty
-			s := open.pop()
-			if s = goal
-				return reconstruct_path(s)
-			closed.push(s)
-			for each neighbor of s
-			// Loop through each immediate neighbor of s
-				if neighbor not in closed
-					if neighbor not in open
-						// Initialize values for neighbor if it is 
-						// not already in the open list
-						gScore(neighbor) := infinity
-						parent(neighbor) := Null
-					update_vertex(s, neighbor)
-		return Null
-            
-    
-		function update_vertex(s, neighbor)
-			// This part of the algorithm is the main difference between A* and Theta*
-			if line_of_sight(parent(s), neighbor)
-				// If there is line-of-sight between parent(s) and neighbor
-				// then ignore s and use the path from parent(s) to neighbor 
-				if gScore(parent(s)) + c(parent(s), neighbor) < gScore(neighbor)
-					// c(s, neighbor) is the Euclidean distance from s to neighbor
-					gScore(neighbor) := gScore(parent(s)) + c(parent(s), neighbor)
-					parent(neighbor) := parent(s)
-					if neighbor in open
-						open.remove(neighbor)
-					open.insert(neighbor, gScore(neighbor) + heuristic(neighbor))
-			else
-				// If the length of the path from start to s and from s to 
-				// neighbor is shorter than the shortest currently known distance
-				// from start to neighbor, then update node with the new distance
-				if gScore(s) + c(s, neighbor) < gScore(neighbor)
-					gScore(neighbor) := gScore(s) + c(s, neighbor)
-					parent(neighbor) := s
-					if neighbor in open
-						open.remove(neighbor)
-					open.insert(neighbor, gScore(neighbor) + heuristic(neighbor))
+	//g(s) in pseudocode
+	//Yeah, it's a long method name, but at least it's descriptive!
+	float GetStartDistanceEstimate(Vertex vertex)
+	{
 
-		function reconstruct_path(s)
-			total_path = {s}
-			// This will recursively reconstruct the path from the goal node 
-			// until the start node is reached
-			if parent(s) != s
-				total_path.push(reconstruct_path(parent(s)))
-			else
-				return total_path
-		}*/
+	}
+
+	//rhs(s) in pseudocode
+	//I assume this stands for right-hand side, but I dunno...
+	//The D*Lite paper defines the rhs as a
+	//"one-step lookahead value based on the g-values and
+	//thus better informed than the g-values"
+	//anyVertex is u in pseudocode
+	float GetRHS(Vertex vertex)
+	{
+		if (vertex.Equals(anyVertex))
+			return 0;
+		else
+		{
+			return Mathf.Min(,)
+		}
+	}
+	*/
 }
