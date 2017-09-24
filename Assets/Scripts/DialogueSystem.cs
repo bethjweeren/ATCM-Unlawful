@@ -17,6 +17,7 @@ public class DialogueSystem
     List<DialogueLine> quoteQueue;
     Prompt dialoguePrompt;
     CharacterID nonPlayerID;
+    public int dialogueTextSize = 18;
 
     public DialogueSystem()
     {

@@ -75,10 +75,16 @@ public class Quotes {
 
     }
 
+    /// <summary>
+    /// Replaces format symbols with rich text formatting.
+    /// </summary>
+    /// <param name="quote">The unformatted string.</param>
+    /// <returns>The formatted string.</returns>
     static string FormatColors(string quote)
     {
         string line = quote;
         string final = "";
+        //Process color codes.
         int startIndex = line.IndexOf('[');
         while (startIndex > -1)
         {
@@ -93,6 +99,38 @@ public class Quotes {
             startIndex = line.IndexOf('[');
         }
         final += line;
+
+        line = final;
+        Debug.Log(final);
+        final = "";
+        bool small = false;
+        //Process text size.
+        int formatIndex = line.IndexOf('%');
+        while(formatIndex > -1)
+        {
+            final += line.Substring(0, formatIndex);
+            string format;
+            if (!small)
+            {
+                int smallSize = 3*(DialogueSystem.Instance().dialogueTextSize / 4);
+                format = "<size=" + smallSize.ToString() + ">";
+                small = true;
+            }
+            else
+            {
+                format = "</size>";
+                small = false;
+            }
+            final += format;
+            line = line.Substring(formatIndex + 1, line.Length - (formatIndex + 1));
+            formatIndex = line.IndexOf('%');
+        }
+        final += line;
+        if (small)
+        {
+            final += "</size>";
+        }
+        Debug.Log(final);
         return final;
     }
 }

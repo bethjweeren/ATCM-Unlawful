@@ -19,14 +19,15 @@ public class DialogueBox : MonoBehaviour {
     List<string> textPortions;
     string textToDisplay;
     bool doneDisplaying;
-    float typeDelay = 0.02f;
-    float delayMultiplier = 1;
+    bool skipText;
+    float typeDelay = 0.015f;
     bool exitAfterSaying;
     bool choiceMode = false;
 
 	void Start () {
         DialogueSystem.Instance().dialogueBox = this;
         DialogueSystem.Instance().CloseDialogueBox();
+        DialogueSystem.Instance().dialogueTextSize = GetTextSize();
         Debug.Log("Registered dialogue box");
 	}
 	
@@ -117,11 +118,11 @@ public class DialogueBox : MonoBehaviour {
         {
             if (Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.Space))
             {
-                delayMultiplier = 0.25f;
+                skipText = true;
             }
             else
             {
-                delayMultiplier = 1f;
+                skipText = false;
             }
             if (doneDisplaying && (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Space)))
             {
@@ -235,7 +236,14 @@ public class DialogueBox : MonoBehaviour {
                     startFormat = startFormat + nameToDisplay[0];
                     nameToDisplay = nameToDisplay.Substring(1, nameToDisplay.Length - 1);
                     dialogueText.text = baseText + startFormat + endFormat;
-                    yield return new WaitForSeconds(typeDelay * delayMultiplier);
+                    if (skipText)
+                    {
+                        yield return new WaitForEndOfFrame();
+                    }
+                    else
+                    {
+                        yield return new WaitForSeconds(typeDelay);
+                    }
                 }
 
             }
@@ -244,11 +252,23 @@ public class DialogueBox : MonoBehaviour {
                 dialogueText.text = dialogueText.text + textToDisplay[0];
                 textToDisplay = textToDisplay.Substring(1, textToDisplay.Length - 1);
             }
-            yield return new WaitForSeconds(typeDelay * delayMultiplier);
+            if (skipText)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+            else
+            {
+                yield return new WaitForSeconds(typeDelay);
+            }
         }
         doneDisplaying = true;
     }
 
+    /// <summary>
+    /// Cuts long lines of text into smaller portions.
+    /// </summary>
+    /// <param name="allText">The full line of text</param>
+    /// <returns>A list of strings containing the smaller portions.</returns>
     List<string> PartitionText(string allText)
     {
         string remaining = allText;
@@ -279,5 +299,10 @@ public class DialogueBox : MonoBehaviour {
         }
         portions.Add(allText);
         return portions;
+    }
+
+    public int GetTextSize()
+    {
+        return dialogueText.fontSize;
     }
 }
