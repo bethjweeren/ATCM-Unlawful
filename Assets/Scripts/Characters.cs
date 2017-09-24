@@ -42,7 +42,7 @@ public class Characters
         CharacterDict.Add(CharacterID.BLUE, new Character("Bleu", "BLUE", "#193BFF", Resources.Load<Sprite>(thumbPath + "Blue_thumb")));
         NameDict.Add("BLUE", CharacterID.BLUE);
 
-        CharacterDict.Add(CharacterID.BROWN, new Character("The Beggar", "BROWN", "#664028"));
+        CharacterDict.Add(CharacterID.BROWN, new Character("Beggar Marron", "BROWN", "#664028"));
         NameDict.Add("BROWN", CharacterID.BROWN);
 
         CharacterDict.Add(CharacterID.GREEN, new Character("Vert", "GREEN", "#11B211", Resources.Load<Sprite>(thumbPath + "Green_thumb")));
