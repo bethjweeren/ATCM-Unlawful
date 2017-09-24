@@ -3,23 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public enum CharacterID { INVALID, BLACK, BLUE, BROWN, GREEN, PURPLE, RED, YELLOW, PLAYER, VICTIM, VICTIM2, RANDO}
+public enum CharacterID { INVALID, BLACK, BLUE, BROWN, GREEN, PURPLE, RED, YELLOW, PLAYER, VICTIM, VICTIM2, RANDO, WEAPON}
 
 public struct Character
 {
-    public string name, color;
+    public string name, color, identifier;
     public Sprite thumb;
 
-    public Character(string n, string c, Sprite t)
+    public Character(string n, string i, string c, Sprite t)
     {
         name = n;
+        identifier = i;
         color = c;
         thumb = t;
     }
 
-    public Character(string n, string c)
+    public Character(string n, string i, string c)
     {
         name = n;
+        identifier = i;
         color = c;
         thumb = Characters.defaultThumb;
     }
@@ -34,33 +36,33 @@ public class Characters
 
     public Characters()
     {
-        CharacterDict.Add(CharacterID.BLACK, new Character("Friar Noir", "#191919", Resources.Load<Sprite>(thumbPath + "Black_thumb")));
+        CharacterDict.Add(CharacterID.BLACK, new Character("Friar Noir", "BLACK", "#191919", Resources.Load<Sprite>(thumbPath + "Black_thumb")));
         NameDict.Add("BLACK", CharacterID.BLACK);
 
-        CharacterDict.Add(CharacterID.BLUE, new Character("Bleu", "#193BFF", Resources.Load<Sprite>(thumbPath + "Blue_thumb")));
+        CharacterDict.Add(CharacterID.BLUE, new Character("Bleu", "BLUE", "#193BFF", Resources.Load<Sprite>(thumbPath + "Blue_thumb")));
         NameDict.Add("BLUE", CharacterID.BLUE);
 
-        CharacterDict.Add(CharacterID.BROWN, new Character("The Beggar", "#664028"));
+        CharacterDict.Add(CharacterID.BROWN, new Character("The Beggar", "BROWN", "#664028"));
         NameDict.Add("BROWN", CharacterID.BROWN);
 
-        CharacterDict.Add(CharacterID.GREEN, new Character("Vert", "#11B211", Resources.Load<Sprite>(thumbPath + "Green_thumb")));
+        CharacterDict.Add(CharacterID.GREEN, new Character("Vert", "GREEN", "#11B211", Resources.Load<Sprite>(thumbPath + "Green_thumb")));
         NameDict.Add("GREEN", CharacterID.GREEN);
 
-        CharacterDict.Add(CharacterID.PURPLE, new Character("Mayor Violet", "#AF11A5"));
+        CharacterDict.Add(CharacterID.PURPLE, new Character("Mayor Violet", "PURPLE", "#AF11A5"));
         NameDict.Add("PURPLE", CharacterID.PURPLE);
 
-        CharacterDict.Add(CharacterID.RED, new Character("Rouge", "#FF1919", Resources.Load<Sprite>(thumbPath + "Red_thumb")));
+        CharacterDict.Add(CharacterID.RED, new Character("Rouge", "RED", "#FF1919", Resources.Load<Sprite>(thumbPath + "Red_thumb")));
         NameDict.Add("RED", CharacterID.RED);
 
-        CharacterDict.Add(CharacterID.YELLOW, new Character("Jaune", "#FFFF32", Resources.Load<Sprite>(thumbPath + "Yellow_thumb")));
+        CharacterDict.Add(CharacterID.YELLOW, new Character("Jaune", "YELLOW", "#FFFF32", Resources.Load<Sprite>(thumbPath + "Yellow_thumb")));
         NameDict.Add("YELLOW", CharacterID.YELLOW);
 
-        CharacterDict.Add(CharacterID.VICTIM, new Character("Dr. Mort", "#2D2D2D"));
+        CharacterDict.Add(CharacterID.VICTIM, new Character("Dr. Mort", "VICTIM", "#2D2D2D"));
         NameDict.Add("VICTIM", CharacterID.VICTIM);
 
-        CharacterDict.Add(CharacterID.INVALID, new Character("Missingno", "#FFFFFF"));
+        CharacterDict.Add(CharacterID.INVALID, new Character("Missingno", "INVALID", "#FFFFFF"));
 
-        CharacterDict.Add(CharacterID.PLAYER, new Character("Detective", "#FFFFFF"));
+        CharacterDict.Add(CharacterID.PLAYER, new Character("Detective", "PLAYER", "#FFFFFF"));
     }
 
     public CharacterID NameToID(string name)
@@ -84,13 +86,13 @@ public class Characters
 
     public Character IDToCharacter(CharacterID name)
     {
-        Character value = new Character("Missingno", "#FFFFFF");
+        Character value = new Character("Missingno", "INVALID", "#FFFFFF");
         try
         {
             if(!CharacterDict.TryGetValue(name, out value))
             {
                 Debug.Log("Error looking up nickname: " + name.ToString());
-                value = new Character("Missingno", "#FFFFFF");
+                value = new Character("Missingno", "INVALID", "#FFFFFF");
             }
         }
         catch
@@ -98,5 +100,20 @@ public class Characters
             Debug.Log("Nicnkame dictionary empty");
         }
         return value;
+    }
+
+    public static bool IsSuspect(CharacterID id)
+    {
+        switch (id)
+        {
+            case CharacterID.BLACK:
+            case CharacterID.BLUE:
+            case CharacterID.GREEN:
+            case CharacterID.RED:
+            case CharacterID.YELLOW:
+                return true;
+            default:
+                return false;
+        }
     }
 }

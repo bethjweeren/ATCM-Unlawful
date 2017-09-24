@@ -13,7 +13,7 @@ public class DialogueSystem
     public PlayerController player;
     public DialogueBox dialogueBox;
     public GameOver endGame;
-    Quotes quotes;
+    NPCDialogue currentNPC;
     List<DialogueLine> quoteQueue;
     Prompt dialoguePrompt;
     CharacterID nonPlayerID;
@@ -23,6 +23,12 @@ public class DialogueSystem
     {
         characters = new Characters();
         quoteQueue = new List<DialogueLine>();
+        //This part is temporary
+        characters.NameDict.Add("LOCATION", CharacterID.VICTIM2);
+        characters.CharacterDict.Add(CharacterID.VICTIM2, new Character("the town square", "LOCATION", "#FFFFFF"));
+
+        characters.NameDict.Add("WEAPON", CharacterID.WEAPON);
+        characters.CharacterDict.Add(CharacterID.WEAPON, new Character("twine", "WEAPON", "#FFFFFF"));
     }
 
     public static DialogueSystem Instance()
@@ -39,16 +45,17 @@ public class DialogueSystem
 
     public void ProcessChoice(Choice selection)
     {
-        string line;
         switch (selection)
         {
             case Choice.BLACK_ALIBI:
                 if(dialoguePrompt == Prompt.ACCUSATION)
                 {
-                    dialogueBox.transform.parent.gameObject.SetActive(false);
-                    player.EndInteraction();
-                    player.gameObject.SetActive(false);
-                    endGame.LoseGame("The killer was <color=#193BFF>Bleu</color>");
+                    Accuse(CharacterID.BLACK);
+                }
+                else if(dialoguePrompt == Prompt.OPINION)
+                {
+                    quoteQueue.Add(new DialogueLine(currentNPC.GetOpinion(CharacterID.BLACK), nonPlayerID));
+                    NextLine();
                 }
                 else
                 {
@@ -58,10 +65,12 @@ public class DialogueSystem
             case Choice.BLUE_LASTSEEN:
                 if (dialoguePrompt == Prompt.ACCUSATION)
                 {
-                    dialogueBox.transform.parent.gameObject.SetActive(false);
-                    player.EndInteraction();
-                    player.gameObject.SetActive(false);
-                    endGame.WinGame("You guessed correctly");
+                    Accuse(CharacterID.BLUE);
+                }
+                else if (dialoguePrompt == Prompt.OPINION)
+                {
+                    quoteQueue.Add(new DialogueLine(currentNPC.GetOpinion(CharacterID.BLUE), nonPlayerID));
+                    NextLine();
                 }
                 else
                 {
@@ -71,36 +80,44 @@ public class DialogueSystem
             case Choice.GREEN_SUSPECTS:
                 if (dialoguePrompt == Prompt.ACCUSATION)
                 {
-                    dialogueBox.transform.parent.gameObject.SetActive(false);
-                    player.EndInteraction();
-                    player.gameObject.SetActive(false);
-                    endGame.LoseGame("The killer was <color=#193BFF>Bleu</color>");
+                    Accuse(CharacterID.GREEN);
+                }
+                else if (dialoguePrompt == Prompt.OPINION)
+                {
+                    quoteQueue.Add(new DialogueLine(currentNPC.GetOpinion(CharacterID.GREEN), nonPlayerID));
+                    NextLine();
                 }
                 else
                 {
-                    dialogueBox.DisplayLine(nonPlayerID, "This hasn't been implemented yet.", false);
+                    quoteQueue.Add(new DialogueLine(currentNPC.GetHint(), nonPlayerID));
+                    NextLine();
                 }
                 break;
             case Choice.RED_OPINION:
                 if (dialoguePrompt == Prompt.ACCUSATION)
                 {
-                    dialogueBox.transform.parent.gameObject.SetActive(false);
-                    player.EndInteraction();
-                    player.gameObject.SetActive(false);
-                    endGame.LoseGame("The killer was <color=#193BFF>Bleu</color>");
+                    Accuse(CharacterID.RED);
+                }
+                else if (dialoguePrompt == Prompt.OPINION)
+                {
+                    quoteQueue.Add(new DialogueLine(currentNPC.GetOpinion(CharacterID.RED), nonPlayerID));
+                    NextLine();
                 }
                 else
                 {
-                    dialogueBox.DisplayLine(nonPlayerID, "This hasn't been implemented yet.", false);
+                    dialoguePrompt = Prompt.OPINION;
+                    dialogueBox.DisplayChoices(new string[6] { "<color=#191919>Noir</color>.", "<color=#193BFF>Bleu</color>.", "<color=#11B211>Vert</color>.", "<color=#FF1919>Rouge</color>.", "<color=#FFFF32>Jaune</color>.", "Nevermind." });
                 }
                 break;
             case Choice.YELLOW_CLUE:
                 if (dialoguePrompt == Prompt.ACCUSATION)
                 {
-                    dialogueBox.transform.parent.gameObject.SetActive(false);
-                    player.EndInteraction();
-                    player.gameObject.SetActive(false);
-                    endGame.LoseGame("The killer was <color=#193BFF>Bleu</color>");
+                    Accuse(CharacterID.YELLOW);
+                }
+                else if (dialoguePrompt == Prompt.OPINION)
+                {
+                    quoteQueue.Add(new DialogueLine(currentNPC.GetOpinion(CharacterID.YELLOW), nonPlayerID));
+                    NextLine();
                 }
                 else
                 {
@@ -109,8 +126,14 @@ public class DialogueSystem
                 break;
             case Choice.CANCEL:
             default:
-                line = quotes.closers[Random.Range(0, quotes.closers.Count)];
-                dialogueBox.DisplayLine(nonPlayerID, line, true);
+                if(dialoguePrompt == Prompt.OPINION)
+                {
+                    NextChoice();
+                }
+                else
+                {
+                    dialogueBox.DisplayLine(nonPlayerID, currentNPC.GetCloser(), true);
+                }
                 break;
         }
     }
@@ -140,27 +163,24 @@ public class DialogueSystem
         else
         {
             dialoguePrompt = Prompt.DEFAULT;
-            choiceText = new string[6] { "Where were you..?", "When did you last see the victim?", "Who could have done this?", "What's your opinion of...", "Can I ask you about..?", "Goodbye." };
+            choiceText = new string[6] { "Where were you..?", "When did you last see the victim?", "Who could have done this?", "Tell me a little about...", "Can I ask you about..?", "Goodbye." };
         }
         dialogueBox.DisplayChoices(choiceText);
     }
 
-    public void OpenDialogueBox(CharacterID id, Quotes npcQuotes, bool firstMeeting, bool oneliner)
+    public void OpenDialogueBox(CharacterID id, NPCDialogue npc, bool firstMeeting, bool oneliner)
     {
         dialogueBox.transform.parent.gameObject.SetActive(true);
         dialogueBox.SetPortrait(id);
-        quotes = npcQuotes;
+        currentNPC = npc;
         nonPlayerID = id;
-        string line;
         if (firstMeeting)
         {
-            line = quotes.introductions[Random.Range(0, quotes.introductions.Count)];
-            dialogueBox.DisplayLine(id, line, oneliner);
+            dialogueBox.DisplayLine(id, npc.GetIntroduction(), oneliner);
         }
         else
         {
-            line = quotes.openers[Random.Range(0, quotes.openers.Count)];
-            dialogueBox.DisplayLine(id, line, oneliner);
+            dialogueBox.DisplayLine(id, npc.GetOpener(), oneliner);
         }
     }
 
@@ -168,6 +188,21 @@ public class DialogueSystem
     {
         dialogueBox.transform.parent.gameObject.SetActive(false);
         player.EndInteraction();
+    }
+
+    private void Accuse(CharacterID choice)
+    {
+        dialogueBox.transform.parent.gameObject.SetActive(false);
+        player.EndInteraction();
+        player.gameObject.SetActive(false);
+        if (choice == CharacterID.BLUE)
+        {
+            endGame.WinGame("You guessed correctly");
+        }
+        else
+        {
+            endGame.LoseGame("The killer was <color=#193BFF>Bleu</color>");
+        }
     }
 }
 

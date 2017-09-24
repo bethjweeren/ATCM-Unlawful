@@ -271,22 +271,22 @@ public class DialogueBox : MonoBehaviour {
     /// <returns>A list of strings containing the smaller portions.</returns>
     List<string> PartitionText(string allText)
     {
-        string remaining = allText;
+        string remaining = Quotes.FormatColors(allText);
         List<string> portions = new List<string>();
-        while(allText.Length > 255 || (allText.IndexOf('|') >= 0 && allText.IndexOf('|') <= 254))
+        while(remaining.Length > 255 || (remaining.IndexOf('|') >= 0 && remaining.IndexOf('|') <= 254))
         {
-            if (allText.IndexOf('|') >= 0 && allText.IndexOf('|') <= 254)
+            if (remaining.IndexOf('|') >= 0 && remaining.IndexOf('|') <= 254)
             {
-                int breakIndex = allText.IndexOf('|');
-                string beginning = allText.Substring(0, breakIndex - 1);
-                string end = allText.Substring(breakIndex + 2, allText.Length - (breakIndex + 2));
+                int breakIndex = remaining.IndexOf('|');
+                string beginning = remaining.Substring(0, breakIndex - 1);
+                string end = remaining.Substring(breakIndex + 2, remaining.Length - (breakIndex + 2));
                 portions.Add(beginning);
-                allText = end;
+                remaining = end;
             }
             else
             {
-                string beginning = allText.Substring(0, 255);
-                string end = allText.Substring(255, allText.Length - 255);
+                string beginning = remaining.Substring(0, 255);
+                string end = remaining.Substring(255, remaining.Length - 255);
                 int lastSpace = beginning.LastIndexOf(' ');
                 if (lastSpace != 254)
                 {
@@ -294,10 +294,10 @@ public class DialogueBox : MonoBehaviour {
                     beginning = beginning.Substring(0, lastSpace + 1);
                 }
                 portions.Add(beginning);
-                allText = end;
+                remaining = end;
             }
         }
-        portions.Add(allText);
+        portions.Add(remaining);
         return portions;
     }
 

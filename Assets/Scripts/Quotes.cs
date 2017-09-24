@@ -9,6 +9,21 @@ public class Quotes {
     public List<string> introductions;
     public List<string> openers;
     public List<string> closers;
+    public List<string> itemYes;
+    public List<string> itemNo;
+    public List<string> itemBut;
+    public List<string> startHintYes;
+    public List<string> startHintNo;
+    public List<string> motiveGreenInnocent;
+    public List<string> motiveGreenGuilty;
+    public List<string> motiveYellowInnocent;
+    public List<string> motiveYellowGuilty;
+    public List<string> motiveRedInnocent;
+    public List<string> motiveRedGuilty;
+    public List<string> motiveBlackInnocent;
+    public List<string> motiveBlackGuilty;
+    public List<string> motiveBlueInnocent;
+    public List<string> motiveBlueGuilty;
 
     public Quotes()
     {
@@ -28,6 +43,7 @@ public class Quotes {
             fileReader.Close();
             Debug.Log("Read success: " + filename);
 
+            /*
             List<string> temp = new List<string>();
             foreach (string line in quotes.introductions)
             {
@@ -48,7 +64,7 @@ public class Quotes {
                 temp.Add(FormatColors(line));
             }
             quotes.closers = temp;
-
+            */
             return quotes;
         }
         catch
@@ -80,7 +96,7 @@ public class Quotes {
     /// </summary>
     /// <param name="quote">The unformatted string.</param>
     /// <returns>The formatted string.</returns>
-    static string FormatColors(string quote)
+    public static string FormatColors(string quote)
     {
         string line = quote;
         string final = "";
@@ -101,7 +117,6 @@ public class Quotes {
         final += line;
 
         line = final;
-        Debug.Log(final);
         final = "";
         bool small = false;
         //Process text size.
@@ -130,7 +145,6 @@ public class Quotes {
         {
             final += "</size>";
         }
-        Debug.Log(final);
         return final;
     }
 }
