@@ -118,7 +118,7 @@ public class NPCDialogue : MonoBehaviour, IInteractable {
         }
         else
         {
-            DialogueSystem.Instance().player.EndInteraction();
+            Provider.GetInstance().player.EndInteraction();
         }
     }
 

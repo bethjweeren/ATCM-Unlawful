@@ -14,7 +14,7 @@ public class Item : MonoBehaviour, IInteractable {
 		pickUpText.ChangeText (gameObject.name);
 		Debug.Log ("hititem");
 		itemsManager.AddItem (linkedItem);
-        DialogueSystem.Instance().player.EndInteraction();
+        Provider.GetInstance().player.EndInteraction();
 		Destroy (gameObject);
 	}
 }

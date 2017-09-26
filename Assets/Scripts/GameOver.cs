@@ -11,12 +11,6 @@ public class GameOver : MonoBehaviour {
     public Color winColor;
     public Color loseColor;
 
-    void Start()
-    {
-        gameObject.SetActive(false);
-        DialogueSystem.Instance().endGame = this;
-    }
-
     public void LoseGame(string reason)
     {
         headerText.text = "Game Over";

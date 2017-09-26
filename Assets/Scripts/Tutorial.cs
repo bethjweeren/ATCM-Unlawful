@@ -23,7 +23,7 @@ public class Tutorial : MonoBehaviour {
 
     public void Close()
     {
-        DialogueSystem.Instance().player.currentState = PlayerController.State.MAIN;
+        Provider.GetInstance().player.currentState = PlayerController.State.MAIN;
         this.gameObject.SetActive(false);
     }
 }

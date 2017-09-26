@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
-        DialogueSystem.Instance().player = this;
+        Provider.GetInstance().player = this;
         journalCanvas.SetActive (false);
 		itemCanvas.SetActive (false);
 		journal_manager = journalCanvas.GetComponent<Journal_Manager> ();

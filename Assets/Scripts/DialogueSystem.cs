@@ -10,9 +10,7 @@ public class DialogueSystem
     static DialogueSystem instance;
     private static Object singletonLock = new Object();
     public Characters characters;
-    public PlayerController player;
-    public DialogueBox dialogueBox;
-    public GameOver endGame;
+    DialogueBox dialogueBox;
     NPCDialogue currentNPC;
     List<DialogueLine> quoteQueue;
     Prompt dialoguePrompt;
@@ -29,6 +27,12 @@ public class DialogueSystem
 
         characters.NameDict.Add("WEAPON", CharacterID.WEAPON);
         characters.CharacterDict.Add(CharacterID.WEAPON, new Character("twine", "WEAPON", "#FFFFFF"));
+
+        while(Provider.GetInstance() == null)
+        {
+
+        }
+        dialogueBox = Provider.GetInstance().dialogueBox;
     }
 
     public static DialogueSystem Instance()
@@ -187,21 +191,23 @@ public class DialogueSystem
     public void CloseDialogueBox()
     {
         dialogueBox.transform.parent.gameObject.SetActive(false);
-        player.EndInteraction();
+        Provider.GetInstance().player.EndInteraction();
     }
 
     private void Accuse(CharacterID choice)
     {
         dialogueBox.transform.parent.gameObject.SetActive(false);
+        PlayerController player = Provider.GetInstance().player;
         player.EndInteraction();
         player.gameObject.SetActive(false);
+        GameOver gameOver = Provider.GetInstance().gameOver;
         if (choice == CharacterID.BLUE)
         {
-            endGame.WinGame("You guessed correctly");
+            gameOver.WinGame("You guessed correctly");
         }
         else
         {
-            endGame.LoseGame("The killer was <color=#193BFF>Bleu</color>");
+            gameOver.LoseGame("The killer was <color=#193BFF>Bleu</color>");
         }
     }
 }
