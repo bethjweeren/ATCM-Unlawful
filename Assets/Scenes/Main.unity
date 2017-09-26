@@ -29271,7 +29271,7 @@ MonoBehaviour:
 
     I = Inventory
 
-    E = Interact/Talk
+    E/Spacebar = Interact/Talk
 
     ESC = Menu
 
@@ -34257,7 +34257,7 @@ MonoBehaviour:
 
     I = Inventory
 
-    E = Interact/Talk
+    E/Spacebar = Interact/Talk
 
     ESC = Menu
 
