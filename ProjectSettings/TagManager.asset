@@ -11,6 +11,7 @@ TagManager:
   - item
   - Interactable
   - NPC
+  - Bin
   layers:
   - Default
   - TransparentFX

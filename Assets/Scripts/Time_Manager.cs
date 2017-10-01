@@ -18,14 +18,14 @@ public class Time_Manager : MonoBehaviour {
 	public State pastTimeState;
 
 	public int hour, hourStart = 6, day, afternoonStart = 12, nightStart = 18, morningStart = 6, restStart = 0;
-	private float hrDegree = 30f, minDegree = 6f;
-	public float timer, timeCrunch, minute, currentTimeSpeed, normalTimeSpeed, fastTimeSpeed, pauseEffectTimer;
-	public GameObject hourHand, minuteHand, hourHand_red, minuteHand_red, hourHand_black, minuteHand_black;
+	public float hrDegree = 10f, timerOffset = 10f /*, minDegree = 6f*/;
+	public float timer, timeCrunch, minute, currentTimeSpeed, normalTimeSpeed, fastTimeSpeed, pauseEffectTimer, timerHand, minuteCounter;
+	public GameObject hourHand, /* minuteHand, */ hourHand_red,/* minuteHand_red, */ hourHand_black /*, minuteHand_black*/;
 	public Transform restPlace;
 	public GameObject Player, skipRest, nightShade, afternoonShade;
 	private PlayerController playerController;
 	public bool isGoing = true;
-    public string outOfTimeReason;
+	public string outOfTimeReason;
 	public Journal_Manager journal_Manager;
 	//private WaitForSeconds pauseEffectDuration = new WaitForSeconds(.5f);
 	//private NPC[] npcs; //To freeze/unfreeze NPCs (so they don't have to check on every update)
@@ -49,10 +49,8 @@ public class Time_Manager : MonoBehaviour {
 		nightShade.SetActive (false);
 	}
 
-	void Awake()
-	{
-		npcs = GameObject.FindGameObjectsWithTag("NPC");
-		//npcs = GameObject.FindObjectsOfType<NPC>();
+	void FixedUpdate(){
+		timerHand++;
 	}
 
 	void Update()
@@ -61,11 +59,11 @@ public class Time_Manager : MonoBehaviour {
 		UpdateClock ();
 		//Debug.Log (hour + " : " + minute + " _ " + day);
 		if (day >= 4) {
-            DialogueSystem.Instance().endGame.LoseGame(outOfTimeReason);
+			DialogueSystem.Instance().endGame.LoseGame(outOfTimeReason);
 		}
 
 		if (Input.GetKeyDown (KeyCode.Alpha3)) {
-			journal_Manager.CreateAutoJournalEntry ("I eat cake", CharacterID.RED);
+			journal_Manager.CreateAutoJournalEntry ("I eat cake", CharacterID.BROWN);
 		}
 	}
 
@@ -101,13 +99,18 @@ public class Time_Manager : MonoBehaviour {
 			if (timer >= timeCrunch) {
 				timer = 0;
 				minute += (timeSpeed * Time.deltaTime);
+				minuteCounter += (timeSpeed * Time.deltaTime);
 			}
 			if (minute >= 60) {
 				minute = 0;
 				hour++;
 			}
+			if (minuteCounter >= 1100) {
+				minuteCounter = 0;
+			}
 			if (hour >= 24) {
 				hour = 0;
+				ResetBins ();
 				day++;
 			}
 		}
@@ -181,9 +184,9 @@ public class Time_Manager : MonoBehaviour {
 		if (Input.GetKeyDown(KeyCode.P)) {
 			pauseEffectTimer = 0;
 			hourHand_red.SetActive (false);
-			minuteHand_red.SetActive (false);
+			//minuteHand_red.SetActive (false);
 			hourHand_black.SetActive (true);
-			minuteHand_black.SetActive (true);
+			//minuteHand_black.SetActive (true);
 			Debug.Log ("trying to resume");
 			currentTimeState = pastTimeState;
 			UpdateTime (true, currentTimeSpeed);
@@ -214,8 +217,8 @@ public class Time_Manager : MonoBehaviour {
 	}
 
 	void UpdateClock(){
-		hourHand.transform.localRotation = Quaternion.Euler(0f, 0f, (-hour * hrDegree) + 90f);
-		minuteHand.transform.localRotation = Quaternion.Euler(0f, 0f, (-minute * minDegree) + 90f);
+		hourHand.transform.localRotation = Quaternion.Euler(0f, 0f, (-minuteCounter *hrDegree) + timerOffset);
+		//minuteHand.transform.localRotation = Quaternion.Euler(0f, 0f, (-minute * minDegree) + 90f);
 	}
 
 	void SkipRestPeriod(){
@@ -232,9 +235,9 @@ public class Time_Manager : MonoBehaviour {
 	public void LeavePauseState(){
 		pauseEffectTimer = 0;
 		hourHand_red.SetActive (false);
-		minuteHand_red.SetActive (false);
+		//minuteHand_red.SetActive (false);
 		hourHand_black.SetActive (true);
-		minuteHand_black.SetActive (true);
+		//minuteHand_black.SetActive (true);
 		Debug.Log ("resuming");
 		currentTimeState = pastTimeState;
 		UpdateTime (true, currentTimeSpeed);
@@ -288,16 +291,23 @@ public class Time_Manager : MonoBehaviour {
 
 	void SwitchToRed(){
 		hourHand_red.SetActive (true);
-		minuteHand_red.SetActive (true);
+		//minuteHand_red.SetActive (true);
 		hourHand_black.SetActive (false);
-		minuteHand_black.SetActive (false);
+		//minuteHand_black.SetActive (false);
 	}
 
 	void SwitchToBlack(){
 		hourHand_red.SetActive (false);
-		minuteHand_red.SetActive (false);
+		//minuteHand_red.SetActive (false);
 		hourHand_black.SetActive (true);
-		minuteHand_black.SetActive (true);
+		//minuteHand_black.SetActive (true);
+	}
+
+	void ResetBins(){
+		GameObject[] bins = GameObject.FindGameObjectsWithTag ("Bin");
+		foreach (GameObject bin in bins) {
+			bin.GetComponent<Bin> ().AssignRandomAmount ();
+		}
 	}
 
 	public void FreezeNPCs()

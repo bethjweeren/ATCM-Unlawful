@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
 	};
 
 	public float speed = 1;
-    public float sprintValue = 1;
+	public float sprintValue = 1;
 	public Journal_Manager journal_manager;
 	public ItemsManager itemsManager;
 	public GameObject itemCanvas;
@@ -32,12 +32,12 @@ public class PlayerController : MonoBehaviour
 	public State currentState;
 
 	public Button jounalButton;
-    public float interactRange = 1;
-    public LayerMask interactLayer;
-    public Transform interactRayOrigin;
+	public float interactRange = 1;
+	public LayerMask interactLayer;
+	public Transform interactRayOrigin;
 	public Time_Manager time_manager;
 
-    public static float playerY;
+	public static float playerY;
 
 	private Rigidbody2D playerRB;
 	private Collider2D playerCollider;
@@ -46,15 +46,15 @@ public class PlayerController : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
-        DialogueSystem.Instance().player = this;
-        journalCanvas.SetActive (false);
+		DialogueSystem.Instance().player = this;
+		journalCanvas.SetActive (false);
 		itemCanvas.SetActive (false);
 		journal_manager = journalCanvas.GetComponent<Journal_Manager> ();
 		jounalButton.onClick.AddListener (ToggleJournal);
 		currentState = State.MAIN;
 		playerRB = GetComponent<Rigidbody2D>();
 		animator = GetComponent<Animator>();
-        playerCollider = GetComponent<Collider2D>();
+    playerCollider = GetComponent<Collider2D>();
 		animator.SetBool("Walking", false); //Stop animating sprite
 		playerRB.velocity = new Vector2(0, 0); //Don't move
 		screenMenuStarting.SetActive(true); //Starting menu gets in the way, keep disabled in scene and this will enable it
@@ -72,81 +72,85 @@ public class PlayerController : MonoBehaviour
 
 		playerY = transform.position.y + playerCollider.offset.y;
 
-        switch (currentState)
+		switch (currentState)
 		{
-			case State.MAIN:
-                //TO-DO Use Axis instead of GetKey
-                //TO-DO Only change animator and velocity when keys pressed or released, not held down
+		case State.MAIN:
+			//TO-DO Use Axis instead of GetKey
+			//TO-DO Only change animator and velocity when keys pressed or released, not held down
 
-                //If ANY key was just pressed, change animation and velocity
-                //So it doesn't change every frame
-                if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) || ((Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) && !(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))))
-                {
-                    animator.SetInteger("Direction", 0); //Animate north sprite
-                    animator.SetBool("Walking", true);
-                    playerRB.velocity = new Vector2(0, 1) * speed * sprintValue; //Move north
-                }
-                else if ((Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) || ((Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) && !(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))))
-                {
-                    animator.SetInteger("Direction", 1); //Animate east sprite
-                    animator.SetBool("Walking", true);
-                    playerRB.velocity = new Vector2(1, 0) * speed * sprintValue; //Move east
-                }
-                else if ((Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) || ((Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) && !(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))))
-                {
-                    animator.SetInteger("Direction", 2); //Animate south sprite
-                    animator.SetBool("Walking", true);
-                    playerRB.velocity = new Vector2(0, -1) * speed * sprintValue; //Move south
-                }
-                else if ((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) || ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) && !(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))))
-                {
-                    animator.SetInteger("Direction", 3); //Animate west sprite
-                    animator.SetBool("Walking", true);
-                    playerRB.velocity = new Vector2(-1, 0) * speed * sprintValue; //Move west
-                }
-                else
-                {
-                    if (Input.GetKeyDown(KeyCode.M))
-                    {
+			//If ANY key was just pressed, change animation and velocity
+			//So it doesn't change every frame
+			if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) || ((Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) && !(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))))
+			{
+				animator.SetInteger("Direction", 0); //Animate north sprite
+				animator.SetBool("Walking", true);
+				playerRB.velocity = new Vector2(0, 1) * speed * sprintValue; //Move north
+			}
+			else if ((Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) || ((Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) && !(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))))
+			{
+				animator.SetInteger("Direction", 1); //Animate east sprite
+				animator.SetBool("Walking", true);
+				playerRB.velocity = new Vector2(1, 0) * speed * sprintValue; //Move east
+			}
+			else if ((Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) || ((Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) && !(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))))
+			{
+				animator.SetInteger("Direction", 2); //Animate south sprite
+				animator.SetBool("Walking", true);
+				playerRB.velocity = new Vector2(0, -1) * speed * sprintValue; //Move south
+			}
+			else if ((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) || ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) && !(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))))
+			{
+				animator.SetInteger("Direction", 3); //Animate west sprite
+				animator.SetBool("Walking", true);
+				playerRB.velocity = new Vector2(-1, 0) * speed * sprintValue; //Move west
+			}
+			else
+			{
+				if (Input.GetKeyDown(KeyCode.M))
+				{
 					if (time_manager.currentTimeState != Time_Manager.State.Rest) {
 						time_manager.ForcePausedState ();
 					}
-                        currentState = State.JOURNAL;
-                        StopMoving();
-                        print("Looking at map. Press M or ESC or Space to close."); //Replace with map code
-                        journalCanvas.SetActive(true);
-                        journal_manager.BringUpMap();
-					}
-                    else if (Input.GetKeyDown(KeyCode.J))
-                    {
+					currentState = State.JOURNAL;
+					StopMoving();
+					print("Looking at map. Press M or ESC or Space to close."); //Replace with map code
+					journalCanvas.SetActive(true);
+					journal_manager.BringUpMap();
+					FreezeNPCs();
+				}
+				else if (Input.GetKeyDown(KeyCode.J))
+				{
 					if (time_manager.currentTimeState != Time_Manager.State.Rest) {
 						time_manager.ForcePausedState ();
 					}
-                        currentState = State.JOURNAL;
-                        StopMoving();
-                        print("Looking at journal. Press J or ESC to close."); //Replace with journal code
-                        journalCanvas.SetActive(true);
+					currentState = State.JOURNAL;
+					StopMoving();
+					print("Looking at journal. Press J or ESC to close."); //Replace with journal code
+					journalCanvas.SetActive(true);
+					FreezeNPCs();
+				}
+
+				else if (Input.GetKeyDown(KeyCode.I))
+				{
+					currentState = State.INVENTORY;
+					StopMoving();
+					itemCanvas.SetActive (true);
+					print("Looking through inventory. Press I or ESC to close."); //Replace with inventory code
+					FreezeNPCs();
+				}
+				else if (Input.GetKeyDown(KeyCode.Escape))
+				{
+					if (time_manager.currentTimeState != Time_Manager.State.Rest)
+					{
+						time_manager.ForcePausedState ();
 					}
-                    
-                    else if (Input.GetKeyDown(KeyCode.I))
-                    {
-                        currentState = State.INVENTORY;
-                        StopMoving();
-						itemCanvas.SetActive (true);
-                        print("Looking through inventory. Press I or ESC to close."); //Replace with inventory code
-					}
-                    else if (Input.GetKeyDown(KeyCode.Escape))
-                    {
-						if (time_manager.currentTimeState != Time_Manager.State.Rest)
-						{
-							time_manager.ForcePausedState ();
-						}
-                        currentState = State.MENU;
-                        StopMoving();
-						screenMenu.SetActive(true);
-					}
-                }
-				/*
+					currentState = State.MENU;
+					StopMoving();
+					screenMenu.SetActive(true);
+					FreezeNPCs();
+				}
+			}
+			/*
                 if (Input.GetKeyDown(KeyCode.LeftShift))
                 {
                     sprintValue = 2;
@@ -156,107 +160,113 @@ public class PlayerController : MonoBehaviour
                     sprintValue = 1;
                 }
 				*/
-                if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Space))
-                {
-                    int facing = animator.GetInteger("Direction");
-                    Vector2 facingVector;
-                    switch (facing)
-                    {
-                        case 0:
-                            facingVector = Vector2.up;
-                            break;
-                        case 1:
-                            facingVector = Vector2.right;
-                            break;
-                        case 2:
-                            facingVector = Vector2.down;
-                            break;
-                        case 3:
-                            facingVector = Vector2.left;
-                            break;
-                        default:
-                            Debug.Log("Invalid facing dirction recieved from animator component");
-                            facingVector = Vector2.zero;
-                            break;
-                    }
-                    Debug.DrawLine(interactRayOrigin.position, (Vector2)interactRayOrigin.position + interactRange * facingVector);
-                    RaycastHit2D foundObject = Physics2D.Raycast(interactRayOrigin.position, facingVector, interactRange, interactLayer);
-                    if (foundObject)
-                    {
-                        currentState = State.INTERACTING;
-                        StopMoving();
-                        foundObject.collider.GetComponent<IInteractable>().Interact();
-                    }
-                    else
-                    {
-                        GameObject[] interacts = GameObject.FindGameObjectsWithTag("Interactable");
-                        GameObject nearest = null;
-                        float distance = Mathf.Infinity;
-                        foreach (GameObject g in interacts)
-                        {
-                            if(Vector2.Distance(transform.position, g.transform.position) < distance)
-                            {
-                                nearest = g;
-                                distance = Vector2.Distance(transform.position, g.transform.position);
-                            }
-                        }
-                        if (nearest != null && distance < interactRange * 0.75f) //If the player misses the raycast but there is an interactable object nearby
-                        {
-                            if(Mathf.Abs(transform.position.y - nearest.transform.position.y) > Mathf.Abs(transform.position.x - nearest.transform.position.x))
-                            {
-                                if(transform.position.y > nearest.transform.position.y)
-                                {
-                                    animator.SetInteger("Direction", 2); //Face south
-                                }
-                                else
-                                {
-                                    animator.SetInteger("Direction", 0); //Face north
-                                }
-                            }
-                            else
-                            {
-                                if (transform.position.x > nearest.transform.position.x)
-                                {
-                                    animator.SetInteger("Direction", 3); //Face west
-                                }
-                                else
-                                {
-                                    animator.SetInteger("Direction", 1); //Face east
-                                }
-                            }
-                            currentState = State.INTERACTING;
-                            StopMoving();
-                            nearest.GetComponent<IInteractable>().Interact();
-						}
-                    }
-                }
-                else if (!AnyMovementKey())
+			if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Space))
+			{
+				int facing = animator.GetInteger("Direction");
+				Vector2 facingVector;
+				switch (facing)
 				{
-                    StopMoving();
-                }
-				break;
+				case 0:
+					facingVector = Vector2.up;
+					break;
+				case 1:
+					facingVector = Vector2.right;
+					break;
+				case 2:
+					facingVector = Vector2.down;
+					break;
+				case 3:
+					facingVector = Vector2.left;
+					break;
+				default:
+					Debug.Log("Invalid facing dirction recieved from animator component");
+					facingVector = Vector2.zero;
+					break;
+				}
+				Debug.DrawLine(interactRayOrigin.position, (Vector2)interactRayOrigin.position + interactRange * facingVector);
+				RaycastHit2D foundObject = Physics2D.Raycast(interactRayOrigin.position, facingVector, interactRange, interactLayer);
+				if (foundObject)
+				{
+					if (time_manager.currentTimeState != Time_Manager.State.Rest) {
+						time_manager.ForcePausedState ();
+					}
+					currentState = State.INTERACTING;
+					StopMoving();
+					foundObject.collider.GetComponent<IInteractable>().Interact();
+				}
+				else
+				{
+					GameObject[] interacts = GameObject.FindGameObjectsWithTag("Interactable");
+					GameObject nearest = null;
+					float distance = Mathf.Infinity;
+					foreach (GameObject g in interacts)
+					{
+						if(Vector2.Distance(transform.position, g.transform.position) < distance)
+						{
+							nearest = g;
+							distance = Vector2.Distance(transform.position, g.transform.position);
+						}
+					}
+					if (nearest != null && distance < interactRange * 0.75f) //If the player misses the raycast but there is an interactable object nearby
+					{
+						if(Mathf.Abs(transform.position.y - nearest.transform.position.y) > Mathf.Abs(transform.position.x - nearest.transform.position.x))
+						{
+							if(transform.position.y > nearest.transform.position.y)
+							{
+								animator.SetInteger("Direction", 2); //Face south
+							}
+							else
+							{
+								animator.SetInteger("Direction", 0); //Face north
+							}
+						}
+						else
+						{
+							if (transform.position.x > nearest.transform.position.x)
+							{
+								animator.SetInteger("Direction", 3); //Face west
+							}
+							else
+							{
+								animator.SetInteger("Direction", 1); //Face east
+							}
+						}
+						currentState = State.INTERACTING;
+						StopMoving();
+						nearest.GetComponent<IInteractable>().Interact();
+						FreezeNPCs();
+					}
+				}
+			}
+			else if (!AnyMovementKey())
+			{
+				StopMoving();
+			}
+			break;
 
 		case State.JOURNAL:
-				if (Input.GetKeyDown(KeyCode.J) || Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.M) || Input.GetKeyDown(KeyCode.Space)) //Pressing "J" to close the journal might not work if typing
+			if (Input.GetKeyDown(KeyCode.J) || Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.M) || Input.GetKeyDown(KeyCode.Space)) //Pressing "J" to close the journal might not work if typing
+			{
+				if (time_manager.currentTimeState != Time_Manager.State.Rest)
 				{
-					if (time_manager.currentTimeState != Time_Manager.State.Rest)
-					{
-						time_manager.LeavePauseState ();
-					}
-					currentState = State.MAIN;
-					journalCanvas.SetActive(false);
+					time_manager.LeavePauseState ();
 				}
-				break;
+				currentState = State.MAIN;
+				journalCanvas.SetActive(false);
+				UnfreezeNPCs();
+			}
+			break;
 
-			case State.INVENTORY:
-				if (Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.Escape))
-				{
-					itemCanvas.SetActive (false);
-					currentState = State.MAIN;
-				}
-				break;
+		case State.INVENTORY:
+			if (Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.Escape))
+			{
+				itemCanvas.SetActive (false);
+				currentState = State.MAIN;
+				UnfreezeNPCs();
+			}
+			break;
 
-			case State.INTERACTING:
+		case State.INTERACTING:
 			/*
 				if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Escape))
 				{
@@ -264,52 +274,56 @@ public class PlayerController : MonoBehaviour
 					print("Ended interaction."); //Replace with interaction/NPC discussion code
 				}
 				*/
-				break;
+			break;
 
 		case State.MENU:
 			if (time_manager.currentTimeState != Time_Manager.State.Rest) {
 				time_manager.ForcePausedState ();
 			}
-				if (Input.GetKeyDown(KeyCode.Escape))
-				{
+			if (Input.GetKeyDown(KeyCode.Escape))
+			{
 				if (time_manager.currentTimeState != Time_Manager.State.Rest) {
 					time_manager.LeavePauseState ();
 				}
-					screenMenu.SetActive(false);
-					screenControls.SetActive(false);
-					screenCredits.SetActive(false);
-					currentState = State.MAIN;
-				}
-				break;
+				screenMenu.SetActive(false);
+				screenControls.SetActive(false);
+				screenCredits.SetActive(false);
+				currentState = State.MAIN;
+			}
+			break;
 
-			case State.PAUSED:
+		case State.PAUSED:
 			break;
 		}
 	}
 
-    public void StopMoving()
-    {
-        animator.SetBool("Walking", false); //Stop animating sprite
-        playerRB.velocity = new Vector2(0, 0); //Don't move
-    }
+	public void StopMoving()
+	{
+		animator.SetBool("Walking", false); //Stop animating sprite
+		playerRB.velocity = new Vector2(0, 0); //Don't move
+	}
 
-    bool AnyMovementKeyDown()
-    {
-        return (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.RightArrow));
-    }
+	bool AnyMovementKeyDown()
+	{
+		return (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.RightArrow));
+	}
 
-    bool AnyMovementKey()
-    {
-        return (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.RightArrow));
-    }
+	bool AnyMovementKey()
+	{
+		return (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.RightArrow));
+	}
 
-    public void EndInteraction()
-    {
-        if (currentState == State.INTERACTING)
-        {
-            currentState = State.MAIN;
+	public void EndInteraction()
+	{
+		if (currentState == State.INTERACTING)
+		{
+			if (time_manager.currentTimeState != Time_Manager.State.Rest) {
+				time_manager.LeavePauseState ();
+			}
+			currentState = State.MAIN;
+			UnfreezeNPCs();
 		}
-    }
+	}
 
 	//Similar to EndInteraction, but need this for the Menu, specifically ButtonPlay.cs
 	public void SwitchToMainState()
@@ -322,7 +336,7 @@ public class PlayerController : MonoBehaviour
 		speed = newSpeed;
 	}
 
-    void ToggleJournal()
+	void ToggleJournal()
 	{
 		if (currentState == State.MAIN) {
 			if (time_manager.currentTimeState != Time_Manager.State.Rest) {
@@ -353,5 +367,39 @@ public class PlayerController : MonoBehaviour
 	public void SayHello(){
 		Debug.Log ("hello");
 		currentState = State.MAIN;
+	}
+
+	//I have the player change the NPCs' state as needed because it's WAY fewer checks
+	//than having every NPC check the player's state every update.
+	public void FreezeNPCs()
+	{
+
+		//foreach (NPC npcController in npcs)
+		//{
+		//	npcController.StopMoving();
+		//}
+
+	}
+
+	//I have the player change the NPCs' state as needed because it's WAY fewer checks
+	//than having every NPC check the player's state every update.
+	public void UnfreezeNPCs()
+	{
+
+		//foreach (NPC npcController in npcs)
+		//{
+		//	npcController.StartMoving();
+		//}
+
+	}
+
+	void OnEnable()
+	{
+		//UnfreezeNPCs();
+	}
+
+	void OnDisable()
+	{
+		//FreezeNPCs();
 	}
 }
