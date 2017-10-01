@@ -125,7 +125,7 @@ public class DialogueSystem
                 }
                 else
                 {
-                    dialogueBox.DisplayLine(nonPlayerID, "This hasn't been implemented yet.", false);
+                    Provider.GetInstance().clueSelector.Open();
                 }
                 break;
             case Choice.CANCEL:
@@ -140,6 +140,11 @@ public class DialogueSystem
                 }
                 break;
         }
+    }
+
+    public void ProcessClue(string clueID)
+    {
+
     }
 
     public void NextLine()

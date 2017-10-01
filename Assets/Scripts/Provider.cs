@@ -7,6 +7,8 @@ public class Provider : MonoBehaviour {
     public PlayerController player;
     public DialogueBox dialogueBox;
     public GameOver gameOver;
+    public Journal_Manager journal;
+    public Clue_Manager clueSelector;
 
     // Use this for initialization
     void Start () {
