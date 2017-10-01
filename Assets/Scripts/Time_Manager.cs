@@ -28,6 +28,9 @@ public class Time_Manager : MonoBehaviour {
 	public string outOfTimeReason;
 	public Journal_Manager journal_Manager;
 	//private WaitForSeconds pauseEffectDuration = new WaitForSeconds(.5f);
+	//private NPC[] npcs; //To freeze/unfreeze NPCs (so they don't have to check on every update)
+	private GameObject[] npcs; //To freeze/unfreeze NPCs (so they don't have to check on every update)
+	bool alreadyFrozeNPCs = false;
 
 	void Start()
 	{
@@ -195,6 +198,8 @@ public class Time_Manager : MonoBehaviour {
 			pastTimeState = currentTimeState;
 			currentTimeState = State.Paused;
 		}
+		if (!alreadyFrozeNPCs) //It was calling it hundred of times...
+			FreezeNPCs();
 	}
 
 	void NormalCode(){
@@ -236,6 +241,7 @@ public class Time_Manager : MonoBehaviour {
 		Debug.Log ("resuming");
 		currentTimeState = pastTimeState;
 		UpdateTime (true, currentTimeSpeed);
+		UnfreezeNPCs();
 	}
 
 	public void MakeMorning(){
@@ -279,6 +285,8 @@ public class Time_Manager : MonoBehaviour {
 	{
 		//pastTimeState = currentTimeState;
 		currentTimeState = State.Paused;
+		if (alreadyFrozeNPCs == false)
+			FreezeNPCs();
 	}
 
 	void SwitchToRed(){
@@ -301,4 +309,31 @@ public class Time_Manager : MonoBehaviour {
 			bin.GetComponent<Bin> ().AssignRandomAmount ();
 		}
 	}
+
+	public void FreezeNPCs()
+	{
+		alreadyFrozeNPCs = true;
+		foreach (GameObject npc in GameObject.FindGameObjectsWithTag("NPC"))
+		{
+			print(npc.GetComponent<NPC>().name + " freeze");
+			npc.GetComponent<NPC>().StopMoving();
+		}
+	}
+
+	public void UnfreezeNPCs()
+	{
+		foreach (GameObject npc in GameObject.FindGameObjectsWithTag("NPC"))
+		{
+			print(npc.GetComponent<NPC>().name + " unfreeze");
+			npc.GetComponent<NPC>().StartMoving();
+		}
+		alreadyFrozeNPCs = false;
+	}
+
+	/*
+	void OnEnable()
+	{
+		UnfreezeNPCs();
+	}
+	*/
 }

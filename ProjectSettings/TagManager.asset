@@ -10,6 +10,7 @@ TagManager:
   - MarkerBlock
   - item
   - Interactable
+  - NPC
   - Bin
   layers:
   - Default

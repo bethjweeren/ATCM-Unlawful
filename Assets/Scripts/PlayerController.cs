@@ -42,7 +42,6 @@ public class PlayerController : MonoBehaviour
 	private Rigidbody2D playerRB;
 	private Collider2D playerCollider;
 	private Animator animator;
-	private NPC[] npcs; //The player freezes/unfreezes NPCs, not the other way around
 
 	// Use this for initialization
 	void Start()
@@ -53,17 +52,13 @@ public class PlayerController : MonoBehaviour
 		journal_manager = journalCanvas.GetComponent<Journal_Manager> ();
 		jounalButton.onClick.AddListener (ToggleJournal);
 		currentState = State.MAIN;
-		playerRB = this.GetComponent<Rigidbody2D>();
-		animator = this.GetComponent<Animator>();
-		playerCollider = this.GetComponent<Collider2D>();
+		playerRB = GetComponent<Rigidbody2D>();
+		animator = GetComponent<Animator>();
+    playerCollider = GetComponent<Collider2D>();
 		animator.SetBool("Walking", false); //Stop animating sprite
 		playerRB.velocity = new Vector2(0, 0); //Don't move
 		screenMenuStarting.SetActive(true); //Starting menu gets in the way, keep disabled in scene and this will enable it
 		enableOnStart.SetActive(true); //Enable all the intrusive UI things on start, because they get in the way in the scene
-		npcs = GameObject.FindObjectsOfType<NPC>();
-		foreach (NPC npcController in npcs)
-			print(npcController);
-		FreezeNPCs();
 	}
 
 	// Update is called every fixed framerate frame
@@ -334,7 +329,6 @@ public class PlayerController : MonoBehaviour
 	public void SwitchToMainState()
 	{
 		currentState = State.MAIN;
-		UnfreezeNPCs();
 	}
 
 	public void SetSpeed(float newSpeed)
@@ -380,10 +374,10 @@ public class PlayerController : MonoBehaviour
 	public void FreezeNPCs()
 	{
 
-		foreach (NPC npcController in npcs)
-		{
-			npcController.StopMoving();
-		}
+		//foreach (NPC npcController in npcs)
+		//{
+		//	npcController.StopMoving();
+		//}
 
 	}
 
@@ -392,20 +386,20 @@ public class PlayerController : MonoBehaviour
 	public void UnfreezeNPCs()
 	{
 
-		foreach (NPC npcController in npcs)
-		{
-			npcController.StartMoving();
-		}
+		//foreach (NPC npcController in npcs)
+		//{
+		//	npcController.StartMoving();
+		//}
 
 	}
 
 	void OnEnable()
 	{
-		UnfreezeNPCs();
+		//UnfreezeNPCs();
 	}
 
 	void OnDisable()
 	{
-		FreezeNPCs();
+		//FreezeNPCs();
 	}
 }

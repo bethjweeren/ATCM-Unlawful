@@ -20,17 +20,19 @@ AnimationClip:
   - curve:
     - time: 0
       value: {fileID: 21300000, guid: e0c7d000d47b5794d9c45908a1fb5229, type: 3}
-    - time: 0.083333336
+    - time: 0.125
       value: {fileID: 21300000, guid: 70853b566b283e94c8f6148aeddc6bb9, type: 3}
-    - time: 0.16666667
-      value: {fileID: 21300000, guid: f493e7d9eaca9794b9f451637349b915, type: 3}
     - time: 0.25
+      value: {fileID: 21300000, guid: f493e7d9eaca9794b9f451637349b915, type: 3}
+    - time: 0.375
+      value: {fileID: 21300000, guid: 70853b566b283e94c8f6148aeddc6bb9, type: 3}
+    - time: 0.46875
       value: {fileID: 21300000, guid: 70853b566b283e94c8f6148aeddc6bb9, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
-  m_SampleRate: 12
+  m_SampleRate: 32
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -49,12 +51,13 @@ AnimationClip:
     - {fileID: 21300000, guid: 70853b566b283e94c8f6148aeddc6bb9, type: 3}
     - {fileID: 21300000, guid: f493e7d9eaca9794b9f451637349b915, type: 3}
     - {fileID: 21300000, guid: 70853b566b283e94c8f6148aeddc6bb9, type: 3}
+    - {fileID: 21300000, guid: 70853b566b283e94c8f6148aeddc6bb9, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.33333334
+    m_StopTime: 0.5
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -74,4 +77,20 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_GenerateMotionCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0.09375
+    functionName: ToggleRandom
+    data: 
+    objectReferenceParameter: {fileID: 11500000, guid: c84e9d6ef9673e241a13285d242ba274,
+      type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.34375
+    functionName: ToggleRandom
+    data: 
+    objectReferenceParameter: {fileID: 11500000, guid: c84e9d6ef9673e241a13285d242ba274,
+      type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
