@@ -42,7 +42,6 @@ public class PlayerController : MonoBehaviour
 	private Rigidbody2D playerRB;
 	private Collider2D playerCollider;
 	private Animator animator;
-	private NPC[] npcs; //The player freezes/unfreezes NPCs, not the other way around
 
 	// Use this for initialization
 	void Start()
@@ -53,17 +52,13 @@ public class PlayerController : MonoBehaviour
 		journal_manager = journalCanvas.GetComponent<Journal_Manager> ();
 		jounalButton.onClick.AddListener (ToggleJournal);
 		currentState = State.MAIN;
-		playerRB = this.GetComponent<Rigidbody2D>();
-		animator = this.GetComponent<Animator>();
-        playerCollider = this.GetComponent<Collider2D>();
+		playerRB = GetComponent<Rigidbody2D>();
+		animator = GetComponent<Animator>();
+        playerCollider = GetComponent<Collider2D>();
 		animator.SetBool("Walking", false); //Stop animating sprite
 		playerRB.velocity = new Vector2(0, 0); //Don't move
 		screenMenuStarting.SetActive(true); //Starting menu gets in the way, keep disabled in scene and this will enable it
 		enableOnStart.SetActive(true); //Enable all the intrusive UI things on start, because they get in the way in the scene
-		npcs = GameObject.FindObjectsOfType<NPC>();
-		foreach (NPC npcController in npcs)
-			print(npcController);
-		FreezeNPCs();
 	}
 
 	// Update is called every fixed framerate frame
@@ -121,7 +116,6 @@ public class PlayerController : MonoBehaviour
                         print("Looking at map. Press M or ESC or Space to close."); //Replace with map code
                         journalCanvas.SetActive(true);
                         journal_manager.BringUpMap();
-						FreezeNPCs();
 					}
                     else if (Input.GetKeyDown(KeyCode.J))
                     {
@@ -132,7 +126,6 @@ public class PlayerController : MonoBehaviour
                         StopMoving();
                         print("Looking at journal. Press J or ESC to close."); //Replace with journal code
                         journalCanvas.SetActive(true);
-						FreezeNPCs();
 					}
                     
                     else if (Input.GetKeyDown(KeyCode.I))
@@ -141,7 +134,6 @@ public class PlayerController : MonoBehaviour
                         StopMoving();
 						itemCanvas.SetActive (true);
                         print("Looking through inventory. Press I or ESC to close."); //Replace with inventory code
-						FreezeNPCs();
 					}
                     else if (Input.GetKeyDown(KeyCode.Escape))
                     {
@@ -152,7 +144,6 @@ public class PlayerController : MonoBehaviour
                         currentState = State.MENU;
                         StopMoving();
 						screenMenu.SetActive(true);
-						FreezeNPCs();
 					}
                 }
 				/*
@@ -236,7 +227,6 @@ public class PlayerController : MonoBehaviour
                             currentState = State.INTERACTING;
                             StopMoving();
                             nearest.GetComponent<IInteractable>().Interact();
-							FreezeNPCs();
 						}
                     }
                 }
@@ -255,7 +245,6 @@ public class PlayerController : MonoBehaviour
 					}
 					currentState = State.MAIN;
 					journalCanvas.SetActive(false);
-					UnfreezeNPCs();
 				}
 				break;
 
@@ -264,7 +253,6 @@ public class PlayerController : MonoBehaviour
 				{
 					itemCanvas.SetActive (false);
 					currentState = State.MAIN;
-					UnfreezeNPCs();
 				}
 				break;
 
@@ -320,7 +308,6 @@ public class PlayerController : MonoBehaviour
         if (currentState == State.INTERACTING)
         {
             currentState = State.MAIN;
-			UnfreezeNPCs();
 		}
     }
 
@@ -328,7 +315,6 @@ public class PlayerController : MonoBehaviour
 	public void SwitchToMainState()
 	{
 		currentState = State.MAIN;
-		UnfreezeNPCs();
 	}
 
 	public void SetSpeed(float newSpeed)
@@ -367,39 +353,5 @@ public class PlayerController : MonoBehaviour
 	public void SayHello(){
 		Debug.Log ("hello");
 		currentState = State.MAIN;
-	}
-
-	//I have the player change the NPCs' state as needed because it's WAY fewer checks
-	//than having every NPC check the player's state every update.
-	public void FreezeNPCs()
-	{
-		/*
-		foreach (NPC npcController in npcs)
-		{
-			npcController.StopMoving();
-		}
-		*/
-	}
-
-	//I have the player change the NPCs' state as needed because it's WAY fewer checks
-	//than having every NPC check the player's state every update.
-	public void UnfreezeNPCs()
-	{
-		/*
-		foreach (NPC npcController in npcs)
-		{
-			npcController.StartMoving();
-		}
-		*/
-	}
-
-	void OnEnable()
-	{
-		UnfreezeNPCs();
-	}
-
-	void OnDisable()
-	{
-		FreezeNPCs();
 	}
 }
