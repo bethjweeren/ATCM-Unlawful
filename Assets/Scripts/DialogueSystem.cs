@@ -93,7 +93,7 @@ public class DialogueSystem
                 }
                 else
                 {
-                    quoteQueue.Add(new DialogueLine(currentNPC.GetHint(), nonPlayerID));
+                    quoteQueue.Add(new DialogueLine(currentNPC.GetFirstHint(), nonPlayerID));
                     NextLine();
                 }
                 break;
@@ -144,7 +144,9 @@ public class DialogueSystem
 
     public void ProcessClue(string clueID)
     {
-
+        Debug.Log("Processing");
+        quoteQueue.Add(new DialogueLine(currentNPC.CheckClue(clueID), nonPlayerID));
+        NextLine();
     }
 
     public void NextLine()
@@ -215,7 +217,16 @@ public class DialogueSystem
             gameOver.LoseGame("The killer was <color=#193BFF>Bleu</color>");
         }
     }
+
+    public void CreateJournalEntry(string summary, CharacterID page, string clueID)
+    {
+        Provider provider = Provider.GetInstance();
+        provider.journal.CreateAutoJournalEntry(Quotes.FormatColors(summary), page);
+        provider.clueSelector.CreateAutoJournalEntry(Quotes.FormatColors(summary), page, clueID);
+    }
 }
+
+
 
 struct DialogueLine
 {

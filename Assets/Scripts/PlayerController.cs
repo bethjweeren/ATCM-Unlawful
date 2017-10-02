@@ -64,7 +64,9 @@ public class PlayerController : MonoBehaviour
 		foreach (NPC npcController in npcs)
 			print(npcController);
 		FreezeNPCs();
-	}
+
+        DialogueSystem.Instance().CreateJournalEntry("[Red] wanted to talk to me", CharacterID.RED, "talkToRed");
+    }
 
 	// Update is called every fixed framerate frame
 	void Update()

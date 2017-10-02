@@ -120,6 +120,7 @@ public class Clue_Manager : MonoBehaviour {
 
     public void ChooseClue(string clueID)
     {
+        Debug.Log("choosing");
         gameObject.SetActive(false);
         DialogueSystem.Instance().ProcessClue(clueID);
     }
