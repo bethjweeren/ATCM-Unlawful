@@ -9,6 +9,7 @@ public class ButtonStart : MonoBehaviour
 	public Time_Manager time_manager;
 	private Animator playerAnimator;
 	private PlayerController playerController;
+	private GameObject[] npcs;
 
 	void Start()
 	{
@@ -19,7 +20,12 @@ public class ButtonStart : MonoBehaviour
 		playerController.enabled = false;
 		playerAnimator = player.GetComponent<Animator>();
 		playerAnimator.enabled = false;
-		time_manager.SwitchToPausedState();
+		npcs = GameObject.FindGameObjectsWithTag("NPC");
+		foreach(GameObject npc in npcs)
+		{
+			npc.GetComponent<NPC>().enabled = false;
+		}
+		time_manager.SwitchToPausedState(); //Needs to happen AFTER NPCs are enabled, because LeavePauseState calls FreezeNPCs()W;
 		time_manager.enabled = false;
 	}
 
@@ -27,7 +33,11 @@ public class ButtonStart : MonoBehaviour
 	{
 		playerController.enabled = true;
 		playerAnimator.enabled = true;
-		time_manager.LeavePauseState();
+		foreach (GameObject npc in npcs)
+		{
+			npc.GetComponent<NPC>().enabled = true; ;
+		}
+		time_manager.LeavePauseState(); //Needs to happen AFTER NPCs are enabled, because LeavePauseState calls UnfreezeNPCs();
 		time_manager.enabled = true;
 		menu.SetActive(false);
 	}
