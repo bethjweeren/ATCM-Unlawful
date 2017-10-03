@@ -8,6 +8,6 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: d6a015a0f8c0f7f459c24938788dcb99
-  - enabled: 1
-    path: Assets/Scenes/Main.unity
+  - enabled: 0
+    path: Assets/Scenes/MainSharon.unity
     guid: 0c2bbae55fa7ea245896f3dd416b731c
