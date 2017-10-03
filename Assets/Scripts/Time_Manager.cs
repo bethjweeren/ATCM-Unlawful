@@ -18,18 +18,21 @@ public class Time_Manager : MonoBehaviour {
 	public State pastTimeState;
 
 	public int hour, hourStart = 6, day, afternoonStart = 12, nightStart = 18, morningStart = 6, restStart = 0;
-	private float hrDegree = 30f, minDegree = 6f;
-	public float timer, timeCrunch, minute, currentTimeSpeed, normalTimeSpeed, fastTimeSpeed, pauseEffectTimer;
-	public GameObject hourHand, minuteHand, hourHand_red, minuteHand_red, hourHand_black, minuteHand_black;
+	public float hrDegree = 10f, timerOffset = 10f /*, minDegree = 6f*/;
+	public float timer, timeCrunch, minute, currentTimeSpeed, normalTimeSpeed, fastTimeSpeed, pauseEffectTimer, timerHand, minuteCounter;
+	public GameObject hourHand, /* minuteHand, */ hourHand_red,/* minuteHand_red, */ hourHand_black /*, minuteHand_black*/;
 	public Transform restPlace;
 	public GameObject Player, skipRest, nightShade, afternoonShade;
 	private PlayerController playerController;
 	public bool isGoing = true;
-    public string outOfTimeReason;
+	public string outOfTimeReason;
 	public Journal_Manager journal_Manager;
-    //private WaitForSeconds pauseEffectDuration = new WaitForSeconds(.5f);
+	//private WaitForSeconds pauseEffectDuration = new WaitForSeconds(.5f);
+	//private NPC[] npcs; //To freeze/unfreeze NPCs (so they don't have to check on every update)
+	private GameObject[] npcs; //To freeze/unfreeze NPCs (so they don't have to check on every update)
+	bool alreadyFrozeNPCs = false;
 
-    void Start()
+	void Start()
 	{
 		pauseEffectTimer = 0;
 		currentTimeState = State.Morning;
@@ -46,6 +49,10 @@ public class Time_Manager : MonoBehaviour {
 		nightShade.SetActive (false);
 	}
 
+	void FixedUpdate(){
+		timerHand++;
+	}
+
 	void Update()
 	{
 		TimeKeepingStates ();
@@ -56,7 +63,7 @@ public class Time_Manager : MonoBehaviour {
 		}
 
 		if (Input.GetKeyDown (KeyCode.Alpha3)) {
-			journal_Manager.CreateAutoJournalEntry ("I eat cake", CharacterID.RED);
+			journal_Manager.CreateAutoJournalEntry ("I eat cake", CharacterID.BROWN);
 		}
 	}
 
@@ -92,13 +99,18 @@ public class Time_Manager : MonoBehaviour {
 			if (timer >= timeCrunch) {
 				timer = 0;
 				minute += (timeSpeed * Time.deltaTime);
+				minuteCounter += (timeSpeed * Time.deltaTime);
 			}
 			if (minute >= 60) {
 				minute = 0;
 				hour++;
 			}
+			if (minuteCounter >= 1100) {
+				minuteCounter = 0;
+			}
 			if (hour >= 24) {
 				hour = 0;
+				ResetBins ();
 				day++;
 			}
 		}
@@ -172,9 +184,9 @@ public class Time_Manager : MonoBehaviour {
 		if (Input.GetKeyDown(KeyCode.P)) {
 			pauseEffectTimer = 0;
 			hourHand_red.SetActive (false);
-			minuteHand_red.SetActive (false);
+			//minuteHand_red.SetActive (false);
 			hourHand_black.SetActive (true);
-			minuteHand_black.SetActive (true);
+			//minuteHand_black.SetActive (true);
 			Debug.Log ("trying to resume");
 			currentTimeState = pastTimeState;
 			UpdateTime (true, currentTimeSpeed);
@@ -186,6 +198,8 @@ public class Time_Manager : MonoBehaviour {
 			pastTimeState = currentTimeState;
 			currentTimeState = State.Paused;
 		}
+		if (!alreadyFrozeNPCs) //It was calling it hundred of times...
+			FreezeNPCs();
 	}
 
 	void NormalCode(){
@@ -203,8 +217,8 @@ public class Time_Manager : MonoBehaviour {
 	}
 
 	void UpdateClock(){
-		hourHand.transform.localRotation = Quaternion.Euler(0f, 0f, (-hour * hrDegree) + 90f);
-		minuteHand.transform.localRotation = Quaternion.Euler(0f, 0f, (-minute * minDegree) + 90f);
+		hourHand.transform.localRotation = Quaternion.Euler(0f, 0f, (-minuteCounter *hrDegree) + timerOffset);
+		//minuteHand.transform.localRotation = Quaternion.Euler(0f, 0f, (-minute * minDegree) + 90f);
 	}
 
 	void SkipRestPeriod(){
@@ -221,12 +235,13 @@ public class Time_Manager : MonoBehaviour {
 	public void LeavePauseState(){
 		pauseEffectTimer = 0;
 		hourHand_red.SetActive (false);
-		minuteHand_red.SetActive (false);
+		//minuteHand_red.SetActive (false);
 		hourHand_black.SetActive (true);
-		minuteHand_black.SetActive (true);
+		//minuteHand_black.SetActive (true);
 		Debug.Log ("resuming");
 		currentTimeState = pastTimeState;
 		UpdateTime (true, currentTimeSpeed);
+		UnfreezeNPCs();
 	}
 
 	public void MakeMorning(){
@@ -270,19 +285,55 @@ public class Time_Manager : MonoBehaviour {
 	{
 		//pastTimeState = currentTimeState;
 		currentTimeState = State.Paused;
+		if (alreadyFrozeNPCs == false)
+			FreezeNPCs();
 	}
 
 	void SwitchToRed(){
 		hourHand_red.SetActive (true);
-		minuteHand_red.SetActive (true);
+		//minuteHand_red.SetActive (true);
 		hourHand_black.SetActive (false);
-		minuteHand_black.SetActive (false);
+		//minuteHand_black.SetActive (false);
 	}
 
 	void SwitchToBlack(){
 		hourHand_red.SetActive (false);
-		minuteHand_red.SetActive (false);
+		//minuteHand_red.SetActive (false);
 		hourHand_black.SetActive (true);
-		minuteHand_black.SetActive (true);
+		//minuteHand_black.SetActive (true);
 	}
+
+	void ResetBins(){
+		GameObject[] bins = GameObject.FindGameObjectsWithTag ("Bin");
+		foreach (GameObject bin in bins) {
+			bin.GetComponent<Bin> ().AssignRandomAmount ();
+		}
+	}
+
+	public void FreezeNPCs()
+	{
+		alreadyFrozeNPCs = true;
+		foreach (GameObject npc in GameObject.FindGameObjectsWithTag("NPC"))
+		{
+			print(npc.GetComponent<NPC>().name + " freeze");
+			npc.GetComponent<NPC>().StopMoving();
+		}
+	}
+
+	public void UnfreezeNPCs()
+	{
+		foreach (GameObject npc in GameObject.FindGameObjectsWithTag("NPC"))
+		{
+			print(npc.GetComponent<NPC>().name + " unfreeze");
+			npc.GetComponent<NPC>().StartMoving();
+		}
+		alreadyFrozeNPCs = false;
+	}
+
+	/*
+	void OnEnable()
+	{
+		UnfreezeNPCs();
+	}
+	*/
 }

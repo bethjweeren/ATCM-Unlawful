@@ -8,9 +8,9 @@ using UnityEngine;
 public class NPC : MonoBehaviour
 {
 	public float speed = 3f;
+	//public WaypointSet[] waypointSets;
 	public GameObject[] positions;  //Positions 
 	public float waitBetween = 4;
-
 	private Rigidbody2D rb;
 	private int positionNum = 0;
 	private Vector2 aimPos;
@@ -27,22 +27,26 @@ public class NPC : MonoBehaviour
 
 	void Awake()
 	{
+		animator = GetComponent<Animator>();
+		animator.SetBool("Walking", false); //Stop animating sprite
+		rb = GetComponent<Rigidbody2D>();
 		//playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
 	}
 
 	// Use this for initialization
 	void Start()
 	{
-		animator = this.GetComponent<Animator>();
+		animator = GetComponent<Animator>();
 		animator.SetBool("Walking", false); //Stop animating sprite
+		rb = GetComponent<Rigidbody2D>();
 		foreach (GameObject obj in positions)
 		{
 			Renderer rend = obj.GetComponent<Renderer>();
 			rend.enabled = false;
 		}
-		rb = this.GetComponent<Rigidbody2D>();
 		next = positions[positionNum];
 		wait = waitBetween;
+		//StopMoving();
 	}
 
 	void FixedUpdate()
@@ -162,7 +166,7 @@ public class NPC : MonoBehaviour
 	}
 
 	//Ughhhh I don't like this, but I'm still working on actual pathfinding.
-	//So this is my  temporary solution.
+	//So this is my temporary solution.
 	//All this does is make the NPC go in a random direction for a short while
 	//when it touches something.
 	void OnCollisionEnter2D(Collision2D collision)
@@ -234,7 +238,6 @@ public class NPC : MonoBehaviour
 			wait = waitAfterCollision + UnityEngine.Random.Range(-waitAfterCollision, waitAfterCollision);
 		}
 	}
-
 	public void StopMoving()
 	{
 		rb.velocity = new Vector2(0, 0); //Stop moving
@@ -248,9 +251,11 @@ public class NPC : MonoBehaviour
 		stopped = false;
 	}
 
+	/*
 	void OnDisable()
 	{
 		//When this Object is disabled, make sure you also cancel the Invoke repeating method
 		CancelInvoke();
 	}
+	*/
 }

@@ -37,16 +37,19 @@ public class Journal_Manager : MonoBehaviour {
 	public GameObject yellowEntryPage;
 	public GameObject redEntryPage;
 	public GameObject greenEntryPage;
+	public GameObject brownEntryPage;
 	public int currentBlueNotes;
 	public int currentBlackNotes;
 	public int currentYellowNotes;
 	public int currentRedNotes;
 	public int currentGreenNotes;
+	public int currentBrownNotes;
 	public Transform blueNotes1, blueNotes2, blueNotes3, blueNotes4, blueNotes5, blueNotes6, blueNotes7, blueNotes8;
 	public Transform blackNotes1, blackNotes2, blackNotes3, blackNotes4, blackNotes5, blackNotes6, blackNotes7, blackNotes8;
 	public Transform yellowNotes1, yellowNotes2, yellowNotes3, yellowNotes4, yellowNotes5, yellowNotes6, yellowNotes7, yellowNotes8;
 	public Transform redNotes1, redNotes2, redNotes3, redNotes4, redNotes5, redNotes6, redNotes7, redNotes8;
 	public Transform greenNotes1, greenNotes2, greenNotes3, greenNotes4, greenNotes5, greenNotes6, greenNotes7, greenNotes8;
+	public Transform brownNotes1, brownNotes2, brownNotes3, brownNotes4, brownNotes5, brownNotes6, brownNotes7, brownNotes8;
 	public Transform entryLocation;
 	public List<string> journalEntry = new List<string>();
 
@@ -104,7 +107,7 @@ public class Journal_Manager : MonoBehaviour {
 			charactersTab.transform.position = tabLeft1.position;
 			mapTab.transform.position = tabRight2.position;
 			notesTab.transform.position = tabRight1.position;
-		} else if (currentPageNumber == 10) {
+		} else if (currentPageNumber >= 10 && currentPageNumber <= 12) {
 			charactersTab.transform.position = tabLeft1.position;
 			mapTab.transform.position = tabLeft2.position;
 			notesTab.transform.position = tabRight1.position;
@@ -129,7 +132,7 @@ public class Journal_Manager : MonoBehaviour {
 
 	public void BringUpNotes(){
 		PutAwayCurrentPages ();
-		currentPageNumber = 12;
+		currentPageNumber = 14;
 		ChangePage ();
 	}
 
@@ -319,6 +322,40 @@ public class Journal_Manager : MonoBehaviour {
                 }
                 currentRedNotes++;
                 break;
+			case CharacterID.BROWN:
+				characterPage = brownEntryPage;
+				switch (currentBrownNotes)
+				{
+				case 8:
+					return;
+				case 7:
+					entryLocation = brownNotes8;
+					break;
+				case 6:
+					entryLocation = brownNotes7;
+					break;
+				case 5:
+					entryLocation = brownNotes6;
+					break;
+				case 4:
+					entryLocation = brownNotes5;
+					break;
+				case 3:
+					entryLocation = brownNotes4;
+					break;
+				case 2:
+					entryLocation = brownNotes3;
+					break;
+				case 1:
+					entryLocation = brownNotes2;
+					break;
+				case 0:
+				default:
+					entryLocation = brownNotes1;
+					break;
+				}
+				currentRedNotes++;
+				break;
             case CharacterID.YELLOW:
                 characterPage = yellowEntryPage;
                 switch (currentYellowNotes)
