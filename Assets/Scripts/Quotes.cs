@@ -24,6 +24,7 @@ public class Quotes {
     public List<string> motiveBlackGuilty;
     public List<string> motiveBlueInnocent;
     public List<string> motiveBlueGuilty;
+    public List<string> genericDontKnow;
 
     public Quotes()
     {

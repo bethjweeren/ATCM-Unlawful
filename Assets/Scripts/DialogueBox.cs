@@ -25,10 +25,7 @@ public class DialogueBox : MonoBehaviour {
     bool choiceMode = false;
 
 	void Start () {
-        DialogueSystem.Instance().dialogueBox = this;
-        DialogueSystem.Instance().CloseDialogueBox();
         DialogueSystem.Instance().dialogueTextSize = GetTextSize();
-        Debug.Log("Registered dialogue box");
 	}
 	
 	void Update () {

@@ -65,9 +65,8 @@ public class Time_Manager : MonoBehaviour
 		TimeKeepingStates();
 		UpdateClock();
 		//Debug.Log (hour + " : " + minute + " _ " + day);
-		if (day >= 4)
-		{
-			DialogueSystem.Instance().endGame.LoseGame(outOfTimeReason);
+		if (day >= 4) {
+            Provider.GetInstance().gameOver.LoseGame(outOfTimeReason);
 		}
 
 		if (Input.GetKeyDown(KeyCode.Alpha3))

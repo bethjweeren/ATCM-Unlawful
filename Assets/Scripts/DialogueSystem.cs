@@ -10,9 +10,7 @@ public class DialogueSystem
     static DialogueSystem instance;
     private static Object singletonLock = new Object();
     public Characters characters;
-    public PlayerController player;
-    public DialogueBox dialogueBox;
-    public GameOver endGame;
+    DialogueBox dialogueBox;
     NPCDialogue currentNPC;
     List<DialogueLine> quoteQueue;
     Prompt dialoguePrompt;
@@ -29,6 +27,13 @@ public class DialogueSystem
 
         characters.NameDict.Add("WEAPON", CharacterID.WEAPON);
         characters.CharacterDict.Add(CharacterID.WEAPON, new Character("twine", "WEAPON", "#FFFFFF"));
+
+        while(Provider.GetInstance() == null)
+        {
+
+        }
+        dialogueBox = Provider.GetInstance().dialogueBox;
+        CloseDialogueBox();
     }
 
     public static DialogueSystem Instance()
@@ -89,7 +94,7 @@ public class DialogueSystem
                 }
                 else
                 {
-                    quoteQueue.Add(new DialogueLine(currentNPC.GetHint(), nonPlayerID));
+                    quoteQueue.Add(new DialogueLine(currentNPC.GetFirstHint(), nonPlayerID));
                     NextLine();
                 }
                 break;
@@ -121,7 +126,7 @@ public class DialogueSystem
                 }
                 else
                 {
-                    dialogueBox.DisplayLine(nonPlayerID, "This hasn't been implemented yet.", false);
+                    Provider.GetInstance().clueSelector.Open();
                 }
                 break;
             case Choice.CANCEL:
@@ -136,6 +141,12 @@ public class DialogueSystem
                 }
                 break;
         }
+    }
+
+    public void ProcessClue(string clueID)
+    {
+        quoteQueue.Add(new DialogueLine(currentNPC.CheckClue(clueID), nonPlayerID));
+        NextLine();
     }
 
     public void NextLine()
@@ -187,24 +198,35 @@ public class DialogueSystem
     public void CloseDialogueBox()
     {
         dialogueBox.transform.parent.gameObject.SetActive(false);
-        player.EndInteraction();
+        Provider.GetInstance().player.EndInteraction();
     }
 
     private void Accuse(CharacterID choice)
     {
         dialogueBox.transform.parent.gameObject.SetActive(false);
+        PlayerController player = Provider.GetInstance().player;
         player.EndInteraction();
         player.gameObject.SetActive(false);
+        GameOver gameOver = Provider.GetInstance().gameOver;
         if (choice == CharacterID.BLUE)
         {
-            endGame.WinGame("You guessed correctly");
+            gameOver.WinGame("You guessed correctly");
         }
         else
         {
-            endGame.LoseGame("The killer was <color=#193BFF>Bleu</color>");
+            gameOver.LoseGame("The killer was <color=#193BFF>Bleu</color>");
         }
     }
+
+    public void CreateJournalEntry(string summary, CharacterID page, string clueID)
+    {
+        Provider provider = Provider.GetInstance();
+        provider.journal.CreateAutoJournalEntry(Quotes.FormatColors(summary), page);
+        provider.clueSelector.CreateAutoJournalEntry(Quotes.FormatColors(summary), page, clueID);
+    }
 }
+
+
 
 struct DialogueLine
 {
