@@ -201,11 +201,20 @@ public class PlayerController : MonoBehaviour
                     else
                     {
                         GameObject[] interacts = GameObject.FindGameObjectsWithTag("Interactable");
+                        GameObject[] npcs = GameObject.FindGameObjectsWithTag("NPC");
                         GameObject nearest = null;
                         float distance = Mathf.Infinity;
                         foreach (GameObject g in interacts)
                         {
                             if(Vector2.Distance(transform.position, g.transform.position) < distance)
+                            {
+                                nearest = g;
+                                distance = Vector2.Distance(transform.position, g.transform.position);
+                            }
+                        }
+                        foreach (GameObject g in npcs)
+                        {
+                            if (Vector2.Distance(transform.position, g.transform.position) < distance)
                             {
                                 nearest = g;
                                 distance = Vector2.Distance(transform.position, g.transform.position);
