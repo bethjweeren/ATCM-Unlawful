@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Time_Manager : MonoBehaviour {
+public class Time_Manager : MonoBehaviour
+{
 
 	public enum State
 	{
@@ -39,31 +40,38 @@ public class Time_Manager : MonoBehaviour {
 		hour = hourStart;
 		pastTimeState = currentTimeState;
 		currentTimeSpeed = normalTimeSpeed;
-		playerController = Player.GetComponent<PlayerController> ();
+		playerController = Player.GetComponent<PlayerController>();
 
-		Button skipRest_Btn = skipRest.GetComponent<Button> ();
-		skipRest_Btn.onClick.AddListener (SkipRestPeriod);
+		Button skipRest_Btn = skipRest.GetComponent<Button>();
+		skipRest_Btn.onClick.AddListener(SkipRestPeriod);
 
-		skipRest.SetActive (false);
-		afternoonShade.SetActive (false);
-		nightShade.SetActive (false);
+		skipRest.SetActive(false);
+		afternoonShade.SetActive(false);
+		nightShade.SetActive(false);
 	}
 
-	void FixedUpdate(){
+	void Awake()
+	{
+		npcs = GameObject.FindGameObjectsWithTag("NPC");
+	}
+
+	void FixedUpdate()
+	{
 		timerHand++;
 	}
 
 	void Update()
 	{
-		TimeKeepingStates ();
-		UpdateClock ();
+		TimeKeepingStates();
+		UpdateClock();
 		//Debug.Log (hour + " : " + minute + " _ " + day);
 		if (day >= 4) {
             Provider.GetInstance().gameOver.LoseGame(outOfTimeReason);
 		}
 
-		if (Input.GetKeyDown (KeyCode.Alpha3)) {
-			journal_Manager.CreateAutoJournalEntry ("I eat cake", CharacterID.BROWN);
+		if (Input.GetKeyDown(KeyCode.Alpha3))
+		{
+			journal_Manager.CreateAutoJournalEntry("I eat cake", CharacterID.BROWN);
 		}
 	}
 
@@ -71,209 +79,240 @@ public class Time_Manager : MonoBehaviour {
 	{
 		switch (currentTimeState)
 		{
-		case State.Morning:
-			MorningCode ();
-			break;
+			case State.Morning:
+				MorningCode();
+				break;
 
-		case State.Afternoon:
-			AfternoonCode ();
-			break;
+			case State.Afternoon:
+				AfternoonCode();
+				break;
 
-		case State.Night:
-			NightCode ();
-			break;
+			case State.Night:
+				NightCode();
+				break;
 
-		case State.Rest:
-			RestCode ();
-			break;
+			case State.Rest:
+				RestCode();
+				break;
 
-		case State.Paused:
-			PausedCode ();
-			break;
+			case State.Paused:
+				PausedCode();
+				break;
 		}
 	}
 
 	void UpdateTime(bool isTimeMoving, float timeSpeed)
 	{
-		if (isTimeMoving) {
-			if (timer >= timeCrunch) {
+		if (isTimeMoving)
+		{
+			if (timer >= timeCrunch)
+			{
 				timer = 0;
 				minute += (timeSpeed * Time.deltaTime);
 				minuteCounter += (timeSpeed * Time.deltaTime);
 			}
-			if (minute >= 60) {
+			if (minute >= 60)
+			{
 				minute = 0;
 				hour++;
 			}
-			if (minuteCounter >= 1100) {
+			if (minuteCounter >= 1100)
+			{
 				minuteCounter = 0;
 			}
-			if (hour >= 24) {
+			if (hour >= 24)
+			{
 				hour = 0;
-				ResetBins ();
+				ResetBins();
 				day++;
 			}
 		}
 	}
 
-	void MorningCode(){
-		NormalCode ();
-		UpdateTime (true, currentTimeSpeed);
+	void MorningCode()
+	{
+		NormalCode();
+		UpdateTime(true, currentTimeSpeed);
 
 		//enter morning code
 
-		if (hour >= afternoonStart) {
-			afternoonShade.SetActive (true);
+		if (hour >= afternoonStart)
+		{
+			afternoonShade.SetActive(true);
 			currentTimeState = State.Afternoon;
 		}
-		SwitchToPausedState ();
+		SwitchToPausedState();
 	}
 
-	void AfternoonCode(){
-		NormalCode ();
-		UpdateTime (true, currentTimeSpeed);
+	void AfternoonCode()
+	{
+		NormalCode();
+		UpdateTime(true, currentTimeSpeed);
 
 		//enter afternoon code
 
-		if (hour >= nightStart) {
-			afternoonShade.SetActive (false);
-			nightShade.SetActive (true);
+		if (hour >= nightStart)
+		{
+			afternoonShade.SetActive(false);
+			nightShade.SetActive(true);
 			currentTimeState = State.Night;
 		}
-		SwitchToPausedState ();
+		SwitchToPausedState();
 	}
 
-	void NightCode(){
-		NormalCode ();
-		UpdateTime (true, currentTimeSpeed);
+	void NightCode()
+	{
+		NormalCode();
+		UpdateTime(true, currentTimeSpeed);
 
 		//enter night code
 
-		if (hour == morningStart) {
-			skipRest.SetActive (true);
+		if (hour == morningStart)
+		{
+			skipRest.SetActive(true);
 			currentTimeState = State.Rest;
 		}
-		SwitchToPausedState ();
+		SwitchToPausedState();
 	}
 
-	void RestCode(){
+	void RestCode()
+	{
 		//enter rest code
 
 		//move the player
 		Player.transform.position = restPlace.position;
 		//stop player
-		if (isGoing) {
-			playerController.StopInput ();
+		if (isGoing)
+		{
+			playerController.StopInput();
 			isGoing = false;
 		}
-		UpdateTime (false, currentTimeSpeed);
-		SwitchToPausedState ();
+		UpdateTime(false, currentTimeSpeed);
+		SwitchToPausedState();
 	}
 
-	void PausedCode(){
+	void PausedCode()
+	{
 
 		pauseEffectTimer += Time.deltaTime;
 
-		if (Mathf.RoundToInt(pauseEffectTimer)% 2 == 0) {
-			SwitchToRed ();
-		} else {
-			SwitchToBlack ();
+		if (Mathf.RoundToInt(pauseEffectTimer) % 2 == 0)
+		{
+			SwitchToRed();
+		}
+		else
+		{
+			SwitchToBlack();
 		}
 
-		UpdateTime (false, currentTimeSpeed);
-		if (Input.GetKeyDown(KeyCode.P)) {
+		UpdateTime(false, currentTimeSpeed);
+		if (Input.GetKeyDown(KeyCode.P))
+		{
 			pauseEffectTimer = 0;
-			hourHand_red.SetActive (false);
+			hourHand_red.SetActive(false);
 			//minuteHand_red.SetActive (false);
-			hourHand_black.SetActive (true);
+			hourHand_black.SetActive(true);
 			//minuteHand_black.SetActive (true);
-			Debug.Log ("trying to resume");
+			Debug.Log("trying to resume");
 			currentTimeState = pastTimeState;
-			UpdateTime (true, currentTimeSpeed);
+			UpdateTime(true, currentTimeSpeed);
 		}
 	}
 
-	public void SwitchToPausedState(){
-		if (Input.GetKeyDown(KeyCode.P)) {
+	public void SwitchToPausedState()
+	{
+		if (Input.GetKeyDown(KeyCode.P))
+		{
 			pastTimeState = currentTimeState;
 			currentTimeState = State.Paused;
+			if (!alreadyFrozeNPCs) //It was calling it hundred of times...
+				FreezeNPCs();
 		}
-		if (!alreadyFrozeNPCs) //It was calling it hundred of times...
-			FreezeNPCs();
 	}
 
-	void NormalCode(){
-		ChangeTimeSpeed ();
+	void NormalCode()
+	{
+		ChangeTimeSpeed();
 	}
 
-	void ChangeTimeSpeed(){
-		if (Input.GetKeyDown (KeyCode.Keypad6)) {
+	void ChangeTimeSpeed()
+	{
+		if (Input.GetKeyDown(KeyCode.Keypad6))
+		{
 			currentTimeSpeed = fastTimeSpeed;
 		}
 
-		if (Input.GetKeyDown (KeyCode.Keypad5)) {
+		if (Input.GetKeyDown(KeyCode.Keypad5))
+		{
 			currentTimeSpeed = normalTimeSpeed;
 		}
 	}
 
-	void UpdateClock(){
-		hourHand.transform.localRotation = Quaternion.Euler(0f, 0f, (-minuteCounter *hrDegree) + timerOffset);
+	void UpdateClock()
+	{
+		hourHand.transform.localRotation = Quaternion.Euler(0f, 0f, (-minuteCounter * hrDegree) + timerOffset);
 		//minuteHand.transform.localRotation = Quaternion.Euler(0f, 0f, (-minute * minDegree) + 90f);
 	}
 
-	void SkipRestPeriod(){
-		nightShade.SetActive (false);
+	void SkipRestPeriod()
+	{
+		nightShade.SetActive(false);
 		currentTimeState = State.Morning;
 		hour = 6;
 		minute = 0;
-		skipRest.SetActive (false);
-		UpdateTime (true, currentTimeSpeed);
-		playerController.ResumeInput ();
-		Debug.Log ("skiped");
+		skipRest.SetActive(false);
+		UpdateTime(true, currentTimeSpeed);
+		playerController.ResumeInput();
+		Debug.Log("skiped");
 	}
 
-	public void LeavePauseState(){
+	public void LeavePauseState()
+	{
 		pauseEffectTimer = 0;
-		hourHand_red.SetActive (false);
+		hourHand_red.SetActive(false);
 		//minuteHand_red.SetActive (false);
-		hourHand_black.SetActive (true);
+		hourHand_black.SetActive(true);
 		//minuteHand_black.SetActive (true);
-		Debug.Log ("resuming");
+		Debug.Log("resuming");
 		currentTimeState = pastTimeState;
-		UpdateTime (true, currentTimeSpeed);
+		UpdateTime(true, currentTimeSpeed);
 		UnfreezeNPCs();
 	}
 
-	public void MakeMorning(){
-		nightShade.SetActive (false);
-		afternoonShade.SetActive (false);
+	public void MakeMorning()
+	{
+		nightShade.SetActive(false);
+		afternoonShade.SetActive(false);
 		currentTimeState = State.Morning;
 		pastTimeState = State.Morning;
 		hour = 6;
 		minute = 0;
 	}
 
-	public void MakeAfternoon(){
-		nightShade.SetActive (false);
-		afternoonShade.SetActive (true);
+	public void MakeAfternoon()
+	{
+		nightShade.SetActive(false);
+		afternoonShade.SetActive(true);
 		currentTimeState = State.Afternoon;
 		pastTimeState = State.Afternoon;
 		hour = 12;
 		minute = 0;
 	}
 
-	public void MakeNight(){
-		nightShade.SetActive (true);
-		afternoonShade.SetActive (false);
+	public void MakeNight()
+	{
+		nightShade.SetActive(true);
+		afternoonShade.SetActive(false);
 		currentTimeState = State.Night;
 		pastTimeState = State.Night;
 		hour = 12;
 		minute = 0;
 	}
 
-	public void MakeRest(){
-		nightShade.SetActive (true);
-		afternoonShade.SetActive (false);
+	public void MakeRest()
+	{
+		nightShade.SetActive(true);
+		afternoonShade.SetActive(false);
 		currentTimeState = State.Rest;
 		pastTimeState = State.Rest;
 		hour = 18;
@@ -289,24 +328,28 @@ public class Time_Manager : MonoBehaviour {
 			FreezeNPCs();
 	}
 
-	void SwitchToRed(){
-		hourHand_red.SetActive (true);
+	void SwitchToRed()
+	{
+		hourHand_red.SetActive(true);
 		//minuteHand_red.SetActive (true);
-		hourHand_black.SetActive (false);
+		hourHand_black.SetActive(false);
 		//minuteHand_black.SetActive (false);
 	}
 
-	void SwitchToBlack(){
-		hourHand_red.SetActive (false);
+	void SwitchToBlack()
+	{
+		hourHand_red.SetActive(false);
 		//minuteHand_red.SetActive (false);
-		hourHand_black.SetActive (true);
+		hourHand_black.SetActive(true);
 		//minuteHand_black.SetActive (true);
 	}
 
-	void ResetBins(){
-		GameObject[] bins = GameObject.FindGameObjectsWithTag ("Bin");
-		foreach (GameObject bin in bins) {
-			bin.GetComponent<Bin> ().AssignRandomAmount ();
+	void ResetBins()
+	{
+		GameObject[] bins = GameObject.FindGameObjectsWithTag("Bin");
+		foreach (GameObject bin in bins)
+		{
+			bin.GetComponent<Bin>().AssignRandomAmount();
 		}
 	}
 

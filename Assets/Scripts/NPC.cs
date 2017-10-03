@@ -8,8 +8,7 @@ using UnityEngine;
 public class NPC : MonoBehaviour
 {
 	public float speed = 3f;
-	//public WaypointSet[] waypointSets;
-	public GameObject[] positions;  //Positions 
+	private float originalSpeed;
 	public float waitBetween = 4;
 	private Rigidbody2D rb;
 	private int positionNum = 0;
@@ -20,17 +19,21 @@ public class NPC : MonoBehaviour
 	private Vector2 nextPos;
 	public float waitAfterCollision = 30;
 	private int xOrY = 0;
-	private Boolean stopped = false;
-	//private PlayerController playerController; 
-
+	private bool stopped = false;
+	private bool getAwayFromPlayer = false;
+	GameObject player;
+	Vector3 positionAtCollider;
 	GameObject next;
+	Time_Manager timeManager;
+	private GameObject[] positions;  //Positions 
+	private BoxCollider2D boxCollider;
+	public WaypointSet[] waypointSets; //A list of a list of waypoints (I'm avoiding using the word "path" on purpose because pathfinding is separate)
+	private int currentWaypointSet = 0; //We're assuming the sets are in order by time.
 
 	void Awake()
 	{
-		animator = GetComponent<Animator>();
-		animator.SetBool("Walking", false); //Stop animating sprite
-		rb = GetComponent<Rigidbody2D>();
-		//playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+		player = GameObject.FindGameObjectWithTag("Player");
+		timeManager = GameObject.FindObjectOfType<Time_Manager>();
 	}
 
 	// Use this for initialization
@@ -39,115 +42,194 @@ public class NPC : MonoBehaviour
 		animator = GetComponent<Animator>();
 		animator.SetBool("Walking", false); //Stop animating sprite
 		rb = GetComponent<Rigidbody2D>();
-		foreach (GameObject obj in positions)
-		{
-			Renderer rend = obj.GetComponent<Renderer>();
-			rend.enabled = false;
-		}
+		positions = waypointSets[currentWaypointSet].waypoints;
 		next = positions[positionNum];
+		waitBetween = waypointSets[currentWaypointSet].ticksToWaitAtEachWaypoint;
 		wait = waitBetween;
-		//StopMoving();
+		boxCollider = GetComponent<BoxCollider2D>();
+		originalSpeed = speed;
 	}
 
 	void FixedUpdate()
 	{
+		speed = originalSpeed * (timeManager.currentTimeSpeed / timeManager.normalTimeSpeed); //Speed up the NPCs when time changes
+		if (CheckHour() == waypointSets[(currentWaypointSet + 1) % waypointSets.Length].hour)
+		{
+			currentWaypointSet = (currentWaypointSet + 1) % waypointSets.Length;
+			positions = waypointSets[currentWaypointSet].waypoints;
+			positionNum = 0;
+			waitBetween = waypointSets[currentWaypointSet].ticksToWaitAtEachWaypoint;
+			wait = waitBetween;
+		}
 		if (!stopped)
 		{
+			positionAtCollider = new Vector2 (boxCollider.transform.position.x+(boxCollider.offset.x/2), boxCollider.transform.position.y+(boxCollider.offset.y/2));
+			//print("col " + positionAtCollider);
+			//print("pos " + transform.position);
 			if (wait <= 0)
 			{
-				if (positions.Length > 0)
+				int directionPicker = UnityEngine.Random.Range(0, 2); //Next direction: East or west? / North or south?
+				if (getAwayFromPlayer)
 				{
-					next = positions[positionNum];
-					nextPos = next.transform.position;
-					//If near the goal position
-					float xDiff = nextPos.x - transform.position.x;
-					float yDiff = nextPos.y - transform.position.y;
-					if ((Math.Abs(xDiff) <= closeEnough) && (Math.Abs(yDiff) <= closeEnough))
+					float playerSpeed = player.GetComponent<PlayerController>().speed;
+					if (animator.GetInteger("Direction") == 0 || animator.GetInteger("Direction") == 2) //If moving north or south
 					{
-						rb.velocity = new Vector2(0, 0); //Stop moving
-						animator.SetBool("Walking", false); //Stop animating sprite
-						if (positionNum >= positions.Length - 1) //If at the last position, go the first position
+						switch (directionPicker)
 						{
-							positionNum = 0;
+							case 0:
+								animator.SetInteger("Direction", 1); //Animate east sprite
+								rb.velocity = new Vector2(1, 0) * playerSpeed;
+								break;
+							case 1:
+								animator.SetInteger("Direction", 3); //Animate west sprite
+								rb.velocity = new Vector2(-1, 0) * playerSpeed;
+								break;
+							case 2:
+								if (animator.GetInteger("Direction") == 0) //If moving north
+								{
+									animator.SetInteger("Direction", 2); //Animate south sprite
+									rb.velocity = new Vector2(0, -1) * playerSpeed;
+								}
+								else //assume south
+								{
+									animator.SetInteger("Direction", 0); //Animate north sprite
+									rb.velocity = new Vector2(0, 1) * playerSpeed;
+								}
+								break;
 						}
-						else
+					}
+					else //Assume moving east or west
+					{
+						switch (directionPicker)
 						{
-							positionNum++;
+							case 0:
+								animator.SetInteger("Direction", 0); //Animate north sprite
+								rb.velocity = new Vector2(0, 1) * playerSpeed;
+								break;
+							case 1:
+								animator.SetInteger("Direction", 2); //Animate south sprite
+								rb.velocity = new Vector2(0, -1) * playerSpeed;
+								break;
+							case 2:
+								if (animator.GetInteger("Direction") == 1) //If moving east
+								{
+									animator.SetInteger("Direction", 3); //Animate west sprite
+									rb.velocity = new Vector2(-1, 0) * playerSpeed;
+								}
+								else //assume west
+								{
+									animator.SetInteger("Direction", 1); //Animate east sprite
+									rb.velocity = new Vector2(1, 0) * playerSpeed;
+								}
+								break;
 						}
+					}
+					getAwayFromPlayer = false;
+					wait = waitAfterCollision + UnityEngine.Random.Range(-waitAfterCollision, waitAfterCollision);
+				}
+				else
+				{
+					if (positions.Length > 0)
+					{
 						next = positions[positionNum];
 						nextPos = next.transform.position;
-						wait = waitBetween;
-						//Randomly chooses which to do first, horizontal or vertical movement
-						xOrY = UnityEngine.Random.Range(0, 1);
-					}
+						//If near the goal position
+						float xDiff = nextPos.x - positionAtCollider.x;
+						float yDiff = nextPos.y - positionAtCollider.y;
+						if ((Math.Abs(xDiff) <= closeEnough) && (Math.Abs(yDiff) <= closeEnough))
+						{
+							rb.velocity = new Vector2(0, 0); //Stop moving
+							animator.SetBool("Walking", false); //Stop animating sprite
+							if (positionNum >= positions.Length - 1) 
+							{
+								if (waypointSets[currentWaypointSet].looped) //If at the last position, go the first position if looped
+									positionNum = 0;
+								else
+								{
+									animator.SetInteger("Direction", waypointSets[currentWaypointSet].finalDirection);
+									animator.SetBool("Walking", false);
+									rb.velocity = new Vector2(0, 0);
+								}
+							}
+							else
+							{
+								positionNum++;
+							}
+							next = positions[positionNum];
+							nextPos = next.transform.position;
+							wait = waitBetween;
+							//Randomly chooses which to do first, horizontal or vertical movement
+							xOrY = UnityEngine.Random.Range(0, 1);
+						}
 
-					if (xOrY == 0) //Do horizontal movement first
-					{
-						if (Math.Abs(xDiff) > closeEnough)
+						if (xOrY == 0) //Do horizontal movement first
 						{
-							if (xDiff > 0)
+							if (Math.Abs(xDiff) > closeEnough)
 							{
-								animator.SetInteger("Direction", 1); //Animate east sprite
-								animator.SetBool("Walking", true);
-								rb.velocity = new Vector2(1, 0) * speed;
-							}
-							else if (xDiff < 0)
-							{
-								animator.SetInteger("Direction", 3); //Animate west sprite
-								animator.SetBool("Walking", true);
-								rb.velocity = new Vector2(-1, 0) * speed;
-							}
-						}
-						else if (Math.Abs(yDiff) > closeEnough)
-						{
-							{
-								if (yDiff > 0)
+								if (xDiff > 0)
 								{
-									animator.SetInteger("Direction", 0); //Animate north sprite
+									animator.SetInteger("Direction", 1); //Animate east sprite
 									animator.SetBool("Walking", true);
-									rb.velocity = new Vector2(0, 1) * speed;
+									rb.velocity = new Vector2(1, 0) * speed;
 								}
-								else if (yDiff < 0)
+								else if (xDiff < 0)
 								{
-									animator.SetInteger("Direction", 2); //Animate south sprite
+									animator.SetInteger("Direction", 3); //Animate west sprite
 									animator.SetBool("Walking", true);
-									rb.velocity = new Vector2(0, -1) * speed;
+									rb.velocity = new Vector2(-1, 0) * speed;
 								}
 							}
-						}
-					}
-					else //Do vertical movement first
-					{
-						if (Math.Abs(yDiff) > closeEnough)
-						{
+							else if (Math.Abs(yDiff) > closeEnough)
 							{
-								if (yDiff > 0)
 								{
-									animator.SetInteger("Direction", 0); //Animate north sprite
-									animator.SetBool("Walking", true);
-									rb.velocity = new Vector2(0, 1) * speed;
-								}
-								else if (yDiff < 0)
-								{
-									animator.SetInteger("Direction", 2); //Animate south sprite
-									animator.SetBool("Walking", true);
-									rb.velocity = new Vector2(0, -1) * speed;
+									if (yDiff > 0)
+									{
+										animator.SetInteger("Direction", 0); //Animate north sprite
+										animator.SetBool("Walking", true);
+										rb.velocity = new Vector2(0, 1) * speed;
+									}
+									else if (yDiff < 0)
+									{
+										animator.SetInteger("Direction", 2); //Animate south sprite
+										animator.SetBool("Walking", true);
+										rb.velocity = new Vector2(0, -1) * speed;
+									}
 								}
 							}
 						}
-						else if (Math.Abs(xDiff) > closeEnough)
+						else //Do vertical movement first
 						{
-							if (xDiff > 0)
+							if (Math.Abs(yDiff) > closeEnough)
 							{
-								animator.SetInteger("Direction", 1); //Animate east sprite
-								animator.SetBool("Walking", true);
-								rb.velocity = new Vector2(1, 0) * speed;
+								{
+									if (yDiff > 0)
+									{
+										animator.SetInteger("Direction", 0); //Animate north sprite
+										animator.SetBool("Walking", true);
+										rb.velocity = new Vector2(0, 1) * speed;
+									}
+									else if (yDiff < 0)
+									{
+										animator.SetInteger("Direction", 2); //Animate south sprite
+										animator.SetBool("Walking", true);
+										rb.velocity = new Vector2(0, -1) * speed;
+									}
+								}
 							}
-							else if (xDiff < 0)
+							else if (Math.Abs(xDiff) > closeEnough)
 							{
-								animator.SetInteger("Direction", 3); //Animate west sprite
-								animator.SetBool("Walking", true);
-								rb.velocity = new Vector2(-1, 0) * speed;
+								if (xDiff > 0)
+								{
+									animator.SetInteger("Direction", 1); //Animate east sprite
+									animator.SetBool("Walking", true);
+									rb.velocity = new Vector2(1, 0) * speed;
+								}
+								else if (xDiff < 0)
+								{
+									animator.SetInteger("Direction", 3); //Animate west sprite
+									animator.SetBool("Walking", true);
+									rb.velocity = new Vector2(-1, 0) * speed;
+								}
 							}
 						}
 					}
@@ -166,80 +248,93 @@ public class NPC : MonoBehaviour
 	}
 
 	//Ughhhh I don't like this, but I'm still working on actual pathfinding.
-	//So this is my temporary solution.
+	//So this is my  temporary solution.
 	//All this does is make the NPC go in a random direction for a short while
 	//when it touches something.
 	void OnCollisionEnter2D(Collision2D collision)
 	{
-		xOrY = UnityEngine.Random.Range(0, 1); //Whether start with horizontal or vertical first
-		if (collision.otherRigidbody != null)
+		if (!stopped)
 		{
-			int directionPicker = UnityEngine.Random.Range(0, 2); //Next direction: East or west? / North or south?
-			if (animator.GetInteger("Direction") == 0 || animator.GetInteger("Direction") == 2) //If moving north or south
+			xOrY = UnityEngine.Random.Range(0, 1); //Whether start with horizontal or vertical first
+			if (collision.otherRigidbody != null)
 			{
-				if (animator.GetInteger("Direction") == 0) //If moving north
-					this.transform.localPosition.Set(0, -speed, 0); //Move back south by speed
-				else if (animator.GetInteger("Direction") == 2) //If moving south
-					this.transform.localPosition.Set(0, speed, 0); //Move back north by speed
-				switch (directionPicker)
+				if (!collision.gameObject.Equals(player)) //If player bumped into
 				{
-					case 0:
-						animator.SetInteger("Direction", 1); //Animate east sprite
-						rb.velocity = new Vector2(1, 0) * speed;
-						break;
-					case 1:
-						animator.SetInteger("Direction", 3); //Animate west sprite
-						rb.velocity = new Vector2(-1, 0) * speed;
-						break;
-					case 2:
+					int directionPicker = UnityEngine.Random.Range(0, 2); //Next direction: East or west? / North or south?
+					if (animator.GetInteger("Direction") == 0 || animator.GetInteger("Direction") == 2) //If moving north or south
+					{
 						if (animator.GetInteger("Direction") == 0) //If moving north
+							this.transform.localPosition.Set(0, -speed, 0); //Move back south by speed
+						else if (animator.GetInteger("Direction") == 2) //If moving south
+							this.transform.localPosition.Set(0, speed, 0); //Move back north by speed
+						switch (directionPicker)
 						{
-							animator.SetInteger("Direction", 2); //Animate south sprite
-							rb.velocity = new Vector2(0, -1) * speed;
+							case 0:
+								animator.SetInteger("Direction", 1); //Animate east sprite
+								rb.velocity = new Vector2(1, 0) * speed;
+								break;
+							case 1:
+								animator.SetInteger("Direction", 3); //Animate west sprite
+								rb.velocity = new Vector2(-1, 0) * speed;
+								break;
+							case 2:
+								if (animator.GetInteger("Direction") == 0) //If moving north
+								{
+									animator.SetInteger("Direction", 2); //Animate south sprite
+									rb.velocity = new Vector2(0, -1) * speed;
+								}
+								else //assume south
+								{
+									animator.SetInteger("Direction", 0); //Animate north sprite
+									rb.velocity = new Vector2(0, 1) * speed;
+								}
+								break;
 						}
-						else //assume south
-						{
-							animator.SetInteger("Direction", 0); //Animate north sprite
-							rb.velocity = new Vector2(0, 1) * speed;
-						}
-						break;
-				}
-			}
-			else //Assume moving east or west
-			{
-				if (animator.GetInteger("Direction") == 1) //If moving east
-					this.transform.localPosition.Set(-speed, 0, 0); //Move back west by speed
-				else if (animator.GetInteger("Direction") == 3) //If moving west
-					this.transform.localPosition.Set(speed, 0, 0); //Move back east by speed
-				switch (directionPicker)
-				{
-					case 0:
-						animator.SetInteger("Direction", 0); //Animate north sprite
-						rb.velocity = new Vector2(0, 1) * speed;
-						break;
-					case 1:
-						animator.SetInteger("Direction", 2); //Animate south sprite
-						rb.velocity = new Vector2(0, -1) * speed;
-						break;
-					case 2:
+					}
+					else //Assume moving east or west
+					{
 						if (animator.GetInteger("Direction") == 1) //If moving east
+							this.transform.localPosition.Set(-speed, 0, 0); //Move back west by speed
+						else if (animator.GetInteger("Direction") == 3) //If moving west
+							this.transform.localPosition.Set(speed, 0, 0); //Move back east by speed
+						switch (directionPicker)
 						{
-							animator.SetInteger("Direction", 3); //Animate west sprite
-							rb.velocity = new Vector2(-1, 0) * speed;
+							case 0:
+								animator.SetInteger("Direction", 0); //Animate north sprite
+								rb.velocity = new Vector2(0, 1) * speed;
+								break;
+							case 1:
+								animator.SetInteger("Direction", 2); //Animate south sprite
+								rb.velocity = new Vector2(0, -1) * speed;
+								break;
+							case 2:
+								if (animator.GetInteger("Direction") == 1) //If moving east
+								{
+									animator.SetInteger("Direction", 3); //Animate west sprite
+									rb.velocity = new Vector2(-1, 0) * speed;
+								}
+								else //assume west
+								{
+									animator.SetInteger("Direction", 1); //Animate east sprite
+									rb.velocity = new Vector2(1, 0) * speed;
+								}
+								break;
 						}
-						else //assume west
-						{
-							animator.SetInteger("Direction", 1); //Animate east sprite
-							rb.velocity = new Vector2(1, 0) * speed;
-						}
-						break;
+					}
+					wait = waitAfterCollision + UnityEngine.Random.Range(-waitAfterCollision, waitAfterCollision);
 				}
 			}
-			wait = waitAfterCollision + UnityEngine.Random.Range(-waitAfterCollision, waitAfterCollision);
+		}
+		else
+		{
+			rb.velocity = new Vector2(0, 0); //Stop moving
+			animator.SetBool("Walking", false); //Stop animating sprite
 		}
 	}
+
 	public void StopMoving()
 	{
+		print("Stop moving");
 		rb.velocity = new Vector2(0, 0); //Stop moving
 		animator.SetBool("Walking", false); //Stop animating sprite
 		stopped = true;
@@ -248,6 +343,7 @@ public class NPC : MonoBehaviour
 	//FixedUpdate takes over
 	public void StartMoving()
 	{
+		print("Start moving");
 		stopped = false;
 	}
 
@@ -258,4 +354,10 @@ public class NPC : MonoBehaviour
 		CancelInvoke();
 	}
 	*/
+
+	//This ain't efficient
+	int CheckHour()
+	{
+		return timeManager.hour;
+	}
 }

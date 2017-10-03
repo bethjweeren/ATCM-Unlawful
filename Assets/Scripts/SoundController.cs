@@ -7,7 +7,6 @@ public class SoundController : MonoBehaviour
 {
 	public AudioSource[] audioSources;
 	private AudioSource currentAudio;
-	private Random randomGenerator = new Random();
 	// Use this for initialization
 	void Start ()
 	{
