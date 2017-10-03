@@ -18,6 +18,6 @@ public class Bin : MonoBehaviour, IInteractable {
 	public void Interact(){
 		possessionsManager.ChangeMoney (moneyAmount);
 		moneyAmount = 0;
-		DialogueSystem.Instance().player.EndInteraction();
+		Provider.GetInstance().player.EndInteraction();
 	}
 }

@@ -144,7 +144,6 @@ public class DialogueSystem
 
     public void ProcessClue(string clueID)
     {
-        Debug.Log("Processing");
         quoteQueue.Add(new DialogueLine(currentNPC.CheckClue(clueID), nonPlayerID));
         NextLine();
     }

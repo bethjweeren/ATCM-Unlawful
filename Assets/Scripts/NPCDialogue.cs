@@ -62,21 +62,21 @@ public class NPCDialogue : MonoBehaviour, IInteractable {
             switch (id)
             {
                 case CharacterID.BLACK:
-                    clueResponses.Add("blackIsMean", new ClueEntry("Yes, I called [Red] a loser. So what? What are you going to do, have me arrested?", "Stop [Black], he violated the law", "blueSnitch"));
+                    clueResponses.Add("blackLead", new ClueEntry("Yes, I happened to hear [Blue] mention something in the midst of his drunken ramblings that might be of interest to you. You should go speak with him.", "[Black] claims [Blue] knows something.", "blueDrunk"));
                     break;
                 case CharacterID.BLUE:
-                    clueResponses.Add("blueSnitch", new ClueEntry("Huh? [Black] is being a colossal jerk again? Figures. I'd go teach him a lesson, but I hate working on an empty belly.", "[Blue] is too lazy to get his own **** baguette", "yellowBread"));
-                    clueResponses.Add("blueGotBread", new ClueEntry("Thanks, I'll get to arresting that loudmouth. | Oh, by the way I was the one who killed [Victim]. | I mean come on, he was asking for it... even his NAME meant 'DEAD'.", "[Blue] totally killed [Victim]", "fin"));
+                    clueResponses.Add("blueDrunk", new ClueEntry("Huh? I'm not sure I know what [Black] is talking about. | Let me tell you though, guarding the town on an empty stomach is tough work... | If you brought me something to eat it might jog my memory... %(wink)%", "[Blue] wants something to eat.", "yellowBread"));
+                    clueResponses.Add("blueGotBread", new ClueEntry("Thanks, this bread is delicious. | Hey, don't tell anybody... but I was the one who killed [Victim].", "[Blue] totally killed [Victim]", "fin"));
                     break;
                 case CharacterID.GREEN:
                     clueResponses.Add("greenStuff", new ClueEntry("Oh, [Yellow] wants her stuff back? Fine.", "[Green] gave me [Yellow]'s things back", "yellowGotStuff"));
                     break;
                 case CharacterID.RED:
-                    clueResponses.Add("talkToRed", new ClueEntry("Hey, [Black] said some mean things to me.", "[Black] is a huge jerk", "blackIsMean"));
+                    clueResponses.Add("talkToRed", new ClueEntry("Hey, [Black] said he overheard someone talking about the murder.", "[Black] has information for me.", "blackLead"));
                     break;
                 case CharacterID.YELLOW:
-                    clueResponses.Add("yellowBread", new ClueEntry("Hey there honey, I can't bake any bread right now because I lent my pans to [Green]. Like, ALL of my pans.", "How do you even lend your entire kitchen to someone?", "greenStuff"));
-                    clueResponses.Add("yellowGotStuff", new ClueEntry("Thanks, here you go - one fresh loaf", "Got the stupid bread", "blueGotBread"));
+                    clueResponses.Add("yellowBread", new ClueEntry("Hey there honey, I can't bake any bread right now because I lent my pans to [Green]. Like, ALL of my pans.", "[Yellow] lent her pans to [Green].", "greenStuff"));
+                    clueResponses.Add("yellowGotStuff", new ClueEntry("Thanks, here you go - one fresh baguette", "Time to bring le pain. (Bread)", "blueGotBread"));
                     break;
             }
             
