@@ -132,6 +132,7 @@ public class Clue_Manager : MonoBehaviour {
     public void Close()
     {
         gameObject.SetActive(false);
+        Provider.GetInstance().dialogueBox.gameObject.SetActive(true);
         DialogueSystem.Instance().NextLine();
     }
 		

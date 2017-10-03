@@ -2,28 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tutorial : MonoBehaviour {
+public class Tutorial : MonoBehaviour, IInteractable {
     public GameObject letterUI;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return))
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return)) && letterUI.gameObject.activeInHierarchy)
         {
             Close();
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    public void Interact()
     {
-        other.GetComponent<PlayerController>().currentState = PlayerController.State.INTERACTING;
-        other.GetComponent<PlayerController>().StopMoving();
+        PlayerController player = Provider.GetInstance().player;
+        player.currentState = PlayerController.State.INTERACTING;
+        player.StopMoving();
         letterUI.SetActive(true);
-        Destroy(this.gameObject);
     }
 
     public void Close()
     {
         Provider.GetInstance().player.currentState = PlayerController.State.MAIN;
-        this.gameObject.SetActive(false);
+        letterUI.gameObject.SetActive(false);
+        Destroy(this.gameObject);
     }
 }

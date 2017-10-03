@@ -10,7 +10,6 @@ public class DialogueSystem
     static DialogueSystem instance;
     private static Object singletonLock = new Object();
     public Characters characters;
-    DialogueBox dialogueBox;
     NPCDialogue currentNPC;
     List<DialogueLine> quoteQueue;
     Prompt dialoguePrompt;
@@ -32,7 +31,6 @@ public class DialogueSystem
         {
 
         }
-        dialogueBox = Provider.GetInstance().dialogueBox;
         CloseDialogueBox();
     }
 
@@ -64,7 +62,7 @@ public class DialogueSystem
                 }
                 else
                 {
-                    dialogueBox.DisplayLine(nonPlayerID, "This hasn't been implemented yet.", false);
+                    Provider.GetInstance().dialogueBox.DisplayLine(nonPlayerID, "This hasn't been implemented yet.", false);
                 }
                 break;
             case Choice.BLUE_LASTSEEN:
@@ -79,7 +77,7 @@ public class DialogueSystem
                 }
                 else
                 {
-                    dialogueBox.DisplayLine(nonPlayerID, "This hasn't been implemented yet.", false);
+                    Provider.GetInstance().dialogueBox.DisplayLine(nonPlayerID, "This hasn't been implemented yet.", false);
                 }
                 break;
             case Choice.GREEN_SUSPECTS:
@@ -111,7 +109,7 @@ public class DialogueSystem
                 else
                 {
                     dialoguePrompt = Prompt.OPINION;
-                    dialogueBox.DisplayChoices(new string[6] { "<color=#191919>Noir</color>.", "<color=#193BFF>Bleu</color>.", "<color=#11B211>Vert</color>.", "<color=#FF1919>Rouge</color>.", "<color=#FFFF32>Jaune</color>.", "Nevermind." });
+                    Provider.GetInstance().dialogueBox.DisplayChoices(new string[6] { "<color=#191919>Noir</color>.", "<color=#193BFF>Bleu</color>.", "<color=#11B211>Vert</color>.", "<color=#FF1919>Rouge</color>.", "<color=#FFFF32>Jaune</color>.", "Nevermind." });
                 }
                 break;
             case Choice.YELLOW_CLUE:
@@ -126,6 +124,7 @@ public class DialogueSystem
                 }
                 else
                 {
+                    Provider.GetInstance().dialogueBox.gameObject.SetActive(false);
                     Provider.GetInstance().clueSelector.Open();
                 }
                 break;
@@ -137,7 +136,7 @@ public class DialogueSystem
                 }
                 else
                 {
-                    dialogueBox.DisplayLine(nonPlayerID, currentNPC.GetCloser(), true);
+                    Provider.GetInstance().dialogueBox.DisplayLine(nonPlayerID, currentNPC.GetCloser(), true);
                 }
                 break;
         }
@@ -145,6 +144,7 @@ public class DialogueSystem
 
     public void ProcessClue(string clueID)
     {
+        Provider.GetInstance().dialogueBox.gameObject.SetActive(true);
         quoteQueue.Add(new DialogueLine(currentNPC.CheckClue(clueID), nonPlayerID));
         NextLine();
     }
@@ -155,7 +155,7 @@ public class DialogueSystem
         {
             DialogueLine nextLine = quoteQueue[0];
             quoteQueue.RemoveAt(0);
-            dialogueBox.DisplayLine(nextLine.speaker, nextLine.line, false);
+            Provider.GetInstance().dialogueBox.DisplayLine(nextLine.speaker, nextLine.line, false);
         }
         else
         {
@@ -176,34 +176,34 @@ public class DialogueSystem
             dialoguePrompt = Prompt.DEFAULT;
             choiceText = new string[6] { "Where were you..?", "When did you last see the victim?", "Who could have done this?", "Tell me a little about...", "Can I ask you about..?", "Goodbye." };
         }
-        dialogueBox.DisplayChoices(choiceText);
+        Provider.GetInstance().dialogueBox.DisplayChoices(choiceText);
     }
 
     public void OpenDialogueBox(CharacterID id, NPCDialogue npc, bool firstMeeting, bool oneliner)
     {
-        dialogueBox.transform.parent.gameObject.SetActive(true);
-        dialogueBox.SetPortrait(id);
+        Provider.GetInstance().dialogueBox.transform.parent.gameObject.SetActive(true);
+        Provider.GetInstance().dialogueBox.SetPortrait(id);
         currentNPC = npc;
         nonPlayerID = id;
         if (firstMeeting)
         {
-            dialogueBox.DisplayLine(id, npc.GetIntroduction(), oneliner);
+            Provider.GetInstance().dialogueBox.DisplayLine(id, npc.GetIntroduction(), oneliner);
         }
         else
         {
-            dialogueBox.DisplayLine(id, npc.GetOpener(), oneliner);
+            Provider.GetInstance().dialogueBox.DisplayLine(id, npc.GetOpener(), oneliner);
         }
     }
 
     public void CloseDialogueBox()
     {
-        dialogueBox.transform.parent.gameObject.SetActive(false);
+        Provider.GetInstance().dialogueBox.transform.parent.gameObject.SetActive(false);
         Provider.GetInstance().player.EndInteraction();
     }
 
     private void Accuse(CharacterID choice)
     {
-        dialogueBox.transform.parent.gameObject.SetActive(false);
+        Provider.GetInstance().dialogueBox.transform.parent.gameObject.SetActive(false);
         PlayerController player = Provider.GetInstance().player;
         player.EndInteraction();
         player.gameObject.SetActive(false);
