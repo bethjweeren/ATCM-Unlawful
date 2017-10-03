@@ -42,13 +42,13 @@ public class Characters
         CharacterDict.Add(CharacterID.BLUE, new Character("Bleu", "BLUE", "#193BFF", Resources.Load<Sprite>(thumbPath + "Blue_thumb")));
         NameDict.Add("BLUE", CharacterID.BLUE);
 
-        CharacterDict.Add(CharacterID.BROWN, new Character("Beggar Marron", "BROWN", "#664028"));
+        CharacterDict.Add(CharacterID.BROWN, new Character("Beggar Marron", "BROWN", "#664028", Resources.Load<Sprite>(thumbPath + "Brown_thumb")));
         NameDict.Add("BROWN", CharacterID.BROWN);
 
         CharacterDict.Add(CharacterID.GREEN, new Character("Vert", "GREEN", "#11B211", Resources.Load<Sprite>(thumbPath + "Green_thumb")));
         NameDict.Add("GREEN", CharacterID.GREEN);
 
-        CharacterDict.Add(CharacterID.PURPLE, new Character("Mayor Violet", "PURPLE", "#AF11A5"));
+        CharacterDict.Add(CharacterID.PURPLE, new Character("Mayor Violet", "PURPLE", "#AF11A5", Resources.Load<Sprite>(thumbPath + "Purple_thumb")));
         NameDict.Add("PURPLE", CharacterID.PURPLE);
 
         CharacterDict.Add(CharacterID.RED, new Character("Rouge", "RED", "#FF1919", Resources.Load<Sprite>(thumbPath + "Red_thumb")));
