@@ -33,6 +33,7 @@ public class DialogueSystem
 
         }
         dialogueBox = Provider.GetInstance().dialogueBox;
+        CloseDialogueBox();
     }
 
     public static DialogueSystem Instance()

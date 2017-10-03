@@ -75,7 +75,7 @@ public class NPCDialogue : MonoBehaviour, IInteractable {
                     clueResponses.Add("talkToRed", new ClueEntry("Hey, [Black] said he overheard someone talking about the murder.", "[Black] has information for me.", "blackLead"));
                     break;
                 case CharacterID.YELLOW:
-                    clueResponses.Add("yellowBread", new ClueEntry("Hey there honey, I can't bake any bread right now because I lent my pans to [Green]. Like, ALL of my pans.", "[Yellow] lent her pans to [Green].", "greenStuff"));
+                    clueResponses.Add("yellowBread", new ClueEntry("Sorry honey, but I can't bake any bread right now because I lent my pans to [Green]. Like, ALL of my pans.", "[Yellow] lent her pans to [Green].", "greenStuff"));
                     clueResponses.Add("yellowGotStuff", new ClueEntry("Thanks, here you go - one fresh baguette", "Time to bring le pain. (Bread)", "blueGotBread"));
                     break;
             }

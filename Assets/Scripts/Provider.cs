@@ -14,8 +14,7 @@ public class Provider : MonoBehaviour {
     void Start () {
         instance = this;
         DialogueSystem.Instance(); //Initialize the dialogue system
-        DialogueSystem.Instance().CloseDialogueBox();
-        gameObject.gameObject.SetActive(false);
+        gameOver.gameObject.SetActive(false);
     }
 
     private void OnDestroy()
