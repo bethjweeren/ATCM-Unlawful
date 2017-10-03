@@ -198,7 +198,17 @@ public class PlayerController : MonoBehaviour
 				}
 				else
 				{
-					GameObject[] interacts = GameObject.FindGameObjectsWithTag("Interactable");
+					GameObject[] interactableTagged = GameObject.FindGameObjectsWithTag("Interactable");
+					GameObject[] npcTagged = GameObject.FindGameObjectsWithTag("NPC");
+					GameObject[] interacts = new GameObject[interactableTagged.Length + npcTagged.Length];
+					for (int i = 0; i < interactableTagged.Length; i++)
+					{
+						interacts[i] = interactableTagged[i];
+					}
+					for (int i = 0; i < npcTagged.Length; i++)
+					{
+						interacts[i+interactableTagged.Length] = npcTagged[i];
+					}
 					GameObject nearest = null;
 					float distance = Mathf.Infinity;
 					foreach (GameObject g in interacts)
@@ -237,6 +247,10 @@ public class PlayerController : MonoBehaviour
 						StopMoving();
 						nearest.GetComponent<IInteractable>().Interact();
 						FreezeNPCs();
+						if (time_manager.currentTimeState != Time_Manager.State.Rest)
+						{
+							time_manager.ForcePausedState();
+						}
 					}
 				}
 			}
