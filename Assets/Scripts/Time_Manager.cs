@@ -180,13 +180,15 @@ public class Time_Manager : MonoBehaviour
 		//enter rest code
 
 		//move the player
-		Player.transform.position = restPlace.position;
+		//Player.transform.position = restPlace.position;
 		//stop player
+		/*
 		if (isGoing)
 		{
 			playerController.StopInput();
 			isGoing = false;
 		}
+		*/
 		UpdateTime(false, currentTimeSpeed);
 		SwitchToPausedState();
 	}
