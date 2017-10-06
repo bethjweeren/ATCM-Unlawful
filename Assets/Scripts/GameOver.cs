@@ -10,10 +10,14 @@ public class GameOver : MonoBehaviour {
     public Text reasonText;
     public Color winColor;
     public Color loseColor;
+	public AudioSource winSound;
+	public AudioSource loseSound;
 
-    public void LoseGame(string reason)
+	public void LoseGame(string reason)
     {
-        headerText.text = "Game Over";
+		if (loseSound != null)
+			loseSound.Play();
+		headerText.text = "Game Over";
         headerText.color = loseColor;
         reasonText.text = reason;
         gameObject.SetActive(true);
@@ -21,7 +25,9 @@ public class GameOver : MonoBehaviour {
 
     public void WinGame(string reason)
     {
-        headerText.text = "Congratulations";
+		if (winSound != null)
+			winSound.Play();
+		headerText.text = "Congratulations";
         headerText.color = winColor;
         reasonText.text = reason;
         gameObject.SetActive(true);

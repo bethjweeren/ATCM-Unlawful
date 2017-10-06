@@ -39,6 +39,8 @@ public class PlayerController : MonoBehaviour
 
 	public static float playerY;
 
+	public GameObject sleepingNPCNotice;
+
 	private Rigidbody2D playerRB;
 	private Collider2D playerCollider;
 	private Animator animator;
@@ -81,7 +83,8 @@ public class PlayerController : MonoBehaviour
 
 			//If ANY key was just pressed, change animation and velocity
 			//So it doesn't change every frame
-			if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) || ((Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) && !(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))))
+			if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) ||
+					((Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) && !(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))))
 			{
 				animator.SetInteger("Direction", 0); //Animate north sprite
 				animator.SetBool("Walking", true);
@@ -130,7 +133,7 @@ public class PlayerController : MonoBehaviour
 					journalCanvas.SetActive(true);
 					FreezeNPCs();
 				}
-
+				/*
 				else if (Input.GetKeyDown(KeyCode.I))
 				{
 					currentState = State.INVENTORY;
@@ -139,6 +142,7 @@ public class PlayerController : MonoBehaviour
 					print("Looking through inventory. Press I or ESC to close."); //Replace with inventory code
 					FreezeNPCs();
 				}
+				*/
 				else if (Input.GetKeyDown(KeyCode.Escape))
 				{
 					if (time_manager.currentTimeState != Time_Manager.State.Rest)
@@ -168,90 +172,106 @@ public class PlayerController : MonoBehaviour
 				Vector2 facingVector;
 				switch (facing)
 				{
-				case 0:
-					facingVector = Vector2.up;
-					break;
-				case 1:
-					facingVector = Vector2.right;
-					break;
-				case 2:
-					facingVector = Vector2.down;
-					break;
-				case 3:
-					facingVector = Vector2.left;
-					break;
-				default:
-					Debug.Log("Invalid facing dirction recieved from animator component");
-					facingVector = Vector2.zero;
-					break;
+					case 0:
+						facingVector = Vector2.up;
+						break;
+					case 1:
+						facingVector = Vector2.right;
+						break;
+					case 2:
+						facingVector = Vector2.down;
+						break;
+					case 3:
+						facingVector = Vector2.left;
+						break;
+					default:
+						Debug.Log("Invalid facing dirction recieved from animator component");
+						facingVector = Vector2.zero;
+						break;
 				}
 				Debug.DrawLine(interactRayOrigin.position, (Vector2)interactRayOrigin.position + interactRange * facingVector);
 				RaycastHit2D foundObject = Physics2D.Raycast(interactRayOrigin.position, facingVector, interactRange, interactLayer);
 				if (foundObject)
 				{
-					if (time_manager.currentTimeState != Time_Manager.State.Rest) {
-						time_manager.ForcePausedState ();
+					if (time_manager.currentTimeState != Time_Manager.State.Rest)
+					{
+						time_manager.ForcePausedState();
+						currentState = State.INTERACTING;
+						StopMoving();
+						foundObject.collider.GetComponent<IInteractable>().Interact();
 					}
-					currentState = State.INTERACTING;
-					StopMoving();
-					foundObject.collider.GetComponent<IInteractable>().Interact();
+					else
+					{
+						print("interacting at night");
+						if (foundObject.collider.GetComponent<GameObject>().CompareTag("NPC"))
+						{
+							print("found sleeping npc");
+							sleepingNPCNotice.SetActive(true);
+						}
+					}
 				}
 				else
 				{
-					GameObject[] interactableTagged = GameObject.FindGameObjectsWithTag("Interactable");
-					GameObject[] npcTagged = GameObject.FindGameObjectsWithTag("NPC");
-					GameObject[] interacts = new GameObject[interactableTagged.Length + npcTagged.Length];
-					for (int i = 0; i < interactableTagged.Length; i++)
-					{
-						interacts[i] = interactableTagged[i];
-					}
-					for (int i = 0; i < npcTagged.Length; i++)
-					{
-						interacts[i+interactableTagged.Length] = npcTagged[i];
-					}
-					GameObject nearest = null;
-					float distance = Mathf.Infinity;
-					foreach (GameObject g in interacts)
-					{
-						if(Vector2.Distance(transform.position, g.transform.position) < distance)
+
+						GameObject[] interactableTagged = GameObject.FindGameObjectsWithTag("Interactable");
+						GameObject[] npcTagged = GameObject.FindGameObjectsWithTag("NPC");
+						GameObject[] interacts = new GameObject[interactableTagged.Length + npcTagged.Length];
+						for (int i = 0; i < interactableTagged.Length; i++)
 						{
-							nearest = g;
-							distance = Vector2.Distance(transform.position, g.transform.position);
+							interacts[i] = interactableTagged[i];
 						}
-					}
-					if (nearest != null && distance < interactRange * 0.75f) //If the player misses the raycast but there is an interactable object nearby
-					{
-						if(Mathf.Abs(transform.position.y - nearest.transform.position.y) > Mathf.Abs(transform.position.x - nearest.transform.position.x))
+						for (int i = 0; i < npcTagged.Length; i++)
 						{
-							if(transform.position.y > nearest.transform.position.y)
+							interacts[i+interactableTagged.Length] = npcTagged[i];
+						}
+						GameObject nearest = null;
+						float distance = Mathf.Infinity;
+						foreach (GameObject g in interacts)
+						{
+							if(Vector2.Distance(transform.position, g.transform.position) < distance)
 							{
-								animator.SetInteger("Direction", 2); //Face south
+								nearest = g;
+								distance = Vector2.Distance(transform.position, g.transform.position);
+							}
+						}
+						if (nearest != null && distance < interactRange * 0.75f) //If the player misses the raycast but there is an interactable object nearby
+						{
+							if(Mathf.Abs(transform.position.y - nearest.transform.position.y) > Mathf.Abs(transform.position.x - nearest.transform.position.x))
+							{
+								if(transform.position.y > nearest.transform.position.y)
+								{
+									animator.SetInteger("Direction", 2); //Face south
+								}
+								else
+								{
+									animator.SetInteger("Direction", 0); //Face north
+								}
 							}
 							else
 							{
-								animator.SetInteger("Direction", 0); //Face north
+								if (transform.position.x > nearest.transform.position.x)
+								{
+									animator.SetInteger("Direction", 3); //Face west
+								}
+								else
+								{
+									animator.SetInteger("Direction", 1); //Face east
+								}
 							}
-						}
-						else
-						{
-							if (transform.position.x > nearest.transform.position.x)
+							if (time_manager.currentTimeState != Time_Manager.State.Rest)
 							{
-								animator.SetInteger("Direction", 3); //Face west
+								currentState = State.INTERACTING;
+								StopMoving();
+								nearest.GetComponent<IInteractable>().Interact();
+								FreezeNPCs();
+								time_manager.ForcePausedState();
 							}
-							else
+							else if (nearest.CompareTag("NPC"))
 							{
-								animator.SetInteger("Direction", 1); //Face east
+								print("found sleeping npc");
+								sleepingNPCNotice.SetActive(true);
 							}
 						}
-						currentState = State.INTERACTING;
-						StopMoving();
-						nearest.GetComponent<IInteractable>().Interact();
-						FreezeNPCs();
-						if (time_manager.currentTimeState != Time_Manager.State.Rest)
-						{
-							time_manager.ForcePausedState();
-						}
-					}
 				}
 			}
 			else if (!AnyMovementKey())
