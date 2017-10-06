@@ -130,7 +130,7 @@ public class PlayerController : MonoBehaviour
 					journalCanvas.SetActive(true);
 					FreezeNPCs();
 				}
-
+				/*
 				else if (Input.GetKeyDown(KeyCode.I))
 				{
 					currentState = State.INVENTORY;
@@ -139,6 +139,7 @@ public class PlayerController : MonoBehaviour
 					print("Looking through inventory. Press I or ESC to close."); //Replace with inventory code
 					FreezeNPCs();
 				}
+				*/
 				else if (Input.GetKeyDown(KeyCode.Escape))
 				{
 					if (time_manager.currentTimeState != Time_Manager.State.Rest)
