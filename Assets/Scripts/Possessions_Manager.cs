@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Possessions_Manager : MonoBehaviour {
 
-	public int currentMoney = 0;
+	public int currentMoney = 100;
 	public Text moneyText;
 
 	void Start()
@@ -21,6 +21,6 @@ public class Possessions_Manager : MonoBehaviour {
 
 	public void ChangeMoneyText()
 	{
-		moneyText.text = "Money: " + currentMoney.ToString ();
+		moneyText.text = "Livres: " + currentMoney.ToString ();
 	}
 }

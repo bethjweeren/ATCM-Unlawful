@@ -12081,8 +12081,9 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "\u2620 Creative Director \u2620\nBeth Weeren\n\n\u2709 Producer \u269C\u2709\u26F9\nMike
     Li\n\n\u2656 Game Designers \u2656\nJarrod Humes\nJustin Mendoza\nSam Owens\n\n\u2328
-    Programmers \u2328\nGrant Barbee\nSharon Lougheed\nMax Sobhani\n\n\u2767 Concept/2D
-    Artist \u2767\nKaitlin Smith\n\n\u270D Narrative Designer \u270D\nHudson Bielstein"
+    Programmers \u2328\nGrant Barbee\nSharon Lougheed\nMohammad (Max) Sobhani\n\n\u2767
+    Concept/2D Artist \u2767\nKaitlin Smith\n\n\u270D Narrative Designer \u270D\nHudson
+    Bielstein"
 --- !u!222 &400914953
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -40866,8 +40867,9 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "\u2620 Creative Director \u2620\nBeth Weeren\n\n\u2709 Producer \u269C\u2709\u26F9\nMike
     Li\n\n\u2656 Game Designers \u2656\nJarrod Humes\nJustin Mendoza\nSam Owens\n\n\u2328
-    Programmers \u2328\nGrant Barbee\nSharon Lougheed\nMax Sobhani\n\n\u2767 Concept/2D
-    Artist \u2767\nKaitlin Smith\n\n\u270D Narrative Designer \u270D\nHudson Bielstein"
+    Programmers \u2328\nGrant Barbee\nSharon Lougheed\nMohammad (Max) Sobhani\n\n\u2767
+    Concept/2D Artist \u2767\nKaitlin Smith\n\n\u270D Narrative Designer \u270D\nHudson
+    Bielstein"
 --- !u!222 &1408789871
 CanvasRenderer:
   m_ObjectHideFlags: 0
