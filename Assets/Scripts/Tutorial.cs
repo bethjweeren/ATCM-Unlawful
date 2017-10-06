@@ -23,7 +23,7 @@ public class Tutorial : MonoBehaviour, IInteractable {
 
     public void Close()
     {
-        Provider.GetInstance().player.currentState = PlayerController.State.MAIN;
+        Provider.GetInstance().player.EndInteraction();
         letterUI.gameObject.SetActive(false);
         Destroy(this.gameObject);
     }
