@@ -741,6 +741,11 @@ Prefab:
       propertyPath: normalTimeSpeed
       value: 2.3
       objectReference: {fileID: 0}
+    - target: {fileID: 114233522687771292, guid: 1ad2d7e4d5b8f4c4c9aee008025615ad,
+        type: 2}
+      propertyPath: moneyManager
+      value: 
+      objectReference: {fileID: 801756024}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1ad2d7e4d5b8f4c4c9aee008025615ad, type: 2}
   m_IsPrefabParent: 0
@@ -3139,7 +3144,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &122128935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15055,7 +15060,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &454460095
 Transform:
   m_ObjectHideFlags: 0
@@ -20014,6 +20019,36 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114604513664765652, guid: 7bcc72ad9cb105948b8a78b22f08215e,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 964cd4135bf3737479a1dff4255ffc2c,
+        type: 3}
+    - target: {fileID: 114854550771191588, guid: 7bcc72ad9cb105948b8a78b22f08215e,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d2c2a70b827d86c429aa503423852149,
+        type: 3}
+    - target: {fileID: 114338769824108834, guid: 7bcc72ad9cb105948b8a78b22f08215e,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c4d340a1c11826c41b1505129f161acc,
+        type: 3}
+    - target: {fileID: 114172810066536782, guid: 7bcc72ad9cb105948b8a78b22f08215e,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8db8e315113aa964180c6b526222fb8d,
+        type: 3}
+    - target: {fileID: 114862114706620788, guid: 7bcc72ad9cb105948b8a78b22f08215e,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5d6508eea76f9be448e25d9014e5d197,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7bcc72ad9cb105948b8a78b22f08215e, type: 2}
   m_IsPrefabParent: 0
@@ -22752,7 +22787,7 @@ Prefab:
         type: 2}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: e3a5544a590cddd44a450844532c7e46,
+      objectReference: {fileID: 21300000, guid: 91df89005a62e1245a7cd7e85beba5d3,
         type: 3}
     - target: {fileID: 114769756452675928, guid: e03cea222955c634f980f5b5345be279,
         type: 2}
@@ -39906,7 +39941,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1309259251
 MonoBehaviour:
   m_ObjectHideFlags: 0
