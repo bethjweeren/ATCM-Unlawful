@@ -12,6 +12,7 @@ public class Time_Manager : MonoBehaviour
 		Afternoon,
 		Night,
 		Rest,
+		Calm,
 		Paused,
 	};
 
@@ -28,6 +29,7 @@ public class Time_Manager : MonoBehaviour
 	public bool isGoing = true;
 	public string outOfTimeReason;
 	public Journal_Manager journal_Manager;
+	public Possessions_Manager moneyManager;
 	//private WaitForSeconds pauseEffectDuration = new WaitForSeconds(.5f);
 	//private NPC[] npcs; //To freeze/unfreeze NPCs (so they don't have to check on every update)
 	private GameObject[] npcs; //To freeze/unfreeze NPCs (so they don't have to check on every update)
@@ -95,6 +97,10 @@ public class Time_Manager : MonoBehaviour
 				RestCode();
 				break;
 
+			case State.Calm:
+				RestCode();
+				break;
+
 			case State.Paused:
 				PausedCode();
 				break;
@@ -123,7 +129,8 @@ public class Time_Manager : MonoBehaviour
 			if (hour >= 24)
 			{
 				hour = 0;
-				ResetBins();
+				moneyManager.ChangeMoney (100);
+				//ResetBins();
 				day++;
 			}
 		}
@@ -170,6 +177,8 @@ public class Time_Manager : MonoBehaviour
 		if (hour == morningStart)
 		{
 			skipRest.SetActive(true);
+			currentTimeSpeed = normalTimeSpeed;
+			playerController.ResumeInput();
 			currentTimeState = State.Rest;
 		}
 		SwitchToPausedState();
@@ -180,13 +189,15 @@ public class Time_Manager : MonoBehaviour
 		//enter rest code
 
 		//move the player
-		Player.transform.position = restPlace.position;
+		//Player.transform.position = restPlace.position;
 		//stop player
+		/*
 		if (isGoing)
 		{
 			playerController.StopInput();
 			isGoing = false;
 		}
+		*/
 		UpdateTime(false, currentTimeSpeed);
 		SwitchToPausedState();
 	}
@@ -260,6 +271,7 @@ public class Time_Manager : MonoBehaviour
 		currentTimeState = State.Morning;
 		hour = 6;
 		minute = 0;
+		minuteCounter = 0;
 		skipRest.SetActive(false);
 		UpdateTime(true, currentTimeSpeed);
 		playerController.ResumeInput();
