@@ -44,6 +44,9 @@ public class PlayerController : MonoBehaviour
 	private Rigidbody2D playerRB;
 	private Collider2D playerCollider;
 	private Animator animator;
+	
+	//public bool isInTutorial = false;
+	//public Tutorial tutorial;
 
 	// Use this for initialization
 	void Start()
@@ -303,6 +306,9 @@ public class PlayerController : MonoBehaviour
 			break;
 
 		case State.INTERACTING:
+			//if(isInTutorial && Input.GetKeyDown(KeyCode.Space)){
+			//	tutorial.Close();
+			//}
 			/*
 				if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Escape))
 				{
