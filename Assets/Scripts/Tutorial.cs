@@ -11,10 +11,12 @@ public class Tutorial : MonoBehaviour, IInteractable {
         {
             Close();
         }
+	
     }
 
     public void Interact()
     {
+		Debug.Log("in");
         PlayerController player = Provider.GetInstance().player;
         player.currentState = PlayerController.State.INTERACTING;
         player.StopMoving();
@@ -23,6 +25,7 @@ public class Tutorial : MonoBehaviour, IInteractable {
 
     public void Close()
     {
+		Debug.Log("out");
         Provider.GetInstance().player.EndInteraction();
         letterUI.gameObject.SetActive(false);
         Destroy(this.gameObject);
