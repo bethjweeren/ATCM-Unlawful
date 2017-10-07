@@ -223,6 +223,7 @@ public class DialogueSystem
         Provider provider = Provider.GetInstance();
         provider.journal.CreateAutoJournalEntry(Quotes.FormatColors(summary), page);
         provider.clueSelector.CreateAutoJournalEntry(Quotes.FormatColors(summary), page, clueID);
+        provider.alertSystem.CreateAlert("<color=" + characters.IDToCharacter(page).color + ">New entry added to Journal</color>");
     }
 }
 
