@@ -47491,8 +47491,6 @@ MonoBehaviour:
 
     M = Map
 
-    I = Inventory
-
     E/Spacebar = Interact/Talk
 
     ESC = Menu
@@ -56236,8 +56234,6 @@ MonoBehaviour:
     Mouse = Interact with Journal
 
     M = Map
-
-    I = Inventory
 
     E/Spacebar = Interact/Talk
 

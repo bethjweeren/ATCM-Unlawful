@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AlertSystem : MonoBehaviour {
+    private Object alertLock = new Object();
     public GameObject alertFab;
     List<AlertEntry> activeAlerts;
     public AudioSource alertPlayer;
@@ -23,16 +24,19 @@ public class AlertSystem : MonoBehaviour {
 
     public void CreateAlert(string message)
     {
-        alertPlayer.PlayOneShot(alertSound, 0.8f);
-        GameObject alert = (GameObject)Instantiate(alertFab, transform.position, Quaternion.identity, transform.parent);
-        AlertEntry alertScript = alert.GetComponent<AlertEntry>();
-        alertScript.alertText.text = message;
-
-        foreach(AlertEntry a in activeAlerts)
+        lock (alertLock)
         {
-            a.Bump();
+            alertPlayer.PlayOneShot(alertSound, 0.8f);
+            GameObject alert = (GameObject)Instantiate(alertFab, transform.position, Quaternion.identity, transform.parent);
+            AlertEntry alertScript = alert.GetComponent<AlertEntry>();
+            alertScript.alertText.text = message;
+
+            foreach (AlertEntry a in activeAlerts)
+            {
+                a.Bump();
+            }
+            activeAlerts.Add(alertScript);
         }
-        activeAlerts.Add(alertScript);
     }
 
     public void RemoveAlert(AlertEntry alert)

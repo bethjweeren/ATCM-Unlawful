@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Tutorial : MonoBehaviour, IInteractable {
     public GameObject letterUI;
+    bool alreadyRead;
 
     void Update()
     {
         if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return)) && letterUI.gameObject.activeInHierarchy)
         {
-            Debug.Log("up");
             Close();
         }
 	
@@ -17,16 +17,22 @@ public class Tutorial : MonoBehaviour, IInteractable {
 
     public void Interact()
     {
-		Debug.Log("in");
-        PlayerController player = Provider.GetInstance().player;
-        player.currentState = PlayerController.State.INTERACTING;
-        player.StopMoving();
-        letterUI.SetActive(true);
+        if (alreadyRead)
+        {
+            Provider.GetInstance().player.EndInteraction();
+        }
+        else
+        {
+            PlayerController player = Provider.GetInstance().player;
+            player.currentState = PlayerController.State.INTERACTING;
+            player.StopMoving();
+            letterUI.SetActive(true);
+            alreadyRead = true;
+        }
     }
 
     public void Close()
     {
-		Debug.Log("out");
         Provider.GetInstance().player.EndInteraction();
         letterUI.gameObject.SetActive(false);
         Destroy(this.gameObject);

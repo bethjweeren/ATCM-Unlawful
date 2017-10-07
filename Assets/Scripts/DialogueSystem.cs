@@ -221,9 +221,13 @@ public class DialogueSystem
     public void CreateJournalEntry(string summary, CharacterID page, string clueID)
     {
         Provider provider = Provider.GetInstance();
-        provider.journal.CreateAutoJournalEntry(Quotes.FormatColors(summary), page);
-        provider.clueSelector.CreateAutoJournalEntry(Quotes.FormatColors(summary), page, clueID);
-        provider.alertSystem.CreateAlert("<color=" + characters.IDToCharacter(page).color + ">New entry added to Journal</color>");
+        if (!provider.clueSelector.knownClues.Contains(clueID))
+        {
+            provider.journal.CreateAutoJournalEntry(Quotes.FormatColors(summary), page);
+            provider.clueSelector.CreateAutoJournalEntry(Quotes.FormatColors(summary), page, clueID);
+            provider.alertSystem.CreateAlert("<color=" + characters.IDToCharacter(page).color + ">New entry added to Journal</color>");
+            provider.clueSelector.knownClues.Add(clueID);
+        }
     }
 }
 

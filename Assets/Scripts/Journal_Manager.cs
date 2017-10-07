@@ -321,41 +321,7 @@ public class Journal_Manager : MonoBehaviour {
                         break;
                 }
                 currentRedNotes++;
-                break;
-			case CharacterID.BROWN:
-				characterPage = brownEntryPage;
-				switch (currentBrownNotes)
-				{
-				case 8:
-					return;
-				case 7:
-					entryLocation = brownNotes8;
-					break;
-				case 6:
-					entryLocation = brownNotes7;
-					break;
-				case 5:
-					entryLocation = brownNotes6;
-					break;
-				case 4:
-					entryLocation = brownNotes5;
-					break;
-				case 3:
-					entryLocation = brownNotes4;
-					break;
-				case 2:
-					entryLocation = brownNotes3;
-					break;
-				case 1:
-					entryLocation = brownNotes2;
-					break;
-				case 0:
-				default:
-					entryLocation = brownNotes1;
-					break;
-				}
-				currentRedNotes++;
-				break;
+                break;			
             case CharacterID.YELLOW:
                 characterPage = yellowEntryPage;
                 switch (currentYellowNotes)
@@ -391,7 +357,39 @@ public class Journal_Manager : MonoBehaviour {
                 currentYellowNotes++;
                 break;
             default:
-                return;
+                characterPage = brownEntryPage;
+                switch (currentBrownNotes)
+                {
+                    case 8:
+                        return;
+                    case 7:
+                        entryLocation = brownNotes8;
+                        break;
+                    case 6:
+                        entryLocation = brownNotes7;
+                        break;
+                    case 5:
+                        entryLocation = brownNotes6;
+                        break;
+                    case 4:
+                        entryLocation = brownNotes5;
+                        break;
+                    case 3:
+                        entryLocation = brownNotes4;
+                        break;
+                    case 2:
+                        entryLocation = brownNotes3;
+                        break;
+                    case 1:
+                        entryLocation = brownNotes2;
+                        break;
+                    case 0:
+                    default:
+                        entryLocation = brownNotes1;
+                        break;
+                }
+                currentBrownNotes++;
+                break;
         }
         
 		localEntry = Instantiate (autoEntryPrefab, entryLocation.position, entryLocation.rotation, characterPage.transform);

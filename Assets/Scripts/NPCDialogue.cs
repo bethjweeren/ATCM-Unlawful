@@ -48,7 +48,7 @@ public class NPCDialogue : MonoBehaviour, IInteractable {
                 firstMeeting = false;
             }
         }
-        if (id == CharacterID.RANDO)
+        if (id == CharacterID.RANDO || id == CharacterID.VICTIM)
         {
             randomNPC = true;
         }
@@ -153,6 +153,11 @@ public class NPCDialogue : MonoBehaviour, IInteractable {
     {
         if(quotes != null)
         {
+            if(id == CharacterID.VICTIM)
+            {
+                StartCoroutine("ExamineBody");
+
+            }
             DialogueSystem.Instance().OpenDialogueBox(id, this, firstMeeting, randomNPC);
             firstMeeting = false;
         }
@@ -236,5 +241,14 @@ public class NPCDialogue : MonoBehaviour, IInteractable {
         Character suspectCharacter = DialogueSystem.Instance().characters.IDToCharacter(suspect);
         string hint = line;
         return Regex.Replace(hint, "Suspect", suspectCharacter.identifier);
+    }
+
+    IEnumerator ExamineBody()
+    {
+        DialogueSystem.Instance().CreateJournalEntry("The victim was [Victim].", CharacterID.VICTIM, "motive");
+        yield return new WaitForSeconds(0.05f);
+        DialogueSystem.Instance().CreateJournalEntry("[Victim] was strangled.", CharacterID.VICTIM, "method");
+        yield return new WaitForSeconds(0.05f);
+        DialogueSystem.Instance().CreateJournalEntry("[Victim] was killed in the Town Square.", CharacterID.VICTIM, "opportunity");
     }
 }

@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
 		playerRB.velocity = new Vector2(0, 0); //Don't move
 		screenMenuStarting.SetActive(true); //Starting menu gets in the way, keep disabled in scene and this will enable it
 		enableOnStart.SetActive(true); //Enable all the intrusive UI things on start, because they get in the way in the scene
-        DialogueSystem.Instance().CreateJournalEntry("[Red] wanted to talk to me", CharacterID.RED, "talkToRed");
+        //DialogueSystem.Instance().CreateJournalEntry("[Red] wanted to talk to me", CharacterID.RED, "talkToRed");
     }
 
 	// Update is called every fixed framerate frame

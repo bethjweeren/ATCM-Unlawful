@@ -40,6 +40,7 @@ public class Clue_Manager : MonoBehaviour {
     public Transform[] otherNotes;
     public Transform entryLocation;
 	public List<string> journalEntry = new List<string>();
+    public List<string> knownClues = new List<string>();
 
 	void Start()
 	{
