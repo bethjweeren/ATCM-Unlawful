@@ -9,6 +9,7 @@ public class Tutorial : MonoBehaviour, IInteractable {
     {
         if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return)) && letterUI.gameObject.activeInHierarchy)
         {
+            Debug.Log("up");
             Close();
         }
 	

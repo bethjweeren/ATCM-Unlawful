@@ -5,6 +5,8 @@ using UnityEngine;
 public class AlertSystem : MonoBehaviour {
     public GameObject alertFab;
     List<AlertEntry> activeAlerts;
+    public AudioSource alertPlayer;
+    public AudioClip alertSound;
 
 	// Use this for initialization
 	void Start () {
@@ -21,6 +23,7 @@ public class AlertSystem : MonoBehaviour {
 
     public void CreateAlert(string message)
     {
+        alertPlayer.PlayOneShot(alertSound, 0.8f);
         GameObject alert = (GameObject)Instantiate(alertFab, transform.position, Quaternion.identity, transform.parent);
         AlertEntry alertScript = alert.GetComponent<AlertEntry>();
         alertScript.alertText.text = message;
