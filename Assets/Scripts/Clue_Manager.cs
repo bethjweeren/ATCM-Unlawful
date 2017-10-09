@@ -142,7 +142,7 @@ public class Clue_Manager : MonoBehaviour {
         {
             case CharacterID.BLACK:
                 characterPage = blackEntryPage;
-                if(currentBlackNotes < 8)
+                if(currentBlackNotes < 12)
                 {
                     entryLocation = blackNotes[currentBlackNotes];
                 }
@@ -154,7 +154,7 @@ public class Clue_Manager : MonoBehaviour {
                 break;
             case CharacterID.BLUE:
                 characterPage = blueEntryPage;
-                if (currentBlueNotes < 8)
+                if (currentBlueNotes < 12)
                 {
                     entryLocation = blueNotes[currentBlueNotes];
                 }
@@ -166,7 +166,7 @@ public class Clue_Manager : MonoBehaviour {
                 break;
             case CharacterID.GREEN:
                 characterPage = greenEntryPage;
-                if (currentGreenNotes < 8)
+                if (currentGreenNotes < 12)
                 {
                     entryLocation = greenNotes[currentGreenNotes];
                 }
@@ -178,7 +178,7 @@ public class Clue_Manager : MonoBehaviour {
                 break;
             case CharacterID.RED:
                 characterPage = redEntryPage;
-                if (currentRedNotes < 8)
+                if (currentRedNotes < 12)
                 {
                     entryLocation = redNotes[currentRedNotes];
                 }
@@ -190,7 +190,7 @@ public class Clue_Manager : MonoBehaviour {
                 break;
             case CharacterID.YELLOW:
                 characterPage = yellowEntryPage;
-                if (currentYellowNotes < 8)
+                if (currentYellowNotes < 12)
                 {
                     entryLocation = yellowNotes[currentYellowNotes];
                 }
@@ -202,7 +202,7 @@ public class Clue_Manager : MonoBehaviour {
                 break;
             default:
                 characterPage = otherEntryPage;
-                if (currentOtherNotes < 8)
+                if (currentOtherNotes < 12)
                 {
                     entryLocation = otherNotes[currentOtherNotes];
                 }
