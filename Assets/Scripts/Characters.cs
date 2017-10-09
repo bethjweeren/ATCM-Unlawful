@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public enum CharacterID { INVALID, BLACK, BLUE, BROWN, GREEN, PURPLE, RED, YELLOW, PLAYER, VICTIM, VICTIM2, RANDO, WEAPON}
+public enum CharacterID { INVALID, BLACK, BLUE, BROWN, GREEN, PURPLE, RED, YELLOW, PLAYER, VICTIM, VICTIM2, RANDO, WEAPON, OTHER}
 
 public struct Character
 {
@@ -53,6 +53,9 @@ public class Characters
 
         CharacterDict.Add(CharacterID.RED, new Character("Rouge", "RED", "#FF1919", Resources.Load<Sprite>(thumbPath + "Red_thumb")));
         NameDict.Add("RED", CharacterID.RED);
+
+        CharacterDict.Add(CharacterID.OTHER, new Character("Him", "OTHER", "#FF8411"));
+        NameDict.Add("ORANGE", CharacterID.OTHER);
 
         CharacterDict.Add(CharacterID.YELLOW, new Character("Jaune", "YELLOW", "#FFFF32", Resources.Load<Sprite>(thumbPath + "Yellow_thumb")));
         NameDict.Add("YELLOW", CharacterID.YELLOW);

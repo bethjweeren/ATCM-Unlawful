@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Choice { BLACK_ALIBI, BLUE_LASTSEEN, GREEN_SUSPECTS, RED_OPINION, YELLOW_CLUE, CANCEL }
-enum Prompt { DEFAULT, ACCUSATION, OPINION }
+public enum SixChoice { BLACK, BLUE, GREEN, RED, YELLOW, CANCEL }
+public enum FourChoice { MOTIVE, OPPORTUNITY, CLUE, CANCEL }
+public enum ChoiceStyle { DEFAULT, FOUR, SIX }
+enum Prompt { DEFAULT, ACCUSATION, MOTIVE, OPPORTUNITY }
 
 public class DialogueSystem
 {
@@ -46,97 +48,112 @@ public class DialogueSystem
         return instance;
     }
 
-    public void ProcessChoice(Choice selection)
+    public void ProcessFourChoice(FourChoice selection)
     {
         switch (selection)
         {
-            case Choice.BLACK_ALIBI:
-                if(dialoguePrompt == Prompt.ACCUSATION)
+            case FourChoice.MOTIVE:
+                dialoguePrompt = Prompt.MOTIVE;
+                Provider.GetInstance().dialogueBox.DisplayChoices(ChoiceStyle.SIX);
+                break;
+            case FourChoice.OPPORTUNITY:
+                dialoguePrompt = Prompt.OPPORTUNITY;
+                Provider.GetInstance().dialogueBox.DisplayChoices(ChoiceStyle.SIX);
+                break;
+            case FourChoice.CLUE:
+                Provider.GetInstance().dialogueBox.gameObject.SetActive(false);
+                Provider.GetInstance().clueSelector.Open();
+                break;
+            case FourChoice.CANCEL:
+            default:
+                Provider.GetInstance().dialogueBox.DisplayLine(nonPlayerID, currentNPC.GetCloser(), true);
+                break;
+        }
+    }
+
+    public void ProcessSixChoice(SixChoice selection)
+    {
+        switch (selection)
+        {
+            case SixChoice.BLACK:
+                if (dialoguePrompt == Prompt.ACCUSATION)
                 {
                     Accuse(CharacterID.BLACK);
                 }
-                else if(dialoguePrompt == Prompt.OPINION)
+                else if (dialoguePrompt == Prompt.MOTIVE)
                 {
-                    quoteQueue.Add(new DialogueLine(currentNPC.GetOpinion(CharacterID.BLACK), nonPlayerID));
-                    NextLine();
+                    ProcessClue(characters.IDToCharacter(nonPlayerID).identifier + "MOTIVE" + "BLACK");
                 }
-                else
+                else if (dialoguePrompt == Prompt.OPPORTUNITY)
                 {
-                    Provider.GetInstance().dialogueBox.DisplayLine(nonPlayerID, "This hasn't been implemented yet.", false);
+                    ProcessClue(characters.IDToCharacter(nonPlayerID).identifier + "OPPORTUNITY" + "BLACK");
                 }
                 break;
-            case Choice.BLUE_LASTSEEN:
+            case SixChoice.BLUE:
                 if (dialoguePrompt == Prompt.ACCUSATION)
                 {
                     Accuse(CharacterID.BLUE);
                 }
-                else if (dialoguePrompt == Prompt.OPINION)
+                else if (dialoguePrompt == Prompt.MOTIVE)
                 {
-                    quoteQueue.Add(new DialogueLine(currentNPC.GetOpinion(CharacterID.BLUE), nonPlayerID));
-                    NextLine();
+                    ProcessClue(characters.IDToCharacter(nonPlayerID).identifier + "MOTIVE" + "BLUE");
                 }
-                else
+                else if (dialoguePrompt == Prompt.OPPORTUNITY)
                 {
-                    Provider.GetInstance().dialogueBox.DisplayLine(nonPlayerID, "This hasn't been implemented yet.", false);
+                    ProcessClue(characters.IDToCharacter(nonPlayerID).identifier + "OPPORTUNITY" + "BLUE");
                 }
                 break;
-            case Choice.GREEN_SUSPECTS:
+            case SixChoice.GREEN:
                 if (dialoguePrompt == Prompt.ACCUSATION)
                 {
                     Accuse(CharacterID.GREEN);
                 }
-                else if (dialoguePrompt == Prompt.OPINION)
+                else if (dialoguePrompt == Prompt.MOTIVE)
                 {
-                    quoteQueue.Add(new DialogueLine(currentNPC.GetOpinion(CharacterID.GREEN), nonPlayerID));
-                    NextLine();
+                    ProcessClue(characters.IDToCharacter(nonPlayerID).identifier + "MOTIVE" + "GREEN");
                 }
-                else
+                else if (dialoguePrompt == Prompt.OPPORTUNITY)
                 {
-                    quoteQueue.Add(new DialogueLine(currentNPC.GetFirstHint(), nonPlayerID));
-                    NextLine();
+                    ProcessClue(characters.IDToCharacter(nonPlayerID).identifier + "OPPORTUNITY" + "GREEN");
                 }
                 break;
-            case Choice.RED_OPINION:
+            case SixChoice.RED:
                 if (dialoguePrompt == Prompt.ACCUSATION)
                 {
                     Accuse(CharacterID.RED);
                 }
-                else if (dialoguePrompt == Prompt.OPINION)
+                else if (dialoguePrompt == Prompt.MOTIVE)
                 {
-                    quoteQueue.Add(new DialogueLine(currentNPC.GetOpinion(CharacterID.RED), nonPlayerID));
-                    NextLine();
+                    ProcessClue(characters.IDToCharacter(nonPlayerID).identifier + "MOTIVE" + "RED");
                 }
-                else
+                else if (dialoguePrompt == Prompt.OPPORTUNITY)
                 {
-                    dialoguePrompt = Prompt.OPINION;
-                    Provider.GetInstance().dialogueBox.DisplayChoices(new string[6] { "<color=#191919>Noir</color>.", "<color=#193BFF>Bleu</color>.", "<color=#11B211>Vert</color>.", "<color=#FF1919>Rouge</color>.", "<color=#FFFF32>Jaune</color>.", "Nevermind." });
+                    ProcessClue(characters.IDToCharacter(nonPlayerID).identifier + "OPPORTUNITY" + "RED");
                 }
                 break;
-            case Choice.YELLOW_CLUE:
+            case SixChoice.YELLOW:
                 if (dialoguePrompt == Prompt.ACCUSATION)
                 {
                     Accuse(CharacterID.YELLOW);
                 }
-                else if (dialoguePrompt == Prompt.OPINION)
+                else if (dialoguePrompt == Prompt.MOTIVE)
                 {
-                    quoteQueue.Add(new DialogueLine(currentNPC.GetOpinion(CharacterID.YELLOW), nonPlayerID));
-                    NextLine();
+                    ProcessClue(characters.IDToCharacter(nonPlayerID).identifier + "MOTIVE" + "YELLOW");
                 }
-                else
+                else if (dialoguePrompt == Prompt.OPPORTUNITY)
                 {
-                    Provider.GetInstance().dialogueBox.gameObject.SetActive(false);
-                    Provider.GetInstance().clueSelector.Open();
+                    ProcessClue(characters.IDToCharacter(nonPlayerID).identifier + "OPPORTUNITY" + "YELLOW");
                 }
                 break;
-            case Choice.CANCEL:
+            case SixChoice.CANCEL:
             default:
-                if(dialoguePrompt == Prompt.OPINION)
+                if (dialoguePrompt == Prompt.DEFAULT)
                 {
-                    NextChoice();
+                    Provider.GetInstance().dialogueBox.DisplayLine(nonPlayerID, currentNPC.GetCloser(), true);
                 }
                 else
                 {
-                    Provider.GetInstance().dialogueBox.DisplayLine(nonPlayerID, currentNPC.GetCloser(), true);
+                    NextChoice();
                 }
                 break;
         }
@@ -165,18 +182,18 @@ public class DialogueSystem
 
     void NextChoice()
     {
-        string[] choiceText;
+        ChoiceStyle style;
         if (nonPlayerID == CharacterID.PURPLE)
         {
             dialoguePrompt = Prompt.ACCUSATION;
-            choiceText = new string[6] { "<color=#191919>Noir</color>.", "<color=#193BFF>Bleu</color>.", "<color=#11B211>Vert</color>.", "<color=#FF1919>Rouge</color>.", "<color=#FFFF32>Jaune</color>.", "Nevermind." };
+            style = ChoiceStyle.SIX;
         }
         else
         {
             dialoguePrompt = Prompt.DEFAULT;
-            choiceText = new string[6] { "Where were you..?", "When did you last see the victim?", "Who could have done this?", "Tell me a little about...", "Can I ask you about..?", "Goodbye." };
+            style = ChoiceStyle.FOUR;
         }
-        Provider.GetInstance().dialogueBox.DisplayChoices(choiceText);
+        Provider.GetInstance().dialogueBox.DisplayChoices(style);
     }
 
     public void OpenDialogueBox(CharacterID id, NPCDialogue npc, bool firstMeeting, bool oneliner)

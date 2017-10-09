@@ -10,9 +10,13 @@ public class DialogueBox : MonoBehaviour {
     public Image playerThumb;
     public Image nonPlayerThumb;
     public GameObject dialogueContent;
-    public GameObject choiceContent;
-    public Text[] dialogueOptions;
-    Choice selectedChoice;
+    public GameObject fourChoiceContent;
+    public GameObject sixChoiceContent;
+    public GameObject[] fourChoiceOptions;
+    public GameObject[] sixChoiceOptions;
+    FourChoice selectedFourChoice;
+    SixChoice selectedSixChoice;
+    ChoiceStyle choiceMode;
     public Color selectedColor = new Color(255, 255, 255, 100);
     public Color deselectedColor = new Color(65, 75, 100, 100);
     CharacterID speaker;
@@ -22,93 +26,149 @@ public class DialogueBox : MonoBehaviour {
     bool skipText;
     float typeDelay = 0.015f;
     bool exitAfterSaying;
-    bool choiceMode = false;
 
 	void Start () {
         DialogueSystem.Instance().dialogueTextSize = GetTextSize();
 	}
 	
 	void Update () {
-        if (choiceMode)
+        Debug.Log(choiceMode);
+        if (choiceMode != ChoiceStyle.DEFAULT)
         {
             if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Space))
             {
-                choiceMode = false;
-                DialogueSystem.Instance().ProcessChoice(selectedChoice);
+                if(choiceMode == ChoiceStyle.FOUR)
+                {
+                    DialogueSystem.Instance().ProcessFourChoice(selectedFourChoice);
+                }
+                else
+                {
+                    DialogueSystem.Instance().ProcessSixChoice(selectedSixChoice);
+                }
             }
             else
             {
-                switch (selectedChoice)
+                if(choiceMode == ChoiceStyle.FOUR)
                 {
-                    case Choice.BLACK_ALIBI:
-                        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
-                        {
-                            Select(Choice.RED_OPINION);
-                        }
-                        else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
-                        {
-                            Select(Choice.BLUE_LASTSEEN);
-                        }
-                        break;
-                    case Choice.BLUE_LASTSEEN:
-                        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
-                        {
-                            Select(Choice.BLACK_ALIBI);
-                        }
-                        else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
-                        {
-                            Select(Choice.YELLOW_CLUE);
-                        }
-                        else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
-                        {
-                            Select(Choice.GREEN_SUSPECTS);
-                        }
-                        break;
-                    case Choice.GREEN_SUSPECTS:
-                        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
-                        {
-                            Select(Choice.BLUE_LASTSEEN);
-                        }
-                        else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
-                        {
-                            Select(Choice.CANCEL);
-                        }
-                        break;
-                    case Choice.RED_OPINION:
-                        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
-                        {
-                            Select(Choice.BLACK_ALIBI);
-                        }
-                        else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
-                        {
-                            Select(Choice.YELLOW_CLUE);
-                        }
-                        break;
-                    case Choice.YELLOW_CLUE:
-                        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
-                        {
-                            Select(Choice.RED_OPINION);
-                        }
-                        else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
-                        {
-                            Select(Choice.BLUE_LASTSEEN);
-                        }
-                        else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
-                        {
-                            Select(Choice.CANCEL);
-                        }
-                        break;
-                    case Choice.CANCEL:
-                        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
-                        {
-                            Select(Choice.YELLOW_CLUE);
-                        }
-                        else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
-                        {
-                            Select(Choice.GREEN_SUSPECTS);
-                        }
-                        break;
+                    switch (selectedFourChoice)
+                    {
+                        case FourChoice.MOTIVE:
+                            if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+                            {
+                                FourSelect(FourChoice.CLUE);
+                            }
+                            else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+                            {
+                                FourSelect(FourChoice.OPPORTUNITY);
+                            }
+                            break;
+                        case FourChoice.OPPORTUNITY:
+                            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+                            {
+                                FourSelect(FourChoice.MOTIVE);
+                            }
+                            else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+                            {
+                                FourSelect(FourChoice.CANCEL);
+                            }
+                            break;
+                        case FourChoice.CLUE:
+                            if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+                            {
+                                FourSelect(FourChoice.MOTIVE);
+                            }
+                            else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+                            {
+                                FourSelect(FourChoice.CANCEL);
+                            }
+                            break;
+                        case FourChoice.CANCEL:
+                            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+                            {
+                                FourSelect(FourChoice.CLUE);
+                            }
+                            else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+                            {
+                                FourSelect(FourChoice.OPPORTUNITY);
+                            }
+                            break;
+                    }
                 }
+                else if(choiceMode == ChoiceStyle.SIX)
+                {
+                    switch (selectedSixChoice)
+                    {
+                        case SixChoice.BLACK:
+                            if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+                            {
+                                SixSelect(SixChoice.RED);
+                            }
+                            else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+                            {
+                                SixSelect(SixChoice.BLUE);
+                            }
+                            break;
+                        case SixChoice.BLUE:
+                            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+                            {
+                                SixSelect(SixChoice.BLACK);
+                            }
+                            else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+                            {
+                                SixSelect(SixChoice.YELLOW);
+                            }
+                            else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+                            {
+                                SixSelect(SixChoice.GREEN);
+                            }
+                            break;
+                        case SixChoice.GREEN:
+                            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+                            {
+                                SixSelect(SixChoice.BLUE);
+                            }
+                            else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+                            {
+                                SixSelect(SixChoice.CANCEL);
+                            }
+                            break;
+                        case SixChoice.RED:
+                            if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+                            {
+                                SixSelect(SixChoice.BLACK);
+                            }
+                            else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+                            {
+                                SixSelect(SixChoice.YELLOW);
+                            }
+                            break;
+                        case SixChoice.YELLOW:
+                            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+                            {
+                                SixSelect(SixChoice.RED);
+                            }
+                            else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+                            {
+                                SixSelect(SixChoice.BLUE);
+                            }
+                            else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+                            {
+                                SixSelect(SixChoice.CANCEL);
+                            }
+                            break;
+                        case SixChoice.CANCEL:
+                            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+                            {
+                                SixSelect(SixChoice.YELLOW);
+                            }
+                            else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+                            {
+                                SixSelect(SixChoice.GREEN);
+                            }
+                            break;
+                    }
+                }
+                
             } 
         }
         else
@@ -134,16 +194,25 @@ public class DialogueBox : MonoBehaviour {
         dialogueText.text = "";
     }
 
-    void Select(Choice option)
+    void FourSelect(FourChoice option)
     {
-        dialogueOptions[(int)selectedChoice].transform.parent.GetComponent<Image>().color = deselectedColor;
-        selectedChoice = option;
-        dialogueOptions[(int)selectedChoice].transform.parent.GetComponent<Image>().color = selectedColor;
+        fourChoiceOptions[(int)selectedFourChoice].GetComponent<Image>().color = deselectedColor;
+        selectedFourChoice = option;
+        fourChoiceOptions[(int)selectedFourChoice].GetComponent<Image>().color = selectedColor;
+    }
+
+    void SixSelect(SixChoice option)
+    {
+        sixChoiceOptions[(int)selectedSixChoice].GetComponent<Image>().color = deselectedColor;
+        selectedSixChoice = option;
+        sixChoiceOptions[(int)selectedSixChoice].GetComponent<Image>().color = selectedColor;
     }
 
     public void DisplayLine(CharacterID s, string newLine, bool exitLine)
     {
-        choiceContent.SetActive(false);
+        choiceMode = ChoiceStyle.DEFAULT;
+        fourChoiceContent.SetActive(false);
+        sixChoiceContent.SetActive(false);
         dialogueContent.SetActive(true);
         Clear();
         speaker = s;
@@ -153,19 +222,31 @@ public class DialogueBox : MonoBehaviour {
         SayNextPortion();
     }
 
-    public void DisplayChoices(string[] textOptions)
+    public void DisplayChoices(ChoiceStyle style)
     {
-        dialogueOptions[(int)selectedChoice].transform.parent.GetComponent<Image>().color = deselectedColor;
-        selectedChoice = Choice.CANCEL;
-        dialogueOptions[(int)selectedChoice].transform.parent.GetComponent<Image>().color = selectedColor;
-
-        for (int i = 0; i<6; i++)
-        {
-            dialogueOptions[i].text = textOptions[i];
-        }
         dialogueContent.SetActive(false);
-        choiceContent.SetActive(true);
-        choiceMode = true;
+        if (style == ChoiceStyle.FOUR)
+        {
+            choiceMode = ChoiceStyle.FOUR;
+            sixChoiceContent.SetActive(false);
+
+            fourChoiceOptions[(int)selectedFourChoice].GetComponent<Image>().color = deselectedColor;
+            selectedFourChoice = FourChoice.CANCEL;
+            fourChoiceOptions[(int)selectedFourChoice].GetComponent<Image>().color = selectedColor;
+
+            fourChoiceContent.SetActive(true);
+        }
+        else
+        {
+            choiceMode = ChoiceStyle.SIX;
+            fourChoiceContent.SetActive(false);
+
+            sixChoiceOptions[(int)selectedSixChoice].GetComponent<Image>().color = deselectedColor;
+            selectedSixChoice = SixChoice.CANCEL;
+            sixChoiceOptions[(int)selectedSixChoice].GetComponent<Image>().color = selectedColor;
+
+            sixChoiceContent.SetActive(true);
+        }
     }
 
     void SetName(CharacterID id)
