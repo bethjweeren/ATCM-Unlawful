@@ -14,7 +14,7 @@ public class CameraSwitcher : MonoBehaviour
 	public GameObject interior; //Optional if area doesn't have roof
 	private float slowDown = 1.5f; //This variable is private because it's a pain to change for each one, and it helps keeps things consistent
 	private PlayerController playerController;
-	private ArrayList stuffToCover = new ArrayList();
+	private List<SpriteRenderer> stuffToCover = new List<SpriteRenderer>();
 
 	// Use this for initialization
 	void Start ()
@@ -50,12 +50,18 @@ public class CameraSwitcher : MonoBehaviour
 			playerController.SetSpeed(playerController.speed - slowDown); //Slow player down when they enter area
 			if (interior != null && stuffToCover != null)
 			{
-				foreach (SpriteRenderer sr in stuffToCover)
+				for(int i=0; i < stuffToCover.Count; i++)
 				{
-					sr.enabled = true;
+					SpriteRenderer sr = stuffToCover[i];
+					if (sr != null)
+						sr.enabled = true;
+					else
+						stuffToCover.Remove(sr);
 				}
 			}
 		}
+		//The following probably isn't necessary because the RenderLayer script should automatically hide moving things like NPCs
+		/*
 		else
 		{
 			if (interior != null && stuffToCover != null)
@@ -65,6 +71,7 @@ public class CameraSwitcher : MonoBehaviour
 				sr.enabled = false;
 			}
 		}
+		*/
 	}
 
 	//Called when player exits area
@@ -80,12 +87,18 @@ public class CameraSwitcher : MonoBehaviour
 			playerController.SetSpeed(playerController.speed + slowDown); //Bring player back to normal speed when they leave
 			if (interior != null && stuffToCover != null)
 			{
-				foreach (SpriteRenderer sr in stuffToCover)
+				for (int i = 0; i < stuffToCover.Count; i++)
 				{
-					sr.enabled = false;
+					SpriteRenderer sr = stuffToCover[i];
+					if (sr != null)
+						sr.enabled = false;
+					else
+						stuffToCover.Remove(sr);
 				}
 			}
 		}
+		//The following probably isn't necessary because the RenderLayer script should automatically hide moving things like NPCs
+		/*
 		else
 		{
 			if (interior != null && stuffToCover != null)
@@ -95,5 +108,6 @@ public class CameraSwitcher : MonoBehaviour
 				sr.enabled = true;
 			}
 		}
+		*/
 	}
 }

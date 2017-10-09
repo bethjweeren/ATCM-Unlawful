@@ -52,7 +52,8 @@ public class NPC : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		speed = originalSpeed * (timeManager.currentTimeSpeed / timeManager.normalTimeSpeed); //Speed up the NPCs when time changes
+		speed = originalSpeed * (timeManager.currentTimeSpeed / timeManager.normalTimeSpeed); //Speed up the NPCs when time speeds up
+		//closeEnough = closeEnough * (timeManager.currentTimeSpeed / timeManager.normalTimeSpeed); //Make close enough window wider when time speeds up
 		if (CheckHour() == waypointSets[(currentWaypointSet + 1) % waypointSets.Length].hour)
 		{
 			currentWaypointSet = (currentWaypointSet + 1) % waypointSets.Length;
