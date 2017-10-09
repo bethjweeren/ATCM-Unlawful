@@ -14457,7 +14457,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '<color=#193BFF>Bleu</color>
+  m_Text: '<color=#28b1ff>Bleu</color>
 
 '
 --- !u!222 &436784479
@@ -29266,7 +29266,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '<color=#191919>Noir</color>
+  m_Text: '<color=#000000>Noir</color>
 
 '
 --- !u!222 &872473145
@@ -42361,7 +42361,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '<color=#FF1919>Rouge</color>
+  m_Text: '<color=#d72c28>Rouge</color>
 
 '
 --- !u!222 &1299228027
@@ -49768,7 +49768,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: <color=#FFFF32>Jaune</color>
+  m_Text: <color=#fcff03>Jaune</color>
 --- !u!222 &1541050946
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -56134,7 +56134,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: <color=#11B211>Vert</color>
+  m_Text: <color=#61ec52>Vert</color>
 --- !u!222 &1741953765
 CanvasRenderer:
   m_ObjectHideFlags: 0
