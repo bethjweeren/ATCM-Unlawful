@@ -206,10 +206,17 @@ public class PlayerController : MonoBehaviour
 					else
 					{
 						print("interacting at night");
-						if (foundObject.collider.GetComponent<GameObject>().CompareTag("NPC"))
+						if (foundObject.collider.gameObject.CompareTag("NPC"))
 						{
 							print("found sleeping npc");
 							sleepingNPCNotice.SetActive(true);
+						}
+						else
+						{
+							time_manager.ForcePausedState();
+							currentState = State.INTERACTING;
+							StopMoving();
+							foundObject.collider.GetComponent<IInteractable>().Interact();
 						}
 					}
 				}
@@ -266,13 +273,20 @@ public class PlayerController : MonoBehaviour
 								currentState = State.INTERACTING;
 								StopMoving();
 								nearest.GetComponent<IInteractable>().Interact();
-								FreezeNPCs();
+								//FreezeNPCs(); They should already be frozen by time manager
 								time_manager.ForcePausedState();
 							}
 							else if (nearest.CompareTag("NPC"))
 							{
-								print("found sleeping npc");
+								print("found sleeping npc 2");
 								sleepingNPCNotice.SetActive(true);
+							}
+							else
+							{
+								currentState = State.INTERACTING;
+								StopMoving();
+								nearest.GetComponent<IInteractable>().Interact();
+								time_manager.ForcePausedState();
 							}
 						}
 				}
