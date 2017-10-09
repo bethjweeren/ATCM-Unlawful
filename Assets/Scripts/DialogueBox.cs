@@ -32,7 +32,6 @@ public class DialogueBox : MonoBehaviour {
 	}
 	
 	void Update () {
-        Debug.Log(choiceMode);
         if (choiceMode != ChoiceStyle.DEFAULT)
         {
             if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Space))

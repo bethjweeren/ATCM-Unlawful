@@ -44,12 +44,12 @@ public class Journal_Manager : MonoBehaviour {
 	public int currentRedNotes;
 	public int currentGreenNotes;
 	public int currentBrownNotes;
-	public Transform blueNotes1, blueNotes2, blueNotes3, blueNotes4, blueNotes5, blueNotes6, blueNotes7, blueNotes8;
-	public Transform blackNotes1, blackNotes2, blackNotes3, blackNotes4, blackNotes5, blackNotes6, blackNotes7, blackNotes8;
-	public Transform yellowNotes1, yellowNotes2, yellowNotes3, yellowNotes4, yellowNotes5, yellowNotes6, yellowNotes7, yellowNotes8;
-	public Transform redNotes1, redNotes2, redNotes3, redNotes4, redNotes5, redNotes6, redNotes7, redNotes8;
-	public Transform greenNotes1, greenNotes2, greenNotes3, greenNotes4, greenNotes5, greenNotes6, greenNotes7, greenNotes8;
-	public Transform brownNotes1, brownNotes2, brownNotes3, brownNotes4, brownNotes5, brownNotes6, brownNotes7, brownNotes8;
+	public Transform[] blueNotes;
+	public Transform[] blackNotes;
+	public Transform[] yellowNotes;
+	public Transform[] redNotes;
+	public Transform[] greenNotes;
+	public Transform[] brownNotes;
 	public Transform entryLocation;
 	public List<string> journalEntry = new List<string>();
 
@@ -188,211 +188,79 @@ public class Journal_Manager : MonoBehaviour {
         {
             case CharacterID.BLACK:
                 characterPage = blackEntryPage;
-                switch (currentBlackNotes)
+                if (currentBlackNotes < 12)
                 {
-                    case 8:
-                        return;
-                    case 7:
-                        entryLocation = blackNotes8;
-                        break;
-                    case 6:
-                        entryLocation = blackNotes7;
-                        break;
-                    case 5:
-                        entryLocation = blackNotes6;
-                        break;
-                    case 4:
-                        entryLocation = blackNotes5;
-                        break;
-                    case 3:
-                        entryLocation = blackNotes4;
-                        break;
-                    case 2:
-                        entryLocation = blackNotes3;
-                        break;
-                    case 1:
-                        entryLocation = blackNotes2;
-                        break;
-                    case 0:
-                    default:
-                        entryLocation = blackNotes1;
-                        break;
+                    entryLocation = blackNotes[currentBlackNotes];
+                }
+                else
+                {
+                    return;
                 }
                 currentBlackNotes++;
                 break;
             case CharacterID.BLUE:
                 characterPage = blueEntryPage;
-                switch (currentBlueNotes)
+                if (currentBlueNotes < 12)
                 {
-                    case 8:
-                        return;
-                    case 7:
-                        entryLocation = blueNotes8;
-                        break;
-                    case 6:
-                        entryLocation = blueNotes7;
-                        break;
-                    case 5:
-                        entryLocation = blueNotes6;
-                        break;
-                    case 4:
-                        entryLocation = blueNotes5;
-                        break;
-                    case 3:
-                        entryLocation = blueNotes4;
-                        break;
-                    case 2:
-                        entryLocation = blueNotes3;
-                        break;
-                    case 1:
-                        entryLocation = blueNotes2;
-                        break;
-                    case 0:
-                    default:
-                        entryLocation = blueNotes1;
-                        break;
+                    entryLocation = blueNotes[currentBlueNotes];
+                }
+                else
+                {
+                    return;
                 }
                 currentBlueNotes++;
                 break;
             case CharacterID.GREEN:
                 characterPage = greenEntryPage;
-                switch (currentGreenNotes)
+                if (currentGreenNotes < 12)
                 {
-                    case 8:
-                        return;
-                    case 7:
-                        entryLocation = greenNotes8;
-                        break;
-                    case 6:
-                        entryLocation = greenNotes7;
-                        break;
-                    case 5:
-                        entryLocation = greenNotes6;
-                        break;
-                    case 4:
-                        entryLocation = greenNotes5;
-                        break;
-                    case 3:
-                        entryLocation = greenNotes4;
-                        break;
-                    case 2:
-                        entryLocation = greenNotes3;
-                        break;
-                    case 1:
-                        entryLocation = greenNotes2;
-                        break;
-                    case 0:
-                    default:
-                        entryLocation = greenNotes1;
-                        break;
+                    entryLocation = greenNotes[currentGreenNotes];
+                }
+                else
+                {
+                    return;
                 }
                 currentGreenNotes++;
                 break;
             case CharacterID.RED:
                 characterPage = redEntryPage;
-                switch (currentRedNotes)
+                if (currentRedNotes < 12)
                 {
-                    case 8:
-                        return;
-                    case 7:
-                        entryLocation = redNotes8;
-                        break;
-                    case 6:
-                        entryLocation = redNotes7;
-                        break;
-                    case 5:
-                        entryLocation = redNotes6;
-                        break;
-                    case 4:
-                        entryLocation = redNotes5;
-                        break;
-                    case 3:
-                        entryLocation = redNotes4;
-                        break;
-                    case 2:
-                        entryLocation = redNotes3;
-                        break;
-                    case 1:
-                        entryLocation = redNotes2;
-                        break;
-                    case 0:
-                    default:
-                        entryLocation = redNotes1;
-                        break;
+                    entryLocation = redNotes[currentRedNotes];
+                }
+                else
+                {
+                    return;
                 }
                 currentRedNotes++;
-                break;			
+                break;
             case CharacterID.YELLOW:
                 characterPage = yellowEntryPage;
-                switch (currentYellowNotes)
+                if (currentYellowNotes < 12)
                 {
-                    case 8:
-                        return;
-                    case 7:
-                        entryLocation = yellowNotes8;
-                        break;
-                    case 6:
-                        entryLocation = yellowNotes7;
-                        break;
-                    case 5:
-                        entryLocation = yellowNotes6;
-                        break;
-                    case 4:
-                        entryLocation = yellowNotes5;
-                        break;
-                    case 3:
-                        entryLocation = yellowNotes4;
-                        break;
-                    case 2:
-                        entryLocation = yellowNotes3;
-                        break;
-                    case 1:
-                        entryLocation = yellowNotes2;
-                        break;
-                    case 0:
-                    default:
-                        entryLocation = yellowNotes1;
-                        break;
+                    entryLocation = yellowNotes[currentYellowNotes];
+                }
+                else
+                {
+                    return;
                 }
                 currentYellowNotes++;
                 break;
             default:
                 characterPage = brownEntryPage;
-                switch (currentBrownNotes)
+                if (currentBrownNotes < 12)
                 {
-                    case 8:
-                        return;
-                    case 7:
-                        entryLocation = brownNotes8;
-                        break;
-                    case 6:
-                        entryLocation = brownNotes7;
-                        break;
-                    case 5:
-                        entryLocation = brownNotes6;
-                        break;
-                    case 4:
-                        entryLocation = brownNotes5;
-                        break;
-                    case 3:
-                        entryLocation = brownNotes4;
-                        break;
-                    case 2:
-                        entryLocation = brownNotes3;
-                        break;
-                    case 1:
-                        entryLocation = brownNotes2;
-                        break;
-                    case 0:
-                    default:
-                        entryLocation = brownNotes1;
-                        break;
+                    entryLocation = brownNotes[currentBrownNotes];
+                }
+                else
+                {
+                    return;
                 }
                 currentBrownNotes++;
                 break;
         }
-        
-		localEntry = Instantiate (autoEntryPrefab, entryLocation.position, entryLocation.rotation, characterPage.transform);
+
+        localEntry = Instantiate (autoEntryPrefab, entryLocation.position, entryLocation.rotation, characterPage.transform);
 		autoJournalEntry = localEntry.GetComponent<AutoJournalEntry> ();
 		autoJournalEntry.entryText.text = entryString;
 		journalEntry.Add (entryString);
