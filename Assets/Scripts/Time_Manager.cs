@@ -33,8 +33,9 @@ public class Time_Manager : MonoBehaviour
 	//private NPC[] npcs; //To freeze/unfreeze NPCs (so they don't have to check on every update)
 	private GameObject[] npcs; //To freeze/unfreeze NPCs (so they don't have to check on every update)
 	bool alreadyFrozeNPCs = false;
+    public AudioSource timeShift, endOfDay;
 
-	void Start()
+    void Start()
 	{
 		pauseEffectTimer = 0;
 		currentTimeState = State.Morning;
@@ -49,7 +50,8 @@ public class Time_Manager : MonoBehaviour
 		skipRest.SetActive(false);
 		afternoonShade.SetActive(false);
 		nightShade.SetActive(false);
-	}
+        timeShift.Play();
+    }
 
 	void Awake()
 	{
@@ -140,7 +142,8 @@ public class Time_Manager : MonoBehaviour
 
 		if (hour >= afternoonStart)
 		{
-			afternoonShade.SetActive(true);
+            timeShift.Play();
+            afternoonShade.SetActive(true);
 			currentTimeState = State.Afternoon;
 		}
 		SwitchToPausedState();
@@ -155,7 +158,8 @@ public class Time_Manager : MonoBehaviour
 
 		if (hour >= nightStart)
 		{
-			afternoonShade.SetActive(false);
+            timeShift.Play();
+            afternoonShade.SetActive(false);
 			nightShade.SetActive(true);
 			currentTimeState = State.Night;
 		}
@@ -171,7 +175,8 @@ public class Time_Manager : MonoBehaviour
 
 		if (hour == morningStart)
 		{
-			skipRest.SetActive(true);
+            endOfDay.Play();
+            skipRest.SetActive(true);
 			currentTimeState = State.Rest;
 		}
 		SwitchToPausedState();
@@ -262,7 +267,8 @@ public class Time_Manager : MonoBehaviour
 
 	void SkipRestPeriod()
 	{
-		nightShade.SetActive(false);
+        timeShift.Play();
+        nightShade.SetActive(false);
 		currentTimeState = State.Morning;
 		hour = 6;
 		minute = 0;
