@@ -36,7 +36,7 @@ public class Characters
 
     public Characters()
     {
-        CharacterDict.Add(CharacterID.BLACK, new Character("Friar Noir", "BLACK", "#0000", Resources.Load<Sprite>(thumbPath + "Black_thumb")));
+        CharacterDict.Add(CharacterID.BLACK, new Character("Friar Noir", "BLACK", "#000000", Resources.Load<Sprite>(thumbPath + "Black_thumb")));
         NameDict.Add("BLACK", CharacterID.BLACK); //191919
 
         CharacterDict.Add(CharacterID.BLUE, new Character("Bleu", "BLUE", "#28b1ff", Resources.Load<Sprite>(thumbPath + "Blue_thumb")));

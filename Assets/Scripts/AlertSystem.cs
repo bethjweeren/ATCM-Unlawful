@@ -5,6 +5,7 @@ using UnityEngine;
 public class AlertSystem : MonoBehaviour {
     private Object alertLock = new Object();
     public GameObject alertFab;
+    public GameObject alertTray;
     List<AlertEntry> activeAlerts;
     public AudioSource alertPlayer;
     public AudioClip alertSound;
@@ -27,7 +28,7 @@ public class AlertSystem : MonoBehaviour {
         lock (alertLock)
         {
             alertPlayer.PlayOneShot(alertSound, 0.8f);
-            GameObject alert = (GameObject)Instantiate(alertFab, transform.position, Quaternion.identity, transform.parent);
+            GameObject alert = (GameObject)Instantiate(alertFab, transform.position, Quaternion.identity, alertTray.transform);
             AlertEntry alertScript = alert.GetComponent<AlertEntry>();
             alertScript.alertText.text = message;
 

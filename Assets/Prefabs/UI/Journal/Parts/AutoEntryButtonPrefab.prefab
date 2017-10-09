@@ -172,7 +172,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 114028551606219170}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -261,5 +261,5 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0.32824406, y: 0.17296776}
-  m_SizeDelta: {x: 460, y: 52}
+  m_SizeDelta: {x: 450, y: 52}
   m_Pivot: {x: 0.5, y: 0.5}

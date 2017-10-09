@@ -6,33 +6,33 @@ using UnityEngine.UI;
 public class AlertEntry : MonoBehaviour {
     public Text alertText;
     public Image panelBackground;
-    float startY;
+    RectTransform myTransform;
     float startTime;
     bool killing;
     int maxLifetime = 10;
-    int maxCapacity = 3;
+    int maxCapacity = 2;
     int targetPosition;
     float height = 25;
     float dropSpeed = 50;   //25 pixels in .5 seconds
 
 	// Use this for initialization
 	void Start () {
+        myTransform = GetComponent<RectTransform>();
         startTime = Time.time;
-        startY = transform.position.y;
-        targetPosition = 0;
+        targetPosition = -1;
         Bump();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (transform.position.y > (-25) * targetPosition + startY)
+		if (myTransform.position.y > (-25) * targetPosition)
         {
-            float y = transform.position.y - dropSpeed * Time.deltaTime;
-            if(y < (-25) * targetPosition + startY)
+            float y = myTransform.localPosition.y - dropSpeed * Time.deltaTime;
+            if(y < (-25) * targetPosition)
             {
-                y = (-25) * targetPosition + startY;
+                y = (-25) * targetPosition;
             }
-            transform.position = new Vector2(transform.position.x, y);
+            myTransform.localPosition = new Vector2(0, y);
         }
         if (!killing && (targetPosition > maxCapacity || Time.time - startTime > maxLifetime))
         {
