@@ -26,7 +26,7 @@ public class NPC : MonoBehaviour
 	GameObject next;
 	Time_Manager timeManager;
 	private GameObject[] positions;  //Positions 
-	private BoxCollider2D boxCollider;
+	private Collider2D npcCollider;
 	public WaypointSet[] waypointSets; //A list of a list of waypoints (I'm avoiding using the word "path" on purpose because pathfinding is separate)
 	private int currentWaypointSet = 0; //We're assuming the sets are in order by time.
 
@@ -46,13 +46,14 @@ public class NPC : MonoBehaviour
 		next = positions[positionNum];
 		waitBetween = waypointSets[currentWaypointSet].ticksToWaitAtEachWaypoint;
 		wait = waitBetween;
-		boxCollider = GetComponent<BoxCollider2D>();
+		npcCollider = GetComponent<Collider2D>();
 		originalSpeed = speed;
 	}
 
 	void FixedUpdate()
 	{
-		speed = originalSpeed * (timeManager.currentTimeSpeed / timeManager.normalTimeSpeed); //Speed up the NPCs when time changes
+		speed = originalSpeed * (timeManager.currentTimeSpeed / timeManager.normalTimeSpeed); //Speed up the NPCs when time speeds up
+		//closeEnough = closeEnough * (timeManager.currentTimeSpeed / timeManager.normalTimeSpeed); //Make close enough window wider when time speeds up
 		if (CheckHour() == waypointSets[(currentWaypointSet + 1) % waypointSets.Length].hour)
 		{
 			currentWaypointSet = (currentWaypointSet + 1) % waypointSets.Length;
@@ -63,7 +64,7 @@ public class NPC : MonoBehaviour
 		}
 		if (!stopped)
 		{
-			positionAtCollider = new Vector2 (boxCollider.transform.position.x+(boxCollider.offset.x/2), boxCollider.transform.position.y+(boxCollider.offset.y/2));
+			positionAtCollider = new Vector2(npcCollider.bounds.center.x, npcCollider.bounds.center.y);
 			//print("col " + positionAtCollider);
 			//print("pos " + transform.position);
 			if (wait <= 0)

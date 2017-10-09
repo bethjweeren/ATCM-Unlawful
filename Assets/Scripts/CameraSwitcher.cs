@@ -11,18 +11,30 @@ public class CameraSwitcher : MonoBehaviour
 	//Camera to switch to and camera to switch from when enter area
 	public Camera areaCamera, mainCamera;
 	public GameObject roof; //Optional, should NOT be collideable
+	public GameObject interior; //Optional if area doesn't have roof
 	private float slowDown = 1.5f; //This variable is private because it's a pain to change for each one, and it helps keeps things consistent
 	private PlayerController playerController;
-	//private SpriteRenderer spriteRenderer;
-	//private float outdoorSize = .325f;
-	//private float indoorSize = .325f;
+	private List<SpriteRenderer> stuffToCover = new List<SpriteRenderer>();
 
 	// Use this for initialization
 	void Start ()
 	{
 		if (roof != null)
 			roof.SetActive(true); //So we don't need these enabled in the scene because they get in the way
-		//spriteRenderer = playerController.GetComponent<SpriteRenderer>();
+		if (interior != null)
+		{
+			foreach (SpriteRenderer sr in interior.GetComponentsInChildren<SpriteRenderer>())
+			{
+				stuffToCover.Add(sr);
+			}
+		}
+		if (interior != null && stuffToCover != null)
+		{
+			foreach (SpriteRenderer sr in stuffToCover)
+			{
+				sr.enabled = false;
+			}
+		}
 	}
 
 	//Called when player enters area
@@ -31,14 +43,35 @@ public class CameraSwitcher : MonoBehaviour
 		if (other.tag.Equals("Player"))
 		{
 			playerController = other.GetComponent<PlayerController>();
-			//spriteRenderer = other.GetComponent<SpriteRenderer>();
 			areaCamera.enabled = true;
 			mainCamera.enabled = false;
 			if (roof != null)
 				roof.SetActive(false); //Roof disappears and player can enter.
 			playerController.SetSpeed(playerController.speed - slowDown); //Slow player down when they enter area
+			if (interior != null && stuffToCover != null)
+			{
+				for(int i=0; i < stuffToCover.Count; i++)
+				{
+					SpriteRenderer sr = stuffToCover[i];
+					if (sr != null)
+						sr.enabled = true;
+					else
+						stuffToCover.Remove(sr);
+				}
+			}
 		}
-		//other.transform.localScale = new Vector3(indoorSize, indoorSize, 1);
+		//The following probably isn't necessary because the RenderLayer script should automatically hide moving things like NPCs
+		/*
+		else
+		{
+			if (interior != null && stuffToCover != null)
+			{
+				SpriteRenderer sr = other.GetComponent<SpriteRenderer>();
+				stuffToCover.Add(sr);
+				sr.enabled = false;
+			}
+		}
+		*/
 	}
 
 	//Called when player exits area
@@ -47,14 +80,34 @@ public class CameraSwitcher : MonoBehaviour
 		if (other.tag.Equals("Player"))
 		{
 			playerController = other.GetComponent<PlayerController>();
-			//spriteRenderer = other.GetComponent<SpriteRenderer>();
 			areaCamera.enabled = false;
 			mainCamera.enabled = true;
 			if (roof != null)
 				roof.SetActive(true); //Roof covers area again.
 			playerController.SetSpeed(playerController.speed + slowDown); //Bring player back to normal speed when they leave
-			
+			if (interior != null && stuffToCover != null)
+			{
+				for (int i = 0; i < stuffToCover.Count; i++)
+				{
+					SpriteRenderer sr = stuffToCover[i];
+					if (sr != null)
+						sr.enabled = false;
+					else
+						stuffToCover.Remove(sr);
+				}
+			}
 		}
-		//other.transform.localScale = new Vector3(outdoorSize, outdoorSize, 1);
+		//The following probably isn't necessary because the RenderLayer script should automatically hide moving things like NPCs
+		/*
+		else
+		{
+			if (interior != null && stuffToCover != null)
+			{
+				SpriteRenderer sr = other.GetComponent<SpriteRenderer>();
+				stuffToCover.Remove(sr);
+				sr.enabled = true;
+			}
+		}
+		*/
 	}
 }
