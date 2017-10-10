@@ -10980,6 +10980,12 @@ Prefab:
       propertyPath: m_Name
       value: Page_Character_Entry_Green
       objectReference: {fileID: 0}
+    - target: {fileID: 114605750309888776, guid: a5ffd142759c571469c9b6e381a30e24,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c905497827df96a45bcde7b959c8d73d,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a5ffd142759c571469c9b6e381a30e24, type: 2}
   m_IsPrefabParent: 0
@@ -16698,6 +16704,12 @@ Prefab:
       propertyPath: m_Name
       value: Page_Character_Entry_Yellow
       objectReference: {fileID: 0}
+    - target: {fileID: 114605750309888776, guid: a5ffd142759c571469c9b6e381a30e24,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 97fb7a2c878892944bfb569de4bc9e58,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a5ffd142759c571469c9b6e381a30e24, type: 2}
   m_IsPrefabParent: 0
@@ -19029,6 +19041,12 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 1.000003
       objectReference: {fileID: 0}
+    - target: {fileID: 114813384123297318, guid: 48100b27abc7beb4885aa573b469ec3a,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3412d7edad0ebd941a23bedcfec7d9f4,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 48100b27abc7beb4885aa573b469ec3a, type: 2}
   m_IsPrefabParent: 0
@@ -38469,6 +38487,12 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 1.000003
       objectReference: {fileID: 0}
+    - target: {fileID: 114813384123297318, guid: 48100b27abc7beb4885aa573b469ec3a,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ac31fb242623be24cb514d96bda70f0e,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 48100b27abc7beb4885aa573b469ec3a, type: 2}
   m_IsPrefabParent: 0
@@ -50770,6 +50794,12 @@ Prefab:
       propertyPath: m_Name
       value: Page_Character_Entry_Blue
       objectReference: {fileID: 0}
+    - target: {fileID: 114813384123297318, guid: 48100b27abc7beb4885aa573b469ec3a,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 320bab1a2247c954eb5d295e91784d5a,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 48100b27abc7beb4885aa573b469ec3a, type: 2}
   m_IsPrefabParent: 0
