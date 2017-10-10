@@ -147,7 +147,7 @@ public class DialogueSystem
                 break;
             case SixChoice.CANCEL:
             default:
-                if (dialoguePrompt == Prompt.DEFAULT)
+                if (dialoguePrompt == Prompt.ACCUSATION)
                 {
                     Provider.GetInstance().dialogueBox.DisplayLine(nonPlayerID, currentNPC.GetCloser(), true);
                 }
