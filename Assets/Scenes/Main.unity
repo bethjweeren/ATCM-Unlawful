@@ -3437,6 +3437,7 @@ GameObject:
   - component: {fileID: 108059665}
   - component: {fileID: 108059667}
   - component: {fileID: 108059666}
+  - component: {fileID: 108059668}
   m_Layer: 0
   m_Name: Barrel
   m_TagString: Untagged
@@ -3514,6 +3515,18 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!114 &108059668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 108059664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a85e2f4898217d34b83b8e1a3083b614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useCenterOfCollider: 0
 --- !u!1 &108192424
 GameObject:
   m_ObjectHideFlags: 0
@@ -3946,6 +3959,7 @@ GameObject:
   - component: {fileID: 117673897}
   - component: {fileID: 117673899}
   - component: {fileID: 117673898}
+  - component: {fileID: 117673900}
   m_Layer: 0
   m_Name: Barrel (5)
   m_TagString: Untagged
@@ -4023,6 +4037,18 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!114 &117673900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 117673896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a85e2f4898217d34b83b8e1a3083b614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useCenterOfCollider: 0
 --- !u!1 &119040012
 GameObject:
   m_ObjectHideFlags: 0
@@ -7950,6 +7976,7 @@ GameObject:
   - component: {fileID: 193584966}
   - component: {fileID: 193584968}
   - component: {fileID: 193584967}
+  - component: {fileID: 193584969}
   m_Layer: 0
   m_Name: Barrel (3)
   m_TagString: Untagged
@@ -8027,6 +8054,18 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!114 &193584969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 193584965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a85e2f4898217d34b83b8e1a3083b614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useCenterOfCollider: 0
 --- !u!1 &195880711
 GameObject:
   m_ObjectHideFlags: 0
@@ -8634,6 +8673,7 @@ GameObject:
   - component: {fileID: 223829403}
   - component: {fileID: 223829405}
   - component: {fileID: 223829404}
+  - component: {fileID: 223829406}
   m_Layer: 0
   m_Name: Barrel (7)
   m_TagString: Untagged
@@ -8711,6 +8751,18 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!114 &223829406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 223829402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a85e2f4898217d34b83b8e1a3083b614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useCenterOfCollider: 0
 --- !u!1 &226795597
 GameObject:
   m_ObjectHideFlags: 0
@@ -9202,6 +9254,7 @@ GameObject:
   - component: {fileID: 250995640}
   - component: {fileID: 250995642}
   - component: {fileID: 250995641}
+  - component: {fileID: 250995643}
   m_Layer: 0
   m_Name: Barrel (2)
   m_TagString: Untagged
@@ -9279,6 +9332,18 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!114 &250995643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 250995639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a85e2f4898217d34b83b8e1a3083b614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useCenterOfCollider: 0
 --- !u!1 &253386411
 GameObject:
   m_ObjectHideFlags: 0
@@ -12356,6 +12421,7 @@ GameObject:
   - component: {fileID: 353387279}
   - component: {fileID: 353387281}
   - component: {fileID: 353387280}
+  - component: {fileID: 353387282}
   m_Layer: 0
   m_Name: Barrel (1)
   m_TagString: Untagged
@@ -12433,6 +12499,18 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!114 &353387282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 353387278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a85e2f4898217d34b83b8e1a3083b614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useCenterOfCollider: 0
 --- !u!1 &354631435
 GameObject:
   m_ObjectHideFlags: 0
@@ -31058,6 +31136,7 @@ GameObject:
   - component: {fileID: 927809647}
   - component: {fileID: 927809649}
   - component: {fileID: 927809648}
+  - component: {fileID: 927809650}
   m_Layer: 0
   m_Name: Barrel (12)
   m_TagString: Untagged
@@ -31135,6 +31214,18 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!114 &927809650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 927809646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a85e2f4898217d34b83b8e1a3083b614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useCenterOfCollider: 0
 --- !u!1 &928383263
 GameObject:
   m_ObjectHideFlags: 0
@@ -33702,6 +33793,7 @@ GameObject:
   - component: {fileID: 1007025875}
   - component: {fileID: 1007025877}
   - component: {fileID: 1007025876}
+  - component: {fileID: 1007025878}
   m_Layer: 0
   m_Name: Barrel (4)
   m_TagString: Untagged
@@ -33779,6 +33871,18 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!114 &1007025878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1007025874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a85e2f4898217d34b83b8e1a3083b614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useCenterOfCollider: 0
 --- !u!224 &1008950777 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224836207164093560, guid: 7bcc72ad9cb105948b8a78b22f08215e,
@@ -34626,6 +34730,7 @@ GameObject:
   - component: {fileID: 1036522786}
   - component: {fileID: 1036522788}
   - component: {fileID: 1036522787}
+  - component: {fileID: 1036522789}
   m_Layer: 0
   m_Name: Barrel (9)
   m_TagString: Untagged
@@ -34703,6 +34808,18 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!114 &1036522789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1036522785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a85e2f4898217d34b83b8e1a3083b614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useCenterOfCollider: 0
 --- !u!1 &1040298843
 GameObject:
   m_ObjectHideFlags: 0
@@ -34763,7 +34880,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -100
+  m_SortingOrder: -200
   m_Sprite: {fileID: 21300000, guid: abe97a1f1a463a1418ccdcec47963881, type: 3}
   m_Color: {r: 0.76862746, g: 0.6039216, b: 0.42352942, a: 1}
   m_FlipX: 0
@@ -42822,7 +42939,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1309259251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44404,7 +44521,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -505389675
   m_SortingLayer: -1
-  m_SortingOrder: -100
+  m_SortingOrder: -200
   m_Sprite: {fileID: 21300000, guid: abe97a1f1a463a1418ccdcec47963881, type: 3}
   m_Color: {r: 0.76862746, g: 0.6039216, b: 0.42352942, a: 1}
   m_FlipX: 0
@@ -46580,6 +46697,7 @@ GameObject:
   - component: {fileID: 1438932857}
   - component: {fileID: 1438932859}
   - component: {fileID: 1438932858}
+  - component: {fileID: 1438932860}
   m_Layer: 0
   m_Name: Barrel (10)
   m_TagString: Untagged
@@ -46657,6 +46775,18 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!114 &1438932860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1438932856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a85e2f4898217d34b83b8e1a3083b614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useCenterOfCollider: 0
 --- !u!1 &1442483175
 GameObject:
   m_ObjectHideFlags: 0
@@ -52262,6 +52392,7 @@ GameObject:
   - component: {fileID: 1616604359}
   - component: {fileID: 1616604361}
   - component: {fileID: 1616604360}
+  - component: {fileID: 1616604362}
   m_Layer: 0
   m_Name: Barrel (8)
   m_TagString: Untagged
@@ -52339,6 +52470,18 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!114 &1616604362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1616604358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a85e2f4898217d34b83b8e1a3083b614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useCenterOfCollider: 0
 --- !u!1 &1618531087
 GameObject:
   m_ObjectHideFlags: 0
@@ -53320,6 +53463,7 @@ GameObject:
   - component: {fileID: 1640076316}
   - component: {fileID: 1640076318}
   - component: {fileID: 1640076317}
+  - component: {fileID: 1640076319}
   m_Layer: 0
   m_Name: Barrel (11)
   m_TagString: Untagged
@@ -53397,6 +53541,18 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!114 &1640076319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1640076315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a85e2f4898217d34b83b8e1a3083b614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useCenterOfCollider: 0
 --- !u!1 &1640211262
 GameObject:
   m_ObjectHideFlags: 0
@@ -64882,6 +65038,7 @@ GameObject:
   - component: {fileID: 2013400262}
   - component: {fileID: 2013400264}
   - component: {fileID: 2013400263}
+  - component: {fileID: 2013400265}
   m_Layer: 0
   m_Name: Barrel (13)
   m_TagString: Untagged
@@ -64959,6 +65116,18 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!114 &2013400265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2013400261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a85e2f4898217d34b83b8e1a3083b614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useCenterOfCollider: 0
 --- !u!1 &2014042029
 GameObject:
   m_ObjectHideFlags: 0
@@ -65636,6 +65805,7 @@ GameObject:
   - component: {fileID: 2048912600}
   - component: {fileID: 2048912602}
   - component: {fileID: 2048912601}
+  - component: {fileID: 2048912603}
   m_Layer: 0
   m_Name: Barrel (6)
   m_TagString: Untagged
@@ -65713,6 +65883,18 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!114 &2048912603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2048912599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a85e2f4898217d34b83b8e1a3083b614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useCenterOfCollider: 0
 --- !u!224 &2051818965 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224864792074351222, guid: 7bcc72ad9cb105948b8a78b22f08215e,

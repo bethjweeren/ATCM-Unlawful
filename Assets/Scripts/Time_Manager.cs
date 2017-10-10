@@ -137,10 +137,11 @@ public class Time_Manager : MonoBehaviour
 	{
 		NormalCode();
 		UpdateTime(true, currentTimeSpeed);
+        pastTimeState = State.Morning;
 
-		//enter morning code
+        //enter morning code
 
-		if (hour >= afternoonStart)
+        if (hour >= afternoonStart)
 		{
             timeShift.Play();
             afternoonShade.SetActive(true);
@@ -153,10 +154,11 @@ public class Time_Manager : MonoBehaviour
 	{
 		NormalCode();
 		UpdateTime(true, currentTimeSpeed);
+        pastTimeState = State.Afternoon;
 
-		//enter afternoon code
+        //enter afternoon code
 
-		if (hour >= nightStart)
+        if (hour >= nightStart)
 		{
             timeShift.Play();
             afternoonShade.SetActive(false);
@@ -170,10 +172,11 @@ public class Time_Manager : MonoBehaviour
 	{
 		NormalCode();
 		UpdateTime(true, currentTimeSpeed);
+        pastTimeState = State.Night;
 
-		//enter night code
+        //enter night code
 
-		if (hour == morningStart)
+        if (hour == morningStart)
 		{
             endOfDay.Play();
             skipRest.SetActive(true);
