@@ -17,7 +17,7 @@ public class ButtonResume : MonoBehaviour
 		playerController = player.GetComponent<PlayerController>();
 	}
 
-	void TaskOnClick()
+	public void TaskOnClick()
 	{
 		playerController.SwitchToMainState();
 		time_manager.LeavePauseState();

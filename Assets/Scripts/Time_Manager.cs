@@ -126,7 +126,7 @@ public class Time_Manager : MonoBehaviour
 			if (hour >= 24)
 			{
 				hour = 0;
-				moneyManager.ChangeMoney (100);
+				//moneyManager.ChangeMoney (100);
 				//ResetBins();
 				day++;
 			}
