@@ -15,5 +15,5 @@ EditorBuildSettings:
     path: Assets/Scenes/Main.unity
     guid: 980398c12f45afe40b1667309a0b9018
   - enabled: 0
-    path: Assets/Scenes/InteractwMort.unity
+    path: 
     guid: b46130d195b032b41b8dc84156042c81

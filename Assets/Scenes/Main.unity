@@ -28042,11 +28042,11 @@ MonoBehaviour:
   autoEntryPrefab: {fileID: 1331354408134384, guid: 819a4bf5227c6284b81ca66822be1792,
     type: 2}
   blueEntryPage: {fileID: 1551331710}
-  blackEntryPage: {fileID: 1003441490}
+  blackEntryPage: {fileID: 1163669115}
   yellowEntryPage: {fileID: 532952997}
   redEntryPage: {fileID: 597864353}
   greenEntryPage: {fileID: 314489927}
-  otherEntryPage: {fileID: 1163669115}
+  otherEntryPage: {fileID: 1003441490}
   currentBlueNotes: 0
   currentBlackNotes: 0
   currentYellowNotes: 0
@@ -28067,18 +28067,18 @@ MonoBehaviour:
   - {fileID: 1551331699}
   - {fileID: 1551331697}
   blackNotes:
-  - {fileID: 1003441489}
-  - {fileID: 1003441488}
-  - {fileID: 1003441487}
-  - {fileID: 1003441486}
-  - {fileID: 1003441485}
-  - {fileID: 1003441484}
-  - {fileID: 1003441483}
-  - {fileID: 1003441482}
-  - {fileID: 1003441481}
-  - {fileID: 1003441480}
-  - {fileID: 1003441479}
-  - {fileID: 1003441477}
+  - {fileID: 1163669114}
+  - {fileID: 1163669113}
+  - {fileID: 1163669112}
+  - {fileID: 1163669111}
+  - {fileID: 1163669110}
+  - {fileID: 1163669109}
+  - {fileID: 1163669108}
+  - {fileID: 1163669107}
+  - {fileID: 1163669106}
+  - {fileID: 1163669105}
+  - {fileID: 1163669104}
+  - {fileID: 1163669102}
   yellowNotes:
   - {fileID: 532952996}
   - {fileID: 532952995}
@@ -28119,18 +28119,18 @@ MonoBehaviour:
   - {fileID: 314489916}
   - {fileID: 314489914}
   otherNotes:
-  - {fileID: 1163669114}
-  - {fileID: 1163669113}
-  - {fileID: 1163669112}
-  - {fileID: 1163669111}
-  - {fileID: 1163669110}
-  - {fileID: 1163669109}
-  - {fileID: 1163669108}
-  - {fileID: 1163669107}
-  - {fileID: 1163669106}
-  - {fileID: 1163669105}
-  - {fileID: 1163669104}
-  - {fileID: 1163669102}
+  - {fileID: 1003441489}
+  - {fileID: 1003441488}
+  - {fileID: 1003441487}
+  - {fileID: 1003441486}
+  - {fileID: 1003441485}
+  - {fileID: 1003441484}
+  - {fileID: 1003441483}
+  - {fileID: 1003441482}
+  - {fileID: 1003441481}
+  - {fileID: 1003441480}
+  - {fileID: 1003441479}
+  - {fileID: 1003441477}
   entryLocation: {fileID: 0}
   journalEntry: []
   knownClues: []
@@ -33336,7 +33336,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1270458584385242, guid: a5ffd142759c571469c9b6e381a30e24, type: 2}
       propertyPath: m_Name
-      value: Page_Character_Entry_Black
+      value: Page_Character_Entry_Other
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a5ffd142759c571469c9b6e381a30e24, type: 2}
@@ -38335,7 +38335,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1432184188227016, guid: 48100b27abc7beb4885aa573b469ec3a, type: 2}
       propertyPath: m_Name
-      value: Page_Character_Entry_Other
+      value: Page_Character_Entry_Black
       objectReference: {fileID: 0}
     - target: {fileID: 224288836798298756, guid: 48100b27abc7beb4885aa573b469ec3a,
         type: 2}
@@ -42822,7 +42822,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1309259251
 MonoBehaviour:
   m_ObjectHideFlags: 0
