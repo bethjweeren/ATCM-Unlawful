@@ -398,7 +398,7 @@ public class NPCDialogue : MonoBehaviour, IInteractable {
     {
         DialogueSystem.Instance().CreateJournalEntry("The victim was [Victim].", CharacterID.VICTIM, "motive");
         yield return new WaitForSeconds(0.05f);
-        DialogueSystem.Instance().CreateJournalEntry("[Victim] was strangled.", CharacterID.VICTIM, "method");
+        DialogueSystem.Instance().CreateJournalEntry("[Victim] was strangled.", CharacterID.VICTIM, "means");
         yield return new WaitForSeconds(0.05f);
         DialogueSystem.Instance().CreateJournalEntry("[Victim] was killed in the Town Square.", CharacterID.VICTIM, "opportunity");
     }
