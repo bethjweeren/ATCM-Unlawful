@@ -35,6 +35,7 @@ public class Tutorial : MonoBehaviour, IInteractable {
     {
         Provider.GetInstance().player.EndInteraction();
         letterUI.gameObject.SetActive(false);
+        Provider.GetInstance().player.time_manager.LeavePauseState();
         Destroy(this.gameObject);
     }
 }
