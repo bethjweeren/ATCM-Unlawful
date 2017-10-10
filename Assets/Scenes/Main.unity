@@ -6995,6 +6995,11 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!1 &182263824 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1081438929340124, guid: 89560cfaa6be34c4897518e1f8fb98dd,
+    type: 2}
+  m_PrefabInternal: {fileID: 2118706435}
 --- !u!1 &184264900
 GameObject:
   m_ObjectHideFlags: 0
@@ -20030,6 +20035,8 @@ MonoBehaviour:
   loseColor: {r: 1, g: 0, b: 0, a: 1}
   winSound: {fileID: 640037793}
   loseSound: {fileID: 640037793}
+  clock: {fileID: 1160285770}
+  journal: {fileID: 182263824}
 --- !u!82 &640037793
 AudioSource:
   m_ObjectHideFlags: 0
@@ -38150,6 +38157,11 @@ Transform:
   m_PrefabParentObject: {fileID: 4815555381387546, guid: 443e4c39564f2194d926745a2af74f49,
     type: 2}
   m_PrefabInternal: {fileID: 192842137}
+--- !u!1 &1160285770 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1036660500763716, guid: e03cea222955c634f980f5b5345be279,
+    type: 2}
+  m_PrefabInternal: {fileID: 741874626}
 --- !u!1 &1162781921
 GameObject:
   m_ObjectHideFlags: 0
