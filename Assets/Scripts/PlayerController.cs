@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
+        ClueList test = new ClueList();
         Provider.GetInstance().player = this;
         journalCanvas.SetActive (false);
 		itemCanvas.SetActive (false);

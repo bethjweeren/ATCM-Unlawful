@@ -43,29 +43,6 @@ public class Quotes {
             Quotes quotes = JsonUtility.FromJson<Quotes>(json);
             fileReader.Close();
             Debug.Log("Read success: " + filename);
-
-            /*
-            List<string> temp = new List<string>();
-            foreach (string line in quotes.introductions)
-            {
-                temp.Add(FormatColors(line));
-            }
-            quotes.introductions = temp;
-
-            temp = new List<string>();
-            foreach (string line in quotes.openers)
-            {
-                temp.Add(FormatColors(line));
-            }
-            quotes.openers = temp;
-
-            temp = new List<string>();
-            foreach (string line in quotes.closers)
-            {
-                temp.Add(FormatColors(line));
-            }
-            quotes.closers = temp;
-            */
             return quotes;
         }
         catch
