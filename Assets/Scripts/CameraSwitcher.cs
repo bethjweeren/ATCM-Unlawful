@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 //Controls camera switching for one specific area
 //Put this script under any area camera
@@ -9,16 +10,22 @@ using UnityEngine;
 public class CameraSwitcher : MonoBehaviour
 {
 	//Camera to switch to and camera to switch from when enter area
-	public Camera areaCamera, mainCamera;
+	public GameObject areaCameraObject;
+	public Camera mainCamera; //Use GameObjects not actual Camera objects because MovingAreaCamera script uses OnEnable
 	public GameObject roof; //Optional, should NOT be collideable
 	public GameObject interior; //Optional if area doesn't have roof
-	private float slowDown = 1.5f; //This variable is private because it's a pain to change for each one, and it helps keeps things consistent
+	public GameObject blackoutOverlay; //Optional
+	public GameObject fade;
+	private float fadeIncrement = .05f; //Lower the number, slower/more gradual the fade to and from black
+	private float slowDown = 1.5f; //How much to slow down player on entry. This variable is private because it's a pain to change for each one, and it helps keeps things consistent
 	private PlayerController playerController;
 	private List<SpriteRenderer> stuffToCover = new List<SpriteRenderer>();
+	private CanvasRenderer fadeRenderer;
 
 	// Use this for initialization
-	void Start ()
+	void Start()
 	{
+		fadeRenderer = fade.GetComponent<CanvasRenderer>();
 		if (roof != null)
 			roof.SetActive(true); //So we don't need these enabled in the scene because they get in the way
 		if (interior != null)
@@ -42,23 +49,7 @@ public class CameraSwitcher : MonoBehaviour
 	{
 		if (other.tag.Equals("Player"))
 		{
-			playerController = other.GetComponent<PlayerController>();
-			areaCamera.enabled = true;
-			mainCamera.enabled = false;
-			if (roof != null)
-				roof.SetActive(false); //Roof disappears and player can enter.
-			playerController.SetSpeed(playerController.speed - slowDown); //Slow player down when they enter area
-			if (interior != null && stuffToCover != null)
-			{
-				for(int i=0; i < stuffToCover.Count; i++)
-				{
-					SpriteRenderer sr = stuffToCover[i];
-					if (sr != null)
-						sr.enabled = true;
-					else
-						stuffToCover.Remove(sr);
-				}
-			}
+			StartCoroutine(FadeToArea(other));
 		}
 		//The following probably isn't necessary because the RenderLayer script should automatically hide moving things like NPCs
 		/*
@@ -79,23 +70,7 @@ public class CameraSwitcher : MonoBehaviour
 	{
 		if (other.tag.Equals("Player"))
 		{
-			playerController = other.GetComponent<PlayerController>();
-			areaCamera.enabled = false;
-			mainCamera.enabled = true;
-			if (roof != null)
-				roof.SetActive(true); //Roof covers area again.
-			playerController.SetSpeed(playerController.speed + slowDown); //Bring player back to normal speed when they leave
-			if (interior != null && stuffToCover != null)
-			{
-				for (int i = 0; i < stuffToCover.Count; i++)
-				{
-					SpriteRenderer sr = stuffToCover[i];
-					if (sr != null)
-						sr.enabled = false;
-					else
-						stuffToCover.Remove(sr);
-				}
-			}
+			StartCoroutine(FadeToMain(other));
 		}
 		//The following probably isn't necessary because the RenderLayer script should automatically hide moving things like NPCs
 		/*
@@ -109,5 +84,91 @@ public class CameraSwitcher : MonoBehaviour
 			}
 		}
 		*/
+	}
+
+	IEnumerator FadeToArea(Collider2D other)
+	{
+		//Fade to black
+		for (float f = 0f; f <= 1f; f += fadeIncrement)
+		{
+			fadeRenderer.SetAlpha(f);
+			//Color c = fadeImage.material.color;
+			//c.a = f;
+			//fadeImage.material.color = c;
+			yield return null;
+		}
+
+		//Wait, then switch to area camera
+		//yield return new WaitForSeconds(.1f);
+		playerController = other.GetComponent<PlayerController>();
+		mainCamera.enabled = false;
+		areaCameraObject.SetActive(true);
+
+		if (roof != null)
+			roof.SetActive(false); //Roof disappears and player can enter.
+		if (blackoutOverlay != null)
+			blackoutOverlay.SetActive(true); //Blackout appears
+		playerController.SetSpeed(playerController.speed - slowDown); //Slow player down when they enter area
+		if (interior != null && stuffToCover != null)
+		{
+			for (int i = 0; i < stuffToCover.Count; i++)
+			{
+				SpriteRenderer sr = stuffToCover[i];
+				if (sr != null)
+					sr.enabled = true;
+				else
+					stuffToCover.Remove(sr);
+			}
+		}
+
+		//Fade to area camera
+		for (float f = 1f; f >= 0; f -= fadeIncrement)
+		{
+			fadeRenderer.SetAlpha(f);
+			//Color c = fadeImage.material.color;
+			//c.a = f;
+			//fadeImage.material.color = c;
+			yield return null;
+		}
+	}
+
+	IEnumerator FadeToMain(Collider2D other)
+	{
+		//Fade to black
+		for (float f = 0f; f <= 1f; f += fadeIncrement)
+		{
+			fadeRenderer.SetAlpha(f);
+			yield return null;
+		}
+
+		//Wait, then switch to main camera
+		//yield return new WaitForSeconds(.1f);
+		playerController = other.GetComponent<PlayerController>();
+		mainCamera.enabled = true;
+		areaCameraObject.SetActive(false);
+
+		if (roof != null)
+			roof.SetActive(true); //Roof covers area again.
+		if (blackoutOverlay != null)
+			blackoutOverlay.SetActive(false); //Blackout disappears again
+		playerController.SetSpeed(playerController.speed + slowDown); //Bring player back to normal speed when they leave
+		if (interior != null && stuffToCover != null)
+		{
+			for (int i = 0; i < stuffToCover.Count; i++)
+			{
+				SpriteRenderer sr = stuffToCover[i];
+				if (sr != null)
+					sr.enabled = false;
+				else
+					stuffToCover.Remove(sr);
+			}
+		}
+
+		//Fade to main camera
+		for (float f = 1f; f >= 0; f -= fadeIncrement)
+		{
+			fadeRenderer.SetAlpha(f);
+			yield return null;
+		}
 	}
 }
