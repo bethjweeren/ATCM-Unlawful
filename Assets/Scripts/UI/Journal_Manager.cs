@@ -53,7 +53,14 @@ public class Journal_Manager : MonoBehaviour {
 	public Transform entryLocation;
 	public List<string> journalEntry = new List<string>();
 
-	void Start()
+    public GameObject blackStarterEntry;
+    public GameObject blueStarterEntry;
+    public GameObject greenStarterEntry;
+    public GameObject redStarterEntry;
+    public GameObject yellowStarterEntry;
+    public GameObject otherStarterEntry;
+
+    void Start()
 	{
 
 		currentPage.transform.position = page1Location.position;
@@ -188,6 +195,10 @@ public class Journal_Manager : MonoBehaviour {
         {
             case CharacterID.BLACK:
                 characterPage = blackEntryPage;
+                if (currentBlackNotes == 0)
+                {
+                    Destroy(blackStarterEntry);
+                }
                 if (currentBlackNotes < 12)
                 {
                     entryLocation = blackNotes[currentBlackNotes];
@@ -200,6 +211,10 @@ public class Journal_Manager : MonoBehaviour {
                 break;
             case CharacterID.BLUE:
                 characterPage = blueEntryPage;
+                if (currentBlueNotes == 0)
+                {
+                    Destroy(blueStarterEntry);
+                }
                 if (currentBlueNotes < 12)
                 {
                     entryLocation = blueNotes[currentBlueNotes];
@@ -212,6 +227,10 @@ public class Journal_Manager : MonoBehaviour {
                 break;
             case CharacterID.GREEN:
                 characterPage = greenEntryPage;
+                if (currentGreenNotes == 0)
+                {
+                    Destroy(greenStarterEntry);
+                }
                 if (currentGreenNotes < 12)
                 {
                     entryLocation = greenNotes[currentGreenNotes];
@@ -224,6 +243,10 @@ public class Journal_Manager : MonoBehaviour {
                 break;
             case CharacterID.RED:
                 characterPage = redEntryPage;
+                if (currentRedNotes == 0)
+                {
+                    Destroy(redStarterEntry);
+                }
                 if (currentRedNotes < 12)
                 {
                     entryLocation = redNotes[currentRedNotes];
@@ -236,6 +259,10 @@ public class Journal_Manager : MonoBehaviour {
                 break;
             case CharacterID.YELLOW:
                 characterPage = yellowEntryPage;
+                if (currentYellowNotes == 0)
+                {
+                    Destroy(yellowStarterEntry);
+                }
                 if (currentYellowNotes < 12)
                 {
                     entryLocation = yellowNotes[currentYellowNotes];
@@ -248,6 +275,10 @@ public class Journal_Manager : MonoBehaviour {
                 break;
             default:
                 characterPage = brownEntryPage;
+                if (currentBrownNotes == 0)
+                {
+                    Destroy(otherStarterEntry);
+                }
                 if (currentBrownNotes < 12)
                 {
                     entryLocation = brownNotes[currentBrownNotes];
