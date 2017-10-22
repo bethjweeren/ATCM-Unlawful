@@ -120,8 +120,19 @@ public class Time_Manager : MonoBehaviour
 				minute = 0;
 				hour++;
 			}
-			if (minuteCounter >= 1100)
+			if (minuteCounter >= 1160)
 			{
+				timeShift.Play();
+				nightShade.SetActive(false);
+				currentTimeState = State.Morning;
+				hour = 6;
+				minute = 0;
+				minuteCounter = 0;
+				skipRest.SetActive(false);
+				goToBedNote.SetActive (false);
+				UpdateTime(true, currentTimeSpeed);
+				playerController.ResumeInput();
+				Debug.Log("skiped");
 				minuteCounter = 0;
 			}
 			if (hour >= 24)
@@ -202,7 +213,10 @@ public class Time_Manager : MonoBehaviour
 			isGoing = false;
 		}
 		*/
-		UpdateTime(false, currentTimeSpeed);
+
+		UpdateTime(true, currentTimeSpeed);
+
+		//UpdateTime(false, currentTimeSpeed);
 		SwitchToPausedState();
 	}
 
