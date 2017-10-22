@@ -23,7 +23,7 @@ public class Time_Manager : MonoBehaviour
 	public float timer, timeCrunch, minute, currentTimeSpeed, normalTimeSpeed, fastTimeSpeed, pauseEffectTimer, timerHand, minuteCounter;
 	public GameObject hourHand, /* minuteHand, */ hourHand_red,/* minuteHand_red, */ hourHand_black /*, minuteHand_black*/;
 	public Transform restPlace;
-	public GameObject Player, skipRest, nightShade, afternoonShade;
+	public GameObject Player, skipRest, nightShade, afternoonShade, goToBedNote;
 	private PlayerController playerController;
 	public bool isGoing = true;
 	public string outOfTimeReason;
@@ -33,9 +33,9 @@ public class Time_Manager : MonoBehaviour
 	//private NPC[] npcs; //To freeze/unfreeze NPCs (so they don't have to check on every update)
 	private GameObject[] npcs; //To freeze/unfreeze NPCs (so they don't have to check on every update)
 	bool alreadyFrozeNPCs = false;
-    public AudioSource timeShift, endOfDay;
+	public AudioSource timeShift, endOfDay;
 
-    void Start()
+	void Start()
 	{
 		pauseEffectTimer = 0;
 		currentTimeState = State.Morning;
@@ -48,10 +48,11 @@ public class Time_Manager : MonoBehaviour
 		skipRest_Btn.onClick.AddListener(SkipRestPeriod);
 
 		skipRest.SetActive(false);
+		goToBedNote.SetActive (false);
 		afternoonShade.SetActive(false);
 		nightShade.SetActive(false);
-        timeShift.Play();
-    }
+		timeShift.Play();
+	}
 
 	void Awake()
 	{
@@ -69,7 +70,7 @@ public class Time_Manager : MonoBehaviour
 		UpdateClock();
 		//Debug.Log (hour + " : " + minute + " _ " + day);
 		if (day >= 4) {
-            Provider.GetInstance().gameOver.LoseGame(outOfTimeReason);
+			Provider.GetInstance().gameOver.LoseGame(outOfTimeReason);
 		}
 
 		if (Input.GetKeyDown(KeyCode.Alpha3))
@@ -82,25 +83,25 @@ public class Time_Manager : MonoBehaviour
 	{
 		switch (currentTimeState)
 		{
-			case State.Morning:
-				MorningCode();
-				break;
+		case State.Morning:
+			MorningCode();
+			break;
 
-			case State.Afternoon:
-				AfternoonCode();
-				break;
+		case State.Afternoon:
+			AfternoonCode();
+			break;
 
-			case State.Night:
-				NightCode();
-				break;
+		case State.Night:
+			NightCode();
+			break;
 
-			case State.Rest:
-				RestCode();
-				break;
+		case State.Rest:
+			RestCode();
+			break;
 
-			case State.Paused:
-				PausedCode();
-				break;
+		case State.Paused:
+			PausedCode();
+			break;
 		}
 	}
 
@@ -137,14 +138,14 @@ public class Time_Manager : MonoBehaviour
 	{
 		NormalCode();
 		UpdateTime(true, currentTimeSpeed);
-        pastTimeState = State.Morning;
+		pastTimeState = State.Morning;
 
-        //enter morning code
+		//enter morning code
 
-        if (hour >= afternoonStart)
+		if (hour >= afternoonStart)
 		{
-            timeShift.Play();
-            afternoonShade.SetActive(true);
+			timeShift.Play();
+			afternoonShade.SetActive(true);
 			currentTimeState = State.Afternoon;
 		}
 		SwitchToPausedState();
@@ -154,14 +155,14 @@ public class Time_Manager : MonoBehaviour
 	{
 		NormalCode();
 		UpdateTime(true, currentTimeSpeed);
-        pastTimeState = State.Afternoon;
+		pastTimeState = State.Afternoon;
 
-        //enter afternoon code
+		//enter afternoon code
 
-        if (hour >= nightStart)
+		if (hour >= nightStart)
 		{
-            timeShift.Play();
-            afternoonShade.SetActive(false);
+			timeShift.Play();
+			afternoonShade.SetActive(false);
 			nightShade.SetActive(true);
 			currentTimeState = State.Night;
 		}
@@ -172,15 +173,17 @@ public class Time_Manager : MonoBehaviour
 	{
 		NormalCode();
 		UpdateTime(true, currentTimeSpeed);
-        pastTimeState = State.Night;
+		pastTimeState = State.Night;
 
-        //enter night code
+		//enter night code
 
-        if (hour == morningStart)
+		if (hour == morningStart)
 		{
-            endOfDay.Play();
-            skipRest.SetActive(true);
+			endOfDay.Play();
+			//skipRest.SetActive(true);
+			goToBedNote.SetActive (true);
 			currentTimeState = State.Rest;
+			pastTimeState = State.Rest;
 		}
 		SwitchToPausedState();
 	}
@@ -270,13 +273,14 @@ public class Time_Manager : MonoBehaviour
 
 	void SkipRestPeriod()
 	{
-        timeShift.Play();
-        nightShade.SetActive(false);
+		timeShift.Play();
+		nightShade.SetActive(false);
 		currentTimeState = State.Morning;
 		hour = 6;
 		minute = 0;
 		minuteCounter = 0;
 		skipRest.SetActive(false);
+		goToBedNote.SetActive (false);
 		UpdateTime(true, currentTimeSpeed);
 		playerController.ResumeInput();
 		Debug.Log("skiped");
@@ -387,6 +391,14 @@ public class Time_Manager : MonoBehaviour
 			npc.GetComponent<NPC>().StartMoving();
 		}
 		alreadyFrozeNPCs = false;
+	}
+
+	public void TurnOnSkipBtn(){
+		skipRest.SetActive (true);
+	}
+
+	public void TurnOffSkipBtn(){
+		skipRest.SetActive (false);
 	}
 
 	/*

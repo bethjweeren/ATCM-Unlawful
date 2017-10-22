@@ -7,9 +7,15 @@ public class Tile_Swapper : MonoBehaviour {
 
 	public bool isCheck = false;
 	public bool isX = false;
+	public bool isQuestion1 = false;
+	public bool isQuestion2 = false;
+	public bool isQuestion3 = false;
 	private Button tile;
 	public GameObject checkMark;
 	public GameObject xMark;
+	public GameObject question1;
+	public GameObject question2;
+	public GameObject question3;
 
 	void Start () 
 	{
@@ -18,30 +24,48 @@ public class Tile_Swapper : MonoBehaviour {
 
 		checkMark.SetActive (false);
 		xMark.SetActive (false);
+		question1.SetActive (false);
+		question2.SetActive (false);
+		question3.SetActive (false);
 	}
 
 	void SwapTile()
 	{
-		if (isCheck == false && isX == false) {
+		if (isCheck == false && isX == false && isQuestion1 == false && isQuestion2 == false && isQuestion3 == false) {
 			isCheck = true;
 			checkMark.SetActive (true);
 		} else if (isCheck) {
-			isCheck = false;
+			MakeBlank ();
 			isX = true;
-			checkMark.SetActive (false);
 			xMark.SetActive (true);
+		} else if (isX) {
+			MakeBlank ();
+			isQuestion1 = true;
+			question1.SetActive (true);
+		} else if (isQuestion1) {
+			MakeBlank ();
+			isQuestion2 = true;
+			question2.SetActive (true);
+		} else if (isQuestion2) {
+			MakeBlank ();
+			isQuestion3 = true;
+			question3.SetActive (true);
 		} else {
-			isX = false;
-			checkMark.SetActive (false);
-			xMark.SetActive (false);
+			MakeBlank ();
 		}
 	}
 
 	public void MakeBlank(){
 		isCheck = false;
 		isX = false;
+		isQuestion1 = false;
+		isQuestion2 = false;
+		isQuestion3 = false;
 		checkMark.SetActive (false);
 		xMark.SetActive (false);
+		question1.SetActive (false);
+		question2.SetActive (false);
+		question3.SetActive (false);
 	}
 		
 }
