@@ -16,7 +16,7 @@ public class CameraSwitcher : MonoBehaviour
 	public GameObject interior; //Optional if area doesn't have roof
 	public GameObject blackoutOverlay; //Optional
 	public GameObject fade;
-	private float fadeIncrement = .05f; //Lower the number, slower/more gradual the fade to and from black
+	private float fadeIncrement = .07f; //Lower the number, slower/more gradual the fade to and from black
 	private float slowDown = 1.5f; //How much to slow down player on entry. This variable is private because it's a pain to change for each one, and it helps keeps things consistent
 	private PlayerController playerController;
 	private List<SpriteRenderer> stuffToCover = new List<SpriteRenderer>();

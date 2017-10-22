@@ -30,18 +30,32 @@ public class MovingAreaCamera : MonoBehaviour {
 		bool checkSouth = thisCamera.ViewportToWorldPoint(new Vector3(0, 0, thisCamera.nearClipPlane)).y > (cameraAreaLimit.transform.position.y - ySize);
 		bool checkEast = thisCamera.ViewportToWorldPoint(new Vector3(1, 1, thisCamera.nearClipPlane)).x < (cameraAreaLimit.transform.position.x + xSize);
 		bool checkWest = thisCamera.ViewportToWorldPoint(new Vector3(0, 0, thisCamera.nearClipPlane)).x > (cameraAreaLimit.transform.position.x - xSize);
-		//If outside north, move to most northern part of area
-		if (!checkNorth)
-			transform.position = new Vector3(transform.position.x, (cameraAreaLimit.transform.position.y + ySize) - yCameraHalfSize, transform.position.z);
-		//If outside south, move to most southern part of area
-		if (!checkSouth)
-			transform.position = new Vector3(transform.position.x, (cameraAreaLimit.transform.position.y - ySize) + yCameraHalfSize, transform.position.z);
-		//If outside east, move to most eastern part of area
-		if (!checkEast)
-			transform.position = new Vector3((cameraAreaLimit.transform.position.x + xSize) - xCameraHalfSize, transform.position.y, transform.position.z);
-		//If outside west, move to most western part of area
-		if (!checkWest)
-			transform.position = new Vector3((cameraAreaLimit.transform.position.x - xSize) + xCameraHalfSize, transform.position.y, transform.position.z);
+		if (ySize > yCameraHalfSize)
+		{
+			//If outside north, move to most northern part of area
+			if (!checkNorth)
+				transform.position = new Vector3(transform.position.x, (cameraAreaLimit.transform.position.y + ySize) - yCameraHalfSize, transform.position.z);
+			//If outside south, move to most southern part of area
+			if (!checkSouth)
+				transform.position = new Vector3(transform.position.x, (cameraAreaLimit.transform.position.y - ySize) + yCameraHalfSize, transform.position.z);
+		}
+		else
+		{
+			transform.position = new Vector3(transform.position.x, cameraAreaLimit.transform.position.y, transform.position.z);
+		}
+		if (xSize > xCameraHalfSize)
+		{
+			//If outside east, move to most eastern part of area
+			if (!checkEast)
+				transform.position = new Vector3((cameraAreaLimit.transform.position.x + xSize) - xCameraHalfSize, transform.position.y, transform.position.z);
+			//If outside west, move to most western part of area
+			if (!checkWest)
+				transform.position = new Vector3((cameraAreaLimit.transform.position.x - xSize) + xCameraHalfSize, transform.position.y, transform.position.z);
+		}
+		else
+		{
+			transform.position = new Vector3(cameraAreaLimit.transform.position.x, transform.position.y, transform.position.z);
+		}
 	}
 
 	void Awake()
@@ -61,18 +75,32 @@ public class MovingAreaCamera : MonoBehaviour {
 		bool checkSouth = thisCamera.ViewportToWorldPoint(new Vector3(0, 0, thisCamera.nearClipPlane)).y > (cameraAreaLimit.transform.position.y - ySize);
 		bool checkEast = thisCamera.ViewportToWorldPoint(new Vector3(1, 1, thisCamera.nearClipPlane)).x < (cameraAreaLimit.transform.position.x + xSize);
 		bool checkWest = thisCamera.ViewportToWorldPoint(new Vector3(0, 0, thisCamera.nearClipPlane)).x > (cameraAreaLimit.transform.position.x - xSize);
-		//If outside north, move to most northern part of area
-		if (!checkNorth)
-			transform.position = new Vector3(transform.position.x, (cameraAreaLimit.transform.position.y + ySize)-yCameraHalfSize, transform.position.z);
-		//If outside south, move to most southern part of area
-		if (!checkSouth)
-			transform.position = new Vector3(transform.position.x, (cameraAreaLimit.transform.position.y - ySize)+yCameraHalfSize, transform.position.z);
-		//If outside east, move to most eastern part of area
-		if (!checkEast)
-			transform.position = new Vector3((cameraAreaLimit.transform.position.x + xSize)-xCameraHalfSize, transform.position.y, transform.position.z);
-		//If outside west, move to most western part of area
-		if (!checkWest)
-			transform.position = new Vector3((cameraAreaLimit.transform.position.x - xSize)+xCameraHalfSize, transform.position.y, transform.position.z);
+		if (ySize > yCameraHalfSize)
+		{
+			//If outside north, move to most northern part of area
+			if (!checkNorth)
+				transform.position = new Vector3(transform.position.x, (cameraAreaLimit.transform.position.y + ySize) - yCameraHalfSize, transform.position.z);
+			//If outside south, move to most southern part of area
+			if (!checkSouth)
+				transform.position = new Vector3(transform.position.x, (cameraAreaLimit.transform.position.y - ySize) + yCameraHalfSize, transform.position.z);
+		}
+		else
+		{
+			transform.position = new Vector3(transform.position.x, cameraAreaLimit.transform.position.y, transform.position.z);
+		}
+		if (xSize > xCameraHalfSize)
+		{
+			//If outside east, move to most eastern part of area
+			if (!checkEast)
+				transform.position = new Vector3((cameraAreaLimit.transform.position.x + xSize) - xCameraHalfSize, transform.position.y, transform.position.z);
+			//If outside west, move to most western part of area
+			if (!checkWest)
+				transform.position = new Vector3((cameraAreaLimit.transform.position.x - xSize) + xCameraHalfSize, transform.position.y, transform.position.z);
+		}
+		else
+		{
+			transform.position = new Vector3(cameraAreaLimit.transform.position.x, transform.position.y, transform.position.z);
+		}
 	}
 
 	// Update is called once per frame
