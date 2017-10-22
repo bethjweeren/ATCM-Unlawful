@@ -43632,7 +43632,7 @@ Transform:
   - {fileID: 1524805599}
   - {fileID: 1795008214}
   m_Father: {fileID: 2033310895}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1282489049
 GameObject:
@@ -61406,8 +61406,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   areaCameraObject: {fileID: 1240577547}
   mainCamera: {fileID: 1554251038}
-  roof: {fileID: 133113046}
-  interior: {fileID: 719348010}
+  roof: {fileID: 1884536320}
+  interior: {fileID: 1280857191}
   blackoutOverlay: {fileID: 1875245049}
   fade: {fileID: 1616897708}
 --- !u!61 &1820667744
@@ -62349,7 +62349,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1875245050
 Transform:
   m_ObjectHideFlags: 0
@@ -62810,7 +62810,7 @@ Transform:
   - {fileID: 1656292433}
   - {fileID: 1250391883}
   m_Father: {fileID: 2033310895}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1893064847
 GameObject:
@@ -67652,8 +67652,8 @@ Transform:
   m_LocalPosition: {x: -16, y: 27, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1280857192}
   - {fileID: 1884536321}
+  - {fileID: 1280857192}
   - {fileID: 1875245050}
   m_Father: {fileID: 319672497}
   m_RootOrder: 2
