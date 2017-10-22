@@ -3537,13 +3537,25 @@ GameObject:
   - component: {fileID: 108192428}
   - component: {fileID: 108192427}
   - component: {fileID: 108192426}
+  - component: {fileID: 108192425}
   m_Layer: 5
-  m_Name: Letter
+  m_Name: LetterUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!114 &108192425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 108192424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98c3cf3684c4c2241b4197928fb2345a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &108192426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58458,7 +58470,7 @@ GameObject:
   - component: {fileID: 1795008215}
   - component: {fileID: 1795008217}
   m_Layer: 8
-  m_Name: tutorial
+  m_Name: Letter
   m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60795,34 +60807,6 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224729329029599650, guid: 7bcc72ad9cb105948b8a78b22f08215e,
     type: 2}
   m_PrefabInternal: {fileID: 1766813151}
---- !u!1 &1878841323
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1878841324}
-  m_Layer: 0
-  m_Name: tutorial is Environment -> PlayersHouse -> Interior
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1878841324
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1878841323}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.050203, y: 8.346449, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 15
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1881300353
 GameObject:
   m_ObjectHideFlags: 0
