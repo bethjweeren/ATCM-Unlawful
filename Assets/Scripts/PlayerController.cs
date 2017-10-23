@@ -265,8 +265,8 @@ public class PlayerController : MonoBehaviour
 							}
 							if (time_manager.currentTimeState != Time_Manager.State.Rest)
 							{
-								
-							}
+                                BeginInteraction(nearest.GetComponent<IInteractable>());
+                            }
 							else if (nearest.CompareTag("NPC"))
 							{
 								print("found sleeping npc 2");
