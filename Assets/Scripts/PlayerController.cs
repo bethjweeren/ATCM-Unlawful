@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
 	public GameObject screenCredits;
 	public State currentState;
 
-	public Button jounalButton;
+	public Button journalButton;
 	public float interactRange = 1;
 	public LayerMask interactLayer;
 	public Transform interactRayOrigin;
@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
         journalCanvas.SetActive (false);
 		itemCanvas.SetActive (false);
 		journal_manager = journalCanvas.GetComponent<Journal_Manager> ();
-		jounalButton.onClick.AddListener(ToggleJournal);
+		journalButton.onClick.AddListener(ToggleJournal);
 		currentState = State.MAIN;
 		playerRB = GetComponent<Rigidbody2D>();
 		animator = GetComponent<Animator>();
@@ -199,10 +199,7 @@ public class PlayerController : MonoBehaviour
 				{
 					if (time_manager.currentTimeState != Time_Manager.State.Rest)
 					{
-						time_manager.ForcePausedState();
-						currentState = State.INTERACTING;
-						StopMoving();
-						foundObject.collider.GetComponent<IInteractable>().Interact();
+						BeginInteraction(foundObject.collider.GetComponent<IInteractable>());
 					}
 					else
 					{
@@ -214,10 +211,7 @@ public class PlayerController : MonoBehaviour
 						}
 						else
 						{
-							time_manager.ForcePausedState();
-							currentState = State.INTERACTING;
-							StopMoving();
-							foundObject.collider.GetComponent<IInteractable>().Interact();
+							BeginInteraction(foundObject.collider.GetComponent<IInteractable>());
 						}
 					}
 				}
@@ -271,11 +265,7 @@ public class PlayerController : MonoBehaviour
 							}
 							if (time_manager.currentTimeState != Time_Manager.State.Rest)
 							{
-								currentState = State.INTERACTING;
-								StopMoving();
-								nearest.GetComponent<IInteractable>().Interact();
-								//FreezeNPCs(); They should already be frozen by time manager
-								time_manager.ForcePausedState();
+								
 							}
 							else if (nearest.CompareTag("NPC"))
 							{
@@ -284,11 +274,8 @@ public class PlayerController : MonoBehaviour
 							}
 							else
 							{
-								currentState = State.INTERACTING;
-								StopMoving();
-								nearest.GetComponent<IInteractable>().Interact();
-								time_manager.ForcePausedState();
-							}
+                                BeginInteraction(nearest.GetComponent<IInteractable>());
+                            }
 						}
 				}
 			}
@@ -380,7 +367,18 @@ public class PlayerController : MonoBehaviour
 			currentState = State.MAIN;
 			UnfreezeNPCs();
 		}
+        journalButton.gameObject.SetActive(true);
 	}
+
+    public void BeginInteraction(IInteractable other)
+    {
+        currentState = State.INTERACTING;
+        StopMoving();
+        time_manager.ForcePausedState();
+        journalButton.gameObject.SetActive(false);
+        other.Interact();
+        //FreezeNPCs(); They should already be frozen by time manager
+    }
 
 	//Similar to EndInteraction, but need this for the Menu, specifically ButtonPlay.cs
 	public void SwitchToMainState()
