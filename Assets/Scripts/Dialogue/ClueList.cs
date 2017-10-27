@@ -8,13 +8,16 @@ using UnityEngine;
 [Serializable]
 public class ClueList {
 
-    public List<ClueFile> allClues;
+    public List<ClueFile> clues;
 
     public ClueList()
     {
-        allClues = new List<ClueFile>();
-        allClues.Add(new ClueFile());
-        ExportJSON(this, "cluetest.json");
+        clues = new List<ClueFile>();
+    }
+
+    public ClueList(List<ClueFile> clues)
+    {
+        this.clues = clues;
     }
 
     public static ClueList LoadJSON(string filename)
@@ -57,12 +60,24 @@ public class ClueList {
 [Serializable]
 public struct ClueFile
 {
+    public string name;
     public List<CharacterID> owners;
     public List<CharacterID> subjects;
     public string content;
-    public string journalSummary;
     public string beggarSummary;
+    public string journalSummary;
     public List<string> tags;
+
+    public ClueFile(string clueName, List<CharacterID> clueOwners, List<CharacterID> clueSubjects, string clueContent, string clueBeggarSummary, string clueJournalSummary, List<string> clueTags)
+    {
+        name = clueName;
+        owners = clueOwners;
+        subjects = clueSubjects;
+        content = clueContent;
+        beggarSummary = clueBeggarSummary;
+        journalSummary = clueJournalSummary;
+        tags = clueTags;
+    }
 }
 
 public struct Clue
@@ -72,5 +87,6 @@ public struct Clue
     public string content;
     public string journalSummary;
     public string beggarSummary;
+    public string id;
     public bool truth;
 }
