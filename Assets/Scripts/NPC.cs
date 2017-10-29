@@ -348,14 +348,6 @@ public class NPC : MonoBehaviour
 		stopped = false;
 	}
 
-	/*
-	void OnDisable()
-	{
-		//When this Object is disabled, make sure you also cancel the Invoke repeating method
-		CancelInvoke();
-	}
-	*/
-
 	//This ain't efficient
 	int CheckHour()
 	{

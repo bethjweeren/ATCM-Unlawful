@@ -20,13 +20,23 @@ using Priority_Queue;
 public class Pathfinder : MonoBehaviour
 {
 	SimplePriorityQueue<Vertex> priorityQueue; //U in pseudocode, Maintains the priorities of the vertices
+	public GameObject vertexPrefab;
+	public Collider2D npcCollider;
+	public float distanceBetweenVertices = 0.5f;
+
 	float keyModifier; //km in pseudocode, accounts for cost changes
-	HashSet<Vertex> graph; //S in pseudocode, The finite set of vertices of the graph; I chose HashSet cuz the pseudocode just said "Set" and this was close enough I guess.
+	HashSet<GameObject> graph = new HashSet<GameObject>(); //S in pseudocode, The finite set of vertices of the graph; I chose HashSet cuz the pseudocode just said "Set" and this was close enough I guess.
+	public RectTransform townRectangle; //A rectangle that covers the entire play area; determines how big to make the graph.
 
 	// Use this for initialization
 	void Start()
 	{
-
+		if (vertexPrefab.GetComponent<Vertex>() == null)
+		{
+			print("ERROR: Pathfinder.cs needs a vertex prefab object containing the Vertex script!");
+		}
+		vertexPrefab.GetComponent<Vertex>().npcCollider = npcCollider;
+		MakeGraph();
 	}
 
 	// Update is called once per frame
@@ -35,6 +45,41 @@ public class Pathfinder : MonoBehaviour
 
 	}
 
+	void MakeGraph()
+	{
+		for (float newY = townRectangle.rect.yMin + townRectangle.localPosition.y; newY < townRectangle.rect.yMax + townRectangle.localPosition.y; newY += distanceBetweenVertices)
+		{
+			for (float newX = townRectangle.rect.xMin + townRectangle.localPosition.x; newX < townRectangle.rect.xMax + townRectangle.localPosition.x; newX += distanceBetweenVertices)
+			{
+				GameObject vp = Instantiate(vertexPrefab, new Vector3(newX, newY, 1), Quaternion.identity);
+				graph.Add(vp);
+			}
+		}
+		/*
+		RaycastHit2D hit;
+		hit = Physics2D.Raycast(Position, new Vector2(-1, 0), distanceBetweenVertices);
+		//Make connections between vertices/nodes
+		for (float newY = townRectangle.rect.yMin; newY < townRectangle.rect.yMax; newY += distanceBetweenVertices)
+		{
+			for (float newX = townRectangle.rect.xMin; newX < townRectangle.rect.xMax; newX += distanceBetweenVertices)
+			{
+				
+			}
+		}
+		*/
+	}
+
+	/*
+	public static Object prefab = Resources.Load("Prefabs/NPCMovement/Node");
+
+	public static Node CreateNode()
+	{
+		GameObject newObject = Instantiate(prefab) as GameObject;
+		Node yourObject = newObject.GetComponent<YourComponent>();
+		//do additional initialization steps here
+		return yourObject;
+	}
+	*/
 
 	/*
 
@@ -91,10 +136,13 @@ public class Pathfinder : MonoBehaviour
 	}
 
 	//rhs(s) in pseudocode
-	//I assume this stands for right-hand side, but I dunno...
+	//Right-hand-side value
 	//The D*Lite paper defines the rhs as a
 	//"one-step lookahead value based on the g-values and
 	//thus better informed than the g-values"
+	//g = estimate of start distance g* of the vertex
+	//Equal to the cost to the parent of a node plus the cost to travel to that node
+	//By comparing this value to the cost to the node we can detect inconsistencies
 	//anyVertex is u in pseudocode
 	float GetRHS(Vertex vertex)
 	{

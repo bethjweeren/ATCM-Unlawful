@@ -18,8 +18,20 @@ public class PickupText : MonoBehaviour {
 		StartCoroutine (SwitchOut (name));
 	}
 
+	public void ChangeTextAlert()
+	{
+		StartCoroutine(CannotPickup());
+	}
+
 	public IEnumerator SwitchOut(string name){
 		pickUpText.text = "Picked up the " + name;
+		yield return switchDuration;
+		pickUpText.text = "";
+	}
+
+	public IEnumerator CannotPickup()
+	{
+		pickUpText.text = "No space left in inventory";
 		yield return switchDuration;
 		pickUpText.text = "";
 	}
