@@ -44,9 +44,9 @@ public class Vertex : MonoBehaviour
 				//Sets collider to NPC's collider
 				thisCollider = gameObject.AddComponent<BoxCollider2D>();
 				thisCollider.isTrigger = true;
+				((BoxCollider2D)thisCollider).size = new Vector2(((BoxCollider2D)npcCollider).size.x * (npcCollider.gameObject.transform.localScale.x), ((BoxCollider2D)npcCollider).size.y * (npcCollider.gameObject.transform.localScale.y));
 
 				//Check if colliding with anything
-				((BoxCollider2D)thisCollider).size = ((BoxCollider2D)npcCollider).size;
 				Collider2D[] overlappingColliders = new Collider2D[20];
 				ContactFilter2D cf = new ContactFilter2D();
 				cf.NoFilter();
@@ -75,9 +75,9 @@ public class Vertex : MonoBehaviour
 				//Sets collider to NPC's collider
 				thisCollider = gameObject.AddComponent<CircleCollider2D>();
 				thisCollider.isTrigger = true;
+				((CircleCollider2D)thisCollider).radius  = ((CircleCollider2D)npcCollider).radius * (npcCollider.gameObject.transform.localScale.x);
 
 				//Check if colliding with anything
-				((CircleCollider2D)thisCollider).radius = ((CircleCollider2D)npcCollider).radius;
 				Collider2D[] overlappingColliders = new Collider2D[20];
 				ContactFilter2D cf = new ContactFilter2D();
 				cf.NoFilter();
