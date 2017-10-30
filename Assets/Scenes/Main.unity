@@ -19131,7 +19131,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4091495304988582, guid: a3afbe1277a0e814986279b623f4a4c3, type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4091495304988582, guid: a3afbe1277a0e814986279b623f4a4c3, type: 2}
       propertyPath: m_LocalScale.x
@@ -29389,7 +29389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a85e2f4898217d34b83b8e1a3083b614, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useCenterOfCollider: 0
+  useCenterOfCollider: 1
 --- !u!68 &760562788
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -49312,7 +49312,7 @@ Transform:
   - {fileID: 1204763382}
   - {fileID: 1530667220}
   m_Father: {fileID: 1978120336}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1348355053
 GameObject:
@@ -53104,7 +53104,7 @@ Transform:
   - {fileID: 1831470022}
   - {fileID: 950981707}
   m_Father: {fileID: 1978120336}
-  m_RootOrder: 4
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1473619305
 GameObject:
@@ -70483,11 +70483,11 @@ Transform:
   - {fileID: 680499460}
   - {fileID: 1971286972}
   - {fileID: 1372614939}
-  - {fileID: 1466515550}
   - {fileID: 1493884160}
   - {fileID: 1617410399}
   - {fileID: 513233801}
   - {fileID: 1343218385}
+  - {fileID: 1466515550}
   - {fileID: 871851169}
   m_Father: {fileID: 0}
   m_RootOrder: 1
