@@ -44,8 +44,6 @@ public class PlayerController : MonoBehaviour
 	private Rigidbody2D playerRB;
 	private Collider2D playerCollider;
 	private Animator animator;
-
-	public MapTracker mapTracker;
 	
 	//public bool isInTutorial = false;
 	//public Tutorial tutorial;
@@ -67,7 +65,6 @@ public class PlayerController : MonoBehaviour
 		playerRB.velocity = new Vector2(0, 0); //Don't move
 		screenMenuStarting.SetActive(true); //Starting menu gets in the way, keep disabled in scene and this will enable it
 		enableOnStart.SetActive(true); //Enable all the intrusive UI things on start, because they get in the way in the scene
-		mapTracker.UpdateMap ();
         //DialogueSystem.Instance().CreateJournalEntry("[Red] wanted to talk to me", CharacterID.RED, "talkToRed");
     }
 
@@ -101,7 +98,6 @@ public class PlayerController : MonoBehaviour
 					StopMoving();
 					print("Looking at map. Press M or ESC or Space to close."); //Replace with map code
 					journalCanvas.SetActive(true);
-					mapTracker.UpdateMap ();
 					journal_manager.BringUpMap();
 					FreezeNPCs();
 				}
@@ -114,7 +110,6 @@ public class PlayerController : MonoBehaviour
 					StopMoving();
 					print("Looking at journal. Press J or ESC to close."); //Replace with journal code
 					journalCanvas.SetActive(true);
-					mapTracker.UpdateMap ();
 					FreezeNPCs();
 				}
 				/*
@@ -436,7 +431,6 @@ public class PlayerController : MonoBehaviour
 			}
 			currentState = State.JOURNAL;
 			journalCanvas.SetActive (true);
-			mapTracker.UpdateMap ();
 		} else {
 			if (time_manager.currentTimeState != Time_Manager.State.Rest) {
 				time_manager.LeavePauseState ();
