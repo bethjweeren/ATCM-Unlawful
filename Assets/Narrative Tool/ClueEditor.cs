@@ -84,9 +84,11 @@ public class ClueEditor : MonoBehaviour {
 
     void Clear()
     {
-        foreach(GameObject clue in clues)
+        int numberOfClues = clues.Count;
+        for (int i = 0; i < numberOfClues; i++)
         {
-            RemoveClue(clue);
+            Debug.Log("Cleared");
+            RemoveClue(clues[0]);
         }
         UpdateContentHeight();
     }
