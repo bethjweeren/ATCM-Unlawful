@@ -18,12 +18,6 @@ public class ItemSpawner : MonoBehaviour
 		StartCoroutine(CheckToSpawn());
 	}
 
-	// Update is called once per frame
-	void FixedUpdate()
-	{
-
-	}
-
 	IEnumerator CheckToSpawn()
 	{
 		foreach (GameObject obj in itemsToSpawn)
@@ -43,10 +37,5 @@ public class ItemSpawner : MonoBehaviour
 		//Wait a tenth of a second
 		yield return new WaitForSeconds(timeBetweenChecks);
 		StartCoroutine(CheckToSpawn());
-	}
-
-	private void SpawnItem()
-	{
-
 	}
 }
