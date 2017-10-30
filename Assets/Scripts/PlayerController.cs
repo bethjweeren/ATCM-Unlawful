@@ -90,11 +90,37 @@ public class PlayerController : MonoBehaviour
 				if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) ||
 						((Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) && !(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))))
 				{
+<<<<<<< HEAD
+					if (time_manager.currentTimeState != Time_Manager.State.Rest) {
+						time_manager.ForcePausedState ();
+					}
+					currentState = State.JOURNAL;
+					StopMoving();
+					print("Looking at map. Press M or ESC or Space to close."); //Replace with map code
+					journalCanvas.SetActive(true);
+					journal_manager.BringUpMap();
+					FreezeNPCs();
+				}
+				else if (Input.GetKeyDown(KeyCode.J))
+				{
+					if (time_manager.currentTimeState != Time_Manager.State.Rest) {
+						time_manager.ForcePausedState ();
+					}
+					currentState = State.JOURNAL;
+					StopMoving();
+					print("Looking at journal. Press J or ESC to close."); //Replace with journal code
+					journalCanvas.SetActive(true);
+					FreezeNPCs();
+				}
+				/*
+				else if (Input.GetKeyDown(KeyCode.I))
+=======
 					animator.SetInteger("Direction", 0); //Animate north sprite
 					animator.SetBool("Walking", true);
 					playerRB.velocity = new Vector2(0, 1) * speed * sprintValue; //Move north
 				}
 				else if ((Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) || ((Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) && !(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))))
+>>>>>>> master
 				{
 					animator.SetInteger("Direction", 1); //Animate east sprite
 					animator.SetBool("Walking", true);
