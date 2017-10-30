@@ -11,6 +11,7 @@ public class Tile_Swapper : MonoBehaviour {
 	public bool isQuestion2 = false;
 	public bool isQuestion3 = false;
 	private Button tile;
+	public GameObject clickMe;
 	public GameObject checkMark;
 	public GameObject xMark;
 	public GameObject question1;
@@ -22,6 +23,7 @@ public class Tile_Swapper : MonoBehaviour {
 		tile = GetComponent<Button> ();
 		tile.onClick.AddListener (SwapTile);
 
+		clickMe.SetActive (true);
 		checkMark.SetActive (false);
 		xMark.SetActive (false);
 		question1.SetActive (false);
@@ -32,6 +34,7 @@ public class Tile_Swapper : MonoBehaviour {
 	void SwapTile()
 	{
 		if (isCheck == false && isX == false && isQuestion1 == false && isQuestion2 == false && isQuestion3 == false) {
+			clickMe.SetActive (false);
 			isCheck = true;
 			checkMark.SetActive (true);
 		} else if (isCheck) {
