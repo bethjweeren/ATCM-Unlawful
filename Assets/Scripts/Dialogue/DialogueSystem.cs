@@ -17,9 +17,13 @@ public class DialogueSystem
     Prompt dialoguePrompt;
     CharacterID nonPlayerID;
     public int dialogueTextSize = 18;
+    public bool blueIsKiller;
 
     public DialogueSystem()
     {
+        //blueIsKiller = Random.value < 0.5f;
+        blueIsKiller = false;
+
         characters = new Characters();
         quoteQueue = new List<DialogueLine>();
         //This part is temporary
@@ -225,14 +229,29 @@ public class DialogueSystem
         player.EndInteraction();
         player.gameObject.SetActive(false);
         GameOver gameOver = Provider.GetInstance().gameOver;
-        if (choice == CharacterID.BLUE)
+        if (blueIsKiller)
         {
-            gameOver.WinGame("You guessed correctly");
+            if (choice == CharacterID.BLUE)
+            {
+                gameOver.WinGame("You guessed correctly");
+            }
+            else
+            {
+                gameOver.LoseGame("The killer was <color=#193BFF>Bleu</color>");
+            }
         }
         else
         {
-            gameOver.LoseGame("The killer was <color=#193BFF>Bleu</color>");
+            if (choice == CharacterID.RED)
+            {
+                gameOver.WinGame("You guessed correctly");
+            }
+            else
+            {
+                gameOver.LoseGame("The killer was <color=#d72c28>Rouge</color>");
+            }
         }
+        
     }
 
     public void CreateJournalEntry(string summary, CharacterID page, string clueID)
