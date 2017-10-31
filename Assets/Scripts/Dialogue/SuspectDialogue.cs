@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Text.RegularExpressions;
 
-public class SuspectDialogue : NPCDialogue {
+public class SuspectDialogue : CharacterDialogue {
 
     Dictionary<string, ClueEntry> clueResponses;
     List<ClueFile> allClues;
@@ -23,10 +23,10 @@ public class SuspectDialogue : NPCDialogue {
 
     // Use this for initialization
     override protected void Start () {
-        Debug.Log("SuspectInit");
+        base.Start();
         oneLiners = false;
-        allClues = DialogueSystem.Instance().GetCluesByOwner(IDToSuspect(id));
-        Debug.Log(allClues.Count);
+        StartCoroutine("FetchClues");
+        
         //DialogueSystem.Instance().AddSuspectListener(this);
         //clueResponses.Add("", new ClueEntry("", "", ""));
         clueResponses = new Dictionary<string, ClueEntry>();
@@ -71,7 +71,7 @@ public class SuspectDialogue : NPCDialogue {
         return response.text;
     }
 
-    Suspect IDToSuspect(CharacterID charID)
+    public static Suspect IDToSuspect(CharacterID charID)
     {
         switch (charID)
         {
@@ -86,12 +86,32 @@ public class SuspectDialogue : NPCDialogue {
             case CharacterID.YELLOW:
                 return Suspect.YELLOW;
         }
-        throw new System.Exception("Non-suspect ID was given to a suspect: " + id.ToString());
+        throw new System.Exception("Non-suspect ID was given to a suspect: " + charID.ToString());
     }
 
-    public void FetchClues()
+    public static CharacterID SuspectToID(Suspect suspect)
     {
+        switch (suspect)
+        {
+            case Suspect.BLACK:
+                return CharacterID.BLACK;
+            case Suspect.BLUE:
+                return CharacterID.BLUE;
+            case Suspect.GREEN:
+                return CharacterID.GREEN;
+            case Suspect.RED:
+                return CharacterID.RED;
+            case Suspect.YELLOW:
+                return CharacterID.YELLOW;
+        }
+        throw new System.Exception("Invalid suspect value given to character " + suspect.ToString());
+    }
+
+    IEnumerator FetchClues()
+    {
+        yield return new WaitForSeconds(3);
         allClues = DialogueSystem.Instance().GetCluesByOwner(IDToSuspect(id));
-        
+        Debug.Log(id.ToString() + " " + allClues.Count);
+
     }
 }

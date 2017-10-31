@@ -10,13 +10,26 @@ public class RandoDialogue : NPCDialogue {
     new void Start()
     {
         base.Start();
-        oneLiners = !hasIntro;
+        oneLiners = true;
         firstMeeting = hasIntro;
 	}
 	
 	override public void Interact()
     {
-        DialogueSystem.Instance().OpenDialogueBox(CharacterID.VICTIM, this, firstMeeting, oneLiners);
+        if (id == CharacterID.VICTIM)
+        {
+            StartCoroutine("ExamineBody");
+        }
+        DialogueSystem.Instance().OpenDialogueBox(id, this, firstMeeting, oneLiners);
         firstMeeting = false;
+    }
+
+    IEnumerator ExamineBody()
+    {
+        DialogueSystem.Instance().CreateJournalEntry("The victim was [Victim].", CharacterID.VICTIM, "motive");
+        yield return new WaitForSeconds(0.05f);
+        DialogueSystem.Instance().CreateJournalEntry("[Victim] was strangled.", CharacterID.VICTIM, "means");
+        yield return new WaitForSeconds(0.05f);
+        DialogueSystem.Instance().CreateJournalEntry("[Victim] was killed in the Town Square.", CharacterID.VICTIM, "opportunity");
     }
 }

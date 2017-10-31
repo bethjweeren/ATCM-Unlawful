@@ -23,7 +23,7 @@ public class DialogueSystem
     public int dialogueTextSize = 18;
 
     List<ClueFile> clues;
-    List<SuspectDialogue> suspectListeners;
+    //List<SuspectDialogue> suspectListeners;
     Object suspectListLock = new Object();
 
     public DialogueSystem()
@@ -287,7 +287,7 @@ public class DialogueSystem
         return ownClues;
     }
 
-    public void AddSuspectListener(SuspectDialogue suspect)
+    /*public void AddSuspectListener(SuspectDialogue suspect)
     {
         lock (suspectListLock)
         {
@@ -297,7 +297,7 @@ public class DialogueSystem
             }
             suspectListeners.Add(suspect);
         }
-    }
+    }*/
 }
 
 
