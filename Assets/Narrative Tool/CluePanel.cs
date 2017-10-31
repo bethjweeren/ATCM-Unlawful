@@ -54,54 +54,54 @@ public class CluePanel : MonoBehaviour {
         Destroy(this.gameObject);
     }
      
-    private List<CharacterID> TogglesToIDs(Toggle[] toggles)
+    private List<Suspect> TogglesToIDs(Toggle[] toggles)
     {
-        List<CharacterID> ids = new List<CharacterID>();
+        List<Suspect> ids = new List<Suspect>();
         if (toggles[0].isOn)
         {
-            ids.Add(CharacterID.BLACK);
+            ids.Add(Suspect.BLACK);
         }
         if (toggles[1].isOn)
         {
-            ids.Add(CharacterID.BLUE);
+            ids.Add(Suspect.BLUE);
         }
         if (toggles[2].isOn)
         {
-            ids.Add(CharacterID.GREEN);
+            ids.Add(Suspect.GREEN);
         }
         if (toggles[3].isOn)
         {
-            ids.Add(CharacterID.RED);
+            ids.Add(Suspect.RED);
         }
         if (toggles[4].isOn)
         {
-            ids.Add(CharacterID.YELLOW);
+            ids.Add(Suspect.YELLOW);
         }
         return ids;
     }
 
-    private bool[] IDsToToggles(List<CharacterID> ids)
+    private bool[] IDsToToggles(List<Suspect> ids)
     {
         bool[] toggles = new bool[5];
         if (ids != null)
         {
-            if (ids.Contains(CharacterID.BLACK))
+            if (ids.Contains(Suspect.BLACK))
             {
                 toggles[0] = true;
             }
-            if (ids.Contains(CharacterID.BLUE))
+            if (ids.Contains(Suspect.BLUE))
             {
                 toggles[1] = true;
             }
-            if (ids.Contains(CharacterID.GREEN))
+            if (ids.Contains(Suspect.GREEN))
             {
                 toggles[2] = true;
             }
-            if (ids.Contains(CharacterID.RED))
+            if (ids.Contains(Suspect.RED))
             {
                 toggles[3] = true;
             }
-            if (ids.Contains(CharacterID.YELLOW))
+            if (ids.Contains(Suspect.YELLOW))
             {
                 toggles[4] = true;
             }

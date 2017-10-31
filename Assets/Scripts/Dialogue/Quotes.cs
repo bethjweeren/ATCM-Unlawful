@@ -6,8 +6,6 @@ using System.Text;
 
 [Serializable]
 public class Quotes {
-    static string folder = "Dialogue\\";
-
     public List<string> introductions;
     public List<string> openers;
     public List<string> closers;
@@ -40,11 +38,11 @@ public class Quotes {
         try
         {
             string json;
-            StreamReader fileReader = new StreamReader(folder + filename, Encoding.Default);
+            StreamReader fileReader = new StreamReader(Path.Combine(DialogueSystem.folder, filename), Encoding.Default);
             json = fileReader.ReadLine();
             Quotes quotes = JsonUtility.FromJson<Quotes>(json);
             fileReader.Close();
-            Debug.Log("Read success: " + folder + filename);
+            Debug.Log("Read success: " + Path.Combine(DialogueSystem.folder, filename));
             /*
             List<string> temp = new List<string>();
             foreach (string line in quotes.introductions)
@@ -71,7 +69,7 @@ public class Quotes {
         }
         catch
         {
-            Debug.Log("Failed to load from JSON: " + folder + filename);
+            Debug.Log("Failed to load from JSON: " + Path.Combine(DialogueSystem.folder, filename));
             return new Quotes();
         }
     }
@@ -82,13 +80,13 @@ public class Quotes {
         {
             string json = JsonUtility.ToJson(quotes);
             Debug.Log(json);
-            StreamWriter fileWriter = new StreamWriter(folder + filename, false, Encoding.Default);
+            StreamWriter fileWriter = new StreamWriter(Path.Combine(DialogueSystem.folder, filename), false, Encoding.Default);
             fileWriter.WriteLine(json);
             fileWriter.Close();
         }
         catch
         {
-            Debug.Log("Failed to save to JSON: " + folder + filename);
+            Debug.Log("Failed to save to JSON: " + Path.Combine(DialogueSystem.folder, filename));
         }
 
     }

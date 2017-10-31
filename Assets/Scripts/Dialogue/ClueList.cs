@@ -25,16 +25,16 @@ public class ClueList {
         try
         {
             string json;
-            StreamReader fileReader = new StreamReader(filename, Encoding.Default);
+            StreamReader fileReader = new StreamReader(Path.Combine(DialogueSystem.folder, filename), Encoding.Default);
             json = fileReader.ReadLine();
             ClueList clues = JsonUtility.FromJson<ClueList>(json);
             fileReader.Close();
-            Debug.Log("Read success: " + filename);
+            Debug.Log("Read success: " + Path.Combine(DialogueSystem.folder, filename));
             return clues;
         }
         catch
         {
-            Debug.Log("Failed to load from JSON: " + filename);
+            Debug.Log("Failed to load from JSON: " + Path.Combine(DialogueSystem.folder, filename));
             return new ClueList();
         }
     }
@@ -45,13 +45,13 @@ public class ClueList {
         {
             string json = JsonUtility.ToJson(clues);
             Debug.Log(json);
-            StreamWriter fileWriter = new StreamWriter(filename, false, Encoding.Default);
+            StreamWriter fileWriter = new StreamWriter(Path.Combine(DialogueSystem.folder, filename), false, Encoding.Default);
             fileWriter.WriteLine(json);
             fileWriter.Close();
         }
         catch
         {
-            Debug.Log("Failed to save to JSON: " + filename);
+            Debug.Log("Failed to save to JSON: " + Path.Combine(DialogueSystem.folder, filename));
         }
 
     }
@@ -61,14 +61,14 @@ public class ClueList {
 public struct ClueFile
 {
     public string name;
-    public List<CharacterID> owners;
-    public List<CharacterID> subjects;
+    public List<Suspect> owners;
+    public List<Suspect> subjects;
     public string content;
     public string beggarSummary;
     public string journalSummary;
     public List<string> tags;
 
-    public ClueFile(string clueName, List<CharacterID> clueOwners, List<CharacterID> clueSubjects, string clueContent, string clueBeggarSummary, string clueJournalSummary, List<string> clueTags)
+    public ClueFile(string clueName, List<Suspect> clueOwners, List<Suspect> clueSubjects, string clueContent, string clueBeggarSummary, string clueJournalSummary, List<string> clueTags)
     {
         name = clueName;
         owners = clueOwners;

@@ -20,26 +20,18 @@ public class NPCDialogue : MonoBehaviour, IInteractable {
     public CharacterID id;
     Dictionary<string, ClueEntry> clueResponses;
     public string dialogueFile;
-    bool firstMeeting = true;
-    bool randomNPC;
-    public bool likesBlack;
-    string blackOpinion;
-    public bool likesBlue;
-    string blueOpinion;
-    public bool likesGreen;
-    string greenOpinion;
-    public bool likesRed;
-    string redOpinion;
-    public bool likesYellow;
-    string yellowOpinion;
-
-    public bool hasHint;
-    public CharacterID hintBlames;
-
-    Quotes quotes;
+    protected bool firstMeeting = true;
+    protected bool oneLiners;
+    protected Quotes quotes;
 
 	// Use this for initialization
-	void Start () {
+	virtual protected void Start () {
+        Debug.Log("GenericInit");
+        LoadQuotes();
+    }
+
+    void LoadQuotes()
+    {
         quotes = Quotes.LoadJSON(dialogueFile);
         if (quotes != null)
         {
@@ -48,32 +40,13 @@ public class NPCDialogue : MonoBehaviour, IInteractable {
                 firstMeeting = false;
             }
         }
-        if (id == CharacterID.RANDO || id == CharacterID.VICTIM)
-        {
-            randomNPC = true;
-        }
+    }
 
-
-
-        if (Characters.IsSuspect(id))
-        {
-            //clueResponses.Add("", new ClueEntry("", "", ""));
-            clueResponses = new Dictionary<string, ClueEntry>();
-
-
-        }       
-	}
-
-    public void Interact()
+    virtual public void Interact()
     {
         if(quotes != null)
         {
-            if(id == CharacterID.VICTIM)
-            {
-                StartCoroutine("ExamineBody");
-
-            }
-            DialogueSystem.Instance().OpenDialogueBox(id, this, firstMeeting, randomNPC);
+            DialogueSystem.Instance().OpenDialogueBox(id, this, firstMeeting, false);
             firstMeeting = false;
         }
         else
@@ -97,7 +70,7 @@ public class NPCDialogue : MonoBehaviour, IInteractable {
         return quotes.closers[Random.Range(0, quotes.closers.Count)];
     }
 
-    public string GetOpinion(CharacterID subject)
+    /*public string GetOpinion(CharacterID subject)
     {
         switch (subject)
         {
@@ -114,42 +87,7 @@ public class NPCDialogue : MonoBehaviour, IInteractable {
             default:
                 return "I don't know who you're talking about.";
         }
-    }
-
-    public string GetFirstHint()
-    {
-        if (hasHint)
-        {
-            Character suspect = DialogueSystem.Instance().characters.IDToCharacter(hintBlames);
-            string hint = quotes.startHintYes[Random.Range(0, quotes.startHintYes.Count)];
-            //Regex suspectPattern = new Regex("/suspect/i");
-            hint = Regex.Replace(hint, "Suspect", suspect.identifier);
-            return hint;
-        }
-        else
-        {
-            return quotes.startHintNo[Random.Range(0, quotes.startHintNo.Count)];
-        }
-    }
-
-    public string CheckClue(string clueID)
-    {
-        ClueEntry response;
-        try
-        {
-            if (!clueResponses.TryGetValue(clueID, out response))
-            {
-                return quotes.genericDontKnow[Random.Range(0, quotes.genericDontKnow.Count)];
-            }
-
-        }
-        catch
-        {
-            return quotes.startHintYes[Random.Range(0, quotes.startHintYes.Count)];
-        }
-        DialogueSystem.Instance().CreateJournalEntry(response.summary, id, response.nextClueID);
-        return response.text;
-    }
+    }*/
 
     public string ReplaceSuspect(string line, CharacterID suspect)
     {
@@ -158,12 +96,6 @@ public class NPCDialogue : MonoBehaviour, IInteractable {
         return Regex.Replace(hint, "Suspect", suspectCharacter.identifier);
     }
 
-    IEnumerator ExamineBody()
-    {
-        DialogueSystem.Instance().CreateJournalEntry("The victim was [Victim].", CharacterID.VICTIM, "motive");
-        yield return new WaitForSeconds(0.05f);
-        DialogueSystem.Instance().CreateJournalEntry("[Victim] was strangled.", CharacterID.VICTIM, "means");
-        yield return new WaitForSeconds(0.05f);
-        DialogueSystem.Instance().CreateJournalEntry("[Victim] was killed in the Town Square.", CharacterID.VICTIM, "opportunity");
-    }
+
+    
 }

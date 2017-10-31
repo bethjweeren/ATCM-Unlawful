@@ -7,8 +7,12 @@ public enum FourChoice { MOTIVE, OPPORTUNITY, CLUE, CANCEL }
 public enum ChoiceStyle { DEFAULT, FOUR, SIX }
 enum Prompt { DEFAULT, ACCUSATION, MOTIVE, OPPORTUNITY }
 
+public enum Suspect { BLACK, BLUE, GREEN, RED, YELLOW }
+
 public class DialogueSystem
 {
+    public static readonly string folder = "Dialogue";
+
     static DialogueSystem instance;
     private static Object singletonLock = new Object();
     public Characters characters;
@@ -18,10 +22,33 @@ public class DialogueSystem
     CharacterID nonPlayerID;
     public int dialogueTextSize = 18;
 
+    List<ClueFile> clues;
+    List<SuspectDialogue> suspectListeners;
+    Object suspectListLock = new Object();
+
     public DialogueSystem()
     {
         characters = new Characters();
         quoteQueue = new List<DialogueLine>();
+
+        clues = new List<ClueFile>();
+        ClueList motives = ClueList.LoadJSON("Motive.json");
+        foreach (ClueFile clue in motives.clues)
+        {
+            clues.Add(clue);
+        }
+        ClueList opportunities = ClueList.LoadJSON("Opportunity.json");
+        foreach (ClueFile clue in opportunities.clues)
+        {
+            clues.Add(clue);
+        }
+        ClueList weapons = ClueList.LoadJSON("Weapon.json");
+        foreach(ClueFile clue in weapons.clues)
+        {
+            clues.Add(clue);
+        }
+
+
         //This part is temporary
         characters.NameDict.Add("LOCATION", CharacterID.VICTIM2);
         characters.CharacterDict.Add(CharacterID.VICTIM2, new Character("the town square", "LOCATION", "#FFFFFF"));
@@ -162,7 +189,7 @@ public class DialogueSystem
     public void ProcessClue(string clueID)
     {
         Provider.GetInstance().dialogueBox.gameObject.SetActive(true);
-        quoteQueue.Add(new DialogueLine(currentNPC.CheckClue(clueID), nonPlayerID));
+        quoteQueue.Add(new DialogueLine(((SuspectDialogue)currentNPC).CheckClue(clueID), nonPlayerID));
         NextLine();
     }
 
@@ -244,6 +271,31 @@ public class DialogueSystem
             provider.clueSelector.CreateAutoJournalEntry(Quotes.FormatColors(summary), page, clueID);
             provider.alertSystem.CreateAlert("<color=" + characters.IDToCharacter(page).color + ">New entry added to Journal</color>");
             provider.clueSelector.knownClues.Add(clueID);
+        }
+    }
+
+    public List<ClueFile> GetCluesByOwner(Suspect owner)
+    {
+        List<ClueFile> ownClues = new List<ClueFile>();
+        foreach(ClueFile clue in clues)
+        {
+            if (clue.owners.Contains(owner))
+            {
+                ownClues.Add(clue);
+            }
+        }
+        return ownClues;
+    }
+
+    public void AddSuspectListener(SuspectDialogue suspect)
+    {
+        lock (suspectListLock)
+        {
+            if(suspectListeners == null)
+            {
+                suspectListeners = new List<SuspectDialogue>();
+            }
+            suspectListeners.Add(suspect);
         }
     }
 }
