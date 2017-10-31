@@ -60,7 +60,7 @@ public class NPCDialogue : MonoBehaviour, IInteractable {
             //A blank add response line is provided below.
             //clueResponses.Add("", new ClueEntry("", "", ""));
             clueResponses = new Dictionary<string, ClueEntry>();
-            if (DialogueSystem.Instance().blueIsKiller)
+            if (false/*DialogueSystem.Instance().blueIsKiller*/)
             {
                 //The original scenario
                 switch (id)
