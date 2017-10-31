@@ -33,10 +33,10 @@ public class DialogueSystem
         characters.NameDict.Add("WEAPON", CharacterID.WEAPON);
         characters.CharacterDict.Add(CharacterID.WEAPON, new Character("twine", "WEAPON", "#FFFFFF"));
 
-        while(Provider.GetInstance() == null)
+        /*while(Provider.GetInstance() == null)
         {
 
-        }
+        }*/
         CloseDialogueBox();
     }
 
