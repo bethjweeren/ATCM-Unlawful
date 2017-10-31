@@ -16,8 +16,8 @@ public class ItemsManager : MonoBehaviour {
 	//	UpdateInventory ();
 	//}
 
+
 	public void UpdateInventory(){
-		
 		if (items.Count == 1) {
 			items [0].transform.position = itemPosition1.position;
 		} else if (items.Count == 2) {

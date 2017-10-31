@@ -13,6 +13,7 @@ public class PlayerMadeText : MonoBehaviour {
 	void OnGUI() {
 		GUIStyle myStyle = new GUIStyle (GUI.skin.GetStyle("label"));
 		GUI.contentColor = Color.gray;
+		GUI.skin.label.fontSize = 20;
 		if (Input.GetMouseButton(0))
 		{
 			RectTransform rectTransform = textArea.GetComponent<RectTransform>();
