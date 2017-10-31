@@ -26,7 +26,6 @@ public class NPCDialogue : MonoBehaviour, IInteractable {
 
 	// Use this for initialization
 	virtual protected void Start () {
-        Debug.Log("GenericInit");
         LoadQuotes();
     }
 
