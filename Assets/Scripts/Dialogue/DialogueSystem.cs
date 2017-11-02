@@ -23,11 +23,11 @@ public class DialogueSystem
     public int dialogueTextSize = 18;
 
     List<ClueFile> clues;
-    //List<SuspectDialogue> suspectListeners;
-    Object suspectListLock = new Object();
 
     public DialogueSystem()
     {
+        System.DateTime now = System.DateTime.Now;
+        Debug.Log(now.Year + "-" + now.Month.ToString("00") + "-" + now.Day.ToString("00") + " " + now.Hour.ToString("00") + "h" + now.Minute.ToString("00") + "m" + now.Second.ToString("00") + "s");
         characters = new Characters();
         quoteQueue = new List<DialogueLine>();
 
@@ -286,18 +286,6 @@ public class DialogueSystem
         }
         return ownClues;
     }
-
-    /*public void AddSuspectListener(SuspectDialogue suspect)
-    {
-        lock (suspectListLock)
-        {
-            if(suspectListeners == null)
-            {
-                suspectListeners = new List<SuspectDialogue>();
-            }
-            suspectListeners.Add(suspect);
-        }
-    }*/
 }
 
 

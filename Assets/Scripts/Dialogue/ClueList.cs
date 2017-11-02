@@ -39,25 +39,6 @@ public class ClueList {
         }
     }
 
-    //public static ClueList LoadJSON(string filename)
-    //{
-    //    try
-    //    {
-    //        OldClueList oldCLues = OldClueList.LoadJSON(filename);
-    //        List<ClueFile> newCLues = new List<ClueFile>();
-    //        foreach(OldClueFile old in oldCLues.clues)
-    //        {
-    //            newCLues.Add(new ClueFile(old));
-    //        }
-    //        return new ClueList(newCLues);
-    //    }
-    //    catch
-    //    {
-    //        Debug.Log("Failed to load from JSON: " + Path.Combine(DialogueSystem.folder, filename));
-    //        return new ClueList();
-    //    }
-    //}
-
     public static void ExportJSON(ClueList clues, string filename)
     {
         try
@@ -74,30 +55,6 @@ public class ClueList {
         }
 
     }
-
-    //[Serializable] public class OldClueList
-    //{
-    //    public List<OldClueFile> clues;
-
-    //    public static OldClueList LoadJSON(string filename)
-    //    {
-    //        try
-    //        {
-    //            string json;
-    //            StreamReader fileReader = new StreamReader(Path.Combine(DialogueSystem.folder, filename), Encoding.Default);
-    //            json = fileReader.ReadLine();
-    //            OldClueList clues = JsonUtility.FromJson<OldClueList>(json);
-    //            fileReader.Close();
-    //            Debug.Log("Read success: " + Path.Combine(DialogueSystem.folder, filename));
-    //            return clues;
-    //        }
-    //        catch
-    //        {
-    //            Debug.Log("Failed to load from JSON: " + Path.Combine(DialogueSystem.folder, filename));
-    //            return new OldClueList();
-    //        }
-    //    }
-    //}
 }
 
 [Serializable]
@@ -121,49 +78,7 @@ public struct ClueFile
         journalSummary = clueJournalSummary;
         tags = clueTags;
     }
-
-    //public ClueFile(OldClueFile old)
-    //{
-    //    name = old.name;
-    //    owners = new List<Suspect>();
-    //    foreach(CharacterID id in old.owners)
-    //    {
-    //        owners.Add(SuspectDialogue.IDToSuspect(id));
-    //    }
-    //    subjects = new List<Suspect>();
-    //    foreach (CharacterID id in old.subjects)
-    //    {
-    //        subjects.Add(SuspectDialogue.IDToSuspect(id));
-    //    }
-    //    content = old.content;
-    //    beggarSummary = old.beggarSummary;
-    //    journalSummary = old.journalSummary;
-    //    tags = old.tags;
-    //}
 }
-
-//[Serializable]
-//public struct OldClueFile
-//{
-//    public string name;
-//    public List<CharacterID> owners;
-//    public List<CharacterID> subjects;
-//    public string content;
-//    public string beggarSummary;
-//    public string journalSummary;
-//    public List<string> tags;
-
-//    public OldClueFile(string clueName, List<CharacterID> clueOwners, List<CharacterID> clueSubjects, string clueContent, string clueBeggarSummary, string clueJournalSummary, List<string> clueTags)
-//    {
-//        name = clueName;
-//        owners = clueOwners;
-//        subjects = clueSubjects;
-//        content = clueContent;
-//        beggarSummary = clueBeggarSummary;
-//        journalSummary = clueJournalSummary;
-//        tags = clueTags;
-//    }
-//}
 
 public struct Clue
 {

@@ -25,9 +25,8 @@ public class SuspectDialogue : CharacterDialogue {
     override protected void Start () {
         base.Start();
         oneLiners = false;
-        StartCoroutine("FetchClues");
-        
-        //DialogueSystem.Instance().AddSuspectListener(this);
+        allClues = DialogueSystem.Instance().GetCluesByOwner(IDToSuspect(id));
+
         //clueResponses.Add("", new ClueEntry("", "", ""));
         clueResponses = new Dictionary<string, ClueEntry>();
 
@@ -105,13 +104,5 @@ public class SuspectDialogue : CharacterDialogue {
                 return CharacterID.YELLOW;
         }
         throw new System.Exception("Invalid suspect value given to character " + suspect.ToString());
-    }
-
-    IEnumerator FetchClues()
-    {
-        yield return new WaitForSeconds(3);
-        allClues = DialogueSystem.Instance().GetCluesByOwner(IDToSuspect(id));
-        Debug.Log(id.ToString() + " " + allClues.Count);
-
     }
 }
