@@ -252,27 +252,15 @@ public class DialogueSystem
         player.EndInteraction();
         player.gameObject.SetActive(false);
         GameOver gameOver = Provider.GetInstance().gameOver;
-        if (blueIsKiller)
+        if (scenario.killer == SuspectDialogue.IDToSuspect(choice))
         {
-            if (choice == CharacterID.BLUE)
-            {
-                gameOver.WinGame("You guessed correctly");
-            }
-            else
-            {
-                gameOver.LoseGame("The killer was <color=#193BFF>Bleu</color>");
-            }
+            gameOver.WinGame("You guessed correctly");
         }
         else
         {
-            if (choice == CharacterID.RED)
-            {
-                gameOver.WinGame("You guessed correctly");
-            }
-            else
-            {
-                gameOver.LoseGame("The killer was <color=#d72c28>Rouge</color>");
-            }
+            Character killer;
+            characters.CharacterDict.TryGetValue(SuspectDialogue.SuspectToID(scenario.killer), out killer);
+            gameOver.LoseGame("The killer was <color=" + killer.color + ">" + killer.name + "</color>");
         }
         
     }
