@@ -7,49 +7,185 @@ public class SuspectDialogue : CharacterDialogue {
 
     Dictionary<string, ClueEntry> clueResponses;
     List<ClueFile> allClues;
-    /*
-    public bool likesBlack;
-    string blackOpinion;
-    public bool likesBlue;
-    string blueOpinion;
-    public bool likesGreen;
-    string greenOpinion;
-    public bool likesRed;
-    string redOpinion;
-    public bool likesYellow;
-    string yellowOpinion;
-    */
 
 
-    // Use this for initialization
     override protected void Start () {
         base.Start();
         oneLiners = false;
-        allClues = DialogueSystem.Instance().GetCluesByOwner(IDToSuspect(id));
-
-        //clueResponses.Add("", new ClueEntry("", "", ""));
-        clueResponses = new Dictionary<string, ClueEntry>();
-
+        InitializeClues();
     }
 
-    /*public string GetOpinion(CharacterID subject)
+    void InitializeClues()
     {
-        switch (subject)
+        //clueResponses.Add("", new ClueEntry("", "", ""));
+        clueResponses = new Dictionary<string, ClueEntry>();
+        allClues = DialogueSystem.Instance().GetCluesByOwner(IDToSuspect(id));
+
+        List<ClueFile>[] motivesPositive = new List<ClueFile>[5] { new List<ClueFile>(), new List<ClueFile>(), new List<ClueFile>(), new List<ClueFile>(), new List<ClueFile>() };
+        List<ClueFile>[] motivesNegative = new List<ClueFile>[5] { new List<ClueFile>(), new List<ClueFile>(), new List<ClueFile>(), new List<ClueFile>(), new List<ClueFile>() };
+        List<ClueFile>[] opportunityGuilty = new List<ClueFile>[5] { new List<ClueFile>(), new List<ClueFile>(), new List<ClueFile>(), new List<ClueFile>(), new List<ClueFile>() };
+        List<ClueFile>[] opportunityUnknown = new List<ClueFile>[5] { new List<ClueFile>(), new List<ClueFile>(), new List<ClueFile>(), new List<ClueFile>(), new List<ClueFile>() };
+        List<ClueFile>[] opportunityInnocent = new List<ClueFile>[5] { new List<ClueFile>(), new List<ClueFile>(), new List<ClueFile>(), new List<ClueFile>(), new List<ClueFile>() };
+        List<ClueFile> meansYes = new List<ClueFile>();
+        List<ClueFile> meansNo = new List<ClueFile>();
+
+        foreach (ClueFile clue in allClues)
         {
-            case CharacterID.BLACK:
-                return blackOpinion;
-            case CharacterID.BLUE:
-                return blueOpinion;
-            case CharacterID.GREEN:
-                return greenOpinion;
-            case CharacterID.RED:
-                return redOpinion;
-            case CharacterID.YELLOW:
-                return yellowOpinion;
-            default:
-                return "I don't know who you're talking about.";
+            if (clue.tags.Contains("MOTIVE"))
+            {
+                if (clue.tags.Contains("POSITIVE"))
+                {
+                    CategorizeClue(clue, motivesPositive);
+                }
+                if (clue.tags.Contains("NEGATIVE"))
+                {
+                    CategorizeClue(clue, motivesNegative);
+                }
+            }
+            if (clue.tags.Contains("OPPORTUNITY"))
+            {
+                if (clue.tags.Contains("GUILTY"))
+                {
+                    CategorizeClue(clue, opportunityGuilty);
+                }
+                if (clue.tags.Contains("UNKNOWN"))
+                {
+                    CategorizeClue(clue, opportunityUnknown);
+                }
+                if (clue.tags.Contains("INNOCENT"))
+                {
+                    CategorizeClue(clue, opportunityInnocent);
+                }
+            }
+            if (clue.tags.Contains("MEANS"))
+            {
+                if (clue.tags.Contains("YES"))
+                {
+                    meansYes.Add(clue);
+                }
+                if (clue.tags.Contains("NO"))
+                {
+                    meansNo.Add(clue);
+                }
+            }
         }
-    }*/
+
+        Scenario scenario = DialogueSystem.Instance().scenario;
+        Motive[] scenarioMotives = new Motive[5];
+        Opportunity[] scenarioOpportunities = new Opportunity[5];
+
+        switch (IDToSuspect(id))
+        {
+            case Suspect.BLACK:
+                scenarioMotives = scenario.motives.black;
+                scenarioOpportunities = scenario.opportunities.black;
+                break;
+            case Suspect.BLUE:
+                scenarioMotives = scenario.motives.blue;
+                scenarioOpportunities = scenario.opportunities.blue;
+                break;
+            case Suspect.GREEN:
+                scenarioMotives = scenario.motives.green;
+                scenarioOpportunities = scenario.opportunities.green;
+                break;
+            case Suspect.RED:
+                scenarioMotives = scenario.motives.red;
+                scenarioOpportunities = scenario.opportunities.red;
+                break;
+            case Suspect.YELLOW:
+                scenarioMotives = scenario.motives.yellow;
+                scenarioOpportunities = scenario.opportunities.yellow;
+                break;
+        }
+
+        //Populate response dictionary
+        for(int i = 0; i < 5; i++)
+        {
+            switch (scenarioMotives[i])
+            {
+                case Motive.POSITIVE:
+                    CreateResponse(motivesPositive[i], "MOTIVE" + ((Suspect)i).ToString());
+                    break;
+                case Motive.NEGATIVE:
+                    CreateResponse(motivesNegative[i], "MOTIVE" + ((Suspect)i).ToString());
+                    break;
+            }
+
+            switch (scenarioOpportunities[i])
+            {
+                case Opportunity.GUILTY:
+                    CreateResponse(opportunityGuilty[i], "OPP" + ((Suspect)i).ToString());
+                    break;
+                case Opportunity.UNKNOWN:
+                    CreateResponse(opportunityUnknown[i], "OPP" + ((Suspect)i).ToString());
+                    break;
+                case Opportunity.INNOCENT:
+                    CreateResponse(opportunityInnocent[i], "OPP" + ((Suspect)i).ToString());
+                    break;
+            }
+        }
+
+        int suspectID = (int)IDToSuspect(id);
+        switch (scenarioMotives[suspectID])
+        {
+            case Motive.POSITIVE:
+                CreateResponse(motivesPositive[suspectID], "MOTIVE", "MOTIVE" + ((Suspect)suspectID).ToString());
+                break;
+            case Motive.NEGATIVE:
+                CreateResponse(motivesNegative[suspectID], "MOTIVE", "MOTIVE" + ((Suspect)suspectID).ToString());
+                break;
+        }
+
+        switch (scenarioOpportunities[suspectID])
+        {
+            case Opportunity.GUILTY:
+                CreateResponse(opportunityGuilty[suspectID], "OPP", "OPP" + ((Suspect)suspectID).ToString());
+                break;
+            case Opportunity.UNKNOWN:
+                CreateResponse(opportunityUnknown[suspectID], "OPP", "OPP" + ((Suspect)suspectID).ToString());
+                break;
+            case Opportunity.INNOCENT:
+                CreateResponse(opportunityInnocent[suspectID], "OPP", "OPP" + ((Suspect)suspectID).ToString());
+                break;
+        }
+
+        switch (scenario.weapon[suspectID])
+        {
+            case Means.YES:
+                CreateResponse(meansYes, "WEAPON" + ((Suspect)suspectID).ToString());
+                CreateResponse(meansYes, "WEAPON", "WEAPON" + ((Suspect)suspectID).ToString());
+                break;
+            case Means.NO:
+                CreateResponse(meansNo, "WEAPON" + ((Suspect)suspectID).ToString());
+                CreateResponse(meansNo, "WEAPON", "WEAPON" + ((Suspect)suspectID).ToString());
+                break;
+        }
+
+    } 
+
+    void CategorizeClue(ClueFile clue, List<ClueFile>[] category)
+    {
+        foreach(Suspect subject in clue.subjects)
+        {
+            int index = (int)subject;
+            //if(category[index] == null)
+            //{
+            //    category[index] = new List<ClueFile>();
+            //}
+            category[index].Add(clue);
+        }
+    }
+
+    void CreateResponse(List<ClueFile> source, string prompt, string trigger)
+    {
+        ClueFile clue = source[Random.Range(0, source.Count)];
+        clueResponses.Add(prompt, new ClueEntry(clue.content, clue.journalSummary, trigger));
+    }
+
+    void CreateResponse(List<ClueFile> source, string prompt)
+    {
+        CreateResponse(source, prompt, prompt);
+    }
 
     public string CheckClue(string clueID)
     {

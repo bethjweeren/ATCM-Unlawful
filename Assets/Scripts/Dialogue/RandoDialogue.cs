@@ -26,10 +26,10 @@ public class RandoDialogue : NPCDialogue {
 
     IEnumerator ExamineBody()
     {
-        DialogueSystem.Instance().CreateJournalEntry("The victim was [Victim].", CharacterID.VICTIM, "motive");
+        DialogueSystem.Instance().CreateJournalEntry("The victim was [Victim].", CharacterID.VICTIM, "MOTIVE");
         yield return new WaitForSeconds(0.05f);
-        DialogueSystem.Instance().CreateJournalEntry("[Victim] was strangled.", CharacterID.VICTIM, "means");
+        DialogueSystem.Instance().CreateJournalEntry("[Victim] was strangled.", CharacterID.VICTIM, "WEAPON");
         yield return new WaitForSeconds(0.05f);
-        DialogueSystem.Instance().CreateJournalEntry("[Victim] was killed in the Town Square.", CharacterID.VICTIM, "opportunity");
+        DialogueSystem.Instance().CreateJournalEntry("[Victim] was killed in the Town Square.", CharacterID.VICTIM, "OPP");
     }
 }

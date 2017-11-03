@@ -40,7 +40,13 @@ public class Clue_Manager : MonoBehaviour {
     public Transform[] otherNotes;
     public Transform entryLocation;
 	public List<string> journalEntry = new List<string>();
-    public List<string> knownClues = new List<string>();
+
+    public List<string> knownBlackClues = new List<string>();
+    public List<string> knownBlueClues = new List<string>();
+    public List<string> knownGreenClues = new List<string>();
+    public List<string> knownRedClues = new List<string>();
+    public List<string> knownYellowClues = new List<string>();
+    public List<string> knownOtherClues = new List<string>();
 
     public GameObject blackStarterEntry;
     public GameObject blueStarterEntry;
@@ -252,4 +258,66 @@ public class Clue_Manager : MonoBehaviour {
         autoJournalEntry.manager = this;
 		journalEntry.Add (entryString);
 	}
+
+    public bool ClueKnown(CharacterID page, string clueID)
+    {
+        switch (page)
+        {
+            case CharacterID.BLACK:
+                return knownBlackClues.Contains(clueID);
+            case CharacterID.BLUE:
+                return knownBlueClues.Contains(clueID);
+            case CharacterID.GREEN:
+                return knownGreenClues.Contains(clueID);
+            case CharacterID.RED:
+                return knownRedClues.Contains(clueID);
+            case CharacterID.YELLOW:
+                return knownYellowClues.Contains(clueID);
+            default:
+                return knownOtherClues.Contains(clueID);
+        }
+    }
+
+    public void UpdateClueKnown(CharacterID page, string clueID)
+    {
+        switch (page)
+        {
+            case CharacterID.BLACK:
+                if (!knownBlackClues.Contains(clueID))
+                {
+                    knownBlackClues.Add(clueID);
+                }
+                break;
+            case CharacterID.BLUE:
+                if (!knownBlueClues.Contains(clueID))
+                {
+                    knownBlueClues.Add(clueID);
+                }
+                break;
+            case CharacterID.GREEN:
+                if (!knownGreenClues.Contains(clueID))
+                {
+                    knownGreenClues.Add(clueID);
+                }
+                break;
+            case CharacterID.RED:
+                if (!knownRedClues.Contains(clueID))
+                {
+                    knownRedClues.Add(clueID);
+                }
+                break;
+            case CharacterID.YELLOW:
+                if (!knownYellowClues.Contains(clueID))
+                {
+                    knownYellowClues.Add(clueID);
+                }
+                break;
+            default:
+                if (!knownOtherClues.Contains(clueID))
+                {
+                    knownOtherClues.Add(clueID);
+                }
+                break;
+        }
+    }
 }

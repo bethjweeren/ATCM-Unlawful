@@ -23,7 +23,7 @@ public class DialogueSystem
     public int dialogueTextSize = 18;
 
     List<ClueFile> clues;
-    Scenario scenario;
+    public Scenario scenario;
 
     public DialogueSystem()
     {
@@ -111,11 +111,11 @@ public class DialogueSystem
                 }
                 else if (dialoguePrompt == Prompt.MOTIVE)
                 {
-                    ProcessClue(characters.IDToCharacter(nonPlayerID).identifier + "MOTIVE" + "BLACK");
+                    ProcessClue("MOTIVE" + "BLACK");
                 }
                 else if (dialoguePrompt == Prompt.OPPORTUNITY)
                 {
-                    ProcessClue(characters.IDToCharacter(nonPlayerID).identifier + "OPPORTUNITY" + "BLACK");
+                    ProcessClue("OPP" + "BLACK");
                 }
                 break;
             case SixChoice.BLUE:
@@ -125,11 +125,11 @@ public class DialogueSystem
                 }
                 else if (dialoguePrompt == Prompt.MOTIVE)
                 {
-                    ProcessClue(characters.IDToCharacter(nonPlayerID).identifier + "MOTIVE" + "BLUE");
+                    ProcessClue("MOTIVE" + "BLUE");
                 }
                 else if (dialoguePrompt == Prompt.OPPORTUNITY)
                 {
-                    ProcessClue(characters.IDToCharacter(nonPlayerID).identifier + "OPPORTUNITY" + "BLUE");
+                    ProcessClue("OPP" + "BLUE");
                 }
                 break;
             case SixChoice.GREEN:
@@ -139,11 +139,11 @@ public class DialogueSystem
                 }
                 else if (dialoguePrompt == Prompt.MOTIVE)
                 {
-                    ProcessClue(characters.IDToCharacter(nonPlayerID).identifier + "MOTIVE" + "GREEN");
+                    ProcessClue("MOTIVE" + "GREEN");
                 }
                 else if (dialoguePrompt == Prompt.OPPORTUNITY)
                 {
-                    ProcessClue(characters.IDToCharacter(nonPlayerID).identifier + "OPPORTUNITY" + "GREEN");
+                    ProcessClue("OPP" + "GREEN");
                 }
                 break;
             case SixChoice.RED:
@@ -153,11 +153,11 @@ public class DialogueSystem
                 }
                 else if (dialoguePrompt == Prompt.MOTIVE)
                 {
-                    ProcessClue(characters.IDToCharacter(nonPlayerID).identifier + "MOTIVE" + "RED");
+                    ProcessClue("MOTIVE" + "RED");
                 }
                 else if (dialoguePrompt == Prompt.OPPORTUNITY)
                 {
-                    ProcessClue(characters.IDToCharacter(nonPlayerID).identifier + "OPPORTUNITY" + "RED");
+                    ProcessClue("OPP" + "RED");
                 }
                 break;
             case SixChoice.YELLOW:
@@ -167,11 +167,11 @@ public class DialogueSystem
                 }
                 else if (dialoguePrompt == Prompt.MOTIVE)
                 {
-                    ProcessClue(characters.IDToCharacter(nonPlayerID).identifier + "MOTIVE" + "YELLOW");
+                    ProcessClue("MOTIVE" + "YELLOW");
                 }
                 else if (dialoguePrompt == Prompt.OPPORTUNITY)
                 {
-                    ProcessClue(characters.IDToCharacter(nonPlayerID).identifier + "OPPORTUNITY" + "YELLOW");
+                    ProcessClue("OPP" + "YELLOW");
                 }
                 break;
             case SixChoice.CANCEL:
@@ -267,12 +267,12 @@ public class DialogueSystem
     public void CreateJournalEntry(string summary, CharacterID page, string clueID)
     {
         Provider provider = Provider.GetInstance();
-        if (!provider.clueSelector.knownClues.Contains(clueID))
+        if (!provider.clueSelector.ClueKnown(page, clueID))
         {
             provider.journal.CreateAutoJournalEntry(Quotes.FormatColors(summary), page);
             provider.clueSelector.CreateAutoJournalEntry(Quotes.FormatColors(summary), page, clueID);
             provider.alertSystem.CreateAlert("<color=" + characters.IDToCharacter(page).color + ">New entry added to Journal</color>");
-            provider.clueSelector.knownClues.Add(clueID);
+            provider.clueSelector.UpdateClueKnown(page, clueID);
         }
     }
 

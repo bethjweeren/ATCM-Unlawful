@@ -118,7 +118,7 @@ public class CluePanel : MonoBehaviour {
             int commaIndex = remaining.IndexOf(',');
             while (commaIndex >= 0)
             {
-                tagList.Add(remaining.Substring(0, commaIndex));
+                tagList.Add(remaining.Substring(0, commaIndex).ToUpper());
                 remaining = remaining.Substring(commaIndex + 1, remaining.Length - (commaIndex + 1));
                 while(remaining[0] == ' ')
                 {
@@ -126,7 +126,7 @@ public class CluePanel : MonoBehaviour {
                 }
                 commaIndex = remaining.IndexOf(',');
             }
-            tagList.Add(remaining);
+            tagList.Add(remaining.ToUpper());
         }
         return tagList;
     }
@@ -138,7 +138,7 @@ public class CluePanel : MonoBehaviour {
         {
             foreach (string tag in tagList)
             {
-                final += tag + ", ";
+                final += tag.ToLower() + ", ";
             }
         }
         if(final.Length > 0)
