@@ -23,13 +23,15 @@ public class DialogueSystem
     public int dialogueTextSize = 18;
 
     List<ClueFile> clues;
+    Scenario scenario;
 
     public DialogueSystem()
     {
-        System.DateTime now = System.DateTime.Now;
-        Debug.Log(now.Year + "-" + now.Month.ToString("00") + "-" + now.Day.ToString("00") + " " + now.Hour.ToString("00") + "h" + now.Minute.ToString("00") + "m" + now.Second.ToString("00") + "s");
         characters = new Characters();
         quoteQueue = new List<DialogueLine>();
+
+        scenario = new Scenario();
+        Scenario.ExportJSON(scenario);
 
         clues = new List<ClueFile>();
         ClueList motives = ClueList.LoadJSON("Motive.json");
