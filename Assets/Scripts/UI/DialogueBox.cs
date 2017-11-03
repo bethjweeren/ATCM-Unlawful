@@ -383,4 +383,16 @@ public class DialogueBox : MonoBehaviour {
     {
         return dialogueText.fontSize;
     }
+
+    public void ClickButton(int button)
+    {
+        if (choiceMode == ChoiceStyle.FOUR)
+        {
+            DialogueSystem.Instance().ProcessFourChoice((FourChoice)button);
+        }
+        else
+        {
+            DialogueSystem.Instance().ProcessSixChoice((SixChoice)button);
+        }
+    }
 }
