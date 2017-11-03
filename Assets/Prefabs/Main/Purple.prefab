@@ -21,8 +21,9 @@ GameObject:
   - component: {fileID: 4091495304988582}
   - component: {fileID: 212829220957243646}
   - component: {fileID: 61599470931145902}
-  - component: {fileID: 114285586103217640}
+  - component: {fileID: 114546663936458834}
   - component: {fileID: 114976853601740676}
+  - component: {fileID: 114077239802186428}
   m_Layer: 8
   m_Name: Purple
   m_TagString: Interactable
@@ -37,8 +38,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1672068425005804}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.01, y: 40.31, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
+  m_LocalPosition: {x: -0.01, y: 40.459, z: 0}
+  m_LocalScale: {x: 0.39999998, y: 0.39999998, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -68,7 +69,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.6, y: 1.6}
   m_EdgeRadius: 0
---- !u!114 &114285586103217640
+--- !u!114 &114077239802186428
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -76,18 +77,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 1672068425005804}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f7e935d562019d45a781651a24c1525, type: 3}
+  m_Script: {fileID: 11500000, guid: a85e2f4898217d34b83b8e1a3083b614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useCenterOfCollider: 0
+--- !u!114 &114546663936458834
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1672068425005804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 031e938c9abfe434fb9a037f004b92c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   id: 5
   dialogueFile: mayor.json
-  likesBlack: 0
-  likesBlue: 0
-  likesGreen: 0
-  likesRed: 0
-  likesYellow: 0
-  hasHint: 0
-  hintBlames: 0
+  hasIntro: 1
 --- !u!114 &114976853601740676
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -99,6 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59cd6713b9cdf7f48ba7c51a199d8eb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useCenterOfCollider: 0
 --- !u!212 &212829220957243646
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -131,7 +139,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8e7afedbc3627314da364f786f34fa44, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f204dcb798f75224facfe730edb06e35, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
