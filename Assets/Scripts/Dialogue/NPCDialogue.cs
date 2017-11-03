@@ -69,25 +69,6 @@ public class NPCDialogue : MonoBehaviour, IInteractable {
         return quotes.closers[Random.Range(0, quotes.closers.Count)];
     }
 
-    /*public string GetOpinion(CharacterID subject)
-    {
-        switch (subject)
-        {
-            case CharacterID.BLACK:
-                return blackOpinion;
-            case CharacterID.BLUE:
-                return blueOpinion;
-            case CharacterID.GREEN:
-                return greenOpinion;
-            case CharacterID.RED:
-                return redOpinion;
-            case CharacterID.YELLOW:
-                return yellowOpinion;
-            default:
-                return "I don't know who you're talking about.";
-        }
-    }*/
-
     public string ReplaceSuspect(string line, CharacterID suspect)
     {
         Character suspectCharacter = DialogueSystem.Instance().characters.IDToCharacter(suspect);
