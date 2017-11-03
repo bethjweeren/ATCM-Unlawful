@@ -29,7 +29,8 @@ public class DialogueBox : MonoBehaviour {
 
 	void Start () {
         DialogueSystem.Instance().dialogueTextSize = GetTextSize();
-	}
+        DialogueSystem.Instance().CloseDialogueBox();
+    }
 	
 	void Update () {
         if (choiceMode != ChoiceStyle.DEFAULT)

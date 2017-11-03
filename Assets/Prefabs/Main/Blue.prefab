@@ -26,7 +26,6 @@ GameObject:
   - component: {fileID: 114631898181201574}
   - component: {fileID: 50156635053945654}
   - component: {fileID: 95169839460811334}
-  - component: {fileID: 114365361806329642}
   - component: {fileID: 114582957569465200}
   m_Layer: 8
   m_Name: Blue
@@ -110,28 +109,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114365361806329642
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1683336617289884}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a61b7d586e9ef64da4089d046046cc2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 3
-  waitBetween: 4
-  waitAfterCollision: 30
-  waypointSets:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!114 &114582957569465200
 MonoBehaviour:
   m_ObjectHideFlags: 1

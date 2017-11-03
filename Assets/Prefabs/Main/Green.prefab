@@ -23,7 +23,6 @@ GameObject:
   - component: {fileID: 114819646778050702}
   - component: {fileID: 61040138641629610}
   - component: {fileID: 114130490401746950}
-  - component: {fileID: 114978110594271408}
   - component: {fileID: 50364682032668482}
   - component: {fileID: 95612045502229124}
   - component: {fileID: 114927077280642880}
@@ -162,31 +161,6 @@ MonoBehaviour:
   waitBetween: 4
   waitAfterCollision: 30
   waypointSets:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
---- !u!114 &114978110594271408
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1572072126001314}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a61b7d586e9ef64da4089d046046cc2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 3
-  waitBetween: 4
-  waitAfterCollision: 30
-  waypointSets:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
