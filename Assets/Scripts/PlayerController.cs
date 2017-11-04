@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
 	public State currentState;
 
 	public Button journalButton;
+	public Button inventoryButton;
 	public float interactRange = 1;
 	public LayerMask interactLayer;
 	public Transform interactRayOrigin;
@@ -59,6 +60,7 @@ public class PlayerController : MonoBehaviour
 		itemCanvas.SetActive (false);
 		journal_manager = journalCanvas.GetComponent<Journal_Manager> ();
 		journalButton.onClick.AddListener(ToggleJournal);
+		inventoryButton.onClick.AddListener(ToggleInventory);
 		currentState = State.MAIN;
 		playerRB = GetComponent<Rigidbody2D>();
 		animator = GetComponent<Animator>();
@@ -417,6 +419,24 @@ public class PlayerController : MonoBehaviour
 			}
 			currentState = State.MAIN;
 			journalCanvas.SetActive(false);
+		}
+	}
+
+	void ToggleInventory()
+	{
+		if (currentState == State.MAIN) {
+			if (time_manager.currentTimeState != Time_Manager.State.Rest) {
+				time_manager.ForcePausedState ();
+			}
+			Debug.Log ("inv");
+			currentState = State.INVENTORY;
+			itemCanvas.SetActive (true);
+		} else {
+			if (time_manager.currentTimeState != Time_Manager.State.Rest) {
+				time_manager.LeavePauseState ();
+			}
+			currentState = State.MAIN;
+			itemCanvas.SetActive(false);
 		}
 	}
 
