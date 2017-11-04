@@ -23,6 +23,7 @@ public class DialogueBox : MonoBehaviour {
     List<string> textPortions;
     string textToDisplay;
     bool doneDisplaying;
+    public GameObject doneArrow;
     bool skipText;
     float typeDelay = 0.015f;
     bool exitAfterSaying;
@@ -173,7 +174,7 @@ public class DialogueBox : MonoBehaviour {
         }
         else
         {
-            if (Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.Space))
+            if (Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Mouse0))
             {
                 skipText = true;
             }
@@ -181,8 +182,9 @@ public class DialogueBox : MonoBehaviour {
             {
                 skipText = false;
             }
-            if (doneDisplaying && (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Space)))
+            if (doneDisplaying && (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0)))
             {
+                doneArrow.SetActive(false);
                 SayNextPortion();
             }
         }
@@ -340,6 +342,7 @@ public class DialogueBox : MonoBehaviour {
             }
         }
         doneDisplaying = true;
+        doneArrow.SetActive(true);
     }
 
     /// <summary>
