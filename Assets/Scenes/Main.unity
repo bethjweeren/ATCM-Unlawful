@@ -1221,8 +1221,9 @@ GameObject:
   - component: {fileID: 33682411}
   - component: {fileID: 33682413}
   - component: {fileID: 33682412}
+  - component: {fileID: 33682414}
   m_Layer: 5
-  m_Name: GridItem (7)
+  m_Name: glove_left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1282,6 +1283,20 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 33682410}
+--- !u!114 &33682414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 33682410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b464c13db4e695648bf21d74053d0cde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemText: {fileID: 920669060}
+  desc: It's a single glove, left-handed. It's covered in someone's blood. This could
+    be an invaluable clue.
 --- !u!1 &34600838
 GameObject:
   m_ObjectHideFlags: 0
@@ -8751,6 +8766,17 @@ Transform:
   m_PrefabParentObject: {fileID: 4815555381387546, guid: 443e4c39564f2194d926745a2af74f49,
     type: 2}
   m_PrefabInternal: {fileID: 497212235}
+--- !u!224 &209221884 stripped
+RectTransform:
+  m_PrefabParentObject: {fileID: 224835143944843708, guid: 89560cfaa6be34c4897518e1f8fb98dd,
+    type: 2}
+  m_PrefabInternal: {fileID: 1144497072}
+--- !u!114 &209221885 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114276469607998008, guid: 89560cfaa6be34c4897518e1f8fb98dd,
+    type: 2}
+  m_PrefabInternal: {fileID: 1144497072}
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &213213331
 GameObject:
   m_ObjectHideFlags: 0
@@ -12526,7 +12552,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 344486852}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -13527,6 +13553,7 @@ GameObject:
   - component: {fileID: 356516176}
   - component: {fileID: 356516178}
   - component: {fileID: 356516177}
+  - component: {fileID: 356516179}
   m_Layer: 5
   m_Name: GridItem (10)
   m_TagString: Untagged
@@ -13588,6 +13615,19 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 356516175}
+--- !u!114 &356516179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 356516175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b464c13db4e695648bf21d74053d0cde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemText: {fileID: 920669060}
+  desc: 
 --- !u!1 &360372650
 GameObject:
   m_ObjectHideFlags: 0
@@ -15094,7 +15134,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 16
+    m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -15109,7 +15149,8 @@ MonoBehaviour:
     Li\n\n\u2656 Game Designers \u2656\nJarrod Humes\nJustin Mendoza\nSam Owens\n\n\u2328
     Programmers \u2328\nGrant Barbee\nSharon Lougheed\nMohammad (Max) Sobhani\n\n\u2767
     Concept/2D Artist \u2767\nKaitlin Smith\n\n\u270D Narrative Designer \u270D\nHudson
-    Bielstein\n\nSound Designers\nCat Nanagas\nZach Royal\nArael Rauls"
+    Bielstein\n\nSound Designers\nCat Nanagas\nArael Rauls\nPeter Choe\nAndrew Cietzman\nAndres
+    Hurtado\nConnor Goeke\nDarby James"
 --- !u!222 &400914953
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -22634,6 +22675,7 @@ GameObject:
   - component: {fileID: 600229871}
   - component: {fileID: 600229873}
   - component: {fileID: 600229872}
+  - component: {fileID: 600229874}
   m_Layer: 5
   m_Name: GridItem (9)
   m_TagString: Untagged
@@ -22695,6 +22737,19 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 600229870}
+--- !u!114 &600229874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 600229870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b464c13db4e695648bf21d74053d0cde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemText: {fileID: 920669060}
+  desc: 
 --- !u!4 &605788011 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4815555381387546, guid: 443e4c39564f2194d926745a2af74f49,
@@ -27663,7 +27718,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 734299334}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -29406,8 +29461,9 @@ GameObject:
   - component: {fileID: 765085150}
   - component: {fileID: 765085152}
   - component: {fileID: 765085151}
+  - component: {fileID: 765085153}
   m_Layer: 5
-  m_Name: GridItem (5)
+  m_Name: wine bottles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29467,6 +29523,21 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 765085149}
+--- !u!114 &765085153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 765085149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b464c13db4e695648bf21d74053d0cde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemText: {fileID: 920669060}
+  desc: They look like wine bottles of various types, all empty, and what seems to
+    be Bleu's jacket. Seems that Bleu really was knock-out drunk the night of the
+    murder.
 --- !u!1 &776029536
 GameObject:
   m_ObjectHideFlags: 0
@@ -30806,6 +30877,7 @@ MonoBehaviour:
   screenCredits: {fileID: 1836319503}
   currentState: 0
   journalButton: {fileID: 1114971004}
+  inventoryButton: {fileID: 209221885}
   interactRange: 2
   interactLayer:
     serializedVersion: 2
@@ -34608,8 +34680,9 @@ GameObject:
   - component: {fileID: 913490254}
   - component: {fileID: 913490256}
   - component: {fileID: 913490255}
+  - component: {fileID: 913490257}
   m_Layer: 5
-  m_Name: GridItem (3)
+  m_Name: paint brush
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34669,6 +34742,20 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 913490253}
+--- !u!114 &913490257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 913490253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b464c13db4e695648bf21d74053d0cde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemText: {fileID: 920669060}
+  desc: It looks like fresh paint stains of various colors. Seems like Rouge actually
+    was in this alley on the night of the murder.
 --- !u!1 &917585903
 GameObject:
   m_ObjectHideFlags: 0
@@ -34986,6 +35073,80 @@ Prefab:
     - {fileID: 61135164367661346, guid: 443e4c39564f2194d926745a2af74f49, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 443e4c39564f2194d926745a2af74f49, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &920669058
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 920669059}
+  - component: {fileID: 920669061}
+  - component: {fileID: 920669060}
+  m_Layer: 5
+  m_Name: itemTxt
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &920669059
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 920669058}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1069881146}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 306.8, y: 28.599976}
+  m_SizeDelta: {x: 300.18, y: 49.6}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &920669060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 920669058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 12
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 9
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: ' '
+--- !u!222 &920669061
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 920669058}
 --- !u!1 &920895351
 GameObject:
   m_ObjectHideFlags: 0
@@ -35590,8 +35751,9 @@ GameObject:
   - component: {fileID: 947264651}
   - component: {fileID: 947264653}
   - component: {fileID: 947264652}
+  - component: {fileID: 947264654}
   m_Layer: 5
-  m_Name: GridItem (6)
+  m_Name: glove_right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35651,6 +35813,20 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 947264650}
+--- !u!114 &947264654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 947264650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b464c13db4e695648bf21d74053d0cde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemText: {fileID: 920669060}
+  desc: 'It''s a single glove, right-handed. It''s covered in someone''s blood. This
+    could be an invaluable clue. '
 --- !u!1 &948542313
 GameObject:
   m_ObjectHideFlags: 0
@@ -37979,8 +38155,9 @@ GameObject:
   - component: {fileID: 996277097}
   - component: {fileID: 996277099}
   - component: {fileID: 996277098}
+  - component: {fileID: 996277100}
   m_Layer: 5
-  m_Name: GridItem (4)
+  m_Name: candles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38040,6 +38217,20 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 996277096}
+--- !u!114 &996277100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 996277096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b464c13db4e695648bf21d74053d0cde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemText: {fileID: 920669060}
+  desc: 'These religious candles were unused during mass the day before the murder.
+    Seems like Black actually was having a devotional here on the night of the murder. '
 --- !u!1 &997343571
 GameObject:
   m_ObjectHideFlags: 0
@@ -38395,7 +38586,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1003981077}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -40126,8 +40317,9 @@ GameObject:
   - component: {fileID: 1055394118}
   - component: {fileID: 1055394120}
   - component: {fileID: 1055394119}
+  - component: {fileID: 1055394121}
   m_Layer: 5
-  m_Name: GridItem (2)
+  m_Name: bouquet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40187,6 +40379,20 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1055394117}
+--- !u!114 &1055394121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1055394117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b464c13db4e695648bf21d74053d0cde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemText: {fileID: 920669060}
+  desc: It's a bouquet of yellow roses in front of Mr. Yellow's grave. Seems like
+    Jaune did visit Mr. Yellow's grave the night of the murder.
 --- !u!1 &1062549871
 GameObject:
   m_ObjectHideFlags: 0
@@ -40424,7 +40630,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1069881146
 RectTransform:
   m_ObjectHideFlags: 0
@@ -40452,6 +40658,7 @@ RectTransform:
   - {fileID: 1213974209}
   - {fileID: 600229871}
   - {fileID: 356516176}
+  - {fileID: 920669059}
   m_Father: {fileID: 1309259254}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -41098,8 +41305,9 @@ GameObject:
   - component: {fileID: 1092814825}
   - component: {fileID: 1092814827}
   - component: {fileID: 1092814826}
+  - component: {fileID: 1092814828}
   m_Layer: 5
-  m_Name: GridItem (1)
+  m_Name: letter_green
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41159,6 +41367,21 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1092814824}
+--- !u!114 &1092814828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1092814824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b464c13db4e695648bf21d74053d0cde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemText: {fileID: 920669060}
+  desc: 'It''s a letter from Vert, apologizing for missing Jaune on the night of the
+    murder.  It must have blown off Jaune''s door. Seems like Vert went to Yellow
+    Bakery on the night of the murder after all. '
 --- !u!1 &1099540600
 GameObject:
   m_ObjectHideFlags: 0
@@ -42868,6 +43091,155 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!1001 &1144497072
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1309259254}
+    m_Modifications:
+    - target: {fileID: 224835143944843708, guid: 89560cfaa6be34c4897518e1f8fb98dd,
+        type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224835143944843708, guid: 89560cfaa6be34c4897518e1f8fb98dd,
+        type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224835143944843708, guid: 89560cfaa6be34c4897518e1f8fb98dd,
+        type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224835143944843708, guid: 89560cfaa6be34c4897518e1f8fb98dd,
+        type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224835143944843708, guid: 89560cfaa6be34c4897518e1f8fb98dd,
+        type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224835143944843708, guid: 89560cfaa6be34c4897518e1f8fb98dd,
+        type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224835143944843708, guid: 89560cfaa6be34c4897518e1f8fb98dd,
+        type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224835143944843708, guid: 89560cfaa6be34c4897518e1f8fb98dd,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 224835143944843708, guid: 89560cfaa6be34c4897518e1f8fb98dd,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: -88.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 224835143944843708, guid: 89560cfaa6be34c4897518e1f8fb98dd,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 15.284973
+      objectReference: {fileID: 0}
+    - target: {fileID: 224835143944843708, guid: 89560cfaa6be34c4897518e1f8fb98dd,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 56.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 224835143944843708, guid: 89560cfaa6be34c4897518e1f8fb98dd,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 31.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 224835143944843708, guid: 89560cfaa6be34c4897518e1f8fb98dd,
+        type: 2}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224835143944843708, guid: 89560cfaa6be34c4897518e1f8fb98dd,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224835143944843708, guid: 89560cfaa6be34c4897518e1f8fb98dd,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224835143944843708, guid: 89560cfaa6be34c4897518e1f8fb98dd,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224835143944843708, guid: 89560cfaa6be34c4897518e1f8fb98dd,
+        type: 2}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224835143944843708, guid: 89560cfaa6be34c4897518e1f8fb98dd,
+        type: 2}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224835143944843708, guid: 89560cfaa6be34c4897518e1f8fb98dd,
+        type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224835143944843708, guid: 89560cfaa6be34c4897518e1f8fb98dd,
+        type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224835143944843708, guid: 89560cfaa6be34c4897518e1f8fb98dd,
+        type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1081438929340124, guid: 89560cfaa6be34c4897518e1f8fb98dd, type: 2}
+      propertyPath: m_Name
+      value: inv_bttn
+      objectReference: {fileID: 0}
+    - target: {fileID: 114068504272364698, guid: 89560cfaa6be34c4897518e1f8fb98dd,
+        type: 2}
+      propertyPath: m_Text
+      value: Inventory
+      objectReference: {fileID: 0}
+    - target: {fileID: 114068504272364698, guid: 89560cfaa6be34c4897518e1f8fb98dd,
+        type: 2}
+      propertyPath: m_FontData.m_FontSize
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 114068504272364698, guid: 89560cfaa6be34c4897518e1f8fb98dd,
+        type: 2}
+      propertyPath: m_FontData.m_MinSize
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114068504272364698, guid: 89560cfaa6be34c4897518e1f8fb98dd,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114068504272364698, guid: 89560cfaa6be34c4897518e1f8fb98dd,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114068504272364698, guid: 89560cfaa6be34c4897518e1f8fb98dd,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 89560cfaa6be34c4897518e1f8fb98dd, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1147552420
 GameObject:
   m_ObjectHideFlags: 0
@@ -43401,7 +43773,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1155173152}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -45500,6 +45872,7 @@ GameObject:
   - component: {fileID: 1213974209}
   - component: {fileID: 1213974211}
   - component: {fileID: 1213974210}
+  - component: {fileID: 1213974212}
   m_Layer: 5
   m_Name: GridItem (8)
   m_TagString: Untagged
@@ -45561,6 +45934,19 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1213974208}
+--- !u!114 &1213974212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1213974208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b464c13db4e695648bf21d74053d0cde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemText: {fileID: 920669060}
+  desc: 
 --- !u!1 &1221712166
 GameObject:
   m_ObjectHideFlags: 0
@@ -48410,6 +48796,7 @@ RectTransform:
   - {fileID: 433575098}
   - {fileID: 1766813152}
   - {fileID: 1114971003}
+  - {fileID: 209221884}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -51588,7 +51975,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 16
+    m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -51603,7 +51990,8 @@ MonoBehaviour:
     Li\n\n\u2656 Game Designers \u2656\nJarrod Humes\nJustin Mendoza\nSam Owens\n\n\u2328
     Programmers \u2328\nGrant Barbee\nSharon Lougheed\nMohammad (Max) Sobhani\n\n\u2767
     Concept/2D Artist \u2767\nKaitlin Smith\n\n\u270D Narrative Designer \u270D\nHudson
-    Bielstein\n\nSound Designers\nCat Nanagas\nZach Royal\nArael Rauls"
+    Bielstein\n\nSound Designers\nCat Nanagas\nArael Rauls\nPeter Choe\nAndrew Cietzman\nAndres
+    Hurtado\nConnor Goeke\nDarby James"
 --- !u!222 &1408789871
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -57260,6 +57648,8 @@ GameObject:
   - component: {fileID: 1579815663}
   - component: {fileID: 1579815662}
   - component: {fileID: 1579815661}
+  - component: {fileID: 1579815665}
+  - component: {fileID: 1579815664}
   m_Layer: 0
   m_Name: bed
   m_TagString: Untagged
@@ -57290,7 +57680,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.52717006, y: 0}
@@ -57361,6 +57751,43 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!61 &1579815664
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1579815659}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.23, y: -0.24}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.21, y: 1.63}
+  m_EdgeRadius: 0
+--- !u!114 &1579815665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1579815659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66c3adbb4c736b64fafd95d5fc8dd9e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeManager: {fileID: 1782135245}
 --- !u!1 &1579960879
 GameObject:
   m_ObjectHideFlags: 0
@@ -62188,7 +62615,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1714181961}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -69771,8 +70198,9 @@ GameObject:
   - component: {fileID: 1974279712}
   - component: {fileID: 1974279714}
   - component: {fileID: 1974279713}
+  - component: {fileID: 1974279715}
   m_Layer: 5
-  m_Name: GridItem
+  m_Name: Utility Knife
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -69832,6 +70260,20 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1974279711}
+--- !u!114 &1974279715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1974279711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b464c13db4e695648bf21d74053d0cde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemText: {fileID: 920669060}
+  desc: It's a utility knife, and it fits the size of the wounds on the body. I'd
+    better go ask the suspects who owns this.
 --- !u!1 &1975209779
 GameObject:
   m_ObjectHideFlags: 0
@@ -75456,7 +75898,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2080759505}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
