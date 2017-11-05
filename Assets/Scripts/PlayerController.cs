@@ -381,7 +381,8 @@ public class PlayerController : MonoBehaviour
 			UnfreezeNPCs();
 		}
         journalButton.gameObject.SetActive(true);
-	}
+        inventoryButton.gameObject.SetActive(true);
+    }
 
     public void BeginInteraction(IInteractable other)
     {
@@ -389,6 +390,7 @@ public class PlayerController : MonoBehaviour
         StopMoving();
         time_manager.ForcePausedState();
         journalButton.gameObject.SetActive(false);
+        inventoryButton.gameObject.SetActive(false);
         other.Interact();
         //FreezeNPCs(); They should already be frozen by time manager
     }
@@ -406,12 +408,13 @@ public class PlayerController : MonoBehaviour
 
 	void ToggleJournal()
 	{
-		if (currentState == State.MAIN) {
+		if (currentState == State.MAIN || currentState == State.INVENTORY) {
 			if (time_manager.currentTimeState != Time_Manager.State.Rest) {
 				time_manager.ForcePausedState ();
 			}
 			currentState = State.JOURNAL;
-			journalCanvas.SetActive (true);
+            itemCanvas.SetActive(false);
+            journalCanvas.SetActive (true);
 			mapTracker.UpdateMap ();
 		} else {
 			if (time_manager.currentTimeState != Time_Manager.State.Rest) {
@@ -424,13 +427,14 @@ public class PlayerController : MonoBehaviour
 
 	void ToggleInventory()
 	{
-		if (currentState == State.MAIN) {
+		if (currentState == State.MAIN || currentState == State.JOURNAL) {
 			if (time_manager.currentTimeState != Time_Manager.State.Rest) {
 				time_manager.ForcePausedState ();
 			}
 			Debug.Log ("inv");
 			currentState = State.INVENTORY;
-			itemCanvas.SetActive (true);
+            journalCanvas.SetActive(false);
+            itemCanvas.SetActive (true);
 		} else {
 			if (time_manager.currentTimeState != Time_Manager.State.Rest) {
 				time_manager.LeavePauseState ();
