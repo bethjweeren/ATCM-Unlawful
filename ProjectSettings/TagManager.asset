@@ -16,51 +16,54 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  -
   - Water
   - UI
-  - 
-  - 
+  -
+  -
   - Interactable
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
   m_SortingLayers:
-  - name: Background
-    uniqueID: 3789577621
-    locked: 0
-  - name: Default
-    uniqueID: 0
-    locked: 0
-  - name: Below Player
-    uniqueID: 1263317163
-    locked: 0
-  - name: Player
-    uniqueID: 3865796897
-    locked: 0
-  - name: Above Player
-    uniqueID: 570910443
-    locked: 0
-  - name: Overlay
-    uniqueID: 793133837
-    locked: 0
+    - name: Background
+      uniqueID: 3789577621
+      locked: 0
+    - name: Shadow
+      uniqueID: 3669152147
+      locked: 0
+    - name: Default
+      uniqueID: 0
+      locked: 0
+    - name: Below Player
+      uniqueID: 1263317163
+      locked: 0
+    - name: Player
+      uniqueID: 3865796897
+      locked: 0
+    - name: Above Player
+      uniqueID: 570910443
+      locked: 0
+    - name: Overlay
+      uniqueID: 793133837
+      locked: 0
