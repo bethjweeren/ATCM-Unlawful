@@ -60,7 +60,7 @@ public class Characters
         CharacterDict.Add(CharacterID.YELLOW, new Character("Jaune", "YELLOW", "#fcff03", Resources.Load<Sprite>(thumbPath + "Yellow_thumb")));
         NameDict.Add("YELLOW", CharacterID.YELLOW);
 
-        CharacterDict.Add(CharacterID.VICTIM, new Character("Dr. Mort", "VICTIM", "#954C1F"));
+        CharacterDict.Add(CharacterID.VICTIM, new Character("Dr. Mort", "VICTIM", "#B9977C"));
         NameDict.Add("VICTIM", CharacterID.VICTIM);
 
         CharacterDict.Add(CharacterID.INVALID, new Character("Missingno", "INVALID", "#FFFFFF"));
