@@ -260,7 +260,8 @@ public class DialogueSystem
         {
             Character killer;
             characters.CharacterDict.TryGetValue(SuspectDialogue.SuspectToID(scenario.killer), out killer);
-            gameOver.LoseGame("The killer was <color=" + killer.color + ">" + killer.name + "</color>");
+            //gameOver.LoseGame("The killer was <color=" + killer.color + ">" + killer.name + "</color>");
+            gameOver.LoseGame("You guessed incorrectly");
         }
         
     }
@@ -288,6 +289,11 @@ public class DialogueSystem
             }
         }
         return ownClues;
+    }
+
+    public void Reset()
+    {
+        instance = null;
     }
 }
 

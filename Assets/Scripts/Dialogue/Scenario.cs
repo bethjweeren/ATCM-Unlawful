@@ -15,10 +15,12 @@ public class Scenario{
     public MotiveList motives;
     public OpportunityList opportunities;
     public Means[] weapon;
+    private int[] guiltScores;
 
     public Scenario()
     {
         killer = (Suspect)Random.Range(0, 5);
+        guiltScores = new int[5];
         AssignMotives();
         AssignOpportunities();
         weapon = new Means[5];
@@ -59,6 +61,22 @@ public class Scenario{
             remainingMotives.RemoveAt(index);
         }
 
+        //Evaluate Guilt
+        for(int i = 0; i < recipientMotives.Length; i++)
+        {
+            foreach(Motive motive in recipientMotives[i])
+            {
+                switch (motive)
+                {
+                    case Motive.POSITIVE:
+                        break;
+                    case Motive.NEGATIVE:
+                        guiltScores[i] += 1;
+                        break;
+                }
+            }
+        }
+
         //Assign entries
         List<Motive[]> assignedMotives = new List<Motive[]>();
         for (int i = 0; i < 5; i++)
@@ -82,32 +100,51 @@ public class Scenario{
                                       new Opportunity[4] { Opportunity.GUILTY, Opportunity.GUILTY, Opportunity.UNKNOWN, Opportunity.UNKNOWN },
                                       new Opportunity[4] { Opportunity.GUILTY, Opportunity.GUILTY, Opportunity.UNKNOWN, Opportunity.UNKNOWN },
                                       new Opportunity[4] { Opportunity.GUILTY, Opportunity.GUILTY, Opportunity.UNKNOWN, Opportunity.UNKNOWN },
-                                      new Opportunity[4] { Opportunity.UNKNOWN, Opportunity.UNKNOWN, Opportunity.INNOCENT, Opportunity.INNOCENT },
-                                      new Opportunity[4] { Opportunity.UNKNOWN, Opportunity.UNKNOWN, Opportunity.UNKNOWN, Opportunity.INNOCENT }
+                                      new Opportunity[4] { Opportunity.UNKNOWN, Opportunity.UNKNOWN, Opportunity.UNKNOWN, Opportunity.INNOCENT },
+                                      new Opportunity[4] { Opportunity.UNKNOWN, Opportunity.UNKNOWN, Opportunity.INNOCENT, Opportunity.INNOCENT }
                                     };
-        List<List<Opportunity>> remainingOpportunitys = new List<List<Opportunity>>();
+        List<List<Opportunity>> remainingOpportunities = new List<List<Opportunity>>();
         for (int i = 0; i < recipientOpportunityTemplates.Length; i++)
         {
-            remainingOpportunitys.Add(new List<Opportunity>(recipientOpportunityTemplates[i]));
+            remainingOpportunities.Add(new List<Opportunity>(recipientOpportunityTemplates[i]));
         }
 
         List<Opportunity>[] recipientOpportunities = new List<Opportunity>[5];
 
-        //Set up killer motives
+        //Set up killer opportunities
         int index = Random.Range(0, 3);
-        recipientOpportunities[(int)killer] = remainingOpportunitys[index];
-        remainingOpportunitys.RemoveAt(index);
+        recipientOpportunities[(int)killer] = remainingOpportunities[index];
+        remainingOpportunities.RemoveAt(index);
 
-        //Set up everyone else's motives
+        //Set up everyone else's opportunities
         for (int i = 0; i < recipientOpportunities.Length; i++)
         {
             if ((int)killer == i)
             {
                 continue;
             }
-            index = Random.Range(0, remainingOpportunitys.Count);
-            recipientOpportunities[i] = remainingOpportunitys[index];
-            remainingOpportunitys.RemoveAt(index);
+            index = Random.Range(0, remainingOpportunities.Count);
+            recipientOpportunities[i] = remainingOpportunities[index];
+            remainingOpportunities.RemoveAt(index);
+        }
+
+        //Evaluate Guilt
+        for (int i = 0; i < recipientOpportunities.Length; i++)
+        {
+            foreach (Opportunity opportunity in recipientOpportunities[i])
+            {
+                switch (opportunity)
+                {
+                    case Opportunity.GUILTY:
+                        guiltScores[i] += 2;
+                        break;
+                    case Opportunity.UNKNOWN:
+                        break;
+                    case Opportunity.INNOCENT:
+                        guiltScores[i] -= 2;
+                        break;
+                }
+            }
         }
 
         //Assign entries
@@ -136,13 +173,10 @@ public class Scenario{
 
     public void AssignMeans()
     {
-        Means[] recipientMeansTemplate = { Means.YES, Means.YES, Means.YES, Means.YES, Means.NO };
-        List<Means> remainingMeans = new List<Means>(recipientMeansTemplate);
+        //Debug.Log("Black: " + guiltScores[0] + ", Blue: " + guiltScores[1] + ", Green: " + guiltScores[2] + ", Red: " + guiltScores[3] + ", Yellow: " + guiltScores[4]);
 
         //Killer means
-        int index = Random.Range(0, 4);
-        weapon[(int)killer] = remainingMeans[index];
-        remainingMeans.RemoveAt(index);
+        weapon[(int)killer] = Means.YES;
 
         //Set up everyone else's means
         for (int i = 0; i < weapon.Length; i++)
@@ -151,9 +185,14 @@ public class Scenario{
             {
                 continue;
             }
-            index = Random.Range(0, remainingMeans.Count);
-            weapon[i] = remainingMeans[index];
-            remainingMeans.RemoveAt(index);
+            if(guiltScores[i] >= 5)
+            {
+                weapon[i] = Means.NO;
+            }
+            else
+            {
+                weapon[i] = Means.YES;
+            }
         }
     }
 

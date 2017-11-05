@@ -47,9 +47,13 @@ public class PlayerController : MonoBehaviour
 	private Animator animator;
 
 	public MapTracker mapTracker;
-	
-	//public bool isInTutorial = false;
-	//public Tutorial tutorial;
+
+    //public bool isInTutorial = false;
+    //public Tutorial tutorial;
+
+    //Beta Debug
+    public Text keywordText;
+    private readonly string[] keywords = new string[5] { "Nancy", "Adler", "Holmes", "Watson", "Conan" };
 
 	// Use this for initialization
 	void Start()
@@ -71,6 +75,9 @@ public class PlayerController : MonoBehaviour
 		enableOnStart.SetActive(true); //Enable all the intrusive UI things on start, because they get in the way in the scene
 		mapTracker.UpdateMap ();
         //DialogueSystem.Instance().CreateJournalEntry("[Red] wanted to talk to me", CharacterID.RED, "talkToRed");
+
+        //BETA
+        keywordText.text = "Keyword: " + keywords[(int)DialogueSystem.Instance().scenario.killer];
     }
 
 	// Update is called every fixed framerate frame
