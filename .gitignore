@@ -5,6 +5,7 @@
 [Oo]bj/
 [Bb]uild
 [Ll]ibrary/
+Scenarios/
 sysinfo.txt
 *.stackdump
 
