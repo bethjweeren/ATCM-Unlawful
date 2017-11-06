@@ -46,6 +46,7 @@ public class Mark_Manager : MonoBehaviour {
 		clearAll_Btn.onClick.AddListener (ClearAll);
 
 		StopPlacing ();
+
 	}
 
 	void Update()

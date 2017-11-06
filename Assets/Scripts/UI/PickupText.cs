@@ -26,7 +26,7 @@ public class PickupText : MonoBehaviour {
 
 	public IEnumerator SwitchOut(string name){
 		pickUpTextBG.SetActive(true);
-		pickUpText.text = "Picked up the " + name;
+		pickUpText.text = "Picked up " + name;
 		yield return switchDuration;
 		pickUpText.text = "";
 		pickUpTextBG.SetActive(false);

@@ -8,19 +8,55 @@ using UnityEngine;
 //Step 2: Put this script inside the Sounds object
 //Step 3: Drag and drop the footsteps/audio sources into the Audio Sources array
 //Step 4: Move this script inside the NPC object so the animator will find it
+[RequireComponent(typeof(AudioSource))]
 public class SoundController : MonoBehaviour
 {
-	public AudioSource[] audioSources;
+	public AudioClip[] cobblestoneSteps, dirtSteps, woodSteps;
 	public bool soundEnabled = true;
-	private AudioSource currentAudio;
+	private AudioSource audioSource;
+	public AudioClip[] currentClips; //Current audio sources
+	private AudioClip currentClip;
+
 	// Use this for initialization
 	void Start ()
 	{
-		foreach (AudioSource ac in audioSources)
+		audioSource = GetComponent<AudioSource>();
+
+		Collider2D[] overlappingColliders = new Collider2D[20];
+		ContactFilter2D cf = new ContactFilter2D();
+		cf.NoFilter();
+		GetComponent<Collider2D>().OverlapCollider(cf, overlappingColliders);
+
+		currentClips = cobblestoneSteps;
+		foreach (Collider2D oc in overlappingColliders)
 		{
-			ac.loop = false;
-			ac.playOnAwake = false;
+
+			if (oc != null && oc.gameObject.CompareTag("BGDirt"))
+			{
+				currentClips = dirtSteps;
+				break;
+			}
 		}
+		foreach (Collider2D oc in overlappingColliders)
+		{
+
+			if (oc != null && oc.gameObject.CompareTag("BGCobblestone"))
+			{
+				currentClips = cobblestoneSteps;
+				break;
+			}
+		}
+		foreach (Collider2D oc in overlappingColliders)
+		{
+
+			if (oc != null && oc.gameObject.CompareTag("BGWood"))
+			{
+				currentClips = woodSteps;
+				break;
+			}
+		}
+		audioSource.loop = false;
+		audioSource.playOnAwake = false;
 	}
 	
 	// Update is called once per frame
@@ -33,8 +69,9 @@ public class SoundController : MonoBehaviour
 	{
 		if (soundEnabled)
 		{
-			currentAudio = audioSources[Mathf.RoundToInt(Random.Range(0, audioSources.Length))];
-			currentAudio.Play();
+			currentClip = currentClips[Mathf.RoundToInt(Random.Range(0, currentClips.Length))];
+			audioSource.clip = currentClip;
+			audioSource.Play();
 		}
 	}
 }

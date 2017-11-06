@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class LetterUI : MonoBehaviour{
 
-    void Update()
+	void OnEnable()
+	{
+		GetComponentInParent<AudioSource>().Play(); //Play page turn sound
+	}
+
+	void Update()
     {
         if ((Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return)))
         {

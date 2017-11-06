@@ -158,6 +158,7 @@ public class PlayerController : MonoBehaviour
 							time_manager.ForcePausedState();
 						}
 						currentState = State.INVENTORY;
+						itemsManager.PlayBackpackSound();
 						StopMoving();
 						itemCanvas.SetActive (true);
 						print("Looking through inventory. Press I or ESC to close."); //Replace with inventory code
@@ -321,6 +322,7 @@ public class PlayerController : MonoBehaviour
 					{
 						time_manager.LeavePauseState();
 					}
+					itemsManager.PlayBackpackSound();
 					itemCanvas.SetActive (false);
 					currentState = State.MAIN;
 					UnfreezeNPCs();

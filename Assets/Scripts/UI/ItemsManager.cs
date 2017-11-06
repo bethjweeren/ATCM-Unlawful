@@ -6,10 +6,26 @@ public class ItemsManager : MonoBehaviour {
 
 	public Transform itemPosition1, itemPosition2, itemPosition3, itemPosition4, itemPosition5, itemPosition6;
 	public List<GameObject> items = new List<GameObject>();
+	public AudioClip backpackSound;
+	public AudioSource audioSource;
+
+	void Start()
+	{
+		audioSource.clip = backpackSound;
+	}
 
 	public void AddItem(GameObject itemToAdd){
+		audioSource.clip = backpackSound;
+		audioSource.Play();
 		items.Add (itemToAdd);
 		UpdateInventory ();
+	}
+
+	//Just for PlayerController when the player opens the inventory
+	public void PlayBackpackSound()
+	{
+		audioSource.clip = backpackSound;
+		audioSource.Play();
 	}
 
 	//void Update(){

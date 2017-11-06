@@ -18,16 +18,19 @@ public class ItemSpawner : MonoBehaviour
 		StartCoroutine(CheckToSpawn());
 	}
 
+	//If an item should spawn, spawn it. (Er, I mean enable it)
 	IEnumerator CheckToSpawn()
 	{
 		foreach (GameObject obj in itemsToSpawn)
 		{
 			Item i = obj.GetComponent<Item>();
+			//If the object actually exists
 			if (i != null)
 			{
+				//Check if it's the right time to spawn it
 				if ((i.dayToSpawn == timeManager.day) && (i.hourToSpawn == timeManager.hour))
 				{
-					obj.SetActive(true);
+					obj.SetActive(true); //Spawn the object (wWell the object's already there; you're just enabling it.)
 				}
 			}
 			else

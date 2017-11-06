@@ -60,8 +60,13 @@ public class Journal_Manager : MonoBehaviour {
     public GameObject yellowStarterEntry;
     public GameObject otherStarterEntry;
 
+	public AudioClip pageTurnSound;
+	private AudioSource audioSource;
+
     void Start()
 	{
+		audioSource = GetComponentInParent<AudioSource>();
+		audioSource.clip = pageTurnSound;
 
 		currentPage.transform.position = page1Location.position;
 		nextPage.transform.position = page2Location.position;
@@ -103,6 +108,9 @@ public class Journal_Manager : MonoBehaviour {
 
 	public void ChangePage()
 	{
+		audioSource.clip = pageTurnSound;
+		audioSource.Play();
+
 		currentPage = pages [(currentPageNumber)];
 		nextPage = pages [(currentPageNumber+1)];
 		currentPage.transform.position = page1Location.position;
@@ -191,7 +199,8 @@ public class Journal_Manager : MonoBehaviour {
 	}
 		
 	public void CreateAutoJournalEntry(string entryString, CharacterID character){
-        switch (character)
+
+		switch (character)
         {
             case CharacterID.BLACK:
                 characterPage = blackEntryPage;

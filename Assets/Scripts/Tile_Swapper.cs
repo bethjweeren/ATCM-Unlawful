@@ -17,6 +17,8 @@ public class Tile_Swapper : MonoBehaviour {
 	public GameObject question1;
 	public GameObject question2;
 	public GameObject question3;
+	public AudioClip scribbleSound;
+	private AudioSource audioSource;
 
 	void Start () 
 	{
@@ -29,10 +31,14 @@ public class Tile_Swapper : MonoBehaviour {
 		question1.SetActive (false);
 		question2.SetActive (false);
 		question3.SetActive (false);
+
+		audioSource = GetComponentInParent<AudioSource>();
 	}
 
 	void SwapTile()
 	{
+		audioSource.clip = scribbleSound;
+		audioSource.Play();
 		if (isCheck == false && isX == false && isQuestion1 == false && isQuestion2 == false && isQuestion3 == false) {
 			clickMe.SetActive (false);
 			isCheck = true;

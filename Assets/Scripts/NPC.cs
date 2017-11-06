@@ -243,6 +243,7 @@ public class NPC : MonoBehaviour
 		}
 	}
 
+	/*
 	void OnCollisionStay2D(Collision2D collision)
 	{
 		OnCollisionEnter2D(collision);
@@ -332,6 +333,7 @@ public class NPC : MonoBehaviour
 			animator.SetBool("Walking", false); //Stop animating sprite
 		}
 	}
+	*/
 
 	public void StopMoving()
 	{
