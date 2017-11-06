@@ -16,7 +16,16 @@ public class Item : MonoBehaviour, IInteractable
 
 	public void Interact()
 	{
-		if (itemsManager.items.Count < 6)
+		if (itemsManager.items.Count == 0)
+		{
+			pickUpText.ChangeTextInfo(gameObject.name);
+			Debug.Log("hititem");
+			itemsManager.AddItem(linkedItem);
+			Provider.GetInstance().player.EndInteraction();
+			itemSpawner.GetComponent<ItemSpawner>().itemsToSpawn.Remove(gameObject);
+			Destroy(gameObject);
+		}
+		else if (itemsManager.items.Count < 6)
 		{
 			pickUpText.ChangeText(gameObject.name);
 			Debug.Log("hititem");

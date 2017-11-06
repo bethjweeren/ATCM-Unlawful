@@ -11,7 +11,7 @@ public class ItemSpawner : MonoBehaviour
 	void Start()
 	{
 		timeManager = GameObject.FindObjectOfType<Time_Manager>();
-		foreach (GameObject obj in itemsToSpawn)
+		foreach (GameObject obj in itemsToSpawn) //Start off with everything deactivated
 		{
 			obj.SetActive(false);
 		}
@@ -28,16 +28,16 @@ public class ItemSpawner : MonoBehaviour
 			if (i != null)
 			{
 				//Check if it's the right time to spawn it
-				if ((i.dayToSpawn == timeManager.day) && (i.hourToSpawn == timeManager.hour))
+				if ((i.dayToSpawn <= timeManager.day) && (i.hourToSpawn <= timeManager.hour))
 				{
-					obj.SetActive(true); //Spawn the object (wWell the object's already there; you're just enabling it.)
+					obj.SetActive(true); //Spawn the object (Well the object's already there; you're just enabling it.)
 				}
 			}
 			else
 				print("The item " + obj + " does not have the Item script, so it can't be spawned!");
 		}
 
-		//Wait a tenth of a second
+		//Wait the time between checks (for efficiency reasons)
 		yield return new WaitForSeconds(timeBetweenChecks);
 		StartCoroutine(CheckToSpawn());
 	}

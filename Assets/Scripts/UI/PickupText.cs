@@ -15,10 +15,18 @@ public class PickupText : MonoBehaviour {
 		pickUpText.text = "";
 	}
 
+	//Tells player that the item was picked up 
 	public void ChangeText(string name){
 		StartCoroutine (SwitchOut (name));
 	}
 
+	//Tells player that the item was picked up and to open the inventory
+	public void ChangeTextInfo(string name)
+	{
+		StartCoroutine(SwitchOutInfo(name));
+	}
+
+	//Tells player that the inventory is full
 	public void ChangeTextAlert()
 	{
 		StartCoroutine(CannotPickup());
@@ -31,6 +39,16 @@ public class PickupText : MonoBehaviour {
 		pickUpText.text = "";
 		pickUpTextBG.SetActive(false);
 	}
+
+	public IEnumerator SwitchOutInfo(string name)
+	{
+		pickUpTextBG.SetActive(true);
+		pickUpText.text = "Picked up " + name + "\nOpen inventory (I) to view.";
+		yield return (new WaitForSeconds(6f));
+		pickUpText.text = "";
+		pickUpTextBG.SetActive(false);
+	}
+
 
 	public IEnumerator CannotPickup()
 	{
