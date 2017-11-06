@@ -7,26 +7,40 @@ public class AlertSystem : MonoBehaviour {
     public GameObject alertFab;
     public GameObject alertTray;
     List<AlertEntry> activeAlerts;
+    Queue<string> alertQueue;
     public AudioSource alertPlayer;
     public AudioClip alertSound;
 
 	// Use this for initialization
 	void Start () {
         activeAlerts = new List<AlertEntry>();
+        alertQueue = new Queue<string>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            CreateAlert(Random.value.ToString());
-        }
+        UpdateAlerts();
 	}
 
     public void CreateAlert(string message)
     {
         lock (alertLock)
         {
+            alertQueue.Enqueue(message);
+        }
+    }
+
+    void UpdateAlerts()
+    {
+        if(alertQueue.Count > 0)
+        {
+            string message;
+
+            lock (alertLock)
+            {
+                message = alertQueue.Dequeue();
+            }
+
             alertPlayer.PlayOneShot(alertSound, 0.8f);
             GameObject alert = (GameObject)Instantiate(alertFab, transform.position, Quaternion.identity, alertTray.transform);
             AlertEntry alertScript = alert.GetComponent<AlertEntry>();

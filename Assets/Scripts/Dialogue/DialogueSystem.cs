@@ -24,6 +24,7 @@ public class DialogueSystem
     public bool blueIsKiller;
 
     List<ClueFile> clues;
+    public List<ClueFile> items;
     public Scenario scenario;
 
     public DialogueSystem()
@@ -53,6 +54,9 @@ public class DialogueSystem
         {
             clues.Add(clue);
         }
+
+        ClueList itemFile = ClueList.LoadJSON("Items.json");
+        items = itemFile.clues;
 
 
         //This part is temporary
@@ -237,6 +241,13 @@ public class DialogueSystem
         {
             Provider.GetInstance().dialogueBox.DisplayLine(id, npc.GetOpener(), oneliner);
         }
+    }
+
+    public void PlayItemPickup(string text)
+    {
+        Provider.GetInstance().dialogueBox.transform.parent.gameObject.SetActive(true);
+        Provider.GetInstance().dialogueBox.SetPortrait(CharacterID.PLAYER);
+        Provider.GetInstance().dialogueBox.DisplayLine(CharacterID.PLAYER, text, true);
     }
 
     public void CloseDialogueBox()

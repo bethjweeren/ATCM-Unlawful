@@ -28,6 +28,9 @@ public class SuspectDialogue : CharacterDialogue {
         List<ClueFile>[] opportunityInnocent = new List<ClueFile>[5] { new List<ClueFile>(), new List<ClueFile>(), new List<ClueFile>(), new List<ClueFile>(), new List<ClueFile>() };
         List<ClueFile> meansYes = new List<ClueFile>();
         List<ClueFile> meansNo = new List<ClueFile>();
+        List<ClueFile> method = new List<ClueFile>();
+        List<ClueFile> glovePositive = new List<ClueFile>();
+        List<ClueFile> gloveNegative = new List<ClueFile>();
 
         foreach (ClueFile clue in allClues)
         {
@@ -67,6 +70,10 @@ public class SuspectDialogue : CharacterDialogue {
                 {
                     meansNo.Add(clue);
                 }
+            }
+            if (clue.tags.Contains("METHOD"))
+            {
+                method.Add(clue);
             }
         }
 
@@ -161,6 +168,7 @@ public class SuspectDialogue : CharacterDialogue {
                 break;
         }
 
+        CreateResponse(method, "METHOD", "NOCLUE");
     } 
 
     void CategorizeClue(ClueFile clue, List<ClueFile>[] category)

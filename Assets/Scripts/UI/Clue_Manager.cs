@@ -261,6 +261,10 @@ public class Clue_Manager : MonoBehaviour {
 
     public bool ClueKnown(CharacterID page, string clueID)
     {
+        if(clueID == "NOCLUE")
+        {
+            return true;
+        }
         switch (page)
         {
             case CharacterID.BLACK:

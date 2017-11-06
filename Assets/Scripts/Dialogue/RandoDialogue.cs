@@ -18,18 +18,12 @@ public class RandoDialogue : NPCDialogue {
     {
         if (id == CharacterID.VICTIM)
         {
-            StartCoroutine("ExamineBody");
+            DialogueSystem.Instance().CreateJournalEntry("The victim was [Victim].", CharacterID.VICTIM, "MOTIVE");
+            DialogueSystem.Instance().CreateJournalEntry("[Victim] was stabbed.", CharacterID.VICTIM, "METHOD");
+            DialogueSystem.Instance().CreateJournalEntry("[Victim] was killed in the Town Square.", CharacterID.VICTIM, "OPP");
         }
         DialogueSystem.Instance().OpenDialogueBox(id, this, firstMeeting, oneLiners);
         firstMeeting = false;
     }
 
-    IEnumerator ExamineBody()
-    {
-        DialogueSystem.Instance().CreateJournalEntry("The victim was [Victim].", CharacterID.VICTIM, "MOTIVE");
-        yield return new WaitForSeconds(0.05f);
-        DialogueSystem.Instance().CreateJournalEntry("[Victim] was stabbed.", CharacterID.VICTIM, "WEAPON");
-        yield return new WaitForSeconds(0.05f);
-        DialogueSystem.Instance().CreateJournalEntry("[Victim] was killed in the Town Square.", CharacterID.VICTIM, "OPP");
-    }
 }

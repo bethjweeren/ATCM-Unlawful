@@ -13,26 +13,52 @@ public class Item : MonoBehaviour, IInteractable
 	public int dayToSpawn;
 	public int hourToSpawn;
 	public GameObject itemSpawner;
+    public string[] tags;
+    public string clueID;
+    ClueFile itemClue;
+
+    void Start()
+    {
+        foreach(ClueFile clue in DialogueSystem.Instance().items)
+        {
+            bool match = true;
+            foreach(string tag in tags)
+            {
+                if (!clue.tags.Contains(tag.ToUpper()))
+                {
+                    match = false;
+                }
+            }
+            if (match)
+            {
+                itemClue = clue;
+            }
+        }
+    }
 
 	public void Interact()
 	{
 		if (itemsManager.items.Count == 0)
 		{
-			pickUpText.ChangeTextInfo(gameObject.name);
-			Debug.Log("hititem");
-			itemsManager.AddItem(linkedItem);
-			Provider.GetInstance().player.EndInteraction();
+            //pickUpText.ChangeTextInfo(gameObject.name);
+            //StartCoroutine("PickupAlert");
+            Provider.GetInstance().alertSystem.CreateAlert(gameObject.name + " added to Inventory (I)");
+            DialogueSystem.Instance().CreateJournalEntry(itemClue.journalSummary, CharacterID.VICTIM, clueID.ToUpper());
+            itemsManager.AddItem(linkedItem);
 			itemSpawner.GetComponent<ItemSpawner>().itemsToSpawn.Remove(gameObject);
+            DialogueSystem.Instance().PlayItemPickup(itemClue.content);
 			Destroy(gameObject);
 		}
 		else if (itemsManager.items.Count < 6)
 		{
-			pickUpText.ChangeText(gameObject.name);
-			Debug.Log("hititem");
-			itemsManager.AddItem(linkedItem);
-			Provider.GetInstance().player.EndInteraction();
+            //pickUpText.ChangeText(gameObject.name);
+            //StartCoroutine("PickupAlert");
+            Provider.GetInstance().alertSystem.CreateAlert(gameObject.name + " added to Inventory (I)");
+            DialogueSystem.Instance().CreateJournalEntry(itemClue.journalSummary, CharacterID.VICTIM, clueID.ToUpper());
+            itemsManager.AddItem(linkedItem);
 			itemSpawner.GetComponent<ItemSpawner>().itemsToSpawn.Remove(gameObject);
-			Destroy(gameObject);
+            DialogueSystem.Instance().PlayItemPickup(itemClue.content);
+            Destroy(gameObject);
 		}
 		else
 		{
@@ -40,4 +66,11 @@ public class Item : MonoBehaviour, IInteractable
 			Provider.GetInstance().player.EndInteraction();
 		}
 	}
+
+    IEnumerator PickupAlert()
+    {
+        Provider.GetInstance().alertSystem.CreateAlert(gameObject.name + " added to Inventory (I)");
+        yield return new WaitForSeconds(0.1f);
+        DialogueSystem.Instance().CreateJournalEntry(itemClue.journalSummary, CharacterID.VICTIM, clueID.ToUpper());
+    }
 }
