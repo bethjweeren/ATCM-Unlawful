@@ -28,7 +28,7 @@ public class RandoDialogue : NPCDialogue {
     {
         DialogueSystem.Instance().CreateJournalEntry("The victim was [Victim].", CharacterID.VICTIM, "MOTIVE");
         yield return new WaitForSeconds(0.05f);
-        DialogueSystem.Instance().CreateJournalEntry("[Victim] was strangled.", CharacterID.VICTIM, "WEAPON");
+        DialogueSystem.Instance().CreateJournalEntry("[Victim] was stabbed.", CharacterID.VICTIM, "WEAPON");
         yield return new WaitForSeconds(0.05f);
         DialogueSystem.Instance().CreateJournalEntry("[Victim] was killed in the Town Square.", CharacterID.VICTIM, "OPP");
     }
