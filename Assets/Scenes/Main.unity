@@ -124,7 +124,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1584424
 RectTransform:
   m_ObjectHideFlags: 0
@@ -141,7 +141,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 306.8, y: 28.599976}
-  m_SizeDelta: {x: 300.18, y: 49.6}
+  m_SizeDelta: {x: 320, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1584425
 MonoBehaviour:
@@ -149,7 +149,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1584423}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -1892,7 +1892,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b464c13db4e695648bf21d74053d0cde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemTextBG: {fileID: 0}
+  itemTextBG: {fileID: 1584425}
   itemText: {fileID: 920669060}
   desc: It's a single glove, left-handed. It's covered in someone's blood. This could
     be an invaluable clue.
@@ -11818,6 +11818,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactText: {fileID: 1018604945}
+  interactTextBG: {fileID: 1925026137}
 --- !u!114 &237088073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17439,7 +17440,7 @@ Prefab:
     - target: {fileID: 224395241363268358, guid: 14ba0156ac597384fa15430431cd32b3,
         type: 2}
       propertyPath: m_RootOrder
-      value: 15
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 224395241363268358, guid: 14ba0156ac597384fa15430431cd32b3,
         type: 2}
@@ -17621,7 +17622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b464c13db4e695648bf21d74053d0cde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemTextBG: {fileID: 0}
+  itemTextBG: {fileID: 1584425}
   itemText: {fileID: 920669060}
   desc: It may not help you in your case, but it sure looks delicious. <You found
     the secret cookie.>
@@ -27950,7 +27951,7 @@ Prefab:
     - target: {fileID: 224800391138835062, guid: bae003f88e6fcac48b8adf41fcb2c5d5,
         type: 2}
       propertyPath: m_RootOrder
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 224800391138835062, guid: bae003f88e6fcac48b8adf41fcb2c5d5,
         type: 2}
@@ -28834,7 +28835,7 @@ RectTransform:
   - {fileID: 1206915992}
   - {fileID: 596935627}
   m_Father: {fileID: 1309259254}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -30422,7 +30423,7 @@ RectTransform:
   - {fileID: 1948124821}
   - {fileID: 749539002}
   m_Father: {fileID: 1309259254}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -34163,7 +34164,7 @@ Prefab:
     - target: {fileID: 224385511074643006, guid: e03cea222955c634f980f5b5345be279,
         type: 2}
       propertyPath: m_RootOrder
-      value: 13
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 224385511074643006, guid: e03cea222955c634f980f5b5345be279,
         type: 2}
@@ -35349,7 +35350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b464c13db4e695648bf21d74053d0cde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemTextBG: {fileID: 0}
+  itemTextBG: {fileID: 1584425}
   itemText: {fileID: 920669060}
   desc: They look like wine bottles of various types, all empty, and what seems to
     be Bleu's jacket. Seems that Bleu really was knock-out drunk the night of the
@@ -39189,7 +39190,7 @@ RectTransform:
   - {fileID: 1780454235}
   - {fileID: 200943053}
   m_Father: {fileID: 1309259254}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -42806,7 +42807,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1309259254}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -43816,7 +43817,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b464c13db4e695648bf21d74053d0cde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemTextBG: {fileID: 0}
+  itemTextBG: {fileID: 1584425}
   itemText: {fileID: 920669060}
   desc: It looks like fresh paint stains of various colors. Seems like Rouge actually
     was in this alley on the night of the murder.
@@ -45261,7 +45262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b464c13db4e695648bf21d74053d0cde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemTextBG: {fileID: 0}
+  itemTextBG: {fileID: 1584425}
   itemText: {fileID: 920669060}
   desc: 'It''s a single glove, right-handed. It''s covered in someone''s blood. This
     could be an invaluable clue. '
@@ -47809,7 +47810,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b464c13db4e695648bf21d74053d0cde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemTextBG: {fileID: 0}
+  itemTextBG: {fileID: 1584425}
   itemText: {fileID: 920669060}
   desc: 'These religious candles were unused during mass the day before the murder.
     Seems like Black actually was having a devotional here on the night of the murder. '
@@ -49443,7 +49444,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -49483,7 +49484,7 @@ RectTransform:
   m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
   m_Children: []
   m_Father: {fileID: 1309259254}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -51278,7 +51279,7 @@ RectTransform:
   - {fileID: 286307665}
   - {fileID: 254823271}
   m_Father: {fileID: 1309259254}
-  m_RootOrder: 19
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -51584,7 +51585,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b464c13db4e695648bf21d74053d0cde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemTextBG: {fileID: 0}
+  itemTextBG: {fileID: 1584425}
   itemText: {fileID: 920669060}
   desc: It's a bouquet of yellow roses in front of Mr. Yellow's grave. Seems like
     Jaune did visit Mr. Yellow's grave the night of the murder.
@@ -51915,7 +51916,7 @@ RectTransform:
   - {fileID: 1584424}
   - {fileID: 920669059}
   m_Father: {fileID: 1309259254}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -52985,7 +52986,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b464c13db4e695648bf21d74053d0cde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemTextBG: {fileID: 0}
+  itemTextBG: {fileID: 1584425}
   itemText: {fileID: 920669060}
   desc: 'It''s a letter from Vert, apologizing for missing Jaune on the night of the
     murder.  It must have blown off Jaune''s door. Seems like Vert went to Yellow
@@ -55828,7 +55829,7 @@ Prefab:
     - target: {fileID: 224835143944843708, guid: 89560cfaa6be34c4897518e1f8fb98dd,
         type: 2}
       propertyPath: m_RootOrder
-      value: 18
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 224835143944843708, guid: 89560cfaa6be34c4897518e1f8fb98dd,
         type: 2}
@@ -64300,6 +64301,7 @@ RectTransform:
   m_Children:
   - {fileID: 1616897709}
   - {fileID: 202648332}
+  - {fileID: 1925026138}
   - {fileID: 1018604948}
   - {fileID: 1326344822}
   - {fileID: 1858125663}
@@ -64936,7 +64938,7 @@ RectTransform:
   m_LocalScale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
   m_Children: []
   m_Father: {fileID: 1309259254}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -68827,7 +68829,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1309259254}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -74938,7 +74940,7 @@ RectTransform:
   m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_Children: []
   m_Father: {fileID: 1309259254}
-  m_RootOrder: 20
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -77855,7 +77857,7 @@ RectTransform:
   - {fileID: 776340295}
   - {fileID: 804855428}
   m_Father: {fileID: 1309259254}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -83688,7 +83690,7 @@ RectTransform:
   m_Children:
   - {fileID: 274599462}
   m_Father: {fileID: 1309259254}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -87431,7 +87433,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1309259254}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -90991,6 +90993,74 @@ RectTransform:
   m_AnchoredPosition: {x: 526.00006, y: 285.59995}
   m_SizeDelta: {x: 120.7, y: 90.2}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1925026137
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1925026138}
+  - component: {fileID: 1925026140}
+  - component: {fileID: 1925026139}
+  m_Layer: 5
+  m_Name: interactTextBG
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1925026138
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1925026137}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
+  m_Children: []
+  m_Father: {fileID: 1309259254}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 404, y: -348.26}
+  m_SizeDelta: {x: 180, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1925026139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1925026137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.74509805}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &1925026140
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1925026137}
 --- !u!1 &1926483110
 GameObject:
   m_ObjectHideFlags: 0
@@ -93505,7 +93575,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b464c13db4e695648bf21d74053d0cde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemTextBG: {fileID: 0}
+  itemTextBG: {fileID: 1584425}
   itemText: {fileID: 920669060}
   desc: It's a utility knife, and it fits the size of the wounds on the body. I'd
     better go ask the suspects who owns this.
@@ -94111,7 +94181,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1309259254}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -99283,7 +99353,7 @@ Prefab:
     - target: {fileID: 224835143944843708, guid: 89560cfaa6be34c4897518e1f8fb98dd,
         type: 2}
       propertyPath: m_RootOrder
-      value: 17
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 224835143944843708, guid: 89560cfaa6be34c4897518e1f8fb98dd,
         type: 2}
