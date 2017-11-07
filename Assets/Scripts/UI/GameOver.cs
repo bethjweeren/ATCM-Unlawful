@@ -15,6 +15,7 @@ public class GameOver : MonoBehaviour {
     public GameObject clock;
     public GameObject journal;
     public GameObject inventory;
+    public GameObject sleepText;
 
 	public void LoseGame(string reason)
     {

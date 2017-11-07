@@ -23,7 +23,7 @@ public class Time_Manager : MonoBehaviour
 	public float timer, timeCrunch, minute, currentTimeSpeed, normalTimeSpeed, fastTimeSpeed, pauseEffectTimer, timerHand, minuteCounter;
 	public GameObject hourHand, /* minuteHand, */ hourHand_red,/* minuteHand_red, */ hourHand_black /*, minuteHand_black*/;
 	public Transform restPlace;
-	public GameObject Player, skipRest, nightShade, afternoonShade, goToBedNote;
+	public GameObject Player, nightShade, afternoonShade, homeButton;
 	private PlayerController playerController;
 	public bool isGoing = true;
 	public string outOfTimeReason;
@@ -44,11 +44,6 @@ public class Time_Manager : MonoBehaviour
 		currentTimeSpeed = normalTimeSpeed;
 		playerController = Player.GetComponent<PlayerController>();
 
-		Button skipRest_Btn = skipRest.GetComponent<Button>();
-		skipRest_Btn.onClick.AddListener(SkipRestPeriod);
-
-		skipRest.SetActive(false);
-		goToBedNote.SetActive (false);
 		afternoonShade.SetActive(false);
 		nightShade.SetActive(false);
 		timeShift.Play();
@@ -74,10 +69,6 @@ public class Time_Manager : MonoBehaviour
             this.enabled = false;
 		}
 
-		if (Input.GetKeyDown(KeyCode.Alpha3))
-		{
-			journal_Manager.CreateAutoJournalEntry("I eat cake", CharacterID.BROWN);
-		}
 	}
 
 	void TimeKeepingStates()
@@ -123,19 +114,8 @@ public class Time_Manager : MonoBehaviour
 			}
 			if (minuteCounter >= 1160)
 			{
-				timeShift.Play();
-				nightShade.SetActive(false);
-				currentTimeState = State.Morning;
-				hour = 6;
-				minute = 0;
-				minuteCounter = 0;
-				skipRest.SetActive(false);
-				goToBedNote.SetActive (false);
-				UpdateTime(true, currentTimeSpeed);
-				playerController.ResumeInput();
-				Debug.Log("skiped");
-				minuteCounter = 0;
-			}
+                //SkipRestPeriod();
+            }
 			if (hour >= 24)
 			{
 				hour = 0;
@@ -176,7 +156,7 @@ public class Time_Manager : MonoBehaviour
 			timeShift.Play();
 			afternoonShade.SetActive(false);
 			nightShade.SetActive(true);
-			currentTimeState = State.Night;
+            currentTimeState = State.Night;
 		}
 		SwitchToPausedState();
 	}
@@ -186,14 +166,14 @@ public class Time_Manager : MonoBehaviour
 		NormalCode();
 		UpdateTime(true, currentTimeSpeed);
 		pastTimeState = State.Night;
+        homeButton.SetActive(true);
 
-		//enter night code
+        //enter night code
 
-		if (hour == morningStart)
+        if (hour == morningStart)
 		{
 			endOfDay.Play();
 			//skipRest.SetActive(true);
-			goToBedNote.SetActive (true);
 			currentTimeState = State.Rest;
 			pastTimeState = State.Rest;
 		}
@@ -202,24 +182,30 @@ public class Time_Manager : MonoBehaviour
 
 	void RestCode()
 	{
-		//enter rest code
+        //enter rest code
 
-		//move the player
-		//Player.transform.position = restPlace.position;
-		//stop player
-		/*
+        //move the player
+        //Player.transform.position = restPlace.position;
+        //stop player
+        /*
 		if (isGoing)
 		{
 			playerController.StopInput();
 			isGoing = false;
 		}
 		*/
+        if (minuteCounter >= 1160)
+        {
+            UpdateTime(false, currentTimeSpeed);
+        }
+        else
+        {
+            UpdateTime(true, currentTimeSpeed);
+        }
 
-		UpdateTime(true, currentTimeSpeed);
-
-		//UpdateTime(false, currentTimeSpeed);
-		SwitchToPausedState();
-	}
+        //UpdateTime(false, currentTimeSpeed);
+        //SwitchToPausedState();
+    }
 
 	void PausedCode()
 	{
@@ -286,7 +272,7 @@ public class Time_Manager : MonoBehaviour
 		//minuteHand.transform.localRotation = Quaternion.Euler(0f, 0f, (-minute * minDegree) + 90f);
 	}
 
-	void SkipRestPeriod()
+	public void SkipRestPeriod()
 	{
 		timeShift.Play();
 		nightShade.SetActive(false);
@@ -294,8 +280,6 @@ public class Time_Manager : MonoBehaviour
 		hour = 6;
 		minute = 0;
 		minuteCounter = 0;
-		skipRest.SetActive(false);
-		goToBedNote.SetActive (false);
 		UpdateTime(true, currentTimeSpeed);
 		playerController.ResumeInput();
 		Debug.Log("skiped");
@@ -406,14 +390,6 @@ public class Time_Manager : MonoBehaviour
 			npc.GetComponent<NPC>().StartMoving();
 		}
 		alreadyFrozeNPCs = false;
-	}
-
-	public void TurnOnSkipBtn(){
-		skipRest.SetActive (true);
-	}
-
-	public void TurnOffSkipBtn(){
-		skipRest.SetActive (false);
 	}
 
 	/*

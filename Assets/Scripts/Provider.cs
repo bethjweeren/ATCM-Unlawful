@@ -10,6 +10,7 @@ public class Provider : MonoBehaviour {
     public Journal_Manager journal;
     public Clue_Manager clueSelector;
     public AlertSystem alertSystem;
+    public Time_Manager timeManager;
 
     // Use this for initialization
     void Start () {
