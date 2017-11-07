@@ -8,6 +8,7 @@ public class SuspectDialogue : CharacterDialogue {
     Dictionary<string, ClueEntry> clueResponses;
     List<ClueFile> allClues;
 
+    private readonly bool[] rightHanded = new bool[5] { true, true, false, false, true };
 
     override protected void Start () {
         base.Start();
@@ -34,7 +35,7 @@ public class SuspectDialogue : CharacterDialogue {
 
         foreach (ClueFile clue in allClues)
         {
-            if (clue.tags.Contains("MOTIVE"))
+            if (clue.tags.Contains("MOTIVE") && !clue.tags.Contains("GLOVE"))
             {
                 if (clue.tags.Contains("POSITIVE"))
                 {
@@ -74,6 +75,17 @@ public class SuspectDialogue : CharacterDialogue {
             if (clue.tags.Contains("METHOD"))
             {
                 method.Add(clue);
+            }
+            if (clue.tags.Contains("GLOVE"))
+            {
+                if (clue.tags.Contains("POSITIVE"))
+                {
+                    glovePositive.Add(clue);
+                }
+                if (clue.tags.Contains("NEGATIVE"))
+                {
+                    gloveNegative.Add(clue);
+                }
             }
         }
 
@@ -169,6 +181,15 @@ public class SuspectDialogue : CharacterDialogue {
         }
 
         CreateResponse(method, "METHOD", "NOCLUE");
+
+        if(rightHanded[suspectID] ^ DialogueSystem.Instance().WasKilledWithRightHand()) //XOR. If the hands of the two don't match, then have a positive remark
+        {
+            CreateResponse(glovePositive, "GLOVE", "GLOVE" + ((Suspect)suspectID).ToString());
+        }
+        else
+        {
+            CreateResponse(gloveNegative, "GLOVE", "GLOVE" + ((Suspect)suspectID).ToString());
+        }
     } 
 
     void CategorizeClue(ClueFile clue, List<ClueFile>[] category)

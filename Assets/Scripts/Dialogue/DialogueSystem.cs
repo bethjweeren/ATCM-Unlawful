@@ -26,6 +26,7 @@ public class DialogueSystem
     List<ClueFile> clues;
     public List<ClueFile> items;
     public Scenario scenario;
+    bool killedWithRightHand;
 
     public DialogueSystem()
     {
@@ -37,6 +38,19 @@ public class DialogueSystem
 
         scenario = new Scenario();
         Scenario.ExportJSON(scenario);
+
+        if (scenario.killer == Suspect.BLUE || scenario.killer == Suspect.YELLOW) //Right-handed killer
+        {
+            killedWithRightHand = true;
+        }
+        else if(scenario.killer == Suspect.BLACK)
+        {
+            bool killedWithRightHand = Random.value < 0.5f;
+        }
+        else
+        {
+            killedWithRightHand = false;
+        }
 
         clues = new List<ClueFile>();
         ClueList motives = ClueList.LoadJSON("Motive.json");
@@ -300,6 +314,11 @@ public class DialogueSystem
             }
         }
         return ownClues;
+    }
+
+    public bool WasKilledWithRightHand()
+    {
+        return killedWithRightHand;
     }
 
     public void Reset()

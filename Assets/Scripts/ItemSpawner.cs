@@ -68,39 +68,27 @@ public class ItemSpawner : MonoBehaviour
             }
         }
 
-        Scenario scenario = DialogueSystem.Instance().scenario;
-        if(scenario.killer == Suspect.GREEN || scenario.killer == Suspect.RED) //Left-handed killer
+        
+        if(DialogueSystem.Instance().WasKilledWithRightHand())
         {
-            if(rightGlove != null)
-            {
-                itemsToSpawn.Remove(rightGlove);
-                Destroy(rightGlove);
-            }
-        }
-        else if(scenario.killer == Suspect.BLUE || scenario.killer == Suspect.YELLOW) //Right-handed killer
-        {
-            if(leftGlove != null)
+            if (leftGlove != null)
             {
                 itemsToSpawn.Remove(leftGlove);
                 Destroy(leftGlove);
             }
+            
         }
         else
         {
-            bool leftHand = Random.value < 0.5f;
-            if(leftHand && rightGlove != null)
+            if (rightGlove != null)
             {
                 itemsToSpawn.Remove(rightGlove);
                 Destroy(rightGlove);
-            }
-            else if(leftGlove != null)
-            {
-                itemsToSpawn.Remove(leftGlove);
-                Destroy(leftGlove);
             }
         }
 
         //Remove killer and one other person's alibi item
+        Scenario scenario = DialogueSystem.Instance().scenario;
         Suspect other = scenario.killer;
         while (other == scenario.killer)
         {
