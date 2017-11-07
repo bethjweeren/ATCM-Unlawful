@@ -614,7 +614,7 @@ Prefab:
         type: 2}
       propertyPath: hourHand_black
       value: 
-      objectReference: {fileID: 1792358688}
+      objectReference: {fileID: 0}
     - target: {fileID: 114233522687771292, guid: 1ad2d7e4d5b8f4c4c9aee008025615ad,
         type: 2}
       propertyPath: minuteHand_black
@@ -629,7 +629,7 @@ Prefab:
         type: 2}
       propertyPath: minuteHand_red
       value: 
-      objectReference: {fileID: 2014042029}
+      objectReference: {fileID: 0}
     - target: {fileID: 114233522687771292, guid: 1ad2d7e4d5b8f4c4c9aee008025615ad,
         type: 2}
       propertyPath: outOfTimeReason
@@ -694,7 +694,7 @@ Prefab:
         type: 2}
       propertyPath: dayText
       value: 
-      objectReference: {fileID: 1976134087}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1ad2d7e4d5b8f4c4c9aee008025615ad, type: 2}
   m_IsPrefabParent: 0
@@ -85412,11 +85412,6 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1787195450}
---- !u!1 &1792358688 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1787711209242118, guid: e03cea222955c634f980f5b5345be279,
-    type: 2}
-  m_PrefabInternal: {fileID: 741874626}
 --- !u!1 &1794538958
 GameObject:
   m_ObjectHideFlags: 0
@@ -93933,12 +93928,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entryText: {fileID: 2031565391}
---- !u!114 &1976134087 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114383459772495246, guid: e03cea222955c634f980f5b5345be279,
-    type: 2}
-  m_PrefabInternal: {fileID: 741874626}
-  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1 &1977842630
 GameObject:
   m_ObjectHideFlags: 0
@@ -96105,11 +96094,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
---- !u!1 &2014042029 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1321684776697252, guid: e03cea222955c634f980f5b5345be279,
-    type: 2}
-  m_PrefabInternal: {fileID: 741874626}
 --- !u!1 &2015727027
 GameObject:
   m_ObjectHideFlags: 0
