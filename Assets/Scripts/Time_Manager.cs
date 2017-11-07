@@ -71,6 +71,7 @@ public class Time_Manager : MonoBehaviour
 		//Debug.Log (hour + " : " + minute + " _ " + day);
 		if (day >= 4) {
 			Provider.GetInstance().gameOver.LoseGame(outOfTimeReason);
+            this.enabled = false;
 		}
 
 		if (Input.GetKeyDown(KeyCode.Alpha3))
