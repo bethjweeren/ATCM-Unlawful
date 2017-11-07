@@ -614,7 +614,7 @@ Prefab:
         type: 2}
       propertyPath: hourHand_black
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 958785115}
     - target: {fileID: 114233522687771292, guid: 1ad2d7e4d5b8f4c4c9aee008025615ad,
         type: 2}
       propertyPath: minuteHand_black
@@ -694,7 +694,7 @@ Prefab:
         type: 2}
       propertyPath: dayText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1262201027}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1ad2d7e4d5b8f4c4c9aee008025615ad, type: 2}
   m_IsPrefabParent: 0
@@ -45786,6 +45786,11 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 955125589}
+--- !u!1 &958785115 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1787711209242118, guid: e03cea222955c634f980f5b5345be279,
+    type: 2}
+  m_PrefabInternal: {fileID: 741874626}
 --- !u!1 &960965042
 GameObject:
   m_ObjectHideFlags: 0
@@ -61531,6 +61536,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1259347080}
+--- !u!114 &1262201027 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114383459772495246, guid: e03cea222955c634f980f5b5345be279,
+    type: 2}
+  m_PrefabInternal: {fileID: 741874626}
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1 &1264037189
 GameObject:
   m_ObjectHideFlags: 0
