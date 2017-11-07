@@ -181,6 +181,7 @@ public class SuspectDialogue : CharacterDialogue {
         }
 
         CreateResponse(method, "METHOD", "NOCLUE");
+        CreateResponse(opportunityInnocent[suspectID], "ITEM" + ((Suspect)suspectID).ToString(), "OPP" + ((Suspect)suspectID).ToString());
 
         if(rightHanded[suspectID] ^ DialogueSystem.Instance().WasKilledWithRightHand()) //XOR. If the hands of the two don't match, then have a positive remark
         {

@@ -30,23 +30,23 @@ public class ItemSpawner : MonoBehaviour
         foreach(GameObject item in itemsToSpawn)
         {
             Item script = item.GetComponent<Item>();
-            if(script.clueID.ToUpper() == "OPPBLACK")
+            if(script.clueID.ToUpper() == "ITEMBLACK")
             {
                 opportunities[0] = item;
             }
-            else if (script.clueID.ToUpper() == "OPPBLUE")
+            else if (script.clueID.ToUpper() == "ITEMBLUE")
             {
                 opportunities[1] = item;
             }
-            else if (script.clueID.ToUpper() == "OPPGREEN")
+            else if (script.clueID.ToUpper() == "ITEMGREEN")
             {
                 opportunities[2] = item;
             }
-            else if (script.clueID.ToUpper() == "OPPRED")
+            else if (script.clueID.ToUpper() == "ITEMRED")
             {
                 opportunities[3] = item;
             }
-            else if (script.clueID.ToUpper() == "OPPYELLOW")
+            else if (script.clueID.ToUpper() == "ITEMYELLOW")
             {
                 opportunities[4] = item;
             }

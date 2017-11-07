@@ -5254,7 +5254,7 @@ MonoBehaviour:
   itemSpawner: {fileID: 1982790089}
   tags:
   - yellow
-  clueID: OPPYELLOW
+  clueID: ITEMYELLOW
 --- !u!212 &98306601
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -12275,7 +12275,7 @@ MonoBehaviour:
   itemSpawner: {fileID: 1982790089}
   tags:
   - black
-  clueID: OPPBLACK
+  clueID: ITEMBLACK
 --- !u!212 &248505051
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -19471,7 +19471,7 @@ MonoBehaviour:
   itemSpawner: {fileID: 1982790089}
   tags:
   - blue
-  clueID: OPPBLUE
+  clueID: ITEMBLUE
 --- !u!212 &394355421
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -20760,7 +20760,7 @@ MonoBehaviour:
   itemSpawner: {fileID: 1982790089}
   tags:
   - green
-  clueID: OPPGREEN
+  clueID: ITEMGREEN
 --- !u!212 &433537017
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -23254,13 +23254,13 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "\t\t\tDetective,\n\t\t\t   The body of Dr. Mort was found\n\t\t\tin the
     Town Square last night.\n\t\t\tGet over there and investigate the body.\n\n\t\t\t\tOnly
-    5 people, aside from the victim,\n\t\t\t\t\twere missing from the festivities
+    5 people, aside from the victim,\n\t\t\t\t   were missing from the festivities
     last\n\t\t\t\t\tnight at Town Hall, so be sure to \n\t\t\t\t\tquestion them all:\n\t\t\t\t\tMr.
     Vert, the Winemaker,\n\t\t\t\t\tMrs. Jaune, the Baker,\n\t\t\t\t\tMs. Rouge, the
-    Merchant,\n\t\t\t\t\tMr. Bleu, the City Guard,\n\t\t\t\t\tand Friar Noir.\n\n\t\t\t\tI
-    want a suspect with a means, motive,\n\t\t\tand opportunity by the 3rd night \tfrom
-    now.\n\n\t\t\tYou'll receive your normal pay each morning.\n\n\t\tOnce you have
-    a case, find me at \n\t\t\tTown Hall to the North.\n\t\t\t- Mayor Violet"
+    Merchant,\n\t\t\t\t   Mr. Bleu, the City Guard,\n\t\t\t\t   and Friar Noir.\n\n\t\t\t
+    \ I want a suspect with a means, motive,\n\t\t\tand opportunity by the 3rd night
+    from now.\n\n\t\t\tOnce you have a case, find me at\n\t\t  Town Hall to the North.\n\t\t\t-
+    Mayor Violet"
 --- !u!222 &495338225
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -91887,7 +91887,7 @@ MonoBehaviour:
   itemSpawner: {fileID: 1982790089}
   tags:
   - red
-  clueID: OPPRED
+  clueID: ITEMRED
 --- !u!212 &1936507024
 SpriteRenderer:
   m_ObjectHideFlags: 0
