@@ -25,8 +25,6 @@ public class Bed : MonoBehaviour, IInteractable {
 			interactText.SetActive(true);
 			inBed = true;
 		}
-		else
-			inBed = false;
 	}
 	
 	void OnTriggerExit2D(Collider2D other) {
@@ -41,7 +39,9 @@ public class Bed : MonoBehaviour, IInteractable {
         if (inBed)
         {
 			Provider.GetInstance().timeManager.SkipRestPeriod();
-        }
+			interactText.SetActive(false);
+			inBed = false;
+		}
 		else
 			Provider.GetInstance().player.EndInteraction();
 	}

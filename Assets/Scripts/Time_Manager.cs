@@ -144,7 +144,7 @@ public class Time_Manager : MonoBehaviour
 		NormalCode();
 		UpdateTime(true, currentTimeSpeed);
 		pastTimeState = State.Morning;
-
+		homeButton.SetActive(false);
 		//enter morning code
 
 		if (hour >= afternoonStart)
@@ -290,6 +290,7 @@ public class Time_Manager : MonoBehaviour
 		Debug.Log("skip rest period");
 		timeShift.Play();
 		nightShade.SetActive(false);
+		homeButton.SetActive(false);
 		currentTimeState = State.Morning;
 		hour = 6;
 		minute = 0;
