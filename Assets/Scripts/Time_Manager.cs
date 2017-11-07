@@ -34,6 +34,7 @@ public class Time_Manager : MonoBehaviour
 	private GameObject[] npcs; //To freeze/unfreeze NPCs (so they don't have to check on every update)
 	bool alreadyFrozeNPCs = false;
 	public AudioSource timeShift, endOfDay;
+	public Text dayText;
 
 	void Start()
 	{
@@ -75,25 +76,25 @@ public class Time_Manager : MonoBehaviour
 	{
 		switch (currentTimeState)
 		{
-		case State.Morning:
-			MorningCode();
-			break;
+			case State.Morning:
+				MorningCode();
+				break;
 
-		case State.Afternoon:
-			AfternoonCode();
-			break;
+			case State.Afternoon:
+				AfternoonCode();
+				break;
 
-		case State.Night:
-			NightCode();
-			break;
+			case State.Night:
+				NightCode();
+				break;
 
-		case State.Rest:
-			RestCode();
-			break;
+			case State.Rest:
+				RestCode();
+				break;
 
-		case State.Paused:
-			PausedCode();
-			break;
+			case State.Paused:
+				PausedCode();
+				break;
 		}
 	}
 
@@ -122,6 +123,18 @@ public class Time_Manager : MonoBehaviour
 				//moneyManager.ChangeMoney (100);
 				//ResetBins();
 				day++;
+				if (day == 1)
+				{
+					dayText.text = "First Day";
+				}
+				else if (day == 2)
+				{
+					dayText.text = "Second Day";
+				}
+				else //Day 3
+				{
+					dayText.text = "Final Day";
+				}
 			}
 		}
 	}
@@ -166,7 +179,6 @@ public class Time_Manager : MonoBehaviour
 		NormalCode();
 		UpdateTime(true, currentTimeSpeed);
 		pastTimeState = State.Night;
-        homeButton.SetActive(true);
 
         //enter night code
 
@@ -182,19 +194,20 @@ public class Time_Manager : MonoBehaviour
 
 	void RestCode()
 	{
-        //enter rest code
+		//enter rest code
 
-        //move the player
-        //Player.transform.position = restPlace.position;
-        //stop player
-        /*
+		//move the player
+		//Player.transform.position = restPlace.position;
+		//stop player
+		/*
 		if (isGoing)
 		{
 			playerController.StopInput();
 			isGoing = false;
 		}
 		*/
-        if (minuteCounter >= 1160)
+		homeButton.SetActive(true);
+		if (minuteCounter >= 1160)
         {
             UpdateTime(false, currentTimeSpeed);
         }
@@ -274,6 +287,7 @@ public class Time_Manager : MonoBehaviour
 
 	public void SkipRestPeriod()
 	{
+		Debug.Log("skip rest period");
 		timeShift.Play();
 		nightShade.SetActive(false);
 		currentTimeState = State.Morning;
@@ -282,7 +296,7 @@ public class Time_Manager : MonoBehaviour
 		minuteCounter = 0;
 		UpdateTime(true, currentTimeSpeed);
 		playerController.ResumeInput();
-		Debug.Log("skiped");
+		Debug.Log("skipped");
 	}
 
 	public void LeavePauseState()

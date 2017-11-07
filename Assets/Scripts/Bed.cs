@@ -6,19 +6,27 @@ public class Bed : MonoBehaviour, IInteractable {
 
 	public GameObject interactText;
     public GameObject playerHouseArea;
-    private Time_Manager time = null;
+    private Time_Manager time;
     bool inBed;
 
-    void OnTriggerEnter2D(Collider2D other) {
+	void Start()
+	{
+		time = FindObjectOfType<Time_Manager>();
+	}
+
+	void OnTriggerEnter2D(Collider2D other) {
         Debug.Log(time == null);
         if(time == null)
         {
             time = Provider.GetInstance().timeManager;
         }
-        if (other.tag == "Player" && time.currentTimeState == Time_Manager.State.Rest ){
+		if (other.tag == "Player" && time.currentTimeState == Time_Manager.State.Rest)
+		{
 			interactText.SetActive(true);
-            inBed = true;
+			inBed = true;
 		}
+		else
+			inBed = false;
 	}
 	
 	void OnTriggerExit2D(Collider2D other) {
@@ -32,9 +40,11 @@ public class Bed : MonoBehaviour, IInteractable {
     {
         if (inBed)
         {
-            Provider.GetInstance().timeManager.SkipRestPeriod();
+			Provider.GetInstance().timeManager.SkipRestPeriod();
         }
-    }
+		else
+			Provider.GetInstance().player.EndInteraction();
+	}
 
     public void TeleportHome()
     {
