@@ -35,6 +35,7 @@ public class Time_Manager : MonoBehaviour
 	bool alreadyFrozeNPCs = false;
 	public AudioSource timeShift, endOfDay;
 	public Text dayText;
+	public GameObject skipButton;
 
 	void Start()
 	{
@@ -45,6 +46,10 @@ public class Time_Manager : MonoBehaviour
 		currentTimeSpeed = normalTimeSpeed;
 		playerController = Player.GetComponent<PlayerController>();
 
+		Button skipRestBtn = skipButton.GetComponent<Button> ();
+		skipRestBtn.onClick.AddListener (SkipRestPeriod);
+
+		skipButton.SetActive (false);
 		afternoonShade.SetActive(false);
 		nightShade.SetActive(false);
 		timeShift.Play();
@@ -405,6 +410,14 @@ public class Time_Manager : MonoBehaviour
 			npc.GetComponent<NPC>().StartMoving();
 		}
 		alreadyFrozeNPCs = false;
+	}
+
+	public void TurnOnSkipBtn(){
+		skipButton.SetActive (true);
+	}
+
+	public void TurnOffSkipBtn(){
+		skipButton.SetActive (false);
 	}
 
 	/*
