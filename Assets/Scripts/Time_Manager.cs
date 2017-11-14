@@ -35,7 +35,6 @@ public class Time_Manager : MonoBehaviour
 	bool alreadyFrozeNPCs = false;
 	public AudioSource timeShift, endOfDay;
 	public Text dayText;
-	public GameObject skipButton;
 
 	void Start()
 	{
@@ -46,10 +45,7 @@ public class Time_Manager : MonoBehaviour
 		currentTimeSpeed = normalTimeSpeed;
 		playerController = Player.GetComponent<PlayerController>();
 
-		Button skipRestBtn = skipButton.GetComponent<Button> ();
-		skipRestBtn.onClick.AddListener (SkipRestPeriod);
 
-		skipButton.SetActive (false);
 		afternoonShade.SetActive(false);
 		nightShade.SetActive(false);
 		timeShift.Play();
@@ -71,7 +67,8 @@ public class Time_Manager : MonoBehaviour
 		UpdateClock();
 		//Debug.Log (hour + " : " + minute + " _ " + day);
 		if (day >= 4) {
-			Provider.GetInstance().gameOver.LoseGame(outOfTimeReason);
+            endOfDay.enabled = false;
+            Provider.GetInstance().gameOver.LoseGame(outOfTimeReason);
             this.enabled = false;
 		}
 
@@ -412,13 +409,13 @@ public class Time_Manager : MonoBehaviour
 		alreadyFrozeNPCs = false;
 	}
 
-	public void TurnOnSkipBtn(){
-		skipButton.SetActive (true);
-	}
+	//public void TurnOnSkipBtn(){
+	//	skipButton.SetActive (true);
+	//}
 
-	public void TurnOffSkipBtn(){
-		skipButton.SetActive (false);
-	}
+	//public void TurnOffSkipBtn(){
+	//	skipButton.SetActive (false);
+	//}
 
 	/*
 	void OnEnable()

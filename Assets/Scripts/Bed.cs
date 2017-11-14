@@ -38,7 +38,8 @@ public class Bed : MonoBehaviour, IInteractable {
     {
         if (inBed)
         {
-			Provider.GetInstance().timeManager.SkipRestPeriod();
+            Provider.GetInstance().player.EndInteraction();
+            Provider.GetInstance().timeManager.SkipRestPeriod();
 			interactText.SetActive(false);
 			inBed = false;
 		}
