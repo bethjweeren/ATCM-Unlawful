@@ -695,6 +695,11 @@ Prefab:
       propertyPath: dayText
       value: 
       objectReference: {fileID: 1262201027}
+    - target: {fileID: 114233522687771292, guid: 1ad2d7e4d5b8f4c4c9aee008025615ad,
+        type: 2}
+      propertyPath: skipButton
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1ad2d7e4d5b8f4c4c9aee008025615ad, type: 2}
   m_IsPrefabParent: 0
@@ -28193,7 +28198,7 @@ Prefab:
     - target: {fileID: 224800391138835062, guid: bae003f88e6fcac48b8adf41fcb2c5d5,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -41.2
+      value: -41.19995
       objectReference: {fileID: 0}
     - target: {fileID: 224800391138835062, guid: bae003f88e6fcac48b8adf41fcb2c5d5,
         type: 2}
@@ -49780,7 +49785,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Press "Space" to Interact
+  m_Text: Press E or Space to pick up the letter
 --- !u!222 &1018604947
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -56182,7 +56187,7 @@ Prefab:
     - target: {fileID: 224835143944843708, guid: 89560cfaa6be34c4897518e1f8fb98dd,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 15.284973
+      value: 15.284912
       objectReference: {fileID: 0}
     - target: {fileID: 224835143944843708, guid: 89560cfaa6be34c4897518e1f8fb98dd,
         type: 2}
@@ -57399,6 +57404,7 @@ GameObject:
   - component: {fileID: 1158843822}
   - component: {fileID: 1158843824}
   - component: {fileID: 1158843823}
+  - component: {fileID: 1158843825}
   m_Layer: 8
   m_Name: bedCollider
   m_TagString: Interactable
@@ -57426,7 +57432,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1158843821}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 386dec00d0dad6446a32c68b065e0f68, type: 3}
   m_Name: 
@@ -57458,6 +57464,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1158843825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1158843821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66c3adbb4c736b64fafd95d5fc8dd9e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeManager: {fileID: 1782135245}
 --- !u!1 &1160285770 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1036660500763716, guid: e03cea222955c634f980f5b5345be279,

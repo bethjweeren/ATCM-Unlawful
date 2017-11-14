@@ -52,6 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c842a13b8ccb476489df73d2557a6548, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 1
   npcCollider: {fileID: 0}
   adjacentVertices: []
 --- !u!212 &212563146154283500

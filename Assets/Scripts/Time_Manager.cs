@@ -45,6 +45,7 @@ public class Time_Manager : MonoBehaviour
 		currentTimeSpeed = normalTimeSpeed;
 		playerController = Player.GetComponent<PlayerController>();
 
+
 		afternoonShade.SetActive(false);
 		nightShade.SetActive(false);
 		timeShift.Play();
@@ -66,7 +67,8 @@ public class Time_Manager : MonoBehaviour
 		UpdateClock();
 		//Debug.Log (hour + " : " + minute + " _ " + day);
 		if (day >= 4) {
-			Provider.GetInstance().gameOver.LoseGame(outOfTimeReason);
+            endOfDay.enabled = false;
+            Provider.GetInstance().gameOver.LoseGame(outOfTimeReason);
             this.enabled = false;
 		}
 
@@ -406,6 +408,14 @@ public class Time_Manager : MonoBehaviour
 		}
 		alreadyFrozeNPCs = false;
 	}
+
+	//public void TurnOnSkipBtn(){
+	//	skipButton.SetActive (true);
+	//}
+
+	//public void TurnOffSkipBtn(){
+	//	skipButton.SetActive (false);
+	//}
 
 	/*
 	void OnEnable()

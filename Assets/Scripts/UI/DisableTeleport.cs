@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DisableTeleport : MonoBehaviour {
 
@@ -8,7 +9,7 @@ public class DisableTeleport : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other) {
 		if(other.tag == "Player"){
-            teleportButton.SetActive(false);
+            teleportButton.GetComponent<Button>().interactable = false;
         }
 	}
 	
@@ -16,7 +17,7 @@ public class DisableTeleport : MonoBehaviour {
         Time_Manager time = Provider.GetInstance().timeManager;
         if (other.tag == "Player" && time.currentTimeState == Time_Manager.State.Rest)
         {
-            teleportButton.SetActive(true);
+            teleportButton.GetComponent<Button>().interactable = true;
         }
 	}
 }
