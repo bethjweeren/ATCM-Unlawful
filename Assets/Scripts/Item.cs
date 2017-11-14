@@ -38,18 +38,7 @@ public class Item : MonoBehaviour, IInteractable
 
 	public void Interact()
 	{
-		if (itemsManager.items.Count == 0)
-		{
-            //pickUpText.ChangeTextInfo(gameObject.name);
-            //StartCoroutine("PickupAlert");
-            Provider.GetInstance().alertSystem.CreateAlert(gameObject.name + " added to Inventory (I)");
-            DialogueSystem.Instance().CreateJournalEntry(itemClue.journalSummary, CharacterID.VICTIM, clueID.ToUpper());
-            itemsManager.AddItem(linkedItem);
-			itemSpawner.GetComponent<ItemSpawner>().itemsToSpawn.Remove(gameObject);
-            DialogueSystem.Instance().PlayItemPickup(itemClue.content);
-			Destroy(gameObject);
-		}
-		else if (itemsManager.items.Count < 6)
+        if (itemsManager.items.Count < 6)
 		{
             //pickUpText.ChangeText(gameObject.name);
             //StartCoroutine("PickupAlert");

@@ -663,7 +663,7 @@ Prefab:
     - target: {fileID: 114233522687771292, guid: 1ad2d7e4d5b8f4c4c9aee008025615ad,
         type: 2}
       propertyPath: normalTimeSpeed
-      value: 2.3
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 114233522687771292, guid: 1ad2d7e4d5b8f4c4c9aee008025615ad,
         type: 2}
@@ -5200,6 +5200,7 @@ GameObject:
   - component: {fileID: 98306599}
   - component: {fileID: 98306598}
   - component: {fileID: 98306603}
+  - component: {fileID: 98306604}
   m_Layer: 0
   m_Name: Bouquet
   m_TagString: Interactable
@@ -5337,6 +5338,19 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &98306604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 98306597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4d93b7649c2e59459b6f2a5450ea2f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finalColor: {r: 0.9034481, g: 0, b: 1, a: 1}
+  period: 0.5
 --- !u!1 &98768150
 GameObject:
   m_ObjectHideFlags: 0
@@ -9192,6 +9206,7 @@ GameObject:
   - component: {fileID: 168725108}
   - component: {fileID: 168725107}
   - component: {fileID: 168725111}
+  - component: {fileID: 168725112}
   m_Layer: 0
   m_Name: Cookie
   m_TagString: Interactable
@@ -9304,6 +9319,19 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &168725112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 168725106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4d93b7649c2e59459b6f2a5450ea2f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finalColor: {r: 0.9034481, g: 0, b: 1, a: 1}
+  period: 0.5
 --- !u!1 &170769573
 GameObject:
   m_ObjectHideFlags: 0
@@ -12259,6 +12287,7 @@ GameObject:
   - component: {fileID: 248505050}
   - component: {fileID: 248505049}
   - component: {fileID: 248505053}
+  - component: {fileID: 248505054}
   m_Layer: 0
   m_Name: Candles
   m_TagString: Interactable
@@ -12371,6 +12400,19 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &248505054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 248505048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4d93b7649c2e59459b6f2a5450ea2f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finalColor: {r: 0.9034481, g: 0, b: 1, a: 1}
+  period: 0.5
 --- !u!1 &250642490
 GameObject:
   m_ObjectHideFlags: 0
@@ -19468,6 +19510,7 @@ GameObject:
   - component: {fileID: 394355420}
   - component: {fileID: 394355419}
   - component: {fileID: 394355423}
+  - component: {fileID: 394355424}
   m_Layer: 0
   m_Name: Wine bottles
   m_TagString: Interactable
@@ -19580,6 +19623,19 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &394355424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 394355418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4d93b7649c2e59459b6f2a5450ea2f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finalColor: {r: 0.9034481, g: 0, b: 1, a: 1}
+  period: 0.5
 --- !u!1 &400914950
 GameObject:
   m_ObjectHideFlags: 0
@@ -20757,6 +20813,7 @@ GameObject:
   - component: {fileID: 433537016}
   - component: {fileID: 433537015}
   - component: {fileID: 433537019}
+  - component: {fileID: 433537020}
   m_Layer: 0
   m_Name: Letter from Vert
   m_TagString: Interactable
@@ -20869,6 +20926,19 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &433537020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 433537014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4d93b7649c2e59459b6f2a5450ea2f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finalColor: {r: 0.9034481, g: 0, b: 1, a: 1}
+  period: 0.5
 --- !u!224 &433575098 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224395241363268358, guid: 14ba0156ac597384fa15430431cd32b3,
@@ -25760,7 +25830,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 563874334}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -21.37, y: 19.61, z: 0}
+  m_LocalPosition: {x: -21.43, y: 19.53, z: 0}
   m_LocalScale: {x: 1, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 2072420225}
@@ -28504,7 +28574,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 624281643}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12.41, y: 23.9525, z: 0}
+  m_LocalPosition: {x: -12.41, y: 23.802, z: 0}
   m_LocalScale: {x: 1, y: 0.75, z: 1}
   m_Children: []
   m_Father: {fileID: 2072420225}
@@ -31933,7 +32003,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 686275037}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -39.69, y: 23.58, z: 0}
+  m_LocalPosition: {x: -39.707, y: 23.516, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 2072420225}
@@ -33284,7 +33354,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 718167332}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -15.35, y: 19.8625, z: 0}
+  m_LocalPosition: {x: -15.38, y: 19.81, z: 0}
   m_LocalScale: {x: 1, y: 0.75, z: 1}
   m_Children: []
   m_Father: {fileID: 2072420225}
@@ -33439,7 +33509,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 723390184}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.71, y: 20.22, z: 0}
+  m_LocalPosition: {x: -4.85, y: 20.03, z: 0}
   m_LocalScale: {x: 2, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2072420225}
@@ -37098,7 +37168,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Murder Game
+  m_Text: Kill the Game
 --- !u!222 &794481509
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -47120,7 +47190,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 982523101}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -27.41, y: 23.9075, z: 0}
+  m_LocalPosition: {x: -27.41, y: 23.785, z: 0}
   m_LocalScale: {x: 1, y: 0.75, z: 1}
   m_Children: []
   m_Father: {fileID: 2072420225}
@@ -47340,7 +47410,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 983443955}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -30.46, y: 19.35, z: 0}
+  m_LocalPosition: {x: -30.46, y: 19.27, z: 0}
   m_LocalScale: {x: 1, y: 0.25, z: 1}
   m_Children: []
   m_Father: {fileID: 2072420225}
@@ -50330,7 +50400,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1028405282}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -18.37, y: 23.9525, z: 0}
+  m_LocalPosition: {x: -18.427, y: 23.773, z: 0}
   m_LocalScale: {x: 1, y: 0.75, z: 1}
   m_Children: []
   m_Father: {fileID: 2072420225}
@@ -51246,7 +51316,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Characters
+  m_Text: Suspects
 --- !u!222 &1043033738
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -54829,7 +54899,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1123656666}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -18.34, y: 19.825, z: 0}
+  m_LocalPosition: {x: -18.44, y: 19.78, z: 0}
   m_LocalScale: {x: 1, y: 0.75, z: 1}
   m_Children: []
   m_Father: {fileID: 2072420225}
@@ -55954,7 +56024,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1143834279}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -21.37, y: 23.57, z: 0}
+  m_LocalPosition: {x: -21.398, y: 23.523, z: 0}
   m_LocalScale: {x: 1, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 2072420225}
@@ -61090,7 +61160,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1251504174}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -27.43, y: 19.565, z: 0}
+  m_LocalPosition: {x: -27.43, y: 19.53, z: 0}
   m_LocalScale: {x: 1, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 2072420225}
@@ -65627,7 +65697,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1330805401}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -24.54, y: 23.57, z: 0}
+  m_LocalPosition: {x: -24.408, y: 23.57, z: 0}
   m_LocalScale: {x: 1, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 2072420225}
@@ -66385,7 +66455,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Murder Game
+  m_Text: Kill the Game
 --- !u!222 &1348355056
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -68436,7 +68506,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1383397478}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -15.4, y: 23.9525, z: 0}
+  m_LocalPosition: {x: -15.4, y: 23.773, z: 0}
   m_LocalScale: {x: 1, y: 0.75, z: 1}
   m_Children: []
   m_Father: {fileID: 2072420225}
@@ -80505,7 +80575,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1688993428}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9.33, y: 20.15, z: 0}
+  m_LocalPosition: {x: -9.42, y: 20.04, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2072420225}
@@ -82033,7 +82103,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1723969157}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -30.25, y: 23.35, z: 0}
+  m_LocalPosition: {x: -30.392, y: 23.265, z: 0}
   m_LocalScale: {x: 1, y: 0.25, z: 1}
   m_Children: []
   m_Father: {fileID: 2072420225}
@@ -83421,8 +83491,9 @@ GameObject:
   - component: {fileID: 1753204536}
   - component: {fileID: 1753204535}
   - component: {fileID: 1753204539}
+  - component: {fileID: 1753204540}
   m_Layer: 0
-  m_Name: Utility knife
+  m_Name: Dagger
   m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -83510,7 +83581,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1753204534}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.02, y: -2.28, z: 0}
+  m_LocalPosition: {x: 1.884, y: 2.209, z: 0}
   m_LocalScale: {x: 2.5, y: 2.5, z: 1}
   m_Children: []
   m_Father: {fileID: 1982790091}
@@ -83533,6 +83604,19 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &1753204540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1753204534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4d93b7649c2e59459b6f2a5450ea2f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finalColor: {r: 0.9034481, g: 0, b: 1, a: 1}
+  period: 0.5
 --- !u!1 &1753256985
 GameObject:
   m_ObjectHideFlags: 0
@@ -85586,7 +85670,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1799579304}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12.61, y: 20.15, z: 0}
+  m_LocalPosition: {x: -12.68, y: 20.04, z: 0}
   m_LocalScale: {x: 0.5, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2072420225}
@@ -90585,7 +90669,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1912373211}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -24.4, y: 19.35, z: 0}
+  m_LocalPosition: {x: -24.4, y: 19.3, z: 0}
   m_LocalScale: {x: 1, y: 0.25, z: 1}
   m_Children: []
   m_Father: {fileID: 2072420225}
@@ -91487,6 +91571,7 @@ GameObject:
   - component: {fileID: 1928459763}
   - component: {fileID: 1928459762}
   - component: {fileID: 1928459766}
+  - component: {fileID: 1928459767}
   m_Layer: 0
   m_Name: Bloody left glove
   m_TagString: Interactable
@@ -91600,6 +91685,19 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &1928459767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1928459761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4d93b7649c2e59459b6f2a5450ea2f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finalColor: {r: 0.9034481, g: 0, b: 1, a: 1}
+  period: 0.5
 --- !u!1 &1928903632
 GameObject:
   m_ObjectHideFlags: 0
@@ -92082,6 +92180,7 @@ GameObject:
   - component: {fileID: 1936507023}
   - component: {fileID: 1936507022}
   - component: {fileID: 1936507026}
+  - component: {fileID: 1936507027}
   m_Layer: 0
   m_Name: Paint brush
   m_TagString: Interactable
@@ -92194,6 +92293,19 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &1936507027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1936507021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4d93b7649c2e59459b6f2a5450ea2f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finalColor: {r: 0.9034481, g: 0, b: 1, a: 1}
+  period: 0.5
 --- !u!1 &1938860759
 GameObject:
   m_ObjectHideFlags: 0
@@ -92206,6 +92318,7 @@ GameObject:
   - component: {fileID: 1938860761}
   - component: {fileID: 1938860760}
   - component: {fileID: 1938860764}
+  - component: {fileID: 1938860765}
   m_Layer: 0
   m_Name: Bloody right glove
   m_TagString: Interactable
@@ -92319,6 +92432,19 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &1938860765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1938860759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4d93b7649c2e59459b6f2a5450ea2f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finalColor: {r: 0.9034481, g: 0, b: 1, a: 1}
+  period: 0.5
 --- !u!1 &1940071921
 GameObject:
   m_ObjectHideFlags: 0
@@ -93768,7 +93894,7 @@ GameObject:
   - component: {fileID: 1974279713}
   - component: {fileID: 1974279715}
   m_Layer: 5
-  m_Name: utility knife
+  m_Name: dagger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -93841,8 +93967,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemTextBG: {fileID: 1584425}
   itemText: {fileID: 920669060}
-  desc: It's a utility knife, and it fits the size of the wounds on the body. I'd
-    better go ask the suspects who owns this.
+  desc: It's a dagger, and it fits the size of the wounds on the body. I'd better
+    go ask the suspects who owns this.
 --- !u!1 &1975209779
 GameObject:
   m_ObjectHideFlags: 0

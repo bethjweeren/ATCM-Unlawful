@@ -78,7 +78,7 @@ public class DialogueSystem
         characters.CharacterDict.Add(CharacterID.VICTIM2, new Character("the town square", "LOCATION", "#FFFFFF"));
 
         characters.NameDict.Add("WEAPON", CharacterID.WEAPON);
-        characters.CharacterDict.Add(CharacterID.WEAPON, new Character("a knife", "WEAPON", "#FFFFFF"));
+        characters.CharacterDict.Add(CharacterID.WEAPON, new Character("a dagger", "WEAPON", "#FFFFFF"));
     }
 
     public static DialogueSystem Instance()
