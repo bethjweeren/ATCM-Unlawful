@@ -5,15 +5,6 @@ using UnityEngine;
 //A vertex/node on the graph that determines whether an NPC can move at a particular location
 public class Vertex : MonoBehaviour
 {
-
-	public enum Direction //Listed clockwise from north (like the player animation)
-	{
-		NORTH,
-		EAST,
-		SOUTH,
-		WEST
-	};
-
 	public bool debug = true; //If true, enable sprite renderer, else disable
 	public Collider2D npcCollider; //The NPC's collider. Needed to determine if the vertex is passable.
 	private Collider2D thisCollider; //The vertex's collider (a copy of the NPC's collider)
@@ -21,10 +12,15 @@ public class Vertex : MonoBehaviour
 	bool known = true; //Does the NPC know about this location? Almost identical to passable.
 	bool unchangeable = false; //Will the passable or known variables stay the same?
 	float weight = 1; //You'd think edges would have weight, but no, I'm putting it in the nodes. Every edge that *points* to this node has this weight.
-		//A higher weight means that the NPC is less likely to walk on this node because it's considered "further away" or more difficult to traverse
-		//This is useful if you want the NPCs to stick to the roads or something. Could probably be set with an area or something.
-	public GameObject[] adjacentVertices; //These NEED to have the Vertex script, no more than 4 adjacent vertices per vertex
-	private SpriteRenderer sr;
+					  //A higher weight means that the NPC is less likely to walk on this node because it's considered "further away" or more difficult to traverse
+					  //This is useful if you want the NPCs to stick to the roads or something. Could probably be set with an area or something.
+	//The following GameObjects NEED to have the Vertex script
+	public GameObject north;
+	public GameObject east;
+	public GameObject south;
+	public GameObject west;
+	public int gridX, gridY;
+	public SpriteRenderer sr;
 
 	// Use this for initialization
 	void Start ()
@@ -135,8 +131,36 @@ public class Vertex : MonoBehaviour
 		}
 	}
 
+	void OnDrawGizmosSelected()
+	{
+		if (debug)
+		{
+			if (north != null)
+			{
+				Gizmos.color = north.GetComponent<SpriteRenderer>().color;
+				Gizmos.DrawLine(transform.position, north.transform.position);
+			}
+			if (east != null)
+			{
+				Gizmos.color = east.GetComponent<SpriteRenderer>().color;
+				Gizmos.DrawLine(transform.position, east.transform.position);
+			}
+			if (south != null)
+			{
+				Gizmos.color = south.GetComponent<SpriteRenderer>().color;
+				Gizmos.DrawLine(transform.position, south.transform.position);
+			}
+			if (west != null)
+			{
+				Gizmos.color = west.GetComponent<SpriteRenderer>().color;
+				Gizmos.DrawLine(transform.position, west.transform.position);
+			}
+		}
+	}
+
 	public GameObject[] getAdjacentVertices()
 	{
+		GameObject[] adjacentVertices = { north, east, south, west };
 		return adjacentVertices;
 	}
 }

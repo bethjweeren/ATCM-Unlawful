@@ -23,9 +23,12 @@ public class Pathfinder : MonoBehaviour
 	public GameObject vertexPrefab;
 	public Collider2D npcCollider;
 	public float distanceBetweenVertices = 0.5f;
+	public bool debug = true;
 
 	float keyModifier; //km in pseudocode, accounts for cost changes
 	HashSet<GameObject> graph = new HashSet<GameObject>(); //S in pseudocode, The finite set of vertices of the graph; I chose HashSet cuz the pseudocode just said "Set" and this was close enough I guess.
+	GameObject[,] vertexArray;
+	int numVX, numVY;
 	public RectTransform townRectangle; //A rectangle that covers the entire play area; determines how big to make the graph.
 
 	// Use this for initialization
@@ -36,6 +39,10 @@ public class Pathfinder : MonoBehaviour
 			print("ERROR: Pathfinder.cs needs a vertex prefab object containing the Vertex script!");
 		}
 		vertexPrefab.GetComponent<Vertex>().npcCollider = npcCollider;
+		
+		numVX = Mathf.FloorToInt(townRectangle.rect.width / distanceBetweenVertices); //Number of vertices along the x side / width of the rectangle
+		numVY = Mathf.FloorToInt(townRectangle.rect.height / distanceBetweenVertices); //Number of vertices along the y side / height of the rectangle
+		vertexArray = new GameObject[numVY, numVX];
 		MakeGraph();
 	}
 
@@ -47,6 +54,49 @@ public class Pathfinder : MonoBehaviour
 
 	void MakeGraph()
 	{
+		print("numVX " + numVX);
+		print("numVY " + numVY);
+		// (0,0) is the bottom-left of the rectangle
+		for (int row = 0; row < numVY; row++)
+		{
+			for (int col = 0; col < numVX; col++)
+			{
+				GameObject vp = Instantiate(vertexPrefab, new Vector3(townRectangle.rect.xMin + townRectangle.localPosition.x + (col * distanceBetweenVertices), townRectangle.rect.yMin + townRectangle.localPosition.y + (row * distanceBetweenVertices), 1), Quaternion.identity, transform);
+				vp.GetComponent<Vertex>().debug = debug;
+				vp.GetComponent<Vertex>().gridX = col;
+				vp.GetComponent<Vertex>().gridY = row;
+				print("row " + row);
+				print("col " + col);
+				
+				vertexArray[row, col] = vp;
+				if (col > 0)
+				{
+					vp.GetComponent<Vertex>().west = vertexArray[row, col - 1];
+					vertexArray[row, col - 1].GetComponent<Vertex>().east = vp;
+					//Debug.DrawRay(vp.transform.position, vp.GetComponent<Vertex>().west.transform.position, vp.GetComponent <SpriteRenderer>().color, 100, false);
+				}
+				if (row > 0)
+				{
+					vp.GetComponent<Vertex>().south = vertexArray[row - 1, col];
+					vertexArray[row - 1, col].GetComponent<Vertex>().north = vp;
+					//Debug.DrawRay(vp.transform.position, vp.GetComponent<Vertex>().south.transform.position, vp.GetComponent<SpriteRenderer>().color, 100, false);
+				}
+				/*
+				if (col > 0)
+				{
+					print(vertexArray[row, col - 1]);
+					vp.GetComponent<Vertex>().SetWestVertex(vertexArray[row, col - 1]);
+					vertexArray[row, col - 1].GetComponent<Vertex>().SetEastVertex(vp);
+				}
+				if (row > 0)
+				{
+					vp.GetComponent<Vertex>().SetSouthVertex(vertexArray[row - 1, col]);
+					vertexArray[row - 1, col].GetComponent<Vertex>().SetNorthVertex(vp);
+				}
+				*/
+			}
+		}
+		/*
 		for (float newY = townRectangle.rect.yMin + townRectangle.localPosition.y; newY < townRectangle.rect.yMax + townRectangle.localPosition.y; newY += distanceBetweenVertices)
 		{
 			for (float newX = townRectangle.rect.xMin + townRectangle.localPosition.x; newX < townRectangle.rect.xMax + townRectangle.localPosition.x; newX += distanceBetweenVertices)
@@ -55,6 +105,8 @@ public class Pathfinder : MonoBehaviour
 				graph.Add(vp);
 			}
 		}
+
+
 		/*
 		RaycastHit2D hit;
 		hit = Physics2D.Raycast(Position, new Vector2(-1, 0), distanceBetweenVertices);
