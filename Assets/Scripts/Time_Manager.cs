@@ -252,6 +252,7 @@ public class Time_Manager : MonoBehaviour
 
 	public void SwitchToPausedState()
 	{
+        /*
 		if (Input.GetKeyDown(KeyCode.P))
 		{
 			pastTimeState = currentTimeState;
@@ -259,6 +260,7 @@ public class Time_Manager : MonoBehaviour
 			if (!alreadyFrozeNPCs) //It was calling it hundred of times...
 				FreezeNPCs();
 		}
+        */
 	}
 
 	void NormalCode()

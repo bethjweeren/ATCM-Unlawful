@@ -1037,7 +1037,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 200, y: -37}
-  m_SizeDelta: {x: 250, y: 315}
+  m_SizeDelta: {x: 300, y: 315}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &17135065
 MonoBehaviour:
@@ -8437,7 +8437,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Begin
+  m_Text: Begin Investigation
 --- !u!222 &152141425
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9690,8 +9690,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 300}
-  m_SizeDelta: {x: 200, y: 200}
+  m_AnchoredPosition: {x: 0, y: 285}
+  m_SizeDelta: {x: 400, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &177595124
 MonoBehaviour:
@@ -9725,7 +9725,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Credits
+  m_Text: Police Force
 --- !u!222 &177595125
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13699,7 +13699,6 @@ RectTransform:
   - {fileID: 200385168}
   - {fileID: 493467515}
   - {fileID: 1156953157}
-  - {fileID: 1549385756}
   - {fileID: 761006041}
   - {fileID: 322849508}
   - {fileID: 322327887}
@@ -13710,6 +13709,7 @@ RectTransform:
   - {fileID: 1443729187}
   - {fileID: 1869025288}
   - {fileID: 509609423}
+  - {fileID: 1549385756}
   m_Father: {fileID: 1766813152}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -16045,7 +16045,7 @@ RectTransform:
   - {fileID: 559354346}
   - {fileID: 2104089363}
   m_Father: {fileID: 274599462}
-  m_RootOrder: 24
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -16290,7 +16290,7 @@ RectTransform:
   - {fileID: 1961960565}
   - {fileID: 1439471527}
   m_Father: {fileID: 274599462}
-  m_RootOrder: 23
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -16364,8 +16364,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 300}
-  m_SizeDelta: {x: 200, y: 200}
+  m_AnchoredPosition: {x: 0, y: 285}
+  m_SizeDelta: {x: 400, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &326072077
 MonoBehaviour:
@@ -16399,7 +16399,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Credits
+  m_Text: Police Force
 --- !u!222 &326072078
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -17157,8 +17157,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 225}
-  m_SizeDelta: {x: 300, y: 200}
+  m_AnchoredPosition: {x: 0, y: 200}
+  m_SizeDelta: {x: 500, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &345005751
 MonoBehaviour:
@@ -17181,7 +17181,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 60
+    m_FontSize: 20
     m_FontStyle: 1
     m_BestFit: 1
     m_MinSize: 1
@@ -17192,7 +17192,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Controls
+  m_Text: Detective Toolkit
 --- !u!222 &345005752
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -19712,8 +19712,8 @@ MonoBehaviour:
     Li\n\n\u2656 Game Designers \u2656\nJarrod Humes\nJustin Mendoza\nSam Owens\n\n\u2328
     Programmers \u2328\nGrant Barbee\nSharon Lougheed\nMohammad (Max) Sobhani\n\n\u2767
     Concept/2D Artist \u2767\nKaitlin Smith\n\n\u270D Narrative Designer \u270D\nHudson
-    Bielstein\n\nSound Designers\nCat Nanagas\nArael Rauls\nPeter Choe\nAndrew Cietzman\nAndres
-    Hurtado\nConnor Goeke\nDarby James"
+    Bielstein\n\n\u266B Sound Designers \u266B\nPeter Choe\nAndrew Cietzman\nConnor
+    Goeke\nAndres Hurtado\nDarby James\nCat Nanagas\nArael Rauls"
 --- !u!222 &400914953
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -23400,7 +23400,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -75}
-  m_SizeDelta: {x: 225, y: 60}
+  m_SizeDelta: {x: 270, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &495338222
 GameObject:
@@ -24107,7 +24107,7 @@ RectTransform:
   - {fileID: 1283936921}
   - {fileID: 1486902190}
   m_Father: {fileID: 274599462}
-  m_RootOrder: 31
+  m_RootOrder: 30
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -27771,7 +27771,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Credits
+  m_Text: Police Force
 --- !u!222 &598021170
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -30395,7 +30395,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Credits
+  m_Text: Police Force
 --- !u!222 &657925852
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -35089,7 +35089,7 @@ RectTransform:
   - {fileID: 1420511325}
   - {fileID: 285796087}
   m_Father: {fileID: 274599462}
-  m_RootOrder: 28
+  m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -35376,7 +35376,7 @@ RectTransform:
   - {fileID: 29240771}
   - {fileID: 1614158454}
   m_Father: {fileID: 274599462}
-  m_RootOrder: 22
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -35548,7 +35548,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 85f5f19a59c440e45a70ea81d96b5763, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ad3dd563dbaddd249ab90a487670927f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -37173,7 +37173,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Kill the Game
+  m_Text: Murder the Game
 --- !u!222 &794481509
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -38624,7 +38624,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 'Jaune Yellow, owner of the Yellow Bakery just south of Town Square.  She''s
-    the most popular suspect in this case since her bakery practically feeds the town.  He''s
+    the most popular suspect in this case since her bakery practically feeds the town.  She''s
     also overbearingly kind; she''s called me "honey" and "dearie" since my first
     baguette.
 
@@ -39358,7 +39358,7 @@ RectTransform:
   - {fileID: 1033406810}
   - {fileID: 1975825428}
   m_Father: {fileID: 274599462}
-  m_RootOrder: 25
+  m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -43492,7 +43492,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 200, y: -150}
-  m_SizeDelta: {x: 225, y: 60}
+  m_SizeDelta: {x: 270, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &909995269
 GameObject:
@@ -45844,7 +45844,7 @@ RectTransform:
   - {fileID: 1841699382}
   - {fileID: 2119126984}
   m_Father: {fileID: 274599462}
-  m_RootOrder: 26
+  m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -46534,7 +46534,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -150}
-  m_SizeDelta: {x: 225, y: 60}
+  m_SizeDelta: {x: 270, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &969807131
 GameObject:
@@ -49810,7 +49810,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 404, y: -348.26}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 300, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1018604949
 MonoBehaviour:
@@ -57705,8 +57705,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 225}
-  m_SizeDelta: {x: 300, y: 200}
+  m_AnchoredPosition: {x: 0, y: 200}
+  m_SizeDelta: {x: 500, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1162781923
 MonoBehaviour:
@@ -57729,7 +57729,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 60
+    m_FontSize: 20
     m_FontStyle: 1
     m_BestFit: 1
     m_MinSize: 1
@@ -57740,7 +57740,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Controls
+  m_Text: Detective Toolkit
 --- !u!222 &1162781924
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -61347,7 +61347,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 200, y: 75}
-  m_SizeDelta: {x: 225, y: 60}
+  m_SizeDelta: {x: 270, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1254998796
 GameObject:
@@ -66473,7 +66473,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Kill the Game
+  m_Text: Murder the Game
 --- !u!222 &1348355056
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -67156,7 +67156,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 225, y: 60}
+  m_SizeDelta: {x: 270, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1367171565
 GameObject:
@@ -68850,7 +68850,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -37}
-  m_SizeDelta: {x: 250, y: 315}
+  m_SizeDelta: {x: 300, y: 315}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1399657853
 MonoBehaviour:
@@ -69698,8 +69698,8 @@ MonoBehaviour:
     Li\n\n\u2656 Game Designers \u2656\nJarrod Humes\nJustin Mendoza\nSam Owens\n\n\u2328
     Programmers \u2328\nGrant Barbee\nSharon Lougheed\nMohammad (Max) Sobhani\n\n\u2767
     Concept/2D Artist \u2767\nKaitlin Smith\n\n\u270D Narrative Designer \u270D\nHudson
-    Bielstein\n\nSound Designers\nCat Nanagas\nArael Rauls\nPeter Choe\nAndrew Cietzman\nAndres
-    Hurtado\nConnor Goeke\nDarby James"
+    Bielstein\n\n\u266B Sound Designers \u266B\nPeter Choe\nAndrew Cietzman\nConnor
+    Goeke\nAndres Hurtado\nDarby James\nCat Nanagas\nArael Rauls"
 --- !u!222 &1408789871
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -71371,11 +71371,11 @@ RectTransform:
   - {fileID: 1070530997}
   - {fileID: 2018758558}
   m_Father: {fileID: 274599462}
-  m_RootOrder: 29
+  m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1904.9998, y: 839.00006}
+  m_AnchoredPosition: {x: -4059, y: 1338}
   m_SizeDelta: {x: 591.4, y: 675.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1443729188
@@ -72807,6 +72807,7 @@ MonoBehaviour:
   yellowStarterEntry: {fileID: 0}
   otherStarterEntry: {fileID: 0}
   pageTurnSound: {fileID: 0}
+  audioSource: {fileID: 0}
 --- !u!4 &1486727236
 Transform:
   m_ObjectHideFlags: 0
@@ -73903,7 +73904,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Controls
+  m_Text: Detective Toolkit
 --- !u!222 &1502055465
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -74549,7 +74550,7 @@ RectTransform:
   - {fileID: 1591913512}
   - {fileID: 574053091}
   m_Father: {fileID: 274599462}
-  m_RootOrder: 27
+  m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -75494,7 +75495,7 @@ RectTransform:
   - {fileID: 960965043}
   - {fileID: 1894450995}
   m_Father: {fileID: 274599462}
-  m_RootOrder: 21
+  m_RootOrder: 31
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -75520,7 +75521,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1550778190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75680,6 +75681,7 @@ MonoBehaviour:
   yellowStarterEntry: {fileID: 2104089362}
   otherStarterEntry: {fileID: 1155584149}
   pageTurnSound: {fileID: 8300000, guid: a8d8eb83fcdc02e4389bbecd8c234152, type: 3}
+  audioSource: {fileID: 1309259256}
 --- !u!114 &1550778191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78285,7 +78287,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Resume
+  m_Text: Back to the Case
 --- !u!222 &1613552855
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -79366,7 +79368,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Controls
+  m_Text: Detective Toolkit
 --- !u!222 &1640211265
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -83381,7 +83383,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 75}
-  m_SizeDelta: {x: 225, y: 60}
+  m_SizeDelta: {x: 270, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1752155706
 GameObject:
@@ -88834,7 +88836,7 @@ RectTransform:
   - {fileID: 1231804696}
   - {fileID: 1745196809}
   m_Father: {fileID: 274599462}
-  m_RootOrder: 30
+  m_RootOrder: 29
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -92184,7 +92186,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 200, y: 0}
-  m_SizeDelta: {x: 225, y: 60}
+  m_SizeDelta: {x: 270, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1936507021
 GameObject:
@@ -98900,7 +98902,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 200, y: -75}
-  m_SizeDelta: {x: 225, y: 60}
+  m_SizeDelta: {x: 270, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2089086035
 GameObject:

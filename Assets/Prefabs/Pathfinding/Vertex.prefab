@@ -54,7 +54,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debug: 1
   npcCollider: {fileID: 0}
-  adjacentVertices: []
+  north: {fileID: 0}
+  east: {fileID: 0}
+  south: {fileID: 0}
+  west: {fileID: 0}
+  gridX: 0
+  gridY: 0
+  sr: {fileID: 0}
 --- !u!212 &212563146154283500
 SpriteRenderer:
   m_ObjectHideFlags: 1
