@@ -7,11 +7,12 @@ public class Vertex : MonoBehaviour
 {
 	public bool debug = true; //If true, enable sprite renderer, else disable
 	public Collider2D npcCollider; //The NPC's collider. Needed to determine if the vertex is passable.
+    public PathfinderGraph graph;
 	private Collider2D thisCollider; //The vertex's collider (a copy of the NPC's collider)
-	bool passable = true; //Is this a wall/barrier?
-	bool known = true; //Does the NPC know about this location? Almost identical to passable.
-	bool unchangeable = false; //Will the passable or known variables stay the same?
-	float weight = 1; //You'd think edges would have weight, but no, I'm putting it in the nodes. Every edge that *points* to this node has this weight.
+    public bool passable = true; //Is this a wall/barrier?
+    public bool known = true; //Does the NPC know about this location? Almost identical to passable.
+    public bool unchangeable = false; //Will the passable or known variables stay the same?
+	public float weight = 1; //You'd think edges would have weight, but no, I'm putting it in the nodes. Every edge that *points* to this node has this weight.
 					  //A higher weight means that the NPC is less likely to walk on this node because it's considered "further away" or more difficult to traverse
 					  //This is useful if you want the NPCs to stick to the roads or something. Could probably be set with an area or something.
 	//The following GameObjects NEED to have the Vertex script
@@ -21,9 +22,14 @@ public class Vertex : MonoBehaviour
 	public GameObject west;
 	public int gridX, gridY;
 	public SpriteRenderer sr;
+    public Vector2 priority = new Vector2(-1,-1);
 
-	// Use this for initialization
-	void Start ()
+    public List<GameObject> pathfinders; //The index of each pathfinder corresponds to the rhs and g values below
+    public List<float> rhs; //RHS = right-hand side / one-step lookahead value
+    public List<float> g; //g = estimate of start distance g* of the vertex
+
+    // Use this for initialization
+    void Start ()
 	{
 		//If debug on, show vertices
 		sr = GetComponent<SpriteRenderer>();
@@ -116,8 +122,22 @@ public class Vertex : MonoBehaviour
 	{
 		if (!unchangeable)
 		{
-			passable = false;
-			sr.color = Color.red;
+            Pathfinder pf = other.gameObject.GetComponent<Pathfinder>();
+            if (pf != null)
+            {
+                if (Vector3.Distance(other.gameObject.transform.position, transform.position) > pf.closeEnough)
+                {
+                    pf.startVertexObj = gameObject;
+                }
+            }
+            passable = false;
+            graph.graphChanged = true;
+            if (!graph.verticesChanged.Contains(gameObject))
+            {
+                graph.verticesChanged.Add(gameObject);
+            }
+            if (debug)
+			    sr.color = Color.red;
 		}
 	}
 
@@ -126,7 +146,8 @@ public class Vertex : MonoBehaviour
 		if (!unchangeable)
 		{
 			passable = true;
-			if (known)
+            graph.graphChanged = true;
+            if (known && debug)
 				sr.color = Color.green;
 		}
 	}
@@ -158,9 +179,103 @@ public class Vertex : MonoBehaviour
 		}
 	}
 
-	public GameObject[] getAdjacentVertices()
+	public GameObject[] GetAdjacentVertices()
 	{
 		GameObject[] adjacentVertices = { north, east, south, west };
 		return adjacentVertices;
 	}
+
+    public List<GameObject> GetSuccessors()
+    {
+        List<GameObject> successors = new List<GameObject>();
+        foreach (GameObject adjVertexObj in GetAdjacentVertices())
+        {
+            if (adjVertexObj != null)
+            {
+                successors.Add(adjVertexObj);
+            }
+        }
+        return successors;
+        /*
+        if (passable)
+        {
+            List<GameObject> successors = new List<GameObject>();
+            foreach (GameObject adjVertexObj in GetAdjacentVertices())
+            {
+                successors.Add(adjVertexObj);
+            }
+            return successors;
+        }
+        else
+        {
+            return null;
+        }
+        */
+    }
+
+    public List<GameObject> GetPredecessors()
+    {
+        List<GameObject> predecessors = new List<GameObject>();
+        foreach(GameObject adjVertexObj in GetAdjacentVertices())
+        {
+            if (adjVertexObj != null)
+            {
+                if (adjVertexObj.GetComponent<Vertex>().passable && adjVertexObj.GetComponent<Vertex>().known)
+                {
+                    predecessors.Add(adjVertexObj);
+                }
+            }
+        }
+        return predecessors;
+    }
+
+    //Compare priorities
+    /*
+    public static bool operator ==(Vertex v1, Vertex v2)
+    {
+        if ((v1.priority.x == v2.priority.x) && (v1.priority.y == v2.priority.y))
+            return true;
+        else
+            return false;
+    }
+
+    public static bool operator !=(Vertex v1, Vertex v2)
+    {
+        if ((v1.priority.x == v2.priority.x) && (v1.priority.y == v2.priority.y))
+            return false;
+        else
+            return true;
+    }
+    */
+    public static bool operator <=(Vertex v1, Vertex v2)
+    {
+        if ((v1.priority.x < v2.priority.x) || ((v1.priority.x == v2.priority.x) && (v1.priority.y <= v2.priority.y)))
+            return true;
+        else
+            return false;
+    }
+
+    public static bool operator >=(Vertex v1, Vertex v2)
+    {
+        if ((v1.priority.x > v2.priority.x) || ((v1.priority.x == v2.priority[0]) && (v1.priority.y >= v2.priority.y)))
+            return true;
+        else
+            return false;
+    }
+
+    public static bool operator <(Vertex v1, Vertex v2)
+    {
+        if ((v1.priority.x < v2.priority.x) || ((v1.priority.x == v2.priority.x) && (v1.priority.y < v2.priority.y)))
+            return true;
+        else
+            return false;
+    }
+
+    public static bool operator >(Vertex v1, Vertex v2)
+    {
+        if ((v1.priority.x > v2.priority.x) || ((v1.priority.x == v2.priority[0]) && (v1.priority.y > v2.priority.y)))
+            return true;
+        else
+            return false;
+    }
 }
