@@ -13699,7 +13699,6 @@ RectTransform:
   - {fileID: 200385168}
   - {fileID: 493467515}
   - {fileID: 1156953157}
-  - {fileID: 1549385756}
   - {fileID: 761006041}
   - {fileID: 322849508}
   - {fileID: 322327887}
@@ -13710,6 +13709,7 @@ RectTransform:
   - {fileID: 1443729187}
   - {fileID: 1869025288}
   - {fileID: 509609423}
+  - {fileID: 1549385756}
   m_Father: {fileID: 1766813152}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -16045,7 +16045,7 @@ RectTransform:
   - {fileID: 559354346}
   - {fileID: 2104089363}
   m_Father: {fileID: 274599462}
-  m_RootOrder: 24
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -16290,7 +16290,7 @@ RectTransform:
   - {fileID: 1961960565}
   - {fileID: 1439471527}
   m_Father: {fileID: 274599462}
-  m_RootOrder: 23
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -24107,7 +24107,7 @@ RectTransform:
   - {fileID: 1283936921}
   - {fileID: 1486902190}
   m_Father: {fileID: 274599462}
-  m_RootOrder: 31
+  m_RootOrder: 30
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -35089,7 +35089,7 @@ RectTransform:
   - {fileID: 1420511325}
   - {fileID: 285796087}
   m_Father: {fileID: 274599462}
-  m_RootOrder: 28
+  m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -35376,7 +35376,7 @@ RectTransform:
   - {fileID: 29240771}
   - {fileID: 1614158454}
   m_Father: {fileID: 274599462}
-  m_RootOrder: 22
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -38624,7 +38624,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 'Jaune Yellow, owner of the Yellow Bakery just south of Town Square.  She''s
-    the most popular suspect in this case since her bakery practically feeds the town.  He''s
+    the most popular suspect in this case since her bakery practically feeds the town.  She''s
     also overbearingly kind; she''s called me "honey" and "dearie" since my first
     baguette.
 
@@ -39358,7 +39358,7 @@ RectTransform:
   - {fileID: 1033406810}
   - {fileID: 1975825428}
   m_Father: {fileID: 274599462}
-  m_RootOrder: 25
+  m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -45844,7 +45844,7 @@ RectTransform:
   - {fileID: 1841699382}
   - {fileID: 2119126984}
   m_Father: {fileID: 274599462}
-  m_RootOrder: 26
+  m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -71371,11 +71371,11 @@ RectTransform:
   - {fileID: 1070530997}
   - {fileID: 2018758558}
   m_Father: {fileID: 274599462}
-  m_RootOrder: 29
+  m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1904.9998, y: 839.00006}
+  m_AnchoredPosition: {x: -4059, y: 1338}
   m_SizeDelta: {x: 591.4, y: 675.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1443729188
@@ -74550,7 +74550,7 @@ RectTransform:
   - {fileID: 1591913512}
   - {fileID: 574053091}
   m_Father: {fileID: 274599462}
-  m_RootOrder: 27
+  m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -75495,7 +75495,7 @@ RectTransform:
   - {fileID: 960965043}
   - {fileID: 1894450995}
   m_Father: {fileID: 274599462}
-  m_RootOrder: 21
+  m_RootOrder: 31
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -75521,7 +75521,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1550778190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -88836,7 +88836,7 @@ RectTransform:
   - {fileID: 1231804696}
   - {fileID: 1745196809}
   m_Father: {fileID: 274599462}
-  m_RootOrder: 30
+  m_RootOrder: 29
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
