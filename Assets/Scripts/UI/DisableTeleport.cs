@@ -15,7 +15,7 @@ public class DisableTeleport : MonoBehaviour {
 	
 	void OnTriggerExit2D(Collider2D other) {
         Time_Manager time = Provider.GetInstance().timeManager;
-        if (other.tag == "Player" && time.currentTimeState == Time_Manager.State.Rest)
+        if (other.tag == "Player")
         {
             teleportButton.GetComponent<Button>().interactable = true;
         }

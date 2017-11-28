@@ -49810,7 +49810,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 404, y: -348.26}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 300, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1018604949
 MonoBehaviour:
@@ -72807,6 +72807,7 @@ MonoBehaviour:
   yellowStarterEntry: {fileID: 0}
   otherStarterEntry: {fileID: 0}
   pageTurnSound: {fileID: 0}
+  audioSource: {fileID: 0}
 --- !u!4 &1486727236
 Transform:
   m_ObjectHideFlags: 0
@@ -75680,6 +75681,7 @@ MonoBehaviour:
   yellowStarterEntry: {fileID: 2104089362}
   otherStarterEntry: {fileID: 1155584149}
   pageTurnSound: {fileID: 8300000, guid: a8d8eb83fcdc02e4389bbecd8c234152, type: 3}
+  audioSource: {fileID: 1309259256}
 --- !u!114 &1550778191
 MonoBehaviour:
   m_ObjectHideFlags: 0

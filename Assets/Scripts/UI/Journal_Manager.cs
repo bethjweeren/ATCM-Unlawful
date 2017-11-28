@@ -61,11 +61,10 @@ public class Journal_Manager : MonoBehaviour {
     public GameObject otherStarterEntry;
 
 	public AudioClip pageTurnSound;
-	private AudioSource audioSource;
+	public AudioSource audioSource;
 
     void Start()
 	{
-		audioSource = GetComponentInParent<AudioSource>();
 		audioSource.clip = pageTurnSound;
 
 		currentPage.transform.position = page1Location.position;
