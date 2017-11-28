@@ -279,14 +279,14 @@ public class DialogueSystem
         GameOver gameOver = Provider.GetInstance().gameOver;
         if (scenario.killer == SuspectDialogue.IDToSuspect(choice))
         {
-            gameOver.WinGame("You guessed correctly");
+            gameOver.WinGame("You caught the killer");
         }
         else
         {
             Character killer;
             characters.CharacterDict.TryGetValue(SuspectDialogue.SuspectToID(scenario.killer), out killer);
             //gameOver.LoseGame("The killer was <color=" + killer.color + ">" + killer.name + "</color>");
-            gameOver.LoseGame("You guessed incorrectly");
+            gameOver.LoseGame("You accused the wrong person");
         }
         
     }
