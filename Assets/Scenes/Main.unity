@@ -75342,7 +75342,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 'Vert Greenston, is a professional vintner.  He owns and operates Green
-    Wine Co., the red wine company to the East that put this town on the map.  He
+    Wine Co., the red wine producer to the East that put this town on the map.  He
     carries himself with formality and precision that makes him feel distant in comparison
     to most residents.  His schedule is often full from running his company; if he''s
     not at his vineyard, he''s likely rushing around town making deals.
@@ -77007,7 +77007,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1904.9998, y: 839.00006}
+  m_AnchoredPosition: {x: -2496.4, y: 1544}
   m_SizeDelta: {x: 591.4, y: 675.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1532561517
@@ -92045,7 +92045,9 @@ MonoBehaviour:
 
     While not the most popular man in town, it seems like most townsfolk don''t suspect
     him due to his laziness.  He''s sent to constantly patrol, so he may be able to
-    give insight into the routines of the other suspects.  If he''s willing that is.'
+    give insight into the routines of the other suspects.  If he''s willing that is.
+    Even so, he should have been on patrol that night, so he may be able to give insight
+    into the routines of the other suspects. If he''s sober that is.'
 --- !u!222 &1873407395
 CanvasRenderer:
   m_ObjectHideFlags: 0
