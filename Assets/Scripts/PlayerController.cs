@@ -32,8 +32,11 @@ public class PlayerController : MonoBehaviour
 	public State currentState;
 
 	public Button journalButton;
-	public Button inventoryButton;
-	public float interactRange = 1;
+    public Button mapButton;
+    public Button inventoryButton;
+    public Sprite inventoryOpen;
+    public Sprite inventoryClosed;
+    public float interactRange = 1;
 	public LayerMask interactLayer;
 	public Transform interactRayOrigin;
 	public Time_Manager time_manager;
@@ -65,7 +68,8 @@ public class PlayerController : MonoBehaviour
 		journal_manager = journalCanvas.GetComponent<Journal_Manager> ();
 		journalButton.onClick.AddListener(ToggleJournal);
 		inventoryButton.onClick.AddListener(ToggleInventory);
-		currentState = State.MAIN;
+        mapButton.onClick.AddListener(ToggleMap);
+        currentState = State.MAIN;
 		playerRB = GetComponent<Rigidbody2D>();
 		animator = GetComponent<Animator>();
         playerCollider = GetComponent<Collider2D>();
@@ -162,7 +166,8 @@ public class PlayerController : MonoBehaviour
 						StopMoving();
 						itemCanvas.SetActive (true);
 						print("Looking through inventory. Press I or ESC to close."); //Replace with inventory code
-						FreezeNPCs();
+                        inventoryButton.GetComponent<Image>().sprite = inventoryOpen;
+                        FreezeNPCs();
 					}
 					else if (Input.GetKeyDown(KeyCode.Escape))
 					{
@@ -326,7 +331,8 @@ public class PlayerController : MonoBehaviour
 					itemCanvas.SetActive (false);
 					currentState = State.MAIN;
 					UnfreezeNPCs();
-				}
+                    inventoryButton.GetComponent<Image>().sprite = inventoryClosed;
+                }
 				break;
 
 			case State.INTERACTING:
@@ -391,6 +397,7 @@ public class PlayerController : MonoBehaviour
 		}
         journalButton.gameObject.SetActive(true);
         inventoryButton.gameObject.SetActive(true);
+        mapButton.gameObject.SetActive(true);
     }
 
     public void BeginInteraction(IInteractable other)
@@ -400,6 +407,7 @@ public class PlayerController : MonoBehaviour
         time_manager.ForcePausedState();
         journalButton.gameObject.SetActive(false);
         inventoryButton.gameObject.SetActive(false);
+        mapButton.gameObject.SetActive(false);
         other.Interact();
         //FreezeNPCs(); They should already be frozen by time manager
     }
@@ -444,16 +452,46 @@ public class PlayerController : MonoBehaviour
 			currentState = State.INVENTORY;
             journalCanvas.SetActive(false);
             itemCanvas.SetActive (true);
+            inventoryButton.GetComponent<Image>().sprite = inventoryOpen; 
 		} else {
 			if (time_manager.currentTimeState != Time_Manager.State.Rest) {
 				time_manager.LeavePauseState ();
 			}
 			currentState = State.MAIN;
 			itemCanvas.SetActive(false);
-		}
+            inventoryButton.GetComponent<Image>().sprite = inventoryClosed;
+        }
 	}
 
-	public void StopInput()
+    void ToggleMap()
+    {
+        if (currentState == State.MAIN)
+        {
+            if (time_manager.currentTimeState != Time_Manager.State.Rest)
+            {
+                time_manager.ForcePausedState();
+            }
+            currentState = State.JOURNAL;
+            StopMoving();
+            print("Looking at map. Press M or ESC or Space to close."); //Replace with map code
+            journalCanvas.SetActive(true);
+            mapTracker.UpdateMap();
+            journal_manager.BringUpMap();
+            FreezeNPCs();
+        }
+        else if (currentState == State.JOURNAL)
+        {
+            if (time_manager.currentTimeState != Time_Manager.State.Rest)
+            {
+                time_manager.LeavePauseState();
+            }
+            currentState = State.MAIN;
+            journalCanvas.SetActive(false);
+            UnfreezeNPCs();
+        }
+    }
+
+    public void StopInput()
 	{
 		animator.SetBool("Walking", false);
 		currentState = State.PAUSED;

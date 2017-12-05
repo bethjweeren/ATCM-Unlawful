@@ -11,40 +11,50 @@ public class GameOver : MonoBehaviour
 	public Text reasonText;
 	public Color winColor;
 	public Color loseColor;
-	public AudioSource winSound;
-	public AudioSource loseSound;
+	public AudioClip winSound;
+	public AudioClip loseSound;
 	public GameObject clock;
 	public GameObject journal;
 	public GameObject inventory;
-	public GameObject sleepText;
+    public GameObject map;
+    public GameObject sleepText;
 	public GameObject returnHome;
+    public AudioSource audioSource;
 
 	public void LoseGame(string reason)
 	{
-		clock.SetActive(false);
+        gameObject.SetActive(true);
+        clock.SetActive(false);
 		journal.SetActive(false);
 		inventory.SetActive(false);
-		returnHome.SetActive(false);
-		if (loseSound != null)
-			loseSound.Play();
+        map.SetActive(false);
+        returnHome.SetActive(false);
+        if (loseSound != null)
+        {
+            audioSource.clip = loseSound;
+            audioSource.Play();
+        }
 		headerText.text = "Game Over";
 		headerText.color = loseColor;
 		reasonText.text = reason;
-		gameObject.SetActive(true);
 	}
 
 	public void WinGame(string reason)
 	{
-		clock.SetActive(false);
+        gameObject.SetActive(true);
+        clock.SetActive(false);
 		journal.SetActive(false);
 		inventory.SetActive(false);
-		returnHome.SetActive(false);
-		if (winSound != null)
-			winSound.Play();
+        map.SetActive(false);
+        returnHome.SetActive(false);
+        if (winSound != null)
+        {
+            audioSource.clip = winSound;
+            audioSource.Play();
+        }
 		headerText.text = "Congratulations";
 		headerText.color = winColor;
 		reasonText.text = reason;
-		gameObject.SetActive(true);
 	}
 
 	public void Restart()

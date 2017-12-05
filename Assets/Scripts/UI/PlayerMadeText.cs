@@ -36,7 +36,7 @@ public class PlayerMadeText : MonoBehaviour {
 				}
 			}
 		}
-		stringToEdit = GUI.TextArea(new Rect(textLocation.position.x , textLocation.position.y , FineCanvasSize.canvasSize.rect.width/4, (3*FineCanvasSize.canvasSize.rect.height/4)), stringToEdit, 1000, myStyle);
+		stringToEdit = GUI.TextArea(new Rect(textLocation.position.x , textLocation.position.y , FineCanvasSize.canvasSize.rect.width/2, (3*FineCanvasSize.canvasSize.rect.height/4)), stringToEdit, 1000, myStyle);
 		if (oldString.CompareTo(stringToEdit) != 0)
 		{
 			audioSource.clip = scribbleSound;
