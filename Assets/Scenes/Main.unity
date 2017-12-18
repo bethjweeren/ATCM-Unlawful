@@ -78016,7 +78016,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1548293896
 RectTransform:
   m_ObjectHideFlags: 0
@@ -84544,7 +84544,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 818735671}
-  screenTo: {fileID: 322541068}
+  screenTo: {fileID: 1367171565}
   screenFrom: {fileID: 1707773638}
 --- !u!114 &1707773641
 MonoBehaviour:
