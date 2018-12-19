@@ -14,8 +14,10 @@ public class PathfinderGraph : MonoBehaviour
 
     //The following variables are only public so Pathfinder can access them easily.
     public bool graphChanged;
+    public List<GameObject> a2DArray = new List<GameObject>();
     public List<GameObject> verticesChanged = new List<GameObject>();
     public GameObject[,] vertexArray; //2D Array
+
     private int numVX, numVY;
 
 	// Use this for initialization
